@@ -1,0 +1,209 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+@import "tailwindcss";
+
+@theme {
+  --breakpoint-xs: 23.75rem;
+  --font-h1: 'Playfair Display', Georgia, serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-heading: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-dm: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-editorial: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+@layer base {
+  :root {
+    /* Primary Backgrounds */
+    --dtcss-primary: #F5EBC8;        /* Heritage Cream */
+    --dtcss-ivory: #F9F5E9;          /* Soft Ivory */
+    --dtcss-white-cream: #FFFDF9;    /* Pure White Cream */
+    --dtcss-hover: #F1EBD9;          /* Hover background */
+    --dtcss-border: #E6DDC8;         /* Hairline Border */
+    --dtcss-alabaster: #F9F5E9;
+    --dtcss-studio: #F9F5E9;
+
+    /* Text & Typography */
+    --dtcss-espresso: #5A4E38;       /* Earthy Brown */
+    --dtcss-deep-brown: #4A2E1B;     /* Deep Roasted Brown */
+    --dtcss-walnut: #786C57;         /* Secondary copy */
+    --dtcss-olive: #40563D;          /* Forest Olive — Primary Accent */
+
+    /* Supporting Accents */
+    --dtcss-sage: #DCE7C9;
+    --dtcss-lime: #E9F399;           /* Fresh Lime Announcement & Highlight */
+    --dtcss-terracotta: #C98A6A;
+    --dtcss-burgundy: #9B6A73;
+    --dtcss-sand: #C7B39A;
+    --dtcss-sage-mist: #E1E9D7;
+    --dtcss-parchment: #F1EBD9;
+    --dtcss-saffron: #C98A6A;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--dtcss-espresso);
+    background-color: var(--dtcss-primary);
+    max-width: 100%;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1,
+  h1.font-serif,
+  h1.bajoz-poster-display {
+    font-family: var(--font-h1) !important;
+    text-wrap: balance;
+    letter-spacing: -0.02em;
+  }
+
+  h2, h3, h4, h5, h6, .font-serif {
+    font-family: var(--font-heading);
+    text-wrap: balance;
+    letter-spacing: -0.02em;
+  }
+
+  .font-sans {
+    font-family: var(--font-sans);
+  }
+
+  .font-mono {
+    font-family: var(--font-sans);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background-color: var(--dtcss-lime);
+    color: var(--dtcss-deep-brown);
+  }
+}
+
+/* Expressive Kicker Lead-In (DM Sans Italic) */
+.bajoz-script-kicker {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+/* Signature BAJOZ Display Headline Lockup (Playfair Display on h1, DM Sans on h2-h6) */
+.bajoz-poster-display {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+h1.bajoz-poster-display {
+  font-family: var(--font-h1) !important;
+}
+
+/* Full-Bleed Heritage Cream Surface */
+.bajoz-grain-canvas {
+  background-color: #F5EBC8;
+}
+
+/* Studio Product Image Pedestal Treatment */
+.bajoz-studio-pedestal {
+  background: #F5EBC8;
+  border: 1px solid #E6DDC8;
+}
+
+/* Drop shadow for floating angled jars & spice garnishes */
+.bajoz-floating-jar-shadow {
+  filter: drop-shadow(0 28px 36px rgba(62, 45, 28, 0.2));
+}
+
+/* Seamless Section Flow & Scroll Reveal Transitions */
+.bajoz-seamless-section {
+  position: relative;
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.bajoz-seamless-section.section-hidden {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+.bajoz-seamless-section.section-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Full-Width Architectural Hairline Divider */
+.bajoz-soft-divider {
+  height: 1px;
+  width: 100%;
+  max-width: 1680px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(90, 78, 56, 0.12);
+}
+
+@keyframes bajozFadeSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bajoz-fade-in {
+  animation: bajozFadeSlide 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .bajoz-seamless-section,
+  .bajoz-seamless-section.section-hidden,
+  .bajoz-seamless-section.section-visible,
+  .bajoz-fade-in {
+    transition: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F5EBC8;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C7B39A;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #40563D;
+}

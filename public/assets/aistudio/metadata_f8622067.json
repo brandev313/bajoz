@@ -1,0 +1,6 @@
+{
+  "name": "BAJOZ — Artisanal Natural Food & Desi Nourishment",
+  "description": "Premium DTC Pakistani natural food store featuring handcrafted Panjeeri, multipurpose SpiceMix, and natural tooth powder with traditional nourishment and modern convenience.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

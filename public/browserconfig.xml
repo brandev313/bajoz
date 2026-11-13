@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<browserconfig>
+  <msapplication>
+    <tile>
+      <square150x150logo src="/assets/aistudio/bajoz-mstile-150_150x150_88f6b46e.png"/>
+      <TileColor>#F5EBC8</TileColor>
+    </tile>
+  </msapplication>
+</browserconfig>

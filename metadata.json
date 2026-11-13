@@ -1,0 +1,8 @@
+{
+  "name": "DTCSS — Artisanal Natural Food & Desi Nourishment",
+  "description": "Premium DTC Pakistani natural food store by DTCSS featuring handcrafted Ghar Ki Panjeeri, multipurpose DTCSS SpiceMix, and Natural Homemade Tooth Powder with traditional nourishment and modern convenience.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
