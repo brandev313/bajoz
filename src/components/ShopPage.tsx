@@ -120,7 +120,6 @@ export const ShopPage: React.FC = () => {
     const q = searchQuery.trim().toLowerCase();
 
     const filtered = publishedProducts.filter((product) => {
-      // 1. Search query match
       if (q) {
         const inName = product.name.toLowerCase().includes(q);
         const inCat = product.category.toLowerCase().includes(q);
@@ -170,12 +169,10 @@ export const ShopPage: React.FC = () => {
         }
       }
 
-      // 2. Category filter
       if (selectedCategory !== 'All' && product.category !== selectedCategory) {
         return false;
       }
 
-      // 3. Pack size filter
       if (selectedPackSize !== 'all') {
         const hasPack = (product.packSizes || []).some(
           (pk) => pk.id === selectedPackSize
@@ -183,7 +180,6 @@ export const ShopPage: React.FC = () => {
         if (!hasPack) return false;
       }
 
-      // 4. Availability
       if (inStockOnly) {
         const totalStock = (product.variants || []).reduce(
           (sum, v) => sum + (v.stock ?? 20),
@@ -197,7 +193,6 @@ export const ShopPage: React.FC = () => {
       return true;
     });
 
-    // Sort
     return [...filtered].sort((a, b) => {
       if (sortBy === 'title-asc') {
         return a.name.localeCompare(b.name);
@@ -248,14 +243,14 @@ export const ShopPage: React.FC = () => {
 
   const renderFilterSidebarContent = () => (
     <div className="space-y-5">
-      <div className="flex items-center justify-between border-b border-[#7A5C38]/25 pb-3">
+      <div className="flex items-center justify-between border-b border-[#5A4E38]/25 pb-3">
         <div className="flex items-center gap-2">
           <SlidersHorizontal className="w-4 h-4 text-[#40563D]" />
-          <h2 className="font-serif text-base sm:text-lg font-extrabold text-[#40563D]">
+          <h2 className="font-display text-base sm:text-lg font-bold text-[#40563D]">
             Shop Filters
           </h2>
           {activeFilterCount > 0 && (
-            <span className="px-2 py-0.5 rounded-full bg-[#E9F399] text-[#40563D] border border-[#7A5C38] font-mono text-xs font-extrabold">
+            <span className="px-2 py-0.5 rounded-full bg-[#E9F390] text-[#40563D] border border-[#5A4E38] font-dm text-xs font-bold">
               {activeFilterCount}
             </span>
           )}
@@ -264,7 +259,7 @@ export const ShopPage: React.FC = () => {
           <button
             type="button"
             onClick={resetAllFilters}
-            className="inline-flex items-center gap-1 text-xs font-bold text-[#40563D] hover:underline cursor-pointer"
+            className="inline-flex items-center gap-1 font-dm text-xs font-bold text-[#40563D] hover:underline cursor-pointer"
           >
             <RotateCcw className="w-3 h-3" />
             <span>Reset</span>
@@ -273,8 +268,8 @@ export const ShopPage: React.FC = () => {
       </div>
 
       {/* 1. Category Filter */}
-      <div className="space-y-2 border-b border-[#7A5C38]/25 pb-4">
-        <h3 className="font-serif text-xs font-extrabold uppercase tracking-wider text-[#4A2E1B]">
+      <div className="space-y-2 border-b border-[#5A4E38]/25 pb-4">
+        <h3 className="font-dm text-xs font-bold uppercase tracking-wider text-[#5A4E38]">
           Category
         </h3>
         <div className="space-y-1.5">
@@ -289,14 +284,14 @@ export const ShopPage: React.FC = () => {
                 key={cat}
                 type="button"
                 onClick={() => setSelectedCategory(cat)}
-                className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs sm:text-sm font-bold transition-colors cursor-pointer border ${
+                className={`w-full flex items-center justify-between px-3.5 py-2 rounded-xl text-left font-dm text-xs sm:text-sm font-bold transition-colors cursor-pointer border ${
                   isSelected
-                    ? 'bg-[#E9F399] text-[#40563D] border-[#7A5C38]'
-                    : 'bg-[#FFFDF9] hover:bg-[#F5EBC8]/70 text-[#5A4E38] border-[#7A5C38]/30'
+                    ? 'bg-[#40563D] text-[#F2EBD0] border-[#40563D]'
+                    : 'bg-[#F2EBD0] hover:bg-[#E9F390] text-[#40563D] border-[#5A4E38]/40'
                 }`}
               >
                 <span>{cat === 'All' ? 'All Products' : cat}</span>
-                <span className="font-mono text-xs font-extrabold opacity-80">
+                <span className="font-dm text-xs font-bold opacity-80">
                   ({count})
                 </span>
               </button>
@@ -306,8 +301,8 @@ export const ShopPage: React.FC = () => {
       </div>
 
       {/* 2. Pack / Jar Size Filter */}
-      <div className="space-y-2 border-b border-[#7A5C38]/25 pb-4">
-        <h3 className="font-serif text-xs font-extrabold uppercase tracking-wider text-[#4A2E1B]">
+      <div className="space-y-2 border-b border-[#5A4E38]/25 pb-4">
+        <h3 className="font-dm text-xs font-bold uppercase tracking-wider text-[#5A4E38]">
           Jar Size
         </h3>
         <div className="space-y-1.5">
@@ -318,14 +313,14 @@ export const ShopPage: React.FC = () => {
                 key={pk.id}
                 type="button"
                 onClick={() => setSelectedPackSize(pk.id)}
-                className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs sm:text-sm font-bold transition-colors cursor-pointer border ${
+                className={`w-full flex items-center justify-between px-3.5 py-2 rounded-xl text-left font-dm text-xs sm:text-sm font-bold transition-colors cursor-pointer border ${
                   isSelected
-                    ? 'bg-[#E9F399] text-[#40563D] border-[#7A5C38]'
-                    : 'bg-[#FFFDF9] hover:bg-[#F5EBC8]/70 text-[#5A4E38] border-[#7A5C38]/30'
+                    ? 'bg-[#40563D] text-[#F2EBD0] border-[#40563D]'
+                    : 'bg-[#F2EBD0] hover:bg-[#E9F390] text-[#40563D] border-[#5A4E38]/40'
                 }`}
               >
                 <span>{pk.label}</span>
-                {isSelected && <Check className="w-3.5 h-3.5 text-[#40563D]" />}
+                {isSelected && <Check className="w-3.5 h-3.5 text-[#E9F390]" />}
               </button>
             );
           })}
@@ -334,7 +329,7 @@ export const ShopPage: React.FC = () => {
 
       {/* 3. Availability */}
       <div className="pt-0.5">
-        <label className="flex items-center justify-between gap-2 text-xs sm:text-sm font-bold text-[#4A2E1B] cursor-pointer select-none">
+        <label className="flex items-center justify-between gap-2 font-dm text-xs sm:text-sm font-bold text-[#40563D] cursor-pointer select-none">
           <span>In Stock Only</span>
           <input
             type="checkbox"
@@ -348,19 +343,18 @@ export const ShopPage: React.FC = () => {
   );
 
   return (
-    <div className="bg-[#F5EBC8] text-[#5A4E38]">
+    <div className="bg-[#F2EBD0] text-[#40563D]">
       {/* =====================================================================
-          1. ABOVE-THE-FOLD SHOP HEADER + FILTERS + PRODUCTS IN FIRST VIEW
+          1. SHOP HERO HEADER SECTION — Heritage Cream (#F2EBD0)
           ===================================================================== */}
-      <section className="pt-4 pb-12 sm:pt-6 sm:pb-16 bg-[#F5EBC8]">
-        <div className="w-full max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-16 xl:px-24 space-y-5">
-          {/* Compact Top Bar: Breadcrumb + Page Title + Integrated Search & Sort */}
-          <div className="rounded-[1.5rem] border-[1.5px] border-[#7A5C38] bg-[#F9F5E9] px-5 py-4 sm:px-7 sm:py-5 space-y-4">
+      <section className="pt-14 pb-12 sm:pt-16 sm:pb-16 lg:pt-20 lg:pb-18 bg-[#FAF9F4] text-[#40563D] bajoz-seamless-section">
+        <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-10 lg:px-14 xl:px-16">
+          <div className="rounded-[1.75rem] border-[1.5px] border-[#5A4E38] bg-[#F2EBD0] px-6 py-6 sm:px-9 sm:py-8 space-y-5 shadow-[0_12px_30px_-12px_rgba(64,86,61,0.1)]">
             {/* Top Row: Breadcrumb & Back Link */}
-            <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
+            <div className="flex flex-wrap items-center justify-between gap-3 font-dm text-sm sm:text-[15px]">
               <nav
                 aria-label="Breadcrumb"
-                className="flex items-center gap-2 font-medium text-[#786C57]"
+                className="flex items-center gap-2.5 font-medium text-[#5A4E38]"
               >
                 <button
                   type="button"
@@ -368,11 +362,11 @@ export const ShopPage: React.FC = () => {
                     setActivePageSlug(null);
                     setActiveProductId(null);
                   }}
-                  className="hover:text-[#40563D] hover:underline cursor-pointer"
+                  className="hover:bg-[#5A4E38] hover:text-[#F2EBD0] cursor-pointer"
                 >
                   Home
                 </button>
-                <span>/</span>
+                <span className="text-[#5A4E38]/60">/</span>
                 <span className="text-[#40563D] font-bold">Shop All Products</span>
               </nav>
 
@@ -382,9 +376,9 @@ export const ShopPage: React.FC = () => {
                   setActivePageSlug(null);
                   setActiveProductId(null);
                 }}
-                className="inline-flex items-center gap-1.5 font-bold text-[#40563D] hover:underline cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md font-bold text-[#40563D] hover:bg-[#5A4E38] hover:text-[#F2EBD0] transition-colors cursor-pointer"
               >
-                <ArrowLeft className="w-3.5 h-3.5" />
+                <ArrowLeft className="w-4 h-4" />
                 <span>Back to Homepage</span>
               </button>
             </div>
@@ -392,10 +386,10 @@ export const ShopPage: React.FC = () => {
             {/* Main Header Row: Page Title on Left + Search, Sort & View Controls on Right */}
             <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-4">
               <div className="space-y-1">
-                <h1 className="font-serif text-2xl sm:text-4xl lg:text-[2.65rem] font-extrabold text-[#40563D] leading-[1.08] tracking-tight">
+                <h1 className="font-h1 text-2xl sm:text-4xl lg:text-[2.65rem] font-medium text-[#40563D] leading-[1.08] tracking-tight">
                   Shop All BAJOZ Products
                 </h1>
-                <p className="text-xs sm:text-sm text-[#5A4E38] font-medium">
+                <p className="font-dm text-xs sm:text-sm text-[#5A4E38] font-medium">
                   Showing {filteredAndSortedProducts.length} of {publishedProducts.length}{' '}
                   handcrafted household essentials
                 </p>
@@ -412,14 +406,14 @@ export const ShopPage: React.FC = () => {
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search SpiceMix, Panjeeri, Tooth Guardian..."
                     aria-label="Search products in shop"
-                    className="w-full pl-10 pr-9 py-2.5 rounded-full bg-[#FFFDF9] border-[1.5px] border-[#7A5C38] text-xs sm:text-sm font-medium text-[#2C221E] placeholder:text-[#786C57] focus:outline-none focus:border-[#40563D]"
+                    className="w-full pl-10 pr-9 py-2.5 rounded-full bg-[#F2EBD0] border border-[#5A4E38] font-dm text-xs sm:text-sm font-medium text-[#40563D] placeholder:text-[#5A4E38]/65 focus:outline-none focus:border-[#40563D]"
                   />
                   {searchQuery && (
                     <button
                       type="button"
                       onClick={() => setSearchQuery('')}
                       aria-label="Clear search"
-                      className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-[#786C57] hover:text-[#2C221E] rounded-full cursor-pointer"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-[#5A4E38]/70 hover:text-[#40563D] rounded-full cursor-pointer"
                     >
                       <X className="w-3.5 h-3.5" />
                     </button>
@@ -431,12 +425,12 @@ export const ShopPage: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => setIsMobileFilterOpen((prev) => !prev)}
-                    className="lg:hidden inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-full bg-[#E9F399] text-[#40563D] border-[1.5px] border-[#7A5C38] text-xs font-extrabold cursor-pointer"
+                    className="lg:hidden inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-full bg-[#DCE7C9] hover:bg-[#E9F390] text-[#40563D] border border-[#5A4E38] font-dm text-xs font-bold cursor-pointer"
                   >
-                    <SlidersHorizontal className="w-3.5 h-3.5" />
+                    <SlidersHorizontal className="w-3.5 h-3.5 text-[#40563D]" />
                     <span>Filters</span>
                     {activeFilterCount > 0 && (
-                      <span className="px-1.5 py-0.2 rounded-full bg-[#40563D] text-[#E9F399] font-mono text-[10px]">
+                      <span className="px-1.5 py-0.2 rounded-full bg-[#40563D] text-[#E9F390] font-dm text-[10px]">
                         {activeFilterCount}
                       </span>
                     )}
@@ -446,7 +440,7 @@ export const ShopPage: React.FC = () => {
                   <div className="flex items-center gap-1.5">
                     <label
                       htmlFor="shop-sort-select"
-                      className="text-xs font-bold text-[#5A4E38] whitespace-nowrap hidden sm:inline"
+                      className="font-dm text-xs font-bold text-[#5A4E38] whitespace-nowrap hidden sm:inline"
                     >
                       Sort:
                     </label>
@@ -455,7 +449,7 @@ export const ShopPage: React.FC = () => {
                         id="shop-sort-select"
                         value={sortBy}
                         onChange={(e) => setSortBy(e.target.value as SortOption)}
-                        className="appearance-none pl-3.5 pr-8 py-2.5 rounded-full bg-[#FFFDF9] border-[1.5px] border-[#7A5C38] text-xs font-extrabold text-[#40563D] cursor-pointer focus:outline-none"
+                        className="appearance-none pl-3.5 pr-8 py-2.5 rounded-full bg-[#F2EBD0] border border-[#5A4E38] font-dm text-xs font-bold text-[#40563D] cursor-pointer focus:outline-none focus:border-[#40563D]"
                       >
                         <option value="featured">Featured</option>
                         <option value="best-selling">Best Selling</option>
@@ -467,15 +461,15 @@ export const ShopPage: React.FC = () => {
                   </div>
 
                   {/* Grid / List Toggle */}
-                  <div className="hidden sm:inline-flex items-center rounded-full bg-[#FFFDF9] border-[1.5px] border-[#7A5C38] p-1">
+                  <div className="hidden sm:inline-flex items-center rounded-full bg-[#F2EBD0] border border-[#5A4E38] p-1">
                     <button
                       type="button"
                       onClick={() => setViewMode('grid')}
                       aria-label="Grid view"
                       className={`p-1.5 rounded-full cursor-pointer transition-colors ${
                         viewMode === 'grid'
-                          ? 'bg-[#E9F399] text-[#40563D]'
-                          : 'text-[#786C57] hover:text-[#40563D]'
+                          ? 'bg-[#40563D] text-[#F2EBD0]'
+                          : 'bg-[#DCE7C9] text-[#40563D] hover:bg-[#E9F390]'
                       }`}
                     >
                       <LayoutGrid className="w-3.5 h-3.5" />
@@ -486,8 +480,8 @@ export const ShopPage: React.FC = () => {
                       aria-label="List view"
                       className={`p-1.5 rounded-full cursor-pointer transition-colors ${
                         viewMode === 'list'
-                          ? 'bg-[#E9F399] text-[#40563D]'
-                          : 'text-[#786C57] hover:text-[#40563D]'
+                          ? 'bg-[#40563D] text-[#F2EBD0]'
+                          : 'bg-[#DCE7C9] text-[#40563D] hover:bg-[#E9F390]'
                       }`}
                     >
                       <List className="w-3.5 h-3.5" />
@@ -497,20 +491,30 @@ export const ShopPage: React.FC = () => {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <WaveDivider fromColor="#FAF9F4" toColor="#F2EBD0" strokeColor="#5A4E38" />
+
+      {/* =====================================================================
+          2. FILTERS & PRODUCT COLLECTION GRID — Warm Alabaster (#F2EBD0)
+          ===================================================================== */}
+      <section className="py-14 sm:py-20 lg:py-24 bg-[#F2EBD0] text-[#40563D] bajoz-seamless-section">
+        <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-10 lg:px-14 xl:px-16 space-y-8">
 
           {/* Mobile Collapsible Filter Drawer */}
           {isMobileFilterOpen && (
-            <div className="lg:hidden rounded-[1.5rem] border-[1.5px] border-[#7A5C38] bg-[#F9F5E9] p-5">
+            <div className="lg:hidden rounded-[1.5rem] border-[1.5px] border-[#5A4E38] bg-[#F2EBD0] p-6">
               {renderFilterSidebarContent()}
             </div>
           )}
 
-          {/* Main 2-Column Shopify Collection Grid: Left Faceted Filters + Right Product Cards */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-7 items-start">
+          {/* Main 2-Column Collection Grid: Left Faceted Filters + Right Product Cards */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
             {/* Left Sidebar Filters (Desktop) */}
             <aside
               aria-label="Product Filters"
-              className="hidden lg:block lg:col-span-3 lg:sticky lg:top-24 rounded-[1.5rem] border-[1.5px] border-[#7A5C38] bg-[#F9F5E9] p-5"
+              className="hidden lg:block lg:col-span-3 lg:sticky lg:top-24 rounded-[1.5rem] border-[1.5px] border-[#5A4E38] bg-[#F2EBD0] p-6 shadow-[0_12px_28px_-12px_rgba(64,86,61,0.1)]"
             >
               {renderFilterSidebarContent()}
             </aside>
@@ -518,29 +522,39 @@ export const ShopPage: React.FC = () => {
             {/* Right Product Collection Grid / List */}
             <div className="lg:col-span-9">
               {filteredAndSortedProducts.length === 0 ? (
-                <div className="rounded-[1.75rem] border-[1.5px] border-[#7A5C38] bg-[#F9F5E9] p-10 sm:p-14 text-center space-y-4">
-                  <h2 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#40563D]">
+                <div className="rounded-[1.75rem] border-[1.5px] border-[#5A4E38] bg-[#F2EBD0] p-10 sm:p-14 text-center space-y-4">
+                  <h2 className="font-display text-2xl sm:text-3xl font-bold text-[#40563D]">
                     No Matching Products Found
                   </h2>
-                  <p className="text-sm sm:text-base text-[#5A4E38] max-w-md mx-auto">
+                  <p className="font-dm text-sm sm:text-base text-[#5A4E38] max-w-md mx-auto">
                     We couldn’t find any products matching your current search or filter
                     selection. Reset your filters to view all 3 signature BAJOZ products.
                   </p>
-                  <button
-                    type="button"
-                    onClick={resetAllFilters}
-                    className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#E9F399] hover:bg-[#dfeb82] text-[#40563D] border-[1.5px] border-[#7A5C38] font-serif text-base font-extrabold cursor-pointer"
-                  >
-                    <RotateCcw className="w-4 h-4" />
-                    <span>Show All Products</span>
-                  </button>
+                  <div className="inline-flex items-center gap-1.5">
+                    <button
+                      type="button"
+                      onClick={resetAllFilters}
+                      className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#E9F390] hover:bg-[#5A4E38] text-[#5A4E38] hover:text-[#F2EBD0] border border-[#5A4E38] shadow-[2px_2px_0px_#5A4E38] hover:shadow-none font-serif text-base font-extrabold transition-all duration-150 cursor-pointer"
+                    >
+                      <RotateCcw className="w-4 h-4" />
+                      <span>Show All Products</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={resetAllFilters}
+                      aria-label="Show All Products"
+                      className="w-11 h-11 rounded-full bg-[#40563D] hover:bg-[#E9F390] text-[#F2EBD0] hover:text-[#40563D] border border-[#40563D] flex items-center justify-center shrink-0 transition-all duration-150 cursor-pointer hover:translate-x-0.5 hover:-translate-y-0.5"
+                    >
+                      <ArrowUpRight className="w-5 h-5 stroke-[2.25]" />
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <div
                   className={
                     viewMode === 'grid'
-                      ? 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 lg:gap-6'
-                      : 'space-y-5'
+                      ? 'grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-7'
+                      : 'space-y-6'
                   }
                 >
                   {filteredAndSortedProducts.map((product) => {
@@ -563,13 +577,13 @@ export const ShopPage: React.FC = () => {
                     return (
                       <article
                         key={product.id}
-                        className={`rounded-[1.5rem] border-[1.5px] border-[#7A5C38] bg-[#F9F5E9] p-4 sm:p-5 flex ${
+                        className={`rounded-[1.5rem] border-[1.5px] border-[#5A4E38] bg-[#F2EBD0] p-5 sm:p-6 flex ${
                           viewMode === 'list'
                             ? 'flex-col sm:flex-row gap-6 items-center'
                             : 'flex-col justify-between'
-                        } transition-colors duration-200 hover:bg-[#FFFDF9]`}
+                        } shadow-[0_12px_28px_-12px_rgba(64,86,61,0.1)] transition-transform duration-200 hover:-translate-y-0.5`}
                       >
-                        {/* Product Image Stage */}
+                        {/* Product Image Stage — Pure White Cream (#FAF9F4) Background */}
                         <div
                           className={
                             viewMode === 'list'
@@ -579,13 +593,8 @@ export const ShopPage: React.FC = () => {
                         >
                           <div
                             onClick={() => setActiveProductId(product.id)}
-                            className="relative aspect-[4/3] sm:aspect-square rounded-[1.25rem] bg-[#B4CBA2] border-[1.5px] border-[#7A5C38] overflow-hidden flex items-center justify-center cursor-pointer group"
+                            className="relative aspect-[4/3] sm:aspect-square rounded-[1.25rem] bg-[#FAF9F4] border-[1.5px] border-[#5A4E38] overflow-hidden flex items-center justify-center cursor-pointer group p-3"
                           >
-                            {/* Top-Left Category Badge */}
-                            <span className="absolute top-2.5 left-2.5 z-10 px-2.5 py-1 rounded-full bg-[#F9F5E9]/95 border border-[#7A5C38] text-[10px] font-extrabold uppercase tracking-wider text-[#40563D]">
-                              {product.category}
-                            </span>
-
                             {/* Top-Right Favorite Heart Button */}
                             <button
                               type="button"
@@ -598,76 +607,84 @@ export const ShopPage: React.FC = () => {
                                   ? `Remove ${product.name} from Favorites`
                                   : `Save ${product.name} to Favorites`
                               }
-                              className={`absolute top-2.5 right-2.5 z-10 w-8 h-8 rounded-full flex items-center justify-center border-[1.5px] border-[#7A5C38] transition-colors cursor-pointer ${
+                              className={`absolute top-2.5 right-2.5 z-10 w-8 h-8 rounded-full flex items-center justify-center border border-[#40563D] transition-colors cursor-pointer ${
                                 isFavorite(product.id)
-                                  ? 'bg-[#E9F399] text-[#9B6A73]'
-                                  : 'bg-[#F9F5E9]/95 hover:bg-[#E9F399] text-[#40563D]'
+                                  ? 'bg-[#E9F390] text-[#40563D]'
+                                  : 'bg-[#FAF9F4]/95 hover:bg-[#E9F390] text-[#40563D]'
                               }`}
                             >
                               <Heart
                                 className={`w-3.5 h-3.5 ${
                                   isFavorite(product.id)
-                                    ? 'fill-[#9B6A73] text-[#9B6A73]'
+                                    ? 'fill-[#40563D] text-[#40563D]'
                                     : ''
                                 }`}
                               />
                             </button>
 
-                            <ProductImage
-                              type={product.imageType}
-                              productId={product.id}
-                              customImageUrl={product.customImageUrl}
-                              fit="cover"
-                              className="w-full h-full transition-transform duration-500 group-hover:scale-105"
-                              alt={product.name}
-                            />
+                            <div className="w-full h-full rounded-xl overflow-hidden bg-[#FAF9F4]">
+                              <ProductImage
+                                type={product.imageType}
+                                productId={product.id}
+                                customImageUrl={product.customImageUrl}
+                                fit="cover"
+                                className="w-full h-full transition-transform duration-500 group-hover:scale-105"
+                                alt={product.name}
+                              />
+                            </div>
                           </div>
                         </div>
 
                         {/* Product Details & Inline Variant/Size Controls */}
                         <div className="flex-1 flex flex-col justify-between space-y-3.5 w-full">
                           <div className="space-y-1.5">
-                            {/* Rating & Price: N/A Row */}
+                            {/* Product Tag + Rating */}
                             <div className="flex items-center justify-between gap-2">
-                              <div className="flex items-center gap-0.5 text-[#C98A6A]">
-                                {Array.from({ length: 5 }).map((_, i) => (
-                                  <Star
-                                    key={i}
-                                    className="w-3.5 h-3.5 fill-current"
-                                  />
-                                ))}
-                                <span className="ml-1 font-mono text-xs font-extrabold text-[#5A4E38]">
+                              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-[#DCE7C9] text-[#40563D] font-dm text-[10px] font-bold tracking-[0.04em]">
+                                {product.id === 'panjeeri'
+                                  ? 'Tasty, Crunchy, Nut-Rich'
+                                  : product.id === 'spicemix'
+                                  ? "Pakistan's 1st All-in-One Cooking Paste"
+                                  : product.id === 'toothpowder'
+                                  ? 'Natural, Chemical-Free, Non-Abrasive'
+                                  : product.category}
+                              </span>
+                              <div className="flex items-center gap-1 text-[#40563D] shrink-0">
+                                <Star className="w-3.5 h-3.5 fill-current" />
+                                <span className="font-dm text-xs font-bold text-[#5A4E38] tabular-nums">
                                   {revAvg} ({revCount})
                                 </span>
                               </div>
-                              <span className="font-mono text-sm sm:text-base font-extrabold text-[#40563D] tabular-nums">
+                            </div>
+
+                            {/* Title & Price */}
+                            <div className="flex items-baseline justify-between gap-2">
+                              <h2
+                                onClick={() => setActiveProductId(product.id)}
+                                className="font-serif text-lg sm:text-xl font-bold text-[#40563D] hover:underline cursor-pointer leading-snug"
+                              >
+                                {product.id === 'spicemix'
+                                  ? 'SpiceMix'
+                                  : product.id === 'panjeeri'
+                                  ? 'HomeMade Panjeeri'
+                                  : product.name}
+                              </h2>
+                              <span className="bajoz-price text-sm text-[#40563D] tabular-nums shrink-0">
                                 Price: N/A
                               </span>
                             </div>
 
-                            {/* Title */}
-                            <h2
-                              onClick={() => setActiveProductId(product.id)}
-                              className="font-serif text-lg sm:text-xl font-extrabold text-[#40563D] hover:underline cursor-pointer leading-snug"
-                            >
-                              {product.id === 'spicemix'
-                                ? 'SpiceMix'
-                                : product.id === 'panjeeri'
-                                ? 'Homemade Panjeeri'
-                                : product.name}
-                            </h2>
-
                             {/* Short Description */}
-                            <p className="text-xs text-[#2C221E] leading-relaxed line-clamp-2">
+                            <p className="font-sans text-xs text-[#5A4E38] leading-relaxed line-clamp-2">
                               {product.description}
                             </p>
                           </div>
 
                           {/* Interactive Options Box (Flavour & Jar Size) */}
-                          <div className="space-y-2 pt-2 border-t border-[#7A5C38]/20">
+                          <div className="space-y-2 pt-2 border-t border-[#5A4E38]/20">
                             {hasFlavourVariants && (
                               <div className="space-y-1">
-                                <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#5A4E38] block">
+                                <span className="bajoz-flavour text-[10px] uppercase tracking-wider text-[#5A4E38] block">
                                   Flavour:
                                 </span>
                                 <div className="grid grid-cols-3 gap-1.5">
@@ -683,10 +700,10 @@ export const ShopPage: React.FC = () => {
                                             [product.id]: v.id,
                                           }))
                                         }
-                                        className={`py-1.5 px-2 rounded-lg text-[11px] font-extrabold border transition-colors cursor-pointer truncate ${
+                                        className={`bajoz-flavour bajoz-variant py-1.5 px-2 rounded-lg text-[11px] border transition-colors cursor-pointer truncate ${
                                           selected
-                                            ? 'bg-[#E9F399] text-[#40563D] border-[#7A5C38]'
-                                            : 'bg-[#FFFDF9] hover:bg-[#F5EBC8] text-[#5A4E38] border-[#7A5C38]/40'
+                                            ? 'bg-[#40563D] text-[#F2EBD0] border-[#40563D]'
+                                            : 'bg-[#FAF9F4] hover:bg-[#E9F390] text-[#40563D] border-[#5A4E38]/50'
                                         }`}
                                       >
                                         {v.name}
@@ -700,7 +717,7 @@ export const ShopPage: React.FC = () => {
                             {/* Jar Size Selector */}
                             {product.packSizes && product.packSizes.length > 0 && (
                               <div className="space-y-1">
-                                <span className="text-[10px] font-extrabold uppercase tracking-wider text-[#5A4E38] block">
+                                <span className="bajoz-size text-[10px] uppercase tracking-wider text-[#5A4E38] block">
                                   Jar Size:
                                 </span>
                                 <div
@@ -724,10 +741,10 @@ export const ShopPage: React.FC = () => {
                                             [product.id]: pk.id,
                                           }))
                                         }
-                                        className={`py-1.5 px-2 rounded-lg text-[11px] font-extrabold border transition-colors cursor-pointer flex items-center justify-center text-center truncate ${
+                                        className={`bajoz-size py-1.5 px-2 rounded-lg text-[11px] border transition-colors cursor-pointer flex items-center justify-center text-center truncate ${
                                           selected
-                                            ? 'bg-[#E9F399] text-[#40563D] border-[#7A5C38]'
-                                            : 'bg-[#FFFDF9] hover:bg-[#F5EBC8] text-[#5A4E38] border-[#7A5C38]/40'
+                                            ? 'bg-[#40563D] text-[#F2EBD0] border-[#40563D]'
+                                            : 'bg-[#FAF9F4] hover:bg-[#E9F390] text-[#40563D] border-[#5A4E38]/50'
                                         }`}
                                       >
                                         <span>{pk.unitWeight || pk.label}</span>
@@ -739,28 +756,36 @@ export const ShopPage: React.FC = () => {
                             )}
                           </div>
 
-                          {/* Card Action Buttons */}
-                          <div className="pt-1 flex items-center gap-2">
-                            <button
-                              type="button"
-                              onClick={() => handleQuickAdd(product, false)}
-                              className="flex-1 py-2.5 px-3.5 rounded-full bg-[#40563D] hover:bg-[#334530] text-[#F9F5E9] border-[1.5px] border-[#7A5C38] font-serif text-xs sm:text-sm font-extrabold tracking-tight transition-colors cursor-pointer inline-flex items-center justify-center gap-1.5"
-                            >
-                              <ShoppingBag className="w-3.5 h-3.5" />
-                              <span>
-                                {isAdded ? 'Added to Bag!' : 'Add · Price: N/A'}
-                              </span>
-                            </button>
+                          {/* Card Action Buttons — PDP 'Buy Now' Style */}
+                          <div className="pt-2 flex flex-wrap items-center justify-between gap-2">
+                            <div className="inline-flex items-center gap-1.5 flex-1">
+                              <button
+                                type="button"
+                                onClick={() => handleQuickAdd(product, true)}
+                                className="bajoz-cta flex-1 py-2.5 px-4 rounded-full bg-[#E9F390] hover:bg-[#5A4E38] text-[#5A4E38] hover:text-[#F2EBD0] border border-[#5A4E38] shadow-[2px_2px_0px_#5A4E38] hover:shadow-none text-sm tracking-tight transition-all duration-150 cursor-pointer inline-flex items-center justify-center gap-1.5 whitespace-nowrap"
+                              >
+                                <ShoppingBag className="w-3.5 h-3.5" />
+                                <span>{isAdded ? 'Added!' : 'Buy Now'}</span>
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => handleQuickAdd(product, true)}
+                                aria-label={`Buy ${product.name} Now`}
+                                className="w-10 h-10 rounded-full bg-[#40563D] hover:bg-[#E9F390] text-[#F2EBD0] hover:text-[#40563D] border border-[#40563D] flex items-center justify-center shrink-0 transition-all duration-150 cursor-pointer hover:translate-x-0.5 hover:-translate-y-0.5"
+                              >
+                                <ArrowUpRight className="w-4 h-4 stroke-[2.25]" />
+                              </button>
+                            </div>
 
                             <button
                               type="button"
                               onClick={() => setActiveProductId(product.id)}
                               aria-label={`View ${product.name} details`}
                               title="View Full Product Details"
-                              className="px-3.5 py-2.5 rounded-full bg-[#E9F399] hover:bg-[#dfeb82] text-[#40563D] border-[1.5px] border-[#7A5C38] font-serif text-xs sm:text-sm font-extrabold inline-flex items-center gap-1 cursor-pointer shrink-0"
+                              className="px-3.5 py-2 rounded-full bg-[#FAF9F4] hover:bg-[#E9F390] text-[#40563D] border border-[#40563D] font-serif text-xs sm:text-sm font-bold inline-flex items-center gap-1 transition-colors cursor-pointer shrink-0"
                             >
                               <span>Details</span>
-                              <ArrowUpRight className="w-4 h-4 stroke-[2.25]" />
+                              <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.25] text-[#40563D]" />
                             </button>
                           </div>
                         </div>
@@ -774,58 +799,46 @@ export const ShopPage: React.FC = () => {
         </div>
       </section>
 
-      <WaveDivider fromColor="#F5EBC8" toColor="#FFFDF9" />
+      <WaveDivider fromColor="#F2EBD0" toColor="#FAF9F4" flip strokeColor="#5A4E38" />
 
       {/* =====================================================================
-          2. THREE CREDIBILITY BADGES UNDER ALL PRODUCTS (#FFFDF9 Pure White Cream)
-             Followed by WaveDivider into #F5EBC8 so Important Notice is a separate section
+          3. ARCHITECTURAL GUARANTEE STRIP SECTION — Pure White Cream (#FAF9F4)
           ===================================================================== */}
-      <section className="py-14 sm:py-20 bg-[#FFFDF9] bajoz-seamless-section">
-        <div className="w-full max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-16 xl:px-24">
+      <section className="py-16 sm:py-22 lg:py-24 bg-[#FAF9F4] text-[#40563D] bajoz-seamless-section">
+        <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-10 lg:px-14 xl:px-16">
           <div
-            aria-label="BAJOZ Product Credibility Badges"
-            className="max-w-3xl mx-auto grid grid-cols-3 gap-4 sm:gap-8 place-items-center"
+            aria-label="BAJOZ Product Credibility Guarantees"
+            className="rounded-2xl bg-[#F2EBD0] border-[1.5px] border-[#5A4E38] px-6 py-8 sm:px-10 sm:py-10 grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-0 sm:divide-x sm:divide-[#5A4E38]/30 text-[#40563D]"
           >
             {[
               {
-                top: '100%',
-                label: 'HALAL',
-                sub: 'Certified Pure',
-                bgClass: 'bg-[#F9F5E9]',
-                ringClass: 'border-[#40563D]/35',
+                top: '100% HALAL',
+                sub: 'Pure Whole Ingredients',
               },
               {
-                top: '100%',
-                label: 'HomeMade',
-                sub: 'Small Batch',
-                bgClass: 'bg-[#E9F399]',
-                ringClass: 'border-[#40563D]/45',
+                top: '100% HomeMade',
+                sub: 'Traditional Family Recipes',
               },
               {
-                top: '100%',
-                label: 'Natural',
-                sub: 'Zero Chemicals',
-                bgClass: 'bg-[#F9F5E9]',
-                ringClass: 'border-[#40563D]/35',
+                top: '100% Natural',
+                sub: 'No Preservatives or Fillers',
               },
             ].map((badge) => (
               <div
-                key={badge.label}
-                className={`w-28 h-28 xs:w-32 xs:h-32 sm:w-40 sm:h-40 lg:w-44 lg:h-44 rounded-full ${badge.bgClass} border-[1.5px] border-[#7A5C38] p-2.5 flex items-center justify-center text-center shadow-xs transition-transform duration-200 hover:scale-103`}
+                key={badge.top}
+                className="flex items-center justify-between sm:justify-center gap-4 sm:px-6"
               >
-                <div
-                  className={`w-full h-full rounded-full border-[1.5px] border-dashed ${badge.ringClass} flex flex-col items-center justify-center px-2`}
-                >
-                  <span className="font-mono text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#40563D] leading-none tracking-tight">
+                <div className="space-y-1 text-left sm:text-center">
+                  <span className="font-dm text-[11px] font-bold uppercase tracking-[0.14em] text-[#5A4E38] block">
+                    BAJOZ Guarantee
+                  </span>
+                  <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#40563D] leading-tight">
                     {badge.top}
-                  </span>
-                  <span className="font-serif text-sm xs:text-base sm:text-xl lg:text-2xl font-extrabold text-[#4A2E1B] leading-tight mt-1">
-                    {badge.label}
-                  </span>
-                  <span className="mt-1.5 inline-flex items-center gap-1 text-[9px] sm:text-xs font-bold uppercase tracking-wider text-[#40563D]/85">
+                  </h3>
+                  <p className="font-dm text-xs text-[#5A4E38] inline-flex items-center gap-1.5">
                     <ShieldCheck className="w-3.5 h-3.5 text-[#40563D] shrink-0" />
                     <span>{badge.sub}</span>
-                  </span>
+                  </p>
                 </div>
               </div>
             ))}
@@ -833,8 +846,7 @@ export const ShopPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Seamless Wave Transition into Pre-Footer Important Notice Section (#F5EBC8) */}
-      <WaveDivider fromColor="#FFFDF9" toColor="#F5EBC8" flip />
+      <WaveDivider fromColor="#FAF9F4" toColor="#F2EBD0" strokeColor="#5A4E38" />
     </div>
   );
 };

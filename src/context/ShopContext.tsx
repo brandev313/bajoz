@@ -17,6 +17,9 @@ import {
   WebsiteCopyConfig,
   CustomPage,
   ActiveProductSelectionContext,
+  ManagedRecipe,
+  QuickRecipeVideoConfig,
+  RecipeVideoOptimizationSettings,
 } from '../types/shop';
 import {
   isSupabaseConfigured,
@@ -47,17 +50,17 @@ export const DEFAULT_SITE_COPY: WebsiteCopyConfig = {
   navReviewsLabel: 'Reviews',
   navTrackOrderLabel: 'Track Order',
   heroKickers: [
-    '#1 Traditional Pakistani Foods Brand',
-    'BAJOZ — The House of Naturals',
+    'Best Traditional Pakistani Foods Brand',
+    'BAJOZ- The House Of Naturals',
   ],
-  heroHeadline:
-    'Get The Taste Of Home Food Without Standing In The Kitchen For Hours',
-  heroSubheadline: '',
+  heroHeadline: 'BAJOZ- The House Of Naturals',
+  heroSubheadline:
+    'A Hub of Ancestral, Natural, Easy-to-Use Goodness for Modern Living',
   heroDescription:
-    'Skip hours of kitchen prep without losing the taste of home with our homemade, natural, and ready-to-use food items that our mothers used to make. Embrace traditional Pakistani foods that are made with care for modern living.',
+    "Reclaim the benefits of things your mothers and grandmother used to make without the hours of kitchen prep and losing the taste of home. Bajoz makes natural, and ready-to-use food items with our Nani and Amma's recipes tailored for modern living.",
   heroBenefits: [
     '100% — Natural Products',
-    '500+ — Happy Customers',
+    'Best Traditional Pakistani Foods Brand',
     '5+ — Years of Legacy',
     '100% — Homemade Food Items',
   ],
@@ -117,24 +120,24 @@ export const DEFAULT_SITE_COPY: WebsiteCopyConfig = {
   craftHeading: 'A Little of Home, in Every Day',
   craftParagraphs: [
     'BAJOZ — The House of Naturals started with one promise: bring back the pure, slow-roasted foods and natural oral care our families grew up trusting — ready for your busy routine.',
-    'Whether it is pure Desi Ghee Panjeeri, 15-minute SpiceMix (no onion), or our natural homemade Tooth Guardian tooth cleaning powder, every jar is small-batch crafted with full ingredient transparency.',
+    'Whether it is pure Desi Ghee Panjeeri, 15-minute SpiceMix (no onion), or our natural homemade Tooth Guardian tooth cleaning powder, every jar is freshly crafted with full ingredient transparency.',
   ],
   craftPillars: [
     {
       id: 'cp-1',
-      title: '01. 100% Pure Whole Ingredients',
+      title: '100% Pure Whole Ingredients',
       description:
         'Pure grass-fed Desi Ghee, Californian almonds, fresh mountain garlic, and wild botanicals — zero palm oil or fillers.',
     },
     {
       id: 'cp-2',
-      title: '02. Full Ingredient Honesty',
+      title: 'Full Ingredient Honesty',
       description:
         'Every ingredient, net weight, and serving direction is listed openly so you know exactly what your family consumes.',
     },
     {
       id: 'cp-3',
-      title: '03. Built for Busy Modern Homes',
+      title: 'Built for Busy Modern Homes',
       description:
         'Enjoy heirloom Panjeeri straight from the jar and cook ghar-jaisa family dinners in 15 minutes.',
     },
@@ -147,7 +150,7 @@ export const DEFAULT_SITE_COPY: WebsiteCopyConfig = {
     {
       id: 'faq-1',
       q: 'What makes BAJOZ different from supermarket brands?',
-      a: 'We craft every batch in our Model Town, Lahore kitchen using 100% pure grass-fed Desi Ghee, whole nuts, cold-pressed mustard oil, and pure botanicals — with zero palm oil, zero preservatives, and full ingredient transparency.',
+      a: 'We craft every batch in our 3 Km, Defence Road, Lahore, Pakistan kitchen using 100% pure grass-fed Desi Ghee, whole nuts, cold-pressed mustard oil, and pure botanicals — with zero palm oil, zero preservatives, and full ingredient transparency.',
     },
     {
       id: 'faq-2',
@@ -195,7 +198,7 @@ export const DEFAULT_SITE_COPY: WebsiteCopyConfig = {
   disclaimerText:
     'The products and information presented on this website are purely traditional foods and natural remedies for everyday routines and are not medical advice. None of these statements or products are intended to diagnose, treat, cure, or prevent any disease.',
   shippingPolicyText:
-    'Nationwide Shipping Across Pakistan: Orders are dispatched from our Model Town, Lahore facility within 24–48 hours in cushioned protective packaging. Delivery takes 2–4 working days across major cities. Standard delivery fee is PKR 250, and shipping is complimentary on all orders of PKR 2,500 or above.',
+    'Nationwide Shipping Across Pakistan: Orders are dispatched from our 3 Km, Defence Road, Lahore, Pakistan facility within 24–48 hours in cushioned protective packaging. Delivery takes 2–4 working days across major cities. Standard delivery fee is PKR 250, and shipping is complimentary on all orders of PKR 2,500 or above.',
   returnsPolicyText:
     'Strict No Returns & No Refunds Policy: Because BAJOZ products are freshly prepared consumables and personal natural-care items, we do NOT accept returns, exchanges, or refunds once an order is placed and dispatched. Please review product ingredients and pack sizes carefully or contact us on WhatsApp (0315-4388166) before ordering.',
   privacyPolicyText:
@@ -205,7 +208,7 @@ export const DEFAULT_SITE_COPY: WebsiteCopyConfig = {
   voiceAgentName: 'BAJOZ Live Voice Guide',
   voiceWelcomeMessage:
     'Assalam-o-Alaikum! Welcome to BAJOZ. I can talk to you in simple English and Pakistani Urdu. / Assalam-o-Alaikum! BAJOZ mein Khush Aamdeed. Main asaan English aur Pakistani Roman Urdu mein aap ki madad kar sakta hoon.',
-  voiceSystemInstruction: `You are the official BAJOZ Live Voice Guide, representing BAJOZ — The House of Naturals (bajoz.pk) in Model Town, Lahore, Pakistan.
+  voiceSystemInstruction: `You are the official BAJOZ Live Voice Guide, representing BAJOZ — The House of Naturals (bajoz.pk) at 3 Km, Defence Road, Lahore, Pakistan.
 Always communicate in Simple English (6th-grade level) and Pakistani Urdu (6th-grade level) without mentioning ANY Hindi words.
 In written text responses, always write in Simple English (6th-grade level) and Pakistani Roman Urdu (6th-grade level, using Latin letters) without any Hindi words (never use namaste, dhanyavad, swagat, bhojan, swad, sugandh, swasthya, parivar, upyog, vikalp, mulya, or kripya).
 STRICT RULES:
@@ -221,12 +224,161 @@ STRICT RULES:
 - Shipping: PKR 250 nationwide across Pakistan; FREE delivery on orders above PKR 2,500.
 - Returns & Refunds: We do NOT provide returns or refunds.
 - Disclaimer: Purely traditional foods and natural care essentials — not medical advice.
-- Contact: WhatsApp 0315-4388166 | Model Town, Lahore.`,
+- Contact: WhatsApp 0315-4388166 | 3 Km, Defence Road, Lahore, Pakistan.`,
   needsSectionKicker: 'Tailored For Your Everyday Life',
   needsSectionHeading: 'Shop By Needs, Favourites, Cravings!',
   whyChooseKicker: 'Why Choose BAJOZ?',
   whyChooseHeading: 'Tradition You Know. Care You Can See.',
 };
+
+export const DEFAULT_VIDEO_OPTIMIZATION: RecipeVideoOptimizationSettings = {
+  autoOptimizeOnUpload: true,
+  maxResolution: '720p',
+  crfQuality: 26,
+  fastStartStreaming: true,
+  autoGeneratePoster: true,
+  lazyLoadOnStorefront: true,
+};
+
+export const DEFAULT_QUICK_RECIPE_VIDEO: QuickRecipeVideoConfig = {
+  enabled: true,
+  kicker: 'Quick Recipe Video · 30-Second Demo',
+  title: 'Steps to Cook Anything of Meat and Vegetable with SpiceMix',
+  subtitle:
+    'Whether you are cooking chicken, mutton, beef, or everyday seasonal vegetables—follow these 4 effortless steps for rich, homemade Pakistani flavour.',
+  durationLabel: '0:30',
+  videoUrl: '/assets/spicemix-quick-recipe-v3.mp4',
+  posterUrl: '/assets/spicemix-recipe-poster-v3.jpg',
+  optimized: true,
+  originalBytes: 15200000,
+  optimizedBytes: 3866955,
+  savingsPercent: 75,
+  chapters: [
+    {
+      timeSec: 0,
+      timeLabel: '0:00',
+      title: 'Stir fry onions and tomatoes in Cooking Oil',
+      caption:
+        'Stir fry only sliced onions and chopped red tomatoes in cooking oil until the onions turn light golden-brown and tender.',
+    },
+    {
+      timeSec: 7.5,
+      timeLabel: '0:08',
+      title: 'Add SpiceMix and Meat/Vegetable',
+      caption:
+        'Add 1–1.5 tbsp of BAJOZ SpiceMix to the fried onion-tomato base, then add chicken (or your choice of meat or vegetables).',
+    },
+    {
+      timeSec: 15,
+      timeLabel: '0:15',
+      title: 'Add Water and Simmer',
+      caption:
+        'Pour in 1–1.5 glasses of water, cover and simmer until the water reduces slightly, then open the lid of the saucepan.',
+    },
+    {
+      timeSec: 22.5,
+      timeLabel: '0:23',
+      title: 'Do Your Magic with Bhunai and Serve Hot',
+      caption:
+        'Stir-fry with bhunai until the cooking oil visibly surfaces around the masala, then serve steaming hot on the family dining table.',
+    },
+  ],
+};
+
+export const DEFAULT_MANAGED_RECIPES: ManagedRecipe[] = [
+  {
+    id: 'rec-lahori-karahi',
+    title: '30-Second Prep Lahori Chicken Karahi',
+    titleUr: 'لاہوری چکن کڑاہی',
+    category: 'chicken',
+    cookTime: '22 mins',
+    servings: '4–5 people',
+    baseWeight: '1 kg Chicken',
+    spiceMixAmount: '2 tbsp BAJOZ SpiceMix',
+    summary:
+      'Authentic street-style Lahori karahi with tender bone-in chicken and rich tomato masala—no garlic peeling or measuring spices.',
+    ingredients: [
+      '1 kg Bone-in Chicken',
+      '2 tbsp BAJOZ SpiceMix',
+      '4 Medium Red Tomatoes (chopped)',
+      '1 Medium Onion (thinly sliced)',
+      '1/3 Cup Cooking Oil or Desi Ghee',
+      'Fresh Cilantro, Green Chilies & Julienned Ginger for garnish',
+    ],
+    steps: [
+      'Heat oil in an iron karahi and fry sliced onions and tomatoes for 4–5 minutes until soft.',
+      'Add chicken and 2 tablespoons of BAJOZ SpiceMix. Sear on medium-high flame for 5 minutes.',
+      'Cover and simmer on medium-low for 12 minutes until chicken is tender and oil separates. Garnish and serve hot with naan.',
+    ],
+    posterUrl: '/assets/spicemix-recipe-poster.jpg',
+    videoUrl: '/assets/spicemix-quick-recipe-demo.mp4',
+    videoDuration: '0:30',
+    videoOptimized: true,
+    videoOriginalBytes: 14800000,
+    videoOptimizedBytes: 5450000,
+    videoSavingsPercent: 63,
+    isPublished: true,
+    featured: true,
+    updatedAt: '2026-11-18',
+  },
+  {
+    id: 'rec-dhaba-daal',
+    title: '12-Minute Dhaba Daal Tadka',
+    titleUr: 'ڈھابہ دال تڑکہ',
+    category: 'lentils',
+    cookTime: '15 mins',
+    servings: '4 people',
+    baseWeight: '250g Yellow Moong & Masoor Daal',
+    spiceMixAmount: '1.5 tbsp BAJOZ SpiceMix',
+    summary:
+      'Silky everyday comfort lentils bloomed with BAJOZ SpiceMix and pure Desi Ghee—ready in 15 minutes.',
+    ingredients: [
+      '250g Mixed Moong & Masoor Lentils (soaked 15 mins)',
+      '1.5 tbsp BAJOZ SpiceMix',
+      '1 Small Onion & 2 Tomatoes (chopped)',
+      '3 Cups Water',
+      '2 tbsp Pure Desi Ghee for tadka',
+    ],
+    steps: [
+      'Fry onion and tomatoes in 2 tbsp oil, then stir in 1.5 tbsp BAJOZ SpiceMix for 1 minute.',
+      'Add drained lentils and 3 cups water. Bring to a boil, cover, and simmer 12 minutes until creamy.',
+      'Finish with warm Desi Ghee, fresh coriander, and serve alongside steamed basmati rice.',
+    ],
+    posterUrl: '/assets/aistudio/image_46d9bf55_06e518ca.jpg',
+    isPublished: true,
+    featured: false,
+    updatedAt: '2026-11-18',
+  },
+  {
+    id: 'rec-mutton-handi',
+    title: 'Slow-Simmered Mutton Qourma Handi',
+    titleUr: 'مٹن قورمہ ہانڈی',
+    category: 'mutton',
+    cookTime: '40 mins',
+    servings: '5–6 people',
+    baseWeight: '1 kg Mutton',
+    spiceMixAmount: '2.5 tbsp BAJOZ SpiceMix',
+    summary:
+      'Rich ceremonial family mutton handi with deep aromatic garam masala warmth—straight from one jar.',
+    ingredients: [
+      '1 kg Bone-in Mutton',
+      '2.5 tbsp BAJOZ SpiceMix',
+      '2 Medium Onions (golden fried)',
+      '1/2 Cup Whisked Yogurt',
+      '1/2 Cup Cooking Oil or Ghee',
+      '2 Cups Warm Water',
+    ],
+    steps: [
+      'Fry onions until golden brown, add mutton and 2.5 tbsp BAJOZ SpiceMix, and sear well for 6 minutes.',
+      'Add warm water, cover tightly, and simmer until tender (or pressure cook 14 minutes).',
+      'Fold in whisked yogurt on low heat, simmer 5 minutes until glossy oil rises, and serve.',
+    ],
+    posterUrl: '/assets/aistudio/image_fe2f1b15_327761c4.jpg',
+    isPublished: true,
+    featured: false,
+    updatedAt: '2026-11-18',
+  },
+];
 
 export const DEFAULT_CUSTOM_PAGES: CustomPage[] = [
   {
@@ -262,7 +414,7 @@ export const DEFAULT_CUSTOM_PAGES: CustomPage[] = [
     id: 'page-purity',
     title: 'Purity & Roasting Standards',
     slug: 'purity',
-    kicker: 'Zero Adulteration · Model Town Kitchen',
+    kicker: 'Zero Adulteration · Lahore Kitchen',
     subtitle:
       'Every jar of BAJOZ — The House of Naturals is slow-roasted in small 10kg batches using unadulterated ingredients sourced directly from trusted Pakistani farms and orchards.',
     isPublished: true,
@@ -281,7 +433,7 @@ export const DEFAULT_CUSTOM_PAGES: CustomPage[] = [
           'All spices, fresh garlic & ginger (zero onion) in SpiceMix',
           'Natural alum, cloves, salts & tree bark powders in Tooth Guardian Oral Care',
         ],
-        ctaText: 'Shop Small-Batch Jars',
+        ctaText: 'Shop Homemade Jars',
         ctaLink: '#collection',
         theme: 'sand',
       },
@@ -303,7 +455,7 @@ const INITIAL_SETTINGS: StoreSettings = {
     'Panjeeri | SpiceMix | Tooth Guardian',
   freeDeliveryThreshold: 2500,
   standardDeliveryFee: 250,
-  officeAddress: 'Model Town, Lahore, Punjab, Pakistan',
+  officeAddress: ' 3 Km, Defence Road, Lahore, Pakistan',
   bankDetails: {
     bankName: 'Meezan Bank Ltd (Islamic Banking)',
     accountTitle: 'BAJOZ HOUSE OF NATURALS',
@@ -1026,6 +1178,12 @@ interface ShopContextValue {
     note?: string,
     actor?: string
   ) => void;
+  cancelOrder: (
+    orderNumber: string,
+    reason?: string,
+    actor?: string,
+    restockInventory?: boolean
+  ) => void;
   deleteOrder: (orderNumber: string) => void;
   createManualAdminOrder: (partial: {
     customer: OrderCustomer;
@@ -1058,6 +1216,13 @@ interface ShopContextValue {
   updateSiteCopy: (copy: WebsiteCopyConfig) => void;
   upsertCustomPage: (page: CustomPage) => void;
   deleteCustomPage: (pageId: string) => void;
+  managedRecipes: ManagedRecipe[];
+  upsertManagedRecipe: (recipe: ManagedRecipe) => void;
+  deleteManagedRecipe: (recipeId: string) => void;
+  quickRecipeVideo: QuickRecipeVideoConfig;
+  updateQuickRecipeVideo: (config: QuickRecipeVideoConfig) => void;
+  videoOptimization: RecipeVideoOptimizationSettings;
+  updateVideoOptimization: (config: RecipeVideoOptimizationSettings) => void;
   registerWithEmail: (data: {
     name: string;
     email: string;
@@ -1089,7 +1254,7 @@ const STORAGE_KEYS = {
   CART: 'bajoz_cart_v6',
   ORDERS: 'bajoz_orders_v4',
   REVIEWS: 'bajoz_reviews_v7',
-  SETTINGS: 'bajoz_settings_v12',
+  SETTINGS: 'bajoz_settings_v13',
   USER: 'bajoz_user_v1',
   REGISTERED_USERS: 'bajoz_registered_users_v1',
   ORDER_NOTES: 'bajoz_order_notes_v1',
@@ -1532,9 +1697,22 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, [orderNotes]);
 
+  const isLegacyDefaultHeroCopy =
+    settings.siteCopy?.heroHeadline ===
+    'Get The Taste Of Home Food Without Standing In The Kitchen For Hours';
+
   const siteCopy: WebsiteCopyConfig = {
     ...DEFAULT_SITE_COPY,
     ...(settings.siteCopy || {}),
+    ...(isLegacyDefaultHeroCopy
+      ? {
+          heroKickers: DEFAULT_SITE_COPY.heroKickers,
+          heroHeadline: DEFAULT_SITE_COPY.heroHeadline,
+          heroSubheadline: DEFAULT_SITE_COPY.heroSubheadline,
+          heroDescription: DEFAULT_SITE_COPY.heroDescription,
+          heroViewProductsCta: DEFAULT_SITE_COPY.heroViewProductsCta,
+        }
+      : {}),
   };
 
   const customPages: CustomPage[] = Array.isArray(settings.customPages)
@@ -1858,6 +2036,63 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
     );
   };
 
+  const cancelOrder = (
+    orderNumber: string,
+    reason?: string,
+    actor?: string,
+    restockInventory = true
+  ) => {
+    const targetOrder = orders.find((o) => o.orderNumber === orderNumber);
+    if (!targetOrder) return;
+
+    const alreadyCancelled = targetOrder.fulfillmentStatus === 'Cancelled';
+    const cancellationNote =
+      reason?.trim() ||
+      `Order cancelled${restockInventory && !alreadyCancelled ? ' & inventory restocked' : ''}`;
+
+    setOrders((prev) =>
+      prev.map((o) => {
+        if (o.orderNumber !== orderNumber) return o;
+        const updated: Order = {
+          ...o,
+          fulfillmentStatus: 'Cancelled',
+          statusHistory: [
+            ...o.statusHistory,
+            {
+              status: 'Cancelled',
+              timestamp: new Date().toISOString(),
+              note: cancellationNote,
+              actor: actor || 'BAJOZ Admin',
+            },
+          ],
+        };
+        void persistOrderToSupabase(updated);
+        return updated;
+      })
+    );
+
+    if (restockInventory && !alreadyCancelled && Array.isArray(targetOrder.items)) {
+      setProducts((prev) =>
+        prev.map((prod) => {
+          const cancelledItems = targetOrder.items.filter((c) => c.productId === prod.id);
+          if (cancelledItems.length === 0) return prod;
+          const updatedProd = {
+            ...prod,
+            variants: prod.variants.map((v) => {
+              const totalQty = cancelledItems
+                .filter((c) => c.variantId === v.id)
+                .reduce((sum, c) => sum + c.quantity, 0);
+              if (totalQty <= 0) return v;
+              return { ...v, stock: v.stock + totalQty };
+            }),
+          };
+          void persistProductToSupabase(updatedProd);
+          return updatedProd;
+        })
+      );
+    }
+  };
+
   const deleteOrder = (orderNumber: string) => {
     setOrders((prev) => prev.filter((o) => o.orderNumber !== orderNumber));
     void removeOrderFromSupabase(orderNumber);
@@ -2082,12 +2317,48 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
     void removeReviewFromSupabase(reviewId);
   };
 
+  const managedRecipes: ManagedRecipe[] = Array.isArray(settings.managedRecipes)
+    ? settings.managedRecipes
+    : DEFAULT_MANAGED_RECIPES;
+
+  const isLegacyDefaultQuickVideo =
+    settings.quickRecipeVideo &&
+    (settings.quickRecipeVideo.videoUrl === '/assets/spicemix-quick-recipe-demo.mp4' ||
+      settings.quickRecipeVideo.videoUrl === '/assets/spicemix-quick-recipe-v2.mp4');
+
+  const quickRecipeVideo: QuickRecipeVideoConfig =
+    settings.quickRecipeVideo && !isLegacyDefaultQuickVideo
+      ? {
+          ...DEFAULT_QUICK_RECIPE_VIDEO,
+          ...settings.quickRecipeVideo,
+          chapters:
+            Array.isArray(settings.quickRecipeVideo.chapters) &&
+            settings.quickRecipeVideo.chapters.length > 0
+              ? settings.quickRecipeVideo.chapters
+              : DEFAULT_QUICK_RECIPE_VIDEO.chapters,
+        }
+      : DEFAULT_QUICK_RECIPE_VIDEO;
+
+  const videoOptimization: RecipeVideoOptimizationSettings = settings.videoOptimization
+    ? { ...DEFAULT_VIDEO_OPTIMIZATION, ...settings.videoOptimization }
+    : DEFAULT_VIDEO_OPTIMIZATION;
+
   const updateStoreSettings = (newSettings: StoreSettings) => {
     const merged: StoreSettings = {
       ...settings,
       ...newSettings,
       siteCopy: newSettings.siteCopy || settings.siteCopy || DEFAULT_SITE_COPY,
       customPages: newSettings.customPages || settings.customPages || DEFAULT_CUSTOM_PAGES,
+      managedRecipes:
+        newSettings.managedRecipes || settings.managedRecipes || DEFAULT_MANAGED_RECIPES,
+      quickRecipeVideo:
+        newSettings.quickRecipeVideo ||
+        settings.quickRecipeVideo ||
+        DEFAULT_QUICK_RECIPE_VIDEO,
+      videoOptimization:
+        newSettings.videoOptimization ||
+        settings.videoOptimization ||
+        DEFAULT_VIDEO_OPTIMIZATION,
     };
     setSettings(merged);
     void persistSettingsToSupabase(merged);
@@ -2130,6 +2401,52 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const nextSettings: StoreSettings = {
       ...settings,
       customPages: updatedPages,
+    };
+    setSettings(nextSettings);
+    void persistSettingsToSupabase(nextSettings);
+  };
+
+  const upsertManagedRecipe = (recipe: ManagedRecipe) => {
+    const current = Array.isArray(settings.managedRecipes)
+      ? settings.managedRecipes
+      : DEFAULT_MANAGED_RECIPES;
+    const exists = current.some((r) => r.id === recipe.id);
+    const updated = exists
+      ? current.map((r) => (r.id === recipe.id ? recipe : r))
+      : [recipe, ...current];
+    const nextSettings: StoreSettings = {
+      ...settings,
+      managedRecipes: updated,
+    };
+    setSettings(nextSettings);
+    void persistSettingsToSupabase(nextSettings);
+  };
+
+  const deleteManagedRecipe = (recipeId: string) => {
+    const current = Array.isArray(settings.managedRecipes)
+      ? settings.managedRecipes
+      : DEFAULT_MANAGED_RECIPES;
+    const nextSettings: StoreSettings = {
+      ...settings,
+      managedRecipes: current.filter((r) => r.id !== recipeId),
+    };
+    setSettings(nextSettings);
+    void persistSettingsToSupabase(nextSettings);
+  };
+
+  const updateQuickRecipeVideo = (config: QuickRecipeVideoConfig) => {
+    const nextSettings: StoreSettings = {
+      ...settings,
+      quickRecipeVideo: config,
+    };
+    setSettings(nextSettings);
+    void persistSettingsToSupabase(nextSettings);
+  };
+
+  const updateVideoOptimization = (config: RecipeVideoOptimizationSettings) => {
+    const nextSettings: StoreSettings = {
+      ...settings,
+      videoOptimization: config,
     };
     setSettings(nextSettings);
     void persistSettingsToSupabase(nextSettings);
@@ -2468,6 +2785,7 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
         updateOrderShipping,
         scheduleOrder,
         updateOrderDetails,
+        cancelOrder,
         deleteOrder,
         createManualAdminOrder,
         addProduct,
@@ -2484,6 +2802,13 @@ export const ShopProvider: React.FC<{ children: React.ReactNode }> = ({ children
         updateSiteCopy,
         upsertCustomPage,
         deleteCustomPage,
+        managedRecipes,
+        upsertManagedRecipe,
+        deleteManagedRecipe,
+        quickRecipeVideo,
+        updateQuickRecipeVideo,
+        videoOptimization,
+        updateVideoOptimization,
         registerWithEmail,
         loginWithEmail,
         loginWithGoogle,

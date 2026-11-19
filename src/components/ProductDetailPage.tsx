@@ -8,6 +8,7 @@ import { useShop, calculateVariantPrice } from '../context/ShopContext';
 import { Product } from '../types/shop';
 import { ProductImage } from './ProductImage';
 import { WaveDivider } from './WaveDivider';
+import { SpiceMixQuickRecipeVideo } from './SpiceMixQuickRecipeVideo';
 import { updateProductPageSeo } from '../lib/seo';
 import {
   ArrowLeft,
@@ -492,7 +493,7 @@ export const ProductDetailPage: React.FC = () => {
       ]
     : isSpiceMix
     ? [
-        'Cut 45 minutes of peeling and grinding down to 30 seconds. Slow-simmered mountain garlic, stone-ground ginger, and whole roasted spices—made with zero preservatives and no onion for effortless Karahi, Biryani, and Daal.',
+        "Cut 45 minutes of peeling and grinding down to 30 seconds. Bajoz's Spicemix comes with a balanced proportion of all Pakistani basic cooking spices, garam masala, ginger and garlic without any preservatives, colours or chemicals. Just Fry your onions, tomatoes, add what you're cooking and SpiceMix, simmer and enjoy with your loved ones",
       ]
     : isToothPowder
     ? [
@@ -588,17 +589,17 @@ export const ProductDetailPage: React.FC = () => {
   const transformationSteps = isPanjeeri
     ? [
         {
-          step: 'Step 1',
+          step: 'Select',
           title: 'Choose Your Pack',
           desc: 'Explore the available size and product details to find the option that suits your home.',
         },
         {
-          step: 'Step 2',
+          step: 'Daily Habit',
           title: 'Make It Part of Your Routine',
           desc: 'Enjoy panjeeri according to your preferences and the serving guidance provided.',
         },
         {
-          step: 'Step 3',
+          step: 'Enjoy',
           title: 'Savour a Little Familiar Goodness',
           desc: 'Share it with family or keep it on hand for the moments when you feel like something traditional.',
         },
@@ -606,17 +607,17 @@ export const ProductDetailPage: React.FC = () => {
     : isSpiceMix
     ? [
         {
-          step: 'Step 1',
+          step: 'Prep Base',
           title: 'Choose What you Want to Cook',
           desc: 'Pick the meal you’re in the mood for, fry onions and tomatoes.',
         },
         {
-          step: 'Step 2',
+          step: 'Add Paste',
           title: 'Add SpiceMix and What You’re Cooking',
           desc: 'Then add your meat/vegetable/lentil or just anything you’re cooking, add 1-2 tablespoon of SpiceMix- and you’re done. No need to do or add anything except water (if it requires).',
         },
         {
-          step: 'Step 3',
+          step: 'Serve Hot',
           title: 'Bring Everyone to The Table',
           desc: 'Enjoy your tasty, aromatic desi food you made in half its prep time with your family.',
         },
@@ -624,34 +625,34 @@ export const ProductDetailPage: React.FC = () => {
     : isToothPowder
     ? [
         {
-          step: 'Step 1',
+          step: 'Review',
           title: 'Explore the Ingredients',
           desc: 'Read the full ingredient list and check for anything you may be sensitive to.',
         },
         {
-          step: 'Step 2',
+          step: 'Directions',
           title: 'Understand How to Use It',
           desc: 'Follow the directions and precautions provided for BAJOZ Tooth Powder. If you have a dental concern, seek advice from a qualified dental professional.',
         },
         {
-          step: 'Step 3',
+          step: 'Confidence',
           title: 'Make an Informed Choice',
           desc: 'Choose products based on their ingredients, intended use, and your individual oral-care needs.',
         },
       ]
     : [
         {
-          step: 'Step 1',
+          step: 'Select',
           title: 'Choose Your Pack',
           desc: 'Explore the available jar size and product details to find the option that suits your household.',
         },
         {
-          step: 'Step 2',
+          step: 'Daily Habit',
           title: 'Make It Part of Your Routine',
           desc: `Use ${product.name} according to your household preferences and the directions provided.`,
         },
         {
-          step: 'Step 3',
+          step: 'Enjoy',
           title: 'Savour Everyday Goodness',
           desc: 'Keep a familiar traditional essential close at hand for your daily routine.',
         },
@@ -863,7 +864,7 @@ export const ProductDetailPage: React.FC = () => {
             'Skip hours of sourcing, cleaning, and roasting from scratch.',
             'Ready to use straight from the jar every day.',
             'Prepared with care in our Model Town Lahore kitchen.',
-            'Consistent small-batch quality your whole household can trust.',
+            'Consistent homemade quality your whole household can trust.',
             'Fits effortlessly into busy morning and evening routines.',
           ],
         },
@@ -1035,112 +1036,6 @@ export const ProductDetailPage: React.FC = () => {
           value: 'N/A',
         },
       ];
-
-  const comparisonRows = [
-    {
-      criteria: 'Preparation',
-      home: 'You source ingredients and prepare it yourself',
-      bajoz:
-        "Preparation is handled before the product reaches you, according to BAJOZ's actual process",
-    },
-    {
-      criteria: 'Time',
-      home: 'Requires planning and preparation',
-      bajoz: 'Convenient to order online',
-    },
-    {
-      criteria: 'Ingredients',
-      home: 'You choose and control each ingredient',
-      bajoz: 'Review the listed ingredients before buying',
-    },
-    {
-      criteria: 'Quantity',
-      home: 'You decide how much to make',
-      bajoz: 'Choose from the available pack sizes',
-    },
-    {
-      criteria: 'Personal preference',
-      home: 'Adjust your recipe as you like',
-      bajoz: 'Check the product details to see if it suits your taste and needs',
-    },
-  ];
-
-  const spiceMixComparisonRows = [
-    {
-      criteria: 'Preparation',
-      individual: 'Measure each spice for your recipe',
-      multipleMixes: 'Choose the right mix for each dish',
-      bajoz: 'One versatile blend for many dishes',
-    },
-    {
-      criteria: 'Pantry organisation',
-      individual: 'Several individual jars',
-      multipleMixes: 'Multiple packs for different recipes',
-      bajoz: 'One blend to keep within reach',
-    },
-    {
-      criteria: 'Ingredients',
-      individual: 'You choose each ingredient separately',
-      multipleMixes: "Depends on each product's label",
-      bajoz: 'Subcontinental spices, ginger, and garlic',
-    },
-    {
-      criteria: 'Preservatives',
-      individual: 'Depends on the ingredients used',
-      multipleMixes: 'Depends on the individual product',
-      bajoz: 'Made without preservatives',
-    },
-    {
-      criteria: 'Onion',
-      individual: 'Add separately if your recipe needs it',
-      multipleMixes: 'Check the product label',
-      bajoz: 'No onion added',
-    },
-    {
-      criteria: 'Flexibility',
-      individual: 'Full control over your own spice balance',
-      multipleMixes: 'Often designed for particular dishes',
-      bajoz: 'Adjust the amount to suit your recipe',
-    },
-  ];
-
-  const toothPowderComparisonRows = [
-    {
-      criteria: 'Product format',
-      conventional: 'Paste or gel',
-      toothPowder: 'Powder',
-    },
-    {
-      criteria: 'Ingredients',
-      conventional: 'Vary by formulation',
-      toothPowder: 'Vary by formulation',
-    },
-    {
-      criteria: 'Fluoride',
-      conventional: 'Check the product label',
-      toothPowder: 'Check whether fluoride is present',
-    },
-    {
-      criteria: 'Directions',
-      conventional: 'Follow the product label',
-      toothPowder: 'Follow the product label',
-    },
-    {
-      criteria: 'Abrasiveness',
-      conventional: 'Depends on the formulation',
-      toothPowder: 'Depends on the formulation',
-    },
-    {
-      criteria: 'Suitability',
-      conventional: 'Depends on your needs and the product',
-      toothPowder: 'Depends on your needs and the product',
-    },
-    {
-      criteria: 'Dental-health evidence',
-      conventional: 'Depends on ingredients and supporting evidence',
-      toothPowder: 'Depends on ingredients and supporting evidence',
-    },
-  ];
 
   const faqsList = isPanjeeri
     ? PANJEERI_FAQS
@@ -1327,37 +1222,37 @@ export const ProductDetailPage: React.FC = () => {
     heroSlideshowReviews[0];
 
   return (
-    <div className="bg-[#F5EBC8] bajoz-grain-canvas min-h-screen text-[#5A4E38]">
+    <div className="bg-[#F2EBD0] bajoz-grain-canvas min-h-screen text-[#5A4E38]">
       {/* =====================================================================
           1. TOP BREADCRUMB & QUICK TRUST BAR
           ===================================================================== */}
-      <div className="pt-4 pb-2">
+      <div className="pt-12 sm:pt-14 pb-3">
         <div className="w-full max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-16 xl:px-24 flex flex-wrap items-center justify-between gap-4">
           <nav
             aria-label="Breadcrumb"
-            className="flex flex-wrap items-center gap-2 text-xs text-[#40563D] font-medium"
+            className="flex flex-wrap items-center gap-2.5 text-sm sm:text-[15px] text-[#40563D] font-medium"
           >
             <button
               type="button"
               onClick={() => setActiveProductId(null)}
-              className="hover:underline cursor-pointer font-semibold text-[#5A4E38]"
+              className="hover:bg-[#5A4E38] hover:text-[#F2EBD0] cursor-pointer font-semibold text-[#5A4E38]"
             >
               Home
             </button>
-            <span>/</span>
+            <span className="text-[#5A4E38]/60">/</span>
             <button
               type="button"
               onClick={() => {
                 setActiveProductId(null);
                 setActivePageSlug('shop');
               }}
-              className="hover:underline cursor-pointer"
+              className="hover:bg-[#5A4E38] hover:text-[#F2EBD0] cursor-pointer"
             >
               Shop All
             </button>
-            <span>/</span>
-            <span className="text-[#786C57]">{product.category}</span>
-            <span>/</span>
+            <span className="text-[#5A4E38]/60">/</span>
+            <span className="text-[#5A4E38]">{product.category}</span>
+            <span className="text-[#5A4E38]/60">/</span>
             <span className="text-[#5A4E38] font-semibold">
               {isPanjeeri ? 'Homemade Panjeeri' : product.name}
             </span>
@@ -1369,9 +1264,9 @@ export const ProductDetailPage: React.FC = () => {
               setActiveProductId(null);
               setActivePageSlug('shop');
             }}
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#5A4E38] hover:text-[#40563D] transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-sm sm:text-[15px] font-semibold text-[#5A4E38] hover:bg-[#5A4E38] hover:text-[#F2EBD0] transition-colors cursor-pointer"
           >
-            <ArrowLeft className="w-3.5 h-3.5" />
+            <ArrowLeft className="w-4 h-4" />
             <span>Back to All Products</span>
           </button>
         </div>
@@ -1382,15 +1277,15 @@ export const ProductDetailPage: React.FC = () => {
           ===================================================================== */}
       <section
         id="pdp-buy-box"
-        className="w-full max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-16 xl:px-24 pt-4 lg:pt-8 pb-10 scroll-mt-20"
+        className="w-full max-w-[1440px] mx-auto px-5 sm:px-10 lg:px-14 xl:px-16 pt-8 sm:pt-10 lg:pt-12 pb-14 sm:pb-18 scroll-mt-20"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           {/* LEFT COLUMN: Single Straight Rounded Product Stage + Autoplay Review */}
           <div className="lg:col-span-6 lg:sticky lg:top-24 space-y-6">
             <div className="relative flex flex-col items-center justify-center bajoz-fade-in py-1 sm:py-2 px-1 sm:px-4 group">
               {/* Single Straight Softly-Rounded Product Photo Card — 100% Unobstructed */}
               <div className="relative w-full max-w-[300px] xs:max-w-[340px] sm:max-w-[400px] lg:max-w-[440px] aspect-square flex items-center justify-center">
-                <div className="relative w-full h-full rounded-[1.75rem] sm:rounded-[2rem] bg-[#B4CBA2] overflow-hidden border-[1.5px] border-[#7A5C38]">
+                <div className="relative w-full h-full rounded-[1.75rem] sm:rounded-[2rem] bg-[#B4CBA2] overflow-hidden border-[1.5px] border-[#5A4E38]">
                   <ProductImage
                     type={product.imageType}
                     productId={product.id}
@@ -1415,10 +1310,10 @@ export const ProductDetailPage: React.FC = () => {
                         ? 'Saved in Favorites — click to remove'
                         : 'Save to Favorites'
                     }
-                    className={`absolute top-3 right-3 sm:top-3.5 sm:right-3.5 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-colors duration-150 cursor-pointer border-[1.5px] border-[#7A5C38] ${
+                    className={`absolute top-3 right-3 sm:top-3.5 sm:right-3.5 z-20 w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-colors duration-150 cursor-pointer border-[1.5px] border-[#5A4E38] ${
                       isFavorite(product.id)
-                        ? 'bg-[#E9F399] text-[#9B6A73]'
-                        : 'bg-[#F9F5E9]/95 hover:bg-[#E9F399] text-[#40563D]'
+                        ? 'bg-[#E9F390] text-[#9B6A73]'
+                        : 'bg-[#F2EBD0]/95 hover:bg-[#E9F390] text-[#40563D]'
                     }`}
                   >
                     <Heart
@@ -1436,26 +1331,26 @@ export const ProductDetailPage: React.FC = () => {
               <div
                 onMouseEnter={() => setIsReviewSlidePaused(true)}
                 onMouseLeave={() => setIsReviewSlidePaused(false)}
-                className="bg-[#F9F5E9] hover:bg-[#F1EBD9] transition-colors rounded-[1.5rem] p-5 sm:p-6 border-[1.5px] border-[#7A5C38] space-y-3"
+                className="w-full h-[196px] sm:h-[208px] flex flex-col justify-between bg-[#F2EBD0] hover:bg-[#F2EBD0] transition-colors rounded-[1.5rem] p-5 sm:p-6 border-[1.5px] border-[#5A4E38] overflow-hidden"
               >
                 <div
                   key={currentHeroReview.id}
-                  className="flex items-start gap-3.5 bajoz-fade-in min-h-[76px]"
+                  className="flex items-start gap-3.5 bajoz-fade-in flex-1 min-h-0 overflow-hidden"
                 >
-                  <div className="w-11 h-11 rounded-full bg-[#40563D] text-[#F9F5E9] font-serif text-sm font-bold flex items-center justify-center shrink-0 mt-0.5 border border-[#7A5C38]">
+                  <div className="w-11 h-11 rounded-full bg-[#40563D] text-[#F2EBD0] font-serif text-sm font-bold flex items-center justify-center shrink-0 mt-0.5 border border-[#5A4E38]">
                     {getInitials(currentHeroReview.customerName)}
                   </div>
-                  <div className="space-y-1.5 min-w-0 flex-1">
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                      <div className="flex items-center gap-2">
-                        <div className="flex items-center gap-0.5 text-[#C98A6A]">
+                  <div className="space-y-1.5 min-w-0 flex-1 h-full flex flex-col overflow-hidden">
+                    <div className="flex flex-wrap items-center justify-between gap-2 shrink-0">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <div className="flex items-center gap-0.5 text-[#C98A6A] shrink-0">
                           {Array.from({ length: currentHeroReview.rating || 5 }).map(
                             (_, i) => (
                               <Star key={i} className="w-3.5 h-3.5 fill-current" />
                             )
                           )}
                         </div>
-                        <span className="text-xs font-bold text-[#5A4E38]">
+                        <span className="text-xs font-bold text-[#5A4E38] truncate">
                           {currentHeroReview.customerName} · {currentHeroReview.city}
                         </span>
                       </div>
@@ -1466,7 +1361,7 @@ export const ProductDetailPage: React.FC = () => {
                             .getElementById('pdp-social-proof')
                             ?.scrollIntoView({ behavior: 'smooth' })
                         }
-                        className="text-[11px] font-bold text-[#40563D] hover:underline cursor-pointer"
+                        className="text-[11px] font-bold text-[#40563D] hover:underline cursor-pointer shrink-0"
                       >
                         {avgRating} ({heroSlideshowReviews.length} Reviews)
                       </button>
@@ -1479,7 +1374,7 @@ export const ProductDetailPage: React.FC = () => {
 
                 {/* Slideshow Controls: Dots + Prev/Next Buttons */}
                 {heroSlideshowReviews.length > 1 && (
-                  <div className="flex items-center justify-between pt-2 border-t border-[#7A5C38]/25">
+                  <div className="flex items-center justify-between pt-2 mt-2 shrink-0 border-t border-[#5A4E38]/25">
                     <div className="flex items-center gap-1.5">
                       {heroSlideshowReviews.map((slide, sIdx) => {
                         const isActive =
@@ -1494,7 +1389,7 @@ export const ProductDetailPage: React.FC = () => {
                             className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
                               isActive
                                 ? 'w-6 bg-[#40563D]'
-                                : 'w-2 bg-[#7A5C38]/35 hover:bg-[#7A5C38]/70'
+                                : 'w-2 bg-[#5A4E38]/35 hover:bg-[#5A4E38]/70'
                             }`}
                           />
                         );
@@ -1512,7 +1407,7 @@ export const ProductDetailPage: React.FC = () => {
                           )
                         }
                         aria-label="Previous customer review"
-                        className="w-7 h-7 rounded-full bg-[#E9F399] hover:bg-[#dfeb82] border-[1.5px] border-[#7A5C38] flex items-center justify-center text-[#40563D] transition-colors cursor-pointer"
+                        className="w-7 h-7 rounded-full bg-[#E9F390] hover:bg-[#DCE7C9] border-[1.5px] border-[#5A4E38] flex items-center justify-center text-[#40563D] transition-colors cursor-pointer"
                       >
                         <ChevronLeft className="w-3.5 h-3.5" />
                       </button>
@@ -1524,7 +1419,7 @@ export const ProductDetailPage: React.FC = () => {
                           )
                         }
                         aria-label="Next customer review"
-                        className="w-7 h-7 rounded-full bg-[#E9F399] hover:bg-[#dfeb82] border-[1.5px] border-[#7A5C38] flex items-center justify-center text-[#40563D] transition-colors cursor-pointer"
+                        className="w-7 h-7 rounded-full bg-[#E9F390] hover:bg-[#DCE7C9] border-[1.5px] border-[#5A4E38] flex items-center justify-center text-[#40563D] transition-colors cursor-pointer"
                       >
                         <ChevronRight className="w-3.5 h-3.5" />
                       </button>
@@ -1543,41 +1438,41 @@ export const ProductDetailPage: React.FC = () => {
                 {
                   top: '100%',
                   label: 'HALAL',
-                  sub: 'Certified Pure',
-                  bgClass: 'bg-[#F9F5E9]',
-                  ringClass: 'border-[#40563D]/35',
+                  bgClass: 'bg-[#DCE7C9]',
+                  ringClass: 'border-[#40563D]/40',
+                  primaryTextClass: 'text-[#40563D]',
                 },
                 {
                   top: '100%',
                   label: 'HomeMade',
-                  sub: 'Small Batch',
-                  bgClass: 'bg-[#E9F399]',
+                  bgClass: 'bg-[#E9F390]',
                   ringClass: 'border-[#40563D]/45',
+                  primaryTextClass: 'text-[#40563D]',
                 },
                 {
                   top: '100%',
                   label: 'Natural',
-                  sub: 'Zero Chemicals',
-                  bgClass: 'bg-[#F9F5E9]',
-                  ringClass: 'border-[#40563D]/35',
+                  bgClass: 'bg-[#5A4E38]',
+                  ringClass: 'border-[#F2EBD0]/45',
+                  primaryTextClass: 'text-[#F2EBD0]',
                 },
               ].map((badge) => (
                 <div
                   key={badge.label}
-                  className={`w-26 h-26 xs:w-28 xs:h-28 sm:w-34 sm:h-34 lg:w-36 lg:h-36 rounded-full ${badge.bgClass} border-[1.5px] border-[#7A5C38] p-2 flex items-center justify-center text-center shadow-xs transition-transform duration-200 hover:scale-103`}
+                  className={`w-26 h-26 xs:w-28 xs:h-28 sm:w-34 sm:h-34 lg:w-36 lg:h-36 rounded-full ${badge.bgClass} border-[1.5px] border-[#5A4E38] p-2 flex items-center justify-center text-center shadow-xs transition-transform duration-200 hover:scale-103`}
                 >
                   <div
                     className={`w-full h-full rounded-full border-[1.5px] border-dashed ${badge.ringClass} flex flex-col items-center justify-center px-2`}
                   >
-                    <span className="font-mono text-lg xs:text-xl sm:text-2xl lg:text-[1.65rem] font-extrabold text-[#40563D] leading-none tracking-tight">
+                    <span
+                      className={`font-mono text-xl xs:text-2xl sm:text-3xl font-extrabold ${badge.primaryTextClass} leading-none tracking-tight`}
+                    >
                       {badge.top}
                     </span>
-                    <span className="font-serif text-xs xs:text-sm sm:text-base lg:text-[1.05rem] font-extrabold text-[#4A2E1B] leading-tight mt-1">
+                    <span
+                      className={`font-display text-sm xs:text-base sm:text-lg font-extrabold ${badge.primaryTextClass} leading-tight mt-1.5`}
+                    >
                       {badge.label}
-                    </span>
-                    <span className="mt-1 inline-flex items-center gap-0.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-[#40563D]/85">
-                      <ShieldCheck className="w-3 h-3 text-[#40563D] shrink-0" />
-                      <span>{badge.sub}</span>
                     </span>
                   </div>
                 </div>
@@ -1587,27 +1482,34 @@ export const ProductDetailPage: React.FC = () => {
 
           {/* RIGHT COLUMN: Minimal, Uncluttered Hero Content (Heading + Short Copy + 4 Badge Pills + Clean Selection & Buy Box) */}
           <div className="lg:col-span-6 space-y-6 lg:pt-2">
-            {/* Two-Line Product Display Heading */}
-            <h1 className="font-serif text-3xl sm:text-5xl lg:text-[3.35rem] text-[#40563D] leading-[1.08] tracking-tight">
-              <span className="block font-extrabold">
-                {isSpiceMix
-                  ? 'BAJOZ SpiceMix'
-                  : isPanjeeri
-                  ? 'BAJOZ Homemade'
-                  : isToothPowder
-                  ? 'BAJOZ Tooth Guardian'
-                  : product.name}
-              </span>
-              <span className="block font-normal text-[#40563D]/95 mt-1">
-                {isSpiceMix
-                  ? "Pakistan's 1st All-in-1 Cooking Paste"
-                  : isPanjeeri
-                  ? 'Khandani Panjeeri'
-                  : isToothPowder
-                  ? 'Natural Homemade Tooth Cleaning Powder'
-                  : '100% Pure & Natural'}
-              </span>
-            </h1>
+            {/* Product Display Title & Sub-Heading */}
+            {isSpiceMix ? (
+              <div className="space-y-3">
+                <h1 className="font-serif text-4xl sm:text-5xl lg:text-[3.6rem] text-[#40563D] leading-[1.06] tracking-tight">
+                  SpiceMix
+                </h1>
+                <h2 className="bajoz-subheadline text-base sm:text-lg lg:text-xl text-[#5A4E38] leading-snug">
+                  The Right Blend of Basic Spices, Garam Masala, Garlic &amp; Ginger!
+                </h2>
+              </div>
+            ) : (
+              <h1 className="font-serif text-3xl sm:text-5xl lg:text-[3.35rem] text-[#40563D] leading-[1.08] tracking-tight">
+                <span className="block font-extrabold">
+                  {isPanjeeri
+                    ? 'BAJOZ Homemade'
+                    : isToothPowder
+                    ? 'BAJOZ Tooth Guardian'
+                    : product.name}
+                </span>
+                <span className="block font-normal text-[#40563D]/95 mt-1">
+                  {isPanjeeri
+                    ? 'Khandani Panjeeri'
+                    : isToothPowder
+                    ? 'Natural Homemade Tooth Cleaning Powder'
+                    : '100% Pure & Natural'}
+                </span>
+              </h1>
+            )}
 
             {/* Clean, Minimal Hero Copy Paragraph */}
             <div className="space-y-3 text-base sm:text-lg text-[#40563D] leading-relaxed max-w-2xl">
@@ -1618,167 +1520,70 @@ export const ProductDetailPage: React.FC = () => {
               ))}
             </div>
 
-            {/* 6 Benefit Badge Pills Right Under Product Description Before Size & Quantity Selection Controls */}
+            {/* Simple Benefit Text Bullet Points with Fresh Lime Yellow (#E9F390) Checkmarks Only */}
             {(() => {
-              const badgePills = isSpiceMix
+              const benefitItems = isSpiceMix
                 ? [
-                    {
-                      text: 'One Paste, All Pakistani Dishes',
-                      toneClass: 'bg-[#E9F399] text-[#40563D] border-[#7A5C38]',
-                      dotClass: 'bg-[#40563D] text-[#E9F399]',
-                    },
-                    {
-                      text: 'The Right Proportion You Need',
-                      toneClass: 'bg-[#F9F5E9] text-[#40563D] border-[#7A5C38]',
-                      dotClass: 'bg-[#40563D] text-[#F9F5E9]',
-                    },
-                    {
-                      text: 'No More Peeling, & Grinding',
-                      toneClass: 'bg-[#F9F5E9] text-[#40563D] border-[#7A5C38]',
-                      dotClass: 'bg-[#40563D] text-[#F9F5E9]',
-                    },
-                    {
-                      text: 'Prep. Time Cut in Half',
-                      toneClass: 'bg-[#E9F399] text-[#40563D] border-[#7A5C38]',
-                      dotClass: 'bg-[#40563D] text-[#E9F399]',
-                    },
-                    {
-                      text: 'Desi Taste, Modern Lifestyle',
-                      toneClass: 'bg-[#E9F399] text-[#40563D] border-[#7A5C38]',
-                      dotClass: 'bg-[#40563D] text-[#E9F399]',
-                    },
-                    {
-                      text: 'Less Kitchen Mess, More Cooking',
-                      toneClass: 'bg-[#F9F5E9] text-[#40563D] border-[#7A5C38]',
-                      dotClass: 'bg-[#40563D] text-[#F9F5E9]',
-                    },
+                    'One Paste, All Pakistani Dishes',
+                    'The Right Proportion You Need',
+                    'No More Peeling, & Grinding',
+                    'Prep. Time Cut in Half',
+                    'Desi Taste, Modern Lifestyle',
+                    'Less Kitchen Mess, More Cooking',
                   ]
                 : isPanjeeri
                 ? [
-                    {
-                      text: '100% Pure Desi Ghee',
-                      toneClass: 'bg-[#E9F399] text-[#40563D] border-[#7A5C38]',
-                      dotClass: 'bg-[#40563D] text-[#E9F399]',
-                    },
-                    {
-                      text: 'Zero Refined White Sugar',
-                      toneClass: 'bg-[#F9F5E9] text-[#40563D] border-[#7A5C38]',
-                      dotClass: 'bg-[#40563D] text-[#F9F5E9]',
-                    },
-                    {
-                      text: 'Postpartum Recovery Support',
-                      toneClass: 'bg-[#F9F5E9] text-[#40563D] border-[#7A5C38]',
-                      dotClass: 'bg-[#40563D] text-[#F9F5E9]',
-                    },
-                    {
-                      text: 'Warming Daily Joint Comfort',
-                      toneClass: 'bg-[#E9F399] text-[#40563D] border-[#7A5C38]',
-                      dotClass: 'bg-[#40563D] text-[#E9F399]',
-                    },
-                    {
-                      text: 'Wholesome Daily Energy',
-                      toneClass: 'bg-[#E9F399] text-[#40563D] border-[#7A5C38]',
-                      dotClass: 'bg-[#40563D] text-[#E9F399]',
-                    },
-                    {
-                      text: 'Small-Batch Khandani Recipe',
-                      toneClass: 'bg-[#F9F5E9] text-[#40563D] border-[#7A5C38]',
-                      dotClass: 'bg-[#40563D] text-[#F9F5E9]',
-                    },
+                    '100% Pure Desi Ghee',
+                    'Zero Refined White Sugar',
+                    'Postpartum Recovery Support',
+                    'Warming Daily Joint Comfort',
+                    'Wholesome Daily Energy',
+                    'Authentic Khandani Recipe',
                   ]
                 : isToothPowder
                 ? [
-                    {
-                      text: 'Natural Homemade Tooth Powder',
-                      toneClass: 'bg-[#E9F399] text-[#40563D] border-[#7A5C38]',
-                      dotClass: 'bg-[#40563D] text-[#E9F399]',
-                    },
-                    {
-                      text: 'Alum, Cloves, Salts & Tree Barks',
-                      toneClass: 'bg-[#F9F5E9] text-[#40563D] border-[#7A5C38]',
-                      dotClass: 'bg-[#40563D] text-[#F9F5E9]',
-                    },
-                    {
-                      text: 'Everyday Oral Care Routine',
-                      toneClass: 'bg-[#F9F5E9] text-[#40563D] border-[#7A5C38]',
-                      dotClass: 'bg-[#40563D] text-[#F9F5E9]',
-                    },
-                    {
-                      text: 'Overall Mouth Cleanliness',
-                      toneClass: 'bg-[#E9F399] text-[#40563D] border-[#7A5C38]',
-                      dotClass: 'bg-[#40563D] text-[#E9F399]',
-                    },
-                    {
-                      text: 'No Synthetic Chemicals Or Colors',
-                      toneClass: 'bg-[#E9F399] text-[#40563D] border-[#7A5C38]',
-                      dotClass: 'bg-[#40563D] text-[#E9F399]',
-                    },
-                    {
-                      text: '40 gm & 80 gm Fresh-Sealed Jars',
-                      toneClass: 'bg-[#F9F5E9] text-[#40563D] border-[#7A5C38]',
-                      dotClass: 'bg-[#40563D] text-[#F9F5E9]',
-                    },
+                    'Natural Homemade Tooth Powder',
+                    'Alum, Cloves, Salts & Tree Barks',
+                    'Everyday Oral Care Routine',
+                    'Overall Mouth Cleanliness',
+                    'No Synthetic Chemicals Or Colors',
+                    '40 gm & 80 gm Fresh-Sealed Jars',
                   ]
                 : [
-                    {
-                      text: '100% Pure Natural Formula',
-                      toneClass: 'bg-[#E9F399] text-[#40563D] border-[#7A5C38]',
-                      dotClass: 'bg-[#40563D] text-[#E9F399]',
-                    },
-                    {
-                      text: 'Zero Chemical Preservatives',
-                      toneClass: 'bg-[#F9F5E9] text-[#40563D] border-[#7A5C38]',
-                      dotClass: 'bg-[#40563D] text-[#F9F5E9]',
-                    },
-                    {
-                      text: 'Small-Batch Homemade Quality',
-                      toneClass: 'bg-[#F9F5E9] text-[#40563D] border-[#7A5C38]',
-                      dotClass: 'bg-[#40563D] text-[#F9F5E9]',
-                    },
-                    {
-                      text: 'Traditional Family Recipe',
-                      toneClass: 'bg-[#E9F399] text-[#40563D] border-[#7A5C38]',
-                      dotClass: 'bg-[#40563D] text-[#E9F399]',
-                    },
-                    {
-                      text: 'Everyday Wholesome Nutrition',
-                      toneClass: 'bg-[#E9F399] text-[#40563D] border-[#7A5C38]',
-                      dotClass: 'bg-[#40563D] text-[#E9F399]',
-                    },
-                    {
-                      text: 'Fresh-Sealed Airtight Jar',
-                      toneClass: 'bg-[#F9F5E9] text-[#40563D] border-[#7A5C38]',
-                      dotClass: 'bg-[#40563D] text-[#F9F5E9]',
-                    },
+                    '100% Pure Natural Formula',
+                    'Zero Chemical Preservatives',
+                    '100% Homemade Quality',
+                    'Traditional Family Recipe',
+                    'Everyday Wholesome Nutrition',
+                    'Fresh-Sealed Airtight Jar',
                   ];
 
               return (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-w-2xl">
-                  {badgePills.slice(0, 6).map((pill, idx) => (
-                    <div
-                      key={`desc-pill-${idx}`}
-                      className={`inline-flex items-center justify-start gap-2 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full border-[1.5px] ${pill.toneClass}`}
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5 max-w-2xl pt-1">
+                  {benefitItems.slice(0, 6).map((text, idx) => (
+                    <li
+                      key={`desc-benefit-${idx}`}
+                      className="flex items-start gap-2 text-sm sm:text-[15px] font-normal text-[#40563D] leading-snug"
                     >
                       <span
-                        className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 ${pill.dotClass}`}
+                        aria-hidden="true"
+                        className="w-4 h-4 rounded-full bg-[#DCE7C9] text-[#40563D] flex items-center justify-center shrink-0 mt-0.5"
                       >
-                        <Check className="w-2.5 h-2.5 sm:w-3 sm:h-3 stroke-[3]" />
+                        <Check className="w-2.5 h-2.5 stroke-[2.75]" />
                       </span>
-                      <span className="text-xs sm:text-sm font-extrabold tracking-tight truncate">
-                        {pill.text}
-                      </span>
-                    </div>
+                      <span>{text}</span>
+                    </li>
                   ))}
-                </div>
+                </ul>
               );
             })()}
 
             {/* Minimal Outlined Selection & Buy Box Container */}
-            <div className="rounded-[1.5rem] border-[1.5px] border-[#7A5C38] bg-[#F5EBC8] p-4 sm:p-6 space-y-4">
+            <div className="rounded-[1.5rem] border-[1.5px] border-[#5A4E38] bg-[#F2EBD0] p-4 sm:p-6 space-y-4">
               {/* Flavour Selector — Shown ONLY for Panjeeri / Multi-Flavour Products (Never on SpiceMix) */}
               {hasFlavourVariants && (
                 <div className="space-y-2">
-                  <span className="text-xs font-extrabold uppercase tracking-wider text-[#40563D] block">
+                  <span className="bajoz-flavour text-xs uppercase tracking-wider text-[#40563D] block">
                     Flavour
                   </span>
                   <div className="grid grid-cols-3 gap-2 sm:gap-2.5">
@@ -1789,10 +1594,10 @@ export const ProductDetailPage: React.FC = () => {
                           key={variant.id}
                           type="button"
                           onClick={() => setSelectedVariantId(variant.id)}
-                          className={`py-2.5 sm:py-3 px-2.5 sm:px-4 rounded-xl text-center font-serif text-sm sm:text-base font-extrabold transition-all cursor-pointer border-[1.5px] border-[#2C221E] ${
+                          className={`bajoz-flavour bajoz-variant py-2.5 sm:py-3 px-2.5 sm:px-4 rounded-xl text-center text-sm sm:text-base transition-all cursor-pointer border-[1.5px] border-[#40563D] ${
                             isSelected
-                              ? 'bg-[#E9F399] text-[#40563D]'
-                              : 'bg-[#F5EBC8] hover:bg-[#F9F5E9] text-[#40563D]'
+                              ? 'bg-[#E9F390] text-[#40563D]'
+                              : 'bg-[#F2EBD0] hover:bg-[#FAF9F4] text-[#40563D]'
                           }`}
                         >
                           {variant.name}
@@ -1814,16 +1619,16 @@ export const ProductDetailPage: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => setSelectedPackId(pack.id)}
-                        className={`w-full py-3.5 sm:py-4 px-4 sm:px-6 rounded-2xl border-[1.5px] border-[#2C221E] transition-all duration-150 cursor-pointer flex items-center justify-between gap-3 ${
+                        className={`bajoz-size w-full py-3.5 sm:py-4 px-4 sm:px-6 rounded-2xl border-[1.5px] border-[#40563D] transition-all duration-150 cursor-pointer flex items-center justify-between gap-3 ${
                           isSelected
-                            ? 'bg-[#E9F399] text-[#40563D]'
-                            : 'bg-[#F5EBC8] hover:bg-[#F9F5E9] text-[#40563D]'
+                            ? 'bg-[#E9F390] text-[#40563D]'
+                            : 'bg-[#F2EBD0] hover:bg-[#FAF9F4] text-[#40563D]'
                         }`}
                       >
-                        <span className="font-serif text-lg sm:text-2xl font-extrabold tracking-tight">
+                        <span className="bajoz-size text-lg sm:text-xl tracking-tight">
                           {pack.label}
                         </span>
-                        <span className="font-mono text-sm sm:text-lg font-extrabold text-[#40563D] tabular-nums">
+                        <span className="bajoz-price text-sm sm:text-lg text-[#40563D] tabular-nums">
                           Price: N/A
                         </span>
                       </button>
@@ -1833,12 +1638,12 @@ export const ProductDetailPage: React.FC = () => {
               </div>
 
               {/* Minimal Quantity Row with Price: N/A Right in Front */}
-              <div className="py-2.5 px-4 sm:px-5 rounded-2xl border-[1.5px] border-[#2C221E] bg-[#F5EBC8] flex items-center justify-between gap-3">
+              <div className="py-2.5 px-4 sm:px-5 rounded-2xl border-[1.5px] border-[#40563D] bg-[#F2EBD0] flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2.5">
-                  <span className="font-serif text-base sm:text-lg font-bold text-[#40563D]">
+                  <span className="bajoz-product-meta text-base sm:text-lg text-[#40563D]">
                     Quantity
                   </span>
-                  <span className="font-mono text-sm sm:text-base font-extrabold text-[#40563D] tabular-nums">
+                  <span className="bajoz-price text-sm sm:text-base text-[#40563D] tabular-nums">
                     · Price: N/A
                   </span>
                 </div>
@@ -1848,18 +1653,18 @@ export const ProductDetailPage: React.FC = () => {
                     type="button"
                     onClick={() => setQuantity((q) => Math.max(1, q - 1))}
                     aria-label="Decrease quantity"
-                    className="w-8 h-8 rounded-full bg-[#F9F5E9] hover:bg-[#E9F399] text-[#40563D] border-[1.5px] border-[#2C221E] flex items-center justify-center transition-colors cursor-pointer"
+                    className="w-8 h-8 rounded-full bg-[#F2EBD0] hover:bg-[#E9F390] text-[#40563D] border-[1.5px] border-[#40563D] flex items-center justify-center transition-colors cursor-pointer"
                   >
                     <Minus className="w-3.5 h-3.5" />
                   </button>
-                  <span className="w-8 text-center font-mono text-sm sm:text-base font-extrabold text-[#40563D] tabular-nums">
+                  <span className="bajoz-product-meta w-8 text-center text-sm sm:text-base text-[#40563D] tabular-nums">
                     {quantity}
                   </span>
                   <button
                     type="button"
                     onClick={() => setQuantity((q) => Math.min(20, q + 1))}
                     aria-label="Increase quantity"
-                    className="w-8 h-8 rounded-full bg-[#F9F5E9] hover:bg-[#E9F399] text-[#40563D] border-[1.5px] border-[#2C221E] flex items-center justify-center transition-colors cursor-pointer"
+                    className="w-8 h-8 rounded-full bg-[#F2EBD0] hover:bg-[#E9F390] text-[#40563D] border-[1.5px] border-[#40563D] flex items-center justify-center transition-colors cursor-pointer"
                   >
                     <Plus className="w-3.5 h-3.5" />
                   </button>
@@ -1873,7 +1678,7 @@ export const ProductDetailPage: React.FC = () => {
                     type="button"
                     disabled={isOutOfStock}
                     onClick={handleBuyItNow}
-                    className="flex-1 sm:flex-initial px-7 sm:px-10 py-3 sm:py-3.5 rounded-full bg-[#E9F399] hover:bg-[#dfeb82] text-[#40563D] border-[1.5px] border-[#7A5C38] font-serif text-lg sm:text-2xl font-extrabold tracking-tight transition-all duration-150 cursor-pointer disabled:opacity-50"
+                    className="bajoz-cta flex-1 sm:flex-initial px-7 sm:px-10 py-3 sm:py-3.5 rounded-full bg-[#E9F390] hover:bg-[#DCE7C9] text-[#40563D] border-[1.5px] border-[#5A4E38] text-lg sm:text-xl tracking-tight transition-all duration-150 cursor-pointer disabled:opacity-50"
                   >
                     {isOutOfStock ? 'Sold Out' : 'Buy Now · Price: N/A'}
                   </button>
@@ -1882,7 +1687,7 @@ export const ProductDetailPage: React.FC = () => {
                     disabled={isOutOfStock}
                     onClick={handleBuyItNow}
                     aria-label="Buy Now"
-                    className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#E9F399] hover:bg-[#dfeb82] text-[#40563D] border-[1.5px] border-[#7A5C38] flex items-center justify-center shrink-0 transition-all duration-150 cursor-pointer disabled:opacity-50 hover:translate-x-0.5 hover:-translate-y-0.5"
+                    className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#E9F390] hover:bg-[#DCE7C9] text-[#40563D] border-[1.5px] border-[#5A4E38] flex items-center justify-center shrink-0 transition-all duration-150 cursor-pointer disabled:opacity-50 hover:translate-x-0.5 hover:-translate-y-0.5"
                   >
                     <ArrowUpRight className="w-6 h-6 stroke-[2.25]" />
                   </button>
@@ -1918,8 +1723,8 @@ export const ProductDetailPage: React.FC = () => {
                   onClick={() => setActiveInfoTab(tab.id)}
                   className={`text-base sm:text-lg lg:text-xl font-semibold transition-all duration-150 cursor-pointer ${
                     isSelected
-                      ? 'px-7 sm:px-8 py-2.5 sm:py-3 rounded-full bg-[#E9F399] text-[#40563D] border-[1.5px] border-[#7A5C38]'
-                      : 'px-4 sm:px-5 py-2.5 sm:py-3 rounded-full bg-transparent text-[#2C221E] hover:text-[#40563D] border-[1.5px] border-transparent'
+                      ? 'px-7 sm:px-8 py-2.5 sm:py-3 rounded-full bg-[#E9F390] text-[#40563D] border-[1.5px] border-[#5A4E38]'
+                      : 'px-4 sm:px-5 py-2.5 sm:py-3 rounded-full bg-transparent text-[#40563D] hover:text-[#40563D] border-[1.5px] border-transparent'
                   }`}
                 >
                   {tab.label}
@@ -1931,7 +1736,7 @@ export const ProductDetailPage: React.FC = () => {
           {/* Rounded Outlined Tab Content Box */}
           <div
             role="tabpanel"
-            className="w-full rounded-[1.5rem] border-[1.5px] border-[#7A5C38] bg-[#F9F5E9] p-6 sm:p-9 lg:p-11 text-left space-y-5 sm:space-y-6 bajoz-fade-in"
+            className="w-full rounded-[1.5rem] border-[1.5px] border-[#5A4E38] bg-[#F2EBD0] p-6 sm:p-9 lg:p-11 text-left space-y-5 sm:space-y-6 bajoz-fade-in"
           >
             {activeInfoTab === 'ingredients' && (
               <>
@@ -1939,12 +1744,12 @@ export const ProductDetailPage: React.FC = () => {
                   <div className="space-y-6">
                     <div className="space-y-2.5 max-w-3xl">
                       <h2 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#40563D]">
-                        17 Pure Homemade Ingredients in Every Jar
+                        Everything You Need to Make Any Pakistani Handi
                       </h2>
-                      <p className="text-base sm:text-lg font-medium text-[#2C221E] leading-relaxed">
-                        Every jar of BAJOZ SpiceMix is slow-simmered in small batches from fresh
-                        garlic, ginger, salt, and whole subcontinental spices — 100% pure, zero
-                        chemical preservatives, and no onion added:
+                      <p className="text-base sm:text-lg font-medium text-[#40563D] leading-relaxed">
+                        Every jar of BAJOZ SpiceMix comes with fresh garlic, ginger, basic spices,
+                        and garam masala. This product is 100% homemade and doesn&apos;t contain
+                        chemicals, preservatives, and colours.
                       </p>
                     </div>
 
@@ -1952,10 +1757,10 @@ export const ProductDetailPage: React.FC = () => {
                       {SPICEMIX_INGREDIENTS.map((ingredientName) => (
                         <li
                           key={ingredientName}
-                          className="rounded-[1.25rem] bg-[#FFFDF9] border-[1.5px] border-[#7A5C38] px-4 py-3.5 flex items-center gap-3"
+                          className="rounded-[1.25rem] bg-[#FAF9F4] border-[1.5px] border-[#5A4E38] px-4 py-3.5 flex items-center gap-3"
                         >
-                          <span className="w-6 h-6 rounded-full bg-[#E9F399] text-[#40563D] border-[1.5px] border-[#7A5C38] flex items-center justify-center shrink-0">
-                            <Check className="w-3.5 h-3.5 stroke-[2.75]" />
+                          <span className="w-4 h-4 rounded-full bg-[#DCE7C9] text-[#40563D] flex items-center justify-center shrink-0">
+                            <Check className="w-2.5 h-2.5 stroke-[2.75]" />
                           </span>
                           <span className="font-serif text-base sm:text-lg font-extrabold text-[#40563D] leading-snug">
                             {ingredientName}
@@ -1970,7 +1775,7 @@ export const ProductDetailPage: React.FC = () => {
                       <h2 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#40563D]">
                         100% Pure Homemade Ingredients in Every Jar
                       </h2>
-                      <p className="text-base sm:text-lg font-medium text-[#2C221E] leading-relaxed">
+                      <p className="text-base sm:text-lg font-medium text-[#40563D] leading-relaxed">
                         Every jar of BAJOZ Homemade Panjeeri is slow-roasted in small batches in
                         100% pure grass-fed Desi Ghee with premium dry fruits, seeds, and organic
                         Gond Katira — zero white sugar and zero preservatives:
@@ -1981,10 +1786,10 @@ export const ProductDetailPage: React.FC = () => {
                       {PANJEERI_INGREDIENTS.map((ingredientName) => (
                         <li
                           key={ingredientName}
-                          className="rounded-[1.25rem] bg-[#FFFDF9] border-[1.5px] border-[#7A5C38] px-4 py-3.5 flex items-center gap-3"
+                          className="rounded-[1.25rem] bg-[#FAF9F4] border-[1.5px] border-[#5A4E38] px-4 py-3.5 flex items-center gap-3"
                         >
-                          <span className="w-6 h-6 rounded-full bg-[#E9F399] text-[#40563D] border-[1.5px] border-[#7A5C38] flex items-center justify-center shrink-0">
-                            <Check className="w-3.5 h-3.5 stroke-[2.75]" />
+                          <span className="w-4 h-4 rounded-full bg-[#DCE7C9] text-[#40563D] flex items-center justify-center shrink-0">
+                            <Check className="w-2.5 h-2.5 stroke-[2.75]" />
                           </span>
                           <span className="font-serif text-base sm:text-lg font-extrabold text-[#40563D] leading-snug">
                             {ingredientName}
@@ -1995,7 +1800,7 @@ export const ProductDetailPage: React.FC = () => {
                   </div>
                 ) : (
                   <>
-                    <p className="text-base sm:text-lg lg:text-xl font-medium text-[#2C221E] leading-relaxed">
+                    <p className="text-base sm:text-lg lg:text-xl font-medium text-[#40563D] leading-relaxed">
                       Ingredients Picked for Pure Ancestral Oral Care.
                       <br />
                       BAJOZ Tooth Guardian Powder: Natural Alum (Phitkari)*, Aromatic Cloves
@@ -2003,7 +1808,7 @@ export const ProductDetailPage: React.FC = () => {
                       Natural Homemade Tooth Cleaning Powder.
                     </p>
 
-                    <p className="text-base sm:text-lg lg:text-xl font-medium text-[#2C221E] leading-relaxed">
+                    <p className="text-base sm:text-lg lg:text-xl font-medium text-[#40563D] leading-relaxed">
                       At BAJOZ, we believe daily oral care should be simple, natural, and transparent. Every jar is handcrafted from time-tested ancestral oral care ingredients—with no synthetic chemicals, artificial colors, or preservatives. Just clean, natural mouth freshness.
                     </p>
                   </>
@@ -2019,7 +1824,7 @@ export const ProductDetailPage: React.FC = () => {
                       <h2 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#40563D]">
                         Uses
                       </h2>
-                      <p className="text-base sm:text-lg font-medium text-[#2C221E] leading-relaxed">
+                      <p className="text-base sm:text-lg font-medium text-[#40563D] leading-relaxed">
                         Make any sub-continental food item with SpiceMix in half the standard
                         cooking time of that item without worry about uniqueness of its taste and
                         aroma. This all purpose cooking paste makes all dishes including:
@@ -2043,10 +1848,10 @@ export const ProductDetailPage: React.FC = () => {
                       ].map((dish) => (
                         <li
                           key={dish}
-                          className="rounded-[1.25rem] bg-[#FFFDF9] border-[1.5px] border-[#7A5C38] px-4 py-3.5 flex items-center gap-3"
+                          className="rounded-[1.25rem] bg-[#FAF9F4] border-[1.5px] border-[#5A4E38] px-4 py-3.5 flex items-center gap-3"
                         >
-                          <span className="w-6 h-6 rounded-full bg-[#E9F399] text-[#40563D] border-[1.5px] border-[#7A5C38] flex items-center justify-center shrink-0">
-                            <Check className="w-3.5 h-3.5 stroke-[2.75]" />
+                          <span className="w-4 h-4 rounded-full bg-[#DCE7C9] text-[#40563D] flex items-center justify-center shrink-0">
+                            <Check className="w-2.5 h-2.5 stroke-[2.75]" />
                           </span>
                           <span className="font-serif text-base sm:text-lg font-extrabold text-[#40563D] leading-snug">
                             {dish}
@@ -2058,71 +1863,77 @@ export const ProductDetailPage: React.FC = () => {
                 ) : isPanjeeri ? (
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
                     {/* 1. Dosage */}
-                    <div className="rounded-[1.25rem] bg-[#FFFDF9] border-[1.5px] border-[#7A5C38] p-6 sm:p-7 flex flex-col justify-between space-y-4">
+                    <div className="rounded-[1.25rem] bg-[#FAF9F4] border-[1.5px] border-[#5A4E38] p-6 sm:p-7 flex flex-col justify-between space-y-4">
                       <div className="space-y-3">
-                        <span className="inline-flex items-center px-3.5 py-1 rounded-full bg-[#E9F399] text-[#40563D] border-[1.5px] border-[#7A5C38] font-serif text-xs sm:text-sm font-extrabold tracking-tight">
+                        <span className="inline-flex items-center px-3.5 py-1 rounded-full bg-[#E9F390] text-[#40563D] border-[1.5px] border-[#5A4E38] font-serif text-xs sm:text-sm font-extrabold tracking-tight">
                           Daily Serving
                         </span>
                         <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#40563D]">
                           Dosage:
                         </h3>
-                        <p className="font-serif text-xl sm:text-2xl font-bold text-[#4A2E1B] pt-1">
+                        <p className="font-serif text-xl sm:text-2xl font-bold text-[#40563D] pt-1">
                           2-3 Tablespoon Per Day
                         </p>
                       </div>
                     </div>
 
                     {/* 2. How To Enjoy Panjeeri? */}
-                    <div className="rounded-[1.25rem] bg-[#FFFDF9] border-[1.5px] border-[#7A5C38] p-6 sm:p-7 space-y-4">
-                      <span className="inline-flex items-center px-3.5 py-1 rounded-full bg-[#E9F399] text-[#40563D] border-[1.5px] border-[#7A5C38] font-serif text-xs sm:text-sm font-extrabold tracking-tight">
+                    <div className="rounded-[1.25rem] bg-[#FAF9F4] border-[1.5px] border-[#5A4E38] p-6 sm:p-7 space-y-4">
+                      <span className="inline-flex items-center px-3.5 py-1 rounded-full bg-[#E9F390] text-[#40563D] border-[1.5px] border-[#5A4E38] font-serif text-xs sm:text-sm font-extrabold tracking-tight">
                         Serving Ways
                       </span>
                       <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#40563D]">
                         How To Enjoy Panjeeri?
                       </h3>
-                      <ol className="space-y-2.5 pt-1">
+                      <ul className="space-y-2.5 pt-1">
                         {[
-                          '1. Use with Warm Milk/Tea',
-                          '2. Enjoy as Healthy Evening Snack',
-                          '3. Take it with Oatmeal',
+                          'Use with Warm Milk/Tea',
+                          'Enjoy as Healthy Evening Snack',
+                          'Take it with Oatmeal',
                         ].map((item) => (
                           <li
                             key={item}
-                            className="rounded-xl bg-[#F9F5E9] border border-[#7A5C38]/40 px-4 py-2.5 font-serif text-base sm:text-lg font-extrabold text-[#4A2E1B]"
+                            className="flex items-start gap-2.5 rounded-xl bg-[#F2EBD0] border border-[#5A4E38]/40 px-4 py-2.5 font-serif text-base sm:text-lg font-extrabold text-[#40563D]"
                           >
-                            {item}
+                            <span className="w-4 h-4 rounded-full bg-[#DCE7C9] text-[#40563D] flex items-center justify-center shrink-0 mt-1.5">
+                              <Check className="w-2.5 h-2.5 stroke-[2.75]" />
+                            </span>
+                            <span>{item}</span>
                           </li>
                         ))}
-                      </ol>
+                      </ul>
                     </div>
 
                     {/* 3. Storage and Usage Instructions */}
-                    <div className="rounded-[1.25rem] bg-[#FFFDF9] border-[1.5px] border-[#7A5C38] p-6 sm:p-7 space-y-4">
-                      <span className="inline-flex items-center px-3.5 py-1 rounded-full bg-[#E9F399] text-[#40563D] border-[1.5px] border-[#7A5C38] font-serif text-xs sm:text-sm font-extrabold tracking-tight">
+                    <div className="rounded-[1.25rem] bg-[#FAF9F4] border-[1.5px] border-[#5A4E38] p-6 sm:p-7 space-y-4">
+                      <span className="inline-flex items-center px-3.5 py-1 rounded-full bg-[#E9F390] text-[#40563D] border-[1.5px] border-[#5A4E38] font-serif text-xs sm:text-sm font-extrabold tracking-tight">
                         Freshness Care
                       </span>
                       <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#40563D]">
                         Storage and Usage Instructions:
                       </h3>
-                      <ol className="space-y-2.5 pt-1">
+                      <ul className="space-y-2.5 pt-1">
                         {[
-                          '1. Keep in Cool, Dry Place',
-                          '2. Always Use Dry Spoon',
-                          '3. Keep the Jar Closed.',
+                          'Keep in Cool, Dry Place',
+                          'Always Use Dry Spoon',
+                          'Keep the Jar Closed.',
                         ].map((item) => (
                           <li
                             key={item}
-                            className="rounded-xl bg-[#F9F5E9] border border-[#7A5C38]/40 px-4 py-2.5 font-serif text-base sm:text-lg font-extrabold text-[#4A2E1B]"
+                            className="flex items-start gap-2.5 rounded-xl bg-[#F2EBD0] border border-[#5A4E38]/40 px-4 py-2.5 font-serif text-base sm:text-lg font-extrabold text-[#40563D]"
                           >
-                            {item}
+                            <span className="w-4 h-4 rounded-full bg-[#DCE7C9] text-[#40563D] flex items-center justify-center shrink-0 mt-1.5">
+                              <Check className="w-2.5 h-2.5 stroke-[2.75]" />
+                            </span>
+                            <span>{item}</span>
                           </li>
                         ))}
-                      </ol>
+                      </ul>
                     </div>
                   </div>
                 ) : (
                   <>
-                    <p className="text-base sm:text-lg lg:text-xl font-medium text-[#2C221E] leading-relaxed">
+                    <p className="text-base sm:text-lg lg:text-xl font-medium text-[#40563D] leading-relaxed">
                       Daily Morning &amp; Evening Ancestral Oral Care Routine.
                       <br />
                       Best for everyday teeth cleaning, comforting gum swelling and bleeding,
@@ -2130,7 +1941,7 @@ export const ProductDetailPage: React.FC = () => {
                       whole family.
                     </p>
 
-                    <p className="text-base sm:text-lg lg:text-xl font-medium text-[#2C221E] leading-relaxed">
+                    <p className="text-base sm:text-lg lg:text-xl font-medium text-[#40563D] leading-relaxed">
                       Use a small pinch on damp soft toothbrush bristles morning and evening. Note: This is a traditional remedial product used by our ancestors and not a medicated product.
                     </p>
                   </>
@@ -2164,11 +1975,11 @@ export const ProductDetailPage: React.FC = () => {
                   {benefitsItems.map((b) => (
                     <div
                       key={b.title}
-                      className="rounded-[1.25rem] bg-[#FFFDF9] hover:bg-[#F5EBC8]/55 transition-colors duration-200 border-[1.5px] border-[#7A5C38] p-5 sm:p-6 space-y-2.5"
+                      className="rounded-[1.25rem] bg-[#FAF9F4] hover:bg-[#F2EBD0]/55 transition-colors duration-200 border-[1.5px] border-[#5A4E38] p-5 sm:p-6 space-y-2.5"
                     >
-                      <div className="flex items-start gap-3">
-                        <span className="w-6 h-6 rounded-full bg-[#E9F399] text-[#40563D] border border-[#7A5C38] flex items-center justify-center shrink-0 mt-0.5">
-                          <Check className="w-3.5 h-3.5 stroke-[2.75]" />
+                      <div className="flex items-start gap-2.5">
+                        <span className="w-4 h-4 rounded-full bg-[#DCE7C9] text-[#40563D] flex items-center justify-center shrink-0 mt-1">
+                          <Check className="w-2.5 h-2.5 stroke-[2.75]" />
                         </span>
                         <h3 className="font-serif text-lg sm:text-xl font-extrabold text-[#40563D] leading-snug">
                           {b.title}
@@ -2176,17 +1987,19 @@ export const ProductDetailPage: React.FC = () => {
                       </div>
 
                       {b.bullets.length === 1 ? (
-                        <p className="text-sm sm:text-base font-medium text-[#2C221E] leading-relaxed pl-9">
+                        <p className="text-sm sm:text-base font-medium text-[#40563D] leading-relaxed pl-6.5">
                           {b.bullets[0]}
                         </p>
                       ) : (
-                        <ul className="space-y-2 pl-9">
+                        <ul className="space-y-2 pl-6.5">
                           {b.bullets.map((bullet, bIdx) => (
                             <li
                               key={bIdx}
-                              className="flex items-start gap-2.5 text-xs sm:text-sm font-medium text-[#2C221E] leading-snug"
+                              className="flex items-start gap-2 text-xs sm:text-sm font-medium text-[#40563D] leading-snug"
                             >
-                              <span className="w-1.5 h-1.5 rounded-full bg-[#40563D] shrink-0 mt-1.5" />
+                              <span className="w-4 h-4 rounded-full bg-[#DCE7C9] text-[#40563D] flex items-center justify-center shrink-0 mt-0.5">
+                                <Check className="w-2.5 h-2.5 stroke-[2.75]" />
+                              </span>
                               <span>{bullet}</span>
                             </li>
                           ))}
@@ -2201,21 +2014,40 @@ export const ProductDetailPage: React.FC = () => {
         </div>
       </section>
 
-      {!isPanjeeri && (
+      {isSpiceMix && (
         <>
-          {/* Smooth Wave Transition from Product Showcase (#F5EBC8) into The Transformation (#F9F5E9) */}
-          <WaveDivider fromColor="#F5EBC8" toColor="#F9F5E9" />
+          <WaveDivider fromColor="#F2EBD0" toColor="#FAF9F4" strokeColor="#5A4E38" />
+          <SpiceMixQuickRecipeVideo
+            onOpenRecipeGuide={() => {
+              setActiveProductId(null);
+              setActivePageSlug('guide');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          />
+          <WaveDivider fromColor="#FAF9F4" toColor="#F2EBD0" flip strokeColor="#5A4E38" />
+        </>
+      )}
+
+      {!isPanjeeri ? (
+        <>
+          {!isSpiceMix && (
+            <WaveDivider fromColor="#F2EBD0" toColor="#FAF9F4" strokeColor="#5A4E38" />
+          )}
 
           {/* =====================================================================
               4. THE TRANSFORMATION (3-Step Customer Journey Cards + CTA)
               ===================================================================== */}
-          <section className="py-20 sm:py-28 lg:py-36 bg-[#F9F5E9] bajoz-seamless-section">
+          <section
+            className={`py-24 sm:py-32 lg:py-36 ${
+              isSpiceMix ? 'bg-[#F2EBD0]' : 'bg-[#FAF9F4]'
+            } bajoz-seamless-section`}
+          >
             <div className="w-full max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-16 xl:px-24 space-y-10 sm:space-y-12">
               <div className="text-center max-w-3xl mx-auto space-y-2.5">
                 <p className="bajoz-script-kicker text-2xl sm:text-3xl text-[#40563D]">
                   The Transformation
                 </p>
-                <h2 className="bajoz-poster-display text-3xl sm:text-4xl lg:text-5xl text-[#4A2E1B]">
+                <h2 className="bajoz-poster-display text-3xl sm:text-4xl lg:text-5xl text-[#40563D]">
                   {isSpiceMix
                     ? 'From “What Should I Cook Today?” to “Dinner Is Sorted.”'
                     : isToothPowder
@@ -2223,15 +2055,15 @@ export const ProductDetailPage: React.FC = () => {
                     : 'From a Familiar Tradition to an Everyday Favourite'}
                 </h2>
                 {isSpiceMix ? (
-                  <p className="text-sm sm:text-base text-[#786C57] leading-relaxed">
+                  <p className="text-sm sm:text-base text-[#5A4E38] leading-relaxed">
                     Long day, hungry family, and a cabinet full of spice boxes? Skip the 45-minute prep—two spoonfuls of BAJOZ SpiceMix build a rich, homemade masala base in seconds.
                   </p>
                 ) : isToothPowder ? (
-                  <p className="text-sm sm:text-base text-[#786C57] leading-relaxed">
+                  <p className="text-sm sm:text-base text-[#5A4E38] leading-relaxed">
                     Oral care shouldn’t mean mystery chemicals. We list every mineral and botanical ingredient clearly so you can brush with confidence every morning and night.
                   </p>
                 ) : (
-                  <p className="text-sm sm:text-base text-[#786C57] leading-relaxed">
+                  <p className="text-sm sm:text-base text-[#5A4E38] leading-relaxed">
                     {`Enjoy the comforting warmth of ${product.name} every single day—without spending hours preparing from scratch.`}
                   </p>
                 )}
@@ -2239,21 +2071,24 @@ export const ProductDetailPage: React.FC = () => {
 
               {/* 3-Step Outlined Rounded Cards */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 pt-4">
-                {transformationSteps.map((item, idx) => (
+                {transformationSteps.map((item) => (
                   <div
-                    key={item.step}
-                    className="rounded-[1.5rem] border-[1.5px] border-[#7A5C38] bg-[#FFFDF9] p-6 sm:p-8 flex flex-col justify-between"
+                    key={item.title}
+                    className="rounded-[1.5rem] border-[1.5px] border-[#5A4E38] bg-[#FAF9F4] p-6 sm:p-8 flex flex-col justify-between"
                   >
                     <div className="space-y-4">
-                      <span className="inline-flex items-center px-3.5 py-1 rounded-full bg-[#E9F399] text-[#40563D] border-[1.5px] border-[#7A5C38] font-mono text-xs font-bold uppercase tracking-[0.1em]">
-                        0{idx + 1}. {item.step}
+                      <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E9F390] text-[#40563D] border-[1.5px] border-[#5A4E38] font-dm text-xs font-bold uppercase tracking-[0.1em]">
+                        <span className="w-4 h-4 rounded-full bg-[#DCE7C9] text-[#40563D] flex items-center justify-center shrink-0">
+                          <Check className="w-2.5 h-2.5 stroke-[2.75]" />
+                        </span>
+                        <span>{item.step}</span>
                       </span>
 
-                      <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#4A2E1B]">
+                      <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#40563D]">
                         {item.title}
                       </h3>
 
-                      <p className="text-sm sm:text-base leading-relaxed text-[#2C221E]">
+                      <p className="text-sm sm:text-base leading-relaxed text-[#40563D]">
                         {item.desc}
                       </p>
                     </div>
@@ -2266,7 +2101,7 @@ export const ProductDetailPage: React.FC = () => {
                   <button
                     type="button"
                     onClick={scrollToTopBuyBox}
-                    className="px-8 sm:px-10 py-3.5 sm:py-4 rounded-full bg-[#E9F399] hover:bg-[#dfeb82] text-[#40563D] border-[1.5px] border-[#7A5C38] font-serif text-lg sm:text-xl font-extrabold tracking-tight transition-colors cursor-pointer"
+                    className="px-8 sm:px-10 py-3.5 sm:py-4 rounded-full bg-[#E9F390] hover:bg-[#DCE7C9] text-[#40563D] border-[1.5px] border-[#5A4E38] font-serif text-lg sm:text-xl font-extrabold tracking-tight transition-colors cursor-pointer"
                   >
                     {isSpiceMix
                       ? 'Make Everyday Cooking Easier'
@@ -2278,7 +2113,7 @@ export const ProductDetailPage: React.FC = () => {
                     type="button"
                     onClick={scrollToTopBuyBox}
                     aria-label="Scroll to Buy Box"
-                    className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#E9F399] hover:bg-[#dfeb82] text-[#40563D] border-[1.5px] border-[#7A5C38] flex items-center justify-center transition-all cursor-pointer hover:translate-x-0.5 hover:-translate-y-0.5"
+                    className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#E9F390] hover:bg-[#DCE7C9] text-[#40563D] border-[1.5px] border-[#5A4E38] flex items-center justify-center transition-all cursor-pointer hover:translate-x-0.5 hover:-translate-y-0.5"
                   >
                     <ArrowUpRight className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.25]" />
                   </button>
@@ -2287,8 +2122,15 @@ export const ProductDetailPage: React.FC = () => {
             </div>
           </section>
 
-          <WaveDivider fromColor="#F9F5E9" toColor="#F5EBC8" flip />
+          <WaveDivider
+            fromColor={isSpiceMix ? '#F2EBD0' : '#FAF9F4'}
+            toColor="#F2EBD0"
+            flip
+            strokeColor="#5A4E38"
+          />
         </>
+      ) : (
+        <WaveDivider fromColor="#F2EBD0" toColor="#F2EBD0" strokeColor="#5A4E38" />
       )}
 
       {/* =====================================================================
@@ -2296,21 +2138,21 @@ export const ProductDetailPage: React.FC = () => {
           ===================================================================== */}
       <section
         id="pdp-social-proof"
-        className="py-20 sm:py-28 lg:py-36 bg-[#F5EBC8] scroll-mt-20 bajoz-seamless-section"
+        className="py-20 sm:py-28 lg:py-36 bg-[#F2EBD0] scroll-mt-20 bajoz-seamless-section"
       >
         <div className="w-full max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-16 xl:px-24 space-y-10">
           <div className="text-center max-w-3xl mx-auto space-y-2.5">
             <p className="bajoz-script-kicker text-2xl sm:text-3xl text-[#40563D]">
               Social Proof
             </p>
-            <h2 className="bajoz-poster-display text-3xl sm:text-4xl lg:text-5xl text-[#4A2E1B]">
+            <h2 className="bajoz-poster-display text-3xl sm:text-4xl lg:text-5xl text-[#40563D]">
               {isSpiceMix
                 ? 'Made for Real Kitchens and Real Family Meals'
                 : isToothPowder
                 ? 'Real Experiences. Honest Feedback.'
                 : "Don't Just Take Our Word for It"}
             </h2>
-            <p className="text-sm sm:text-base text-[#786C57] leading-relaxed">
+            <p className="text-sm sm:text-base text-[#5A4E38] leading-relaxed">
               {isSpiceMix
                 ? "Every kitchen has its own little tricks. Every family has dishes that bring everyone back for seconds. We're proud to be part of our customers' everyday cooking stories."
                 : isToothPowder
@@ -2324,28 +2166,28 @@ export const ProductDetailPage: React.FC = () => {
             {displayedReviews.slice(0, 3).map((rev) => (
               <article
                 key={rev.id}
-                className="bg-[#F9F5E9] rounded-[1.5rem] p-7 sm:p-8 border-[1.5px] border-[#7A5C38] flex flex-col justify-between text-left"
+                className="w-full h-[320px] sm:h-[340px] bg-[#F2EBD0] rounded-[1.5rem] p-7 sm:p-8 border-[1.5px] border-[#5A4E38] flex flex-col justify-between text-left overflow-hidden"
               >
-                <div className="space-y-4">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="flex-1 min-h-0 flex flex-col space-y-4 overflow-hidden">
+                  <div className="flex flex-wrap items-center justify-between gap-2 shrink-0">
                     <div className="flex items-center gap-1 text-[#C98A6A]">
                       {Array.from({ length: rev.rating || 5 }).map((_, idx) => (
                         <Star key={idx} className="w-4 h-4 fill-current" />
                       ))}
-                      <span className="ml-1.5 text-xs font-bold text-[#2C221E] tabular-nums">
+                      <span className="ml-1.5 text-xs font-bold text-[#40563D] tabular-nums">
                         {rev.rating || 5}.0
                       </span>
                     </div>
                     {rev.productTag && (
-                      <span className="px-3 py-1 rounded-full bg-[#E9F399] text-[#40563D] border border-[#7A5C38] font-serif text-xs font-extrabold">
+                      <span className="px-3 py-1 rounded-full bg-[#DCE7C9] text-[#40563D] border border-[#5A4E38]/40 font-serif text-xs font-extrabold">
                         {rev.productTag}
                       </span>
                     )}
                   </div>
-                  <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#4A2E1B]">
+                  <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#40563D] line-clamp-2 shrink-0">
                     “{rev.title}”
                   </h3>
-                  <p className="text-sm sm:text-base text-[#2C221E] leading-relaxed whitespace-pre-line">
+                  <p className="text-sm sm:text-base text-[#40563D] leading-relaxed whitespace-pre-line overflow-y-auto pr-1 flex-1">
                     {rev.comment}
                   </p>
                 </div>
@@ -2371,7 +2213,7 @@ export const ProductDetailPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={scrollToTopBuyBox}
-                  className="px-8 py-3.5 sm:py-4 rounded-full bg-[#E9F399] hover:bg-[#dfeb82] text-[#40563D] border-[1.5px] border-[#7A5C38] font-serif text-lg sm:text-xl font-extrabold tracking-tight transition-colors cursor-pointer"
+                  className="px-8 py-3.5 sm:py-4 rounded-full bg-[#E9F390] hover:bg-[#DCE7C9] text-[#40563D] border-[1.5px] border-[#5A4E38] font-serif text-lg sm:text-xl font-extrabold tracking-tight transition-colors cursor-pointer"
                 >
                   {isPanjeeri
                     ? 'Try BAJOZ Panjeeri'
@@ -2385,7 +2227,7 @@ export const ProductDetailPage: React.FC = () => {
                   type="button"
                   onClick={scrollToTopBuyBox}
                   aria-label="Try Product"
-                  className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#E9F399] hover:bg-[#dfeb82] text-[#40563D] border-[1.5px] border-[#7A5C38] flex items-center justify-center transition-all cursor-pointer hover:translate-x-0.5 hover:-translate-y-0.5"
+                  className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#E9F390] hover:bg-[#DCE7C9] text-[#40563D] border-[1.5px] border-[#5A4E38] flex items-center justify-center transition-all cursor-pointer hover:translate-x-0.5 hover:-translate-y-0.5"
                 >
                   <ArrowUpRight className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.25]" />
                 </button>
@@ -2394,7 +2236,7 @@ export const ProductDetailPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setIsReviewModalOpen(true)}
-                className="inline-flex items-center gap-1.5 px-6 py-3.5 sm:py-4 bg-[#F9F5E9] hover:bg-[#E9F399] text-[#40563D] border-[1.5px] border-[#7A5C38] font-serif text-base sm:text-lg font-bold rounded-full transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-6 py-3.5 sm:py-4 bg-[#F2EBD0] hover:bg-[#E9F390] text-[#40563D] border-[1.5px] border-[#5A4E38] font-serif text-base sm:text-lg font-bold rounded-full transition-colors cursor-pointer"
               >
                 <Plus className="w-4 h-4 text-[#40563D]" />
                 <span>Share Your Experience</span>
@@ -2404,211 +2246,12 @@ export const ProductDetailPage: React.FC = () => {
         </div>
       </section>
 
-      <WaveDivider fromColor="#F5EBC8" toColor="#FFFDF9" flip />
-
-      {/* =====================================================================
-          9. COMPARISON SECTION (Left: Single Straight Image Card & Copy | Right: Outlined Comparison Table)
-          ===================================================================== */}
-      <section className="py-20 sm:py-28 lg:py-36 bg-[#FFFDF9] bajoz-seamless-section">
-        <div className="w-full max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-16 xl:px-24 space-y-10">
-          <div className="text-center max-w-3xl mx-auto space-y-2.5">
-            <p className="bajoz-script-kicker text-2xl sm:text-3xl text-[#40563D]">
-              Comparison
-            </p>
-            <h2 className="bajoz-poster-display text-3xl sm:text-4xl lg:text-5xl text-[#4A2E1B]">
-              {isPanjeeri
-                ? 'Homemade Panjeeri or Ready-to-Enjoy Panjeeri?'
-                : isSpiceMix
-                ? 'Another Masala on the Shelf — or a Simpler Way to Season?'
-                : isToothPowder
-                ? 'Choosing an Oral-Care Product? Start With the Facts.'
-                : `Making It at Home or Choosing BAJOZ ${product.name}?`}
-            </h2>
-            <p className="text-sm sm:text-base text-[#786C57] leading-relaxed">
-              {isSpiceMix
-                ? "There are plenty of ways to bring flavour to a dish. You can measure each spice separately, use different ready-made blends, or keep a versatile homemade mix close at hand. Here's how BAJOZ SpiceMix fits into your kitchen."
-                : isToothPowder
-                ? 'Different oral-care products are designed for different purposes. What matters is understanding the formulation, intended use, and evidence behind the claims.'
-                : "Every home has its own way of doing things. Here's a simple comparison to help you decide what works for you."}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-            {/* Left Column: Single Straight Rounded Card + Closing Copy + CTA */}
-            <div className="lg:col-span-4 space-y-5">
-              <div className="rounded-[1.5rem] border-[1.5px] border-[#7A5C38] bg-[#F9F5E9] p-6 space-y-4">
-                <div className="aspect-square rounded-[1.5rem] bg-[#B4CBA2] border-[1.5px] border-[#7A5C38] overflow-hidden flex items-center justify-center">
-                  <ProductImage
-                    type={product.imageType}
-                    productId={product.id}
-                    customImageUrl={product.customImageUrl}
-                    fit="cover"
-                    className="w-full h-full"
-                    alt={product.name}
-                  />
-                </div>
-                {isSpiceMix && (
-                  <div className="text-xs font-bold uppercase tracking-wider text-[#40563D]">
-                    The BAJOZ difference
-                  </div>
-                )}
-                {isToothPowder && (
-                  <div className="text-xs font-bold uppercase tracking-wider text-[#40563D]">
-                    A thoughtful choice starts with understanding.
-                  </div>
-                )}
-                <p className="text-xs sm:text-sm text-[#2C221E] leading-relaxed">
-                  {isPanjeeri
-                    ? "Love making your own family recipe? There's something special about that. Prefer the convenience of ordering? BAJOZ Panjeeri offers another way to enjoy a familiar traditional food."
-                    : isSpiceMix
-                    ? "You don't need to reinvent your cooking routine. Keep the spices and fresh ingredients your recipes call for, and let BAJOZ SpiceMix simplify one part of the process."
-                    : isToothPowder
-                    ? 'BAJOZ encourages customers to check the ingredients and intended use of any oral-care product before deciding what belongs in their routine.'
-                    : `Love making your own family recipe? There's something special about that. Prefer the convenience of ordering? BAJOZ ${product.name} offers another way to enjoy familiar everyday goodness.`}
-                </p>
-                {isToothPowder && (
-                  <p className="text-[11px] text-[#5A4E38] pt-2 border-t border-[#7A5C38]/25 leading-relaxed">
-                    <strong>Important:</strong> Tooth powder should not be assumed to replace
-                    fluoride toothpaste or other evidence-based dental care. Ask your
-                    dentist which products are appropriate for your needs.
-                  </p>
-                )}
-                <div className="pt-1 flex items-center justify-center gap-1.5">
-                  <button
-                    type="button"
-                    onClick={scrollToTopBuyBox}
-                    className="flex-1 py-3.5 px-5 rounded-full bg-[#E9F399] hover:bg-[#dfeb82] text-[#40563D] border-[1.5px] border-[#7A5C38] font-serif text-base font-extrabold tracking-tight transition-colors cursor-pointer"
-                  >
-                    {isPanjeeri
-                      ? 'Explore BAJOZ Panjeeri'
-                      : isSpiceMix
-                      ? 'Try the Homemade Blend'
-                      : isToothPowder
-                      ? 'Explore Tooth Powder'
-                      : `Explore ${product.name}`}
-                  </button>
-                  <button
-                    type="button"
-                    onClick={scrollToTopBuyBox}
-                    aria-label="Explore Product"
-                    className="w-12 h-12 rounded-full bg-[#E9F399] hover:bg-[#dfeb82] text-[#40563D] border-[1.5px] border-[#7A5C38] flex items-center justify-center shrink-0 transition-all cursor-pointer hover:translate-x-0.5 hover:-translate-y-0.5"
-                  >
-                    <ArrowUpRight className="w-5 h-5 stroke-[2.25]" />
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Column: Side-by-Side Outlined Comparison Table */}
-            <div className="lg:col-span-8">
-              <div className="rounded-[1.5rem] border-[1.5px] border-[#7A5C38] bg-[#F9F5E9] overflow-hidden overflow-x-auto">
-                {isSpiceMix ? (
-                  <div className="min-w-[540px]">
-                    <div className="grid grid-cols-12 bg-[#40563D] text-[#F9F5E9] px-4 sm:px-6 py-4 text-xs sm:text-sm font-bold border-b-[1.5px] border-[#7A5C38]">
-                      <div className="col-span-3">What matters</div>
-                      <div className="col-span-3 px-2">Measuring individual spices</div>
-                      <div className="col-span-3 px-2">
-                        Using multiple dish-specific mixes
-                      </div>
-                      <div className="col-span-3 px-2 text-[#E9F399]">BAJOZ SpiceMix</div>
-                    </div>
-
-                    <div className="divide-y divide-[#7A5C38]/25">
-                      {spiceMixComparisonRows.map((row) => (
-                        <div
-                          key={row.criteria}
-                          className="grid grid-cols-12 px-4 sm:px-6 py-4 text-xs sm:text-sm items-start gap-2"
-                        >
-                          <div className="col-span-3 font-serif text-base font-bold text-[#4A2E1B]">
-                            {row.criteria}
-                          </div>
-                          <div className="col-span-3 px-2 text-[#5A4E38] leading-relaxed">
-                            {row.individual}
-                          </div>
-                          <div className="col-span-3 px-2 text-[#5A4E38] leading-relaxed">
-                            {row.multipleMixes}
-                          </div>
-                          <div className="col-span-3 px-2 text-[#2C221E] font-medium leading-relaxed flex items-start gap-1.5">
-                            <Check className="w-4 h-4 text-[#40563D] shrink-0 mt-0.5" />
-                            <span>{row.bajoz}</span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ) : isToothPowder ? (
-                  <div className="min-w-[480px]">
-                    <div className="grid grid-cols-12 bg-[#40563D] text-[#F9F5E9] px-4 sm:px-6 py-4 text-xs sm:text-sm font-bold border-b-[1.5px] border-[#7A5C38]">
-                      <div className="col-span-4">What to consider</div>
-                      <div className="col-span-4 px-2">Conventional toothpaste</div>
-                      <div className="col-span-4 px-2 text-[#E9F399]">Tooth powder</div>
-                    </div>
-
-                    <div className="divide-y divide-[#7A5C38]/25">
-                      {toothPowderComparisonRows.map((row) => (
-                        <div
-                          key={row.criteria}
-                          className="grid grid-cols-12 px-4 sm:px-6 py-4 text-xs sm:text-sm items-start gap-2"
-                        >
-                          <div className="col-span-4 font-serif text-base sm:text-lg font-bold text-[#4A2E1B]">
-                            {row.criteria}
-                          </div>
-                          <div className="col-span-4 px-2 text-[#5A4E38] leading-relaxed">
-                            {row.conventional}
-                          </div>
-                          <div className="col-span-4 px-2 text-[#2C221E] font-medium leading-relaxed flex items-start gap-1.5">
-                            <Check className="w-4 h-4 text-[#40563D] shrink-0 mt-0.5" />
-                            <span>{row.toothPowder}</span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ) : (
-                  <div className="min-w-[480px]">
-                    <div className="grid grid-cols-12 bg-[#40563D] text-[#F9F5E9] px-4 sm:px-6 py-4 text-xs sm:text-sm font-bold border-b-[1.5px] border-[#7A5C38]">
-                      <div className="col-span-4">What matters</div>
-                      <div className="col-span-4 px-2">Making it at home</div>
-                      <div className="col-span-4 px-2 text-[#E9F399]">
-                        {isPanjeeri
-                          ? 'Buying BAJOZ Panjeeri'
-                          : `Buying BAJOZ ${product.name}`}
-                      </div>
-                    </div>
-
-                    <div className="divide-y divide-[#7A5C38]/25">
-                      {comparisonRows.map((row) => (
-                        <div
-                          key={row.criteria}
-                          className="grid grid-cols-12 px-4 sm:px-6 py-4 text-xs sm:text-sm items-start gap-2"
-                        >
-                          <div className="col-span-4 font-serif text-base sm:text-lg font-bold text-[#4A2E1B]">
-                            {row.criteria}
-                          </div>
-                          <div className="col-span-4 px-2 text-[#5A4E38] leading-relaxed">
-                            {row.home}
-                          </div>
-                          <div className="col-span-4 px-2 text-[#2C221E] font-medium leading-relaxed flex items-start gap-1.5">
-                            <Check className="w-4 h-4 text-[#40563D] shrink-0 mt-0.5" />
-                            <span>{row.bajoz}</span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <WaveDivider fromColor="#FFFDF9" toColor="#F9F5E9" />
+      <WaveDivider fromColor="#F2EBD0" toColor="#FAF9F4" strokeColor="#5A4E38" />
 
       {/* =====================================================================
           10. FREQUENTLY ASKED QUESTIONS (2-Column Split with Outlined FAQ Cards)
           ===================================================================== */}
-      <section className="py-20 sm:py-28 lg:py-36 bg-[#F9F5E9] bajoz-seamless-section">
+      <section className="py-20 sm:py-28 lg:py-36 bg-[#FAF9F4] bajoz-seamless-section">
         <div className="w-full max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-16 xl:px-24 space-y-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
             {/* Left Column: FAQ Heading + Contact CTA */}
@@ -2616,7 +2259,7 @@ export const ProductDetailPage: React.FC = () => {
               <p className="bajoz-script-kicker text-2xl sm:text-3xl text-[#40563D]">
                 Frequently Asked Questions
               </p>
-              <h2 className="bajoz-poster-display text-3xl sm:text-4xl lg:text-5xl text-[#4A2E1B] leading-tight">
+              <h2 className="bajoz-poster-display text-3xl sm:text-4xl lg:text-5xl text-[#40563D] leading-tight">
                 {isPanjeeri
                   ? 'Curious About Panjeeri?'
                   : isSpiceMix
@@ -2625,7 +2268,7 @@ export const ProductDetailPage: React.FC = () => {
                   ? 'Your Tooth Powder Questions, Answered'
                   : `Curious About ${product.name}?`}
               </h2>
-              <p className="text-sm sm:text-base text-[#786C57] leading-relaxed">
+              <p className="text-sm sm:text-base text-[#5A4E38] leading-relaxed">
                 {isToothPowder
                   ? 'Everything you need to know about ingredients, directions, precautions, storage, and ordering online in Pakistan.'
                   : 'Everything you need to know about ingredients, taste, serving guidance, storage, and ordering online in Pakistan.'}
@@ -2637,7 +2280,7 @@ export const ProductDetailPage: React.FC = () => {
                     href={whatsappQuestionUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#E9F399] hover:bg-[#dfeb82] text-[#40563D] border-[1.5px] border-[#7A5C38] font-serif text-base sm:text-lg font-extrabold tracking-tight transition-colors"
+                    className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#E9F390] hover:bg-[#DCE7C9] text-[#40563D] border-[1.5px] border-[#5A4E38] font-serif text-base sm:text-lg font-extrabold tracking-tight transition-colors"
                   >
                     <MessageCircle className="w-4 h-4 text-[#40563D]" />
                     <span>
@@ -2651,7 +2294,7 @@ export const ProductDetailPage: React.FC = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Contact BAJOZ on WhatsApp"
-                    className="w-12 h-12 rounded-full bg-[#E9F399] hover:bg-[#dfeb82] text-[#40563D] border-[1.5px] border-[#7A5C38] flex items-center justify-center transition-all hover:translate-x-0.5 hover:-translate-y-0.5"
+                    className="w-12 h-12 rounded-full bg-[#E9F390] hover:bg-[#DCE7C9] text-[#40563D] border-[1.5px] border-[#5A4E38] flex items-center justify-center transition-all hover:translate-x-0.5 hover:-translate-y-0.5"
                   >
                     <ArrowUpRight className="w-5 h-5 stroke-[2.25]" />
                   </a>
@@ -2666,29 +2309,29 @@ export const ProductDetailPage: React.FC = () => {
                 return (
                   <div
                     key={idx}
-                    className="rounded-[1.5rem] border-[1.5px] border-[#7A5C38] bg-[#FFFDF9] px-5 sm:px-6 py-4 transition-colors"
+                    className="rounded-[1.5rem] border-[1.5px] border-[#5A4E38] bg-[#FAF9F4] px-5 sm:px-6 py-4 transition-colors"
                   >
                     <button
                       type="button"
                       onClick={() => setOpenFaqIdx(isOpen ? null : idx)}
                       className="w-full flex items-center justify-between gap-4 text-left cursor-pointer"
                     >
-                      <span className="font-serif text-lg sm:text-xl font-bold text-[#4A2E1B]">
+                      <span className="font-serif text-lg sm:text-xl font-bold text-[#40563D]">
                         {faq.question}
                       </span>
-                      <span className="w-8 h-8 rounded-full bg-[#E9F399] text-[#40563D] border-[1.5px] border-[#7A5C38] flex items-center justify-center shrink-0 font-mono text-sm font-bold">
+                      <span className="w-8 h-8 rounded-full bg-[#E9F390] text-[#40563D] border-[1.5px] border-[#5A4E38] flex items-center justify-center shrink-0 font-mono text-sm font-bold">
                         {isOpen ? '−' : '+'}
                       </span>
                     </button>
                     <div
                       className={`grid transition-all duration-300 ease-out ${
                         isOpen
-                          ? 'grid-rows-[1fr] opacity-100 mt-3 pt-3 border-t border-[#7A5C38]/25'
+                          ? 'grid-rows-[1fr] opacity-100 mt-3 pt-3 border-t border-[#5A4E38]/25'
                           : 'grid-rows-[0fr] opacity-0 mt-0'
                       }`}
                     >
                       <div className="overflow-hidden">
-                        <p className="text-sm text-[#2C221E] leading-relaxed pr-4">
+                        <p className="text-sm text-[#40563D] leading-relaxed pr-4">
                           {faq.answer}
                         </p>
                       </div>
@@ -2701,19 +2344,19 @@ export const ProductDetailPage: React.FC = () => {
         </div>
       </section>
 
-      <WaveDivider fromColor="#F9F5E9" toColor="#F5EBC8" flip />
+      <WaveDivider fromColor="#FAF9F4" toColor="#F2EBD0" flip strokeColor="#5A4E38" />
 
       {/* =====================================================================
           11. EMOTIONAL CLOSING CTA ("Some Good Things Feel Like Home")
           ===================================================================== */}
-      <section className="py-20 sm:py-28 lg:py-36 bg-[#F5EBC8] bajoz-seamless-section">
+      <section className="py-20 sm:py-28 lg:py-36 bg-[#F2EBD0] bajoz-seamless-section">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="rounded-[1.75rem] border-[1.5px] border-[#7A5C38] bg-[#F9F5E9] p-8 sm:p-12 text-center space-y-6">
+          <div className="rounded-[1.75rem] border-[1.5px] border-[#5A4E38] bg-[#F2EBD0] p-8 sm:p-12 text-center space-y-6">
             <div className="space-y-1">
               <p className="bajoz-script-kicker text-2xl sm:text-3xl text-[#40563D]">
                 BAJOZ — The House of Naturals
               </p>
-              <h2 className="bajoz-poster-display text-3xl sm:text-5xl text-[#4A2E1B]">
+              <h2 className="bajoz-poster-display text-3xl sm:text-5xl text-[#40563D]">
                 {isSpiceMix
                   ? 'Less Time Measuring. More Time Around the Table.'
                   : isToothPowder
@@ -2722,7 +2365,7 @@ export const ProductDetailPage: React.FC = () => {
               </h2>
             </div>
 
-            <div className="space-y-2 max-w-2xl mx-auto text-sm sm:text-base text-[#2C221E] leading-relaxed">
+            <div className="space-y-2 max-w-2xl mx-auto text-sm sm:text-base text-[#40563D] leading-relaxed">
               {isSpiceMix ? (
                 <p>
                   Keep BAJOZ SpiceMix by your stove for effortless Biryanis, Karahis, and Daals—100% homemade with zero preservatives and no onion.
@@ -2733,7 +2376,7 @@ export const ProductDetailPage: React.FC = () => {
                 </p>
               ) : (
                 <p>
-                  Bring home the comforting warmth of small-batch Desi Ghee nourishment with{' '}
+                  Bring home the comforting warmth of homemade Desi Ghee nourishment with{' '}
                   {isPanjeeri ? 'BAJOZ Homemade Panjeeri' : product.name}.
                 </p>
               )}
@@ -2745,7 +2388,7 @@ export const ProductDetailPage: React.FC = () => {
                   type="button"
                   disabled={isOutOfStock}
                   onClick={isToothPowder ? scrollToTopBuyBox : handleAddToCart}
-                  className="px-8 sm:px-10 py-3.5 sm:py-4 rounded-full bg-[#E9F399] hover:bg-[#dfeb82] text-[#40563D] border-[1.5px] border-[#7A5C38] font-serif text-lg sm:text-xl font-extrabold tracking-tight transition-all cursor-pointer"
+                  className="px-8 sm:px-10 py-3.5 sm:py-4 rounded-full bg-[#E9F390] hover:bg-[#DCE7C9] text-[#40563D] border-[1.5px] border-[#5A4E38] font-serif text-lg sm:text-xl font-extrabold tracking-tight transition-all cursor-pointer"
                 >
                   {isSpiceMix
                     ? 'Add SpiceMix to Cart'
@@ -2758,7 +2401,7 @@ export const ProductDetailPage: React.FC = () => {
                   disabled={isOutOfStock}
                   onClick={isToothPowder ? scrollToTopBuyBox : handleAddToCart}
                   aria-label="Add to Cart"
-                  className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#E9F399] hover:bg-[#dfeb82] text-[#40563D] border-[1.5px] border-[#7A5C38] flex items-center justify-center transition-all cursor-pointer hover:translate-x-0.5 hover:-translate-y-0.5"
+                  className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#E9F390] hover:bg-[#DCE7C9] text-[#40563D] border-[1.5px] border-[#5A4E38] flex items-center justify-center transition-all cursor-pointer hover:translate-x-0.5 hover:-translate-y-0.5"
                 >
                   <ArrowUpRight className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.25]" />
                 </button>
@@ -2766,7 +2409,7 @@ export const ProductDetailPage: React.FC = () => {
             </div>
 
             <div className="max-w-md mx-auto pt-1 flex items-center justify-center text-center">
-              <p className="text-xs sm:text-sm text-[#786C57] leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#5A4E38] leading-relaxed">
                 {isSpiceMix
                   ? 'One homemade blend. So many meals to make your own.'
                   : isToothPowder
@@ -2778,25 +2421,25 @@ export const ProductDetailPage: React.FC = () => {
         </div>
       </section>
 
-      <WaveDivider fromColor="#F5EBC8" toColor="#FFFDF9" />
+      <WaveDivider fromColor="#F2EBD0" toColor="#FAF9F4" strokeColor="#5A4E38" />
 
       {/* =====================================================================
           12. BESTSELLERS / RELATED PRODUCTS (Single Straight Image Cards & Outlined Containers)
           ===================================================================== */}
-      <section className="py-20 sm:py-28 lg:py-36 bg-[#FFFDF9] bajoz-seamless-section">
+      <section className="py-20 sm:py-28 lg:py-36 bg-[#FAF9F4] bajoz-seamless-section">
         <div className="w-full max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-16 xl:px-24 space-y-10 sm:space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-2.5">
             <p className="bajoz-script-kicker text-2xl sm:text-3xl text-[#40563D]">
               {isSpiceMix || isToothPowder ? 'Related Products' : 'Our Best Sellers'}
             </p>
-            <h2 className="bajoz-poster-display text-3xl sm:text-4xl lg:text-5xl text-[#4A2E1B]">
+            <h2 className="bajoz-poster-display text-3xl sm:text-4xl lg:text-5xl text-[#40563D]">
               {isSpiceMix
                 ? 'More Goodness for Your Kitchen'
                 : isToothPowder
                 ? 'More Everyday Care to Explore'
                 : 'More Goodness to Explore'}
             </h2>
-            <p className="text-sm sm:text-base text-[#786C57] leading-relaxed">
+            <p className="text-sm sm:text-base text-[#5A4E38] leading-relaxed">
               {isSpiceMix
                 ? 'Make room for more everyday favourites from BAJOZ.'
                 : isToothPowder
@@ -2812,12 +2455,12 @@ export const ProductDetailPage: React.FC = () => {
               return (
                 <div
                   key={`related-${rel.id}`}
-                  className="rounded-[1.75rem] border-[1.5px] border-[#7A5C38] bg-[#F9F5E9] p-6 flex flex-col justify-between"
+                  className="rounded-[1.75rem] border-[1.5px] border-[#5A4E38] bg-[#F2EBD0] p-6 flex flex-col justify-between"
                 >
                   <div>
                     <div
                       onClick={() => setActiveProductId(rel.id)}
-                      className="relative aspect-square rounded-[1.5rem] bg-[#B4CBA2] border-[1.5px] border-[#7A5C38] flex items-center justify-center cursor-pointer overflow-hidden group mb-5"
+                      className="relative aspect-square rounded-[1.5rem] bg-[#B4CBA2] border-[1.5px] border-[#5A4E38] flex items-center justify-center cursor-pointer overflow-hidden group mb-5"
                     >
                       <button
                         type="button"
@@ -2836,10 +2479,10 @@ export const ProductDetailPage: React.FC = () => {
                             ? 'Saved in Favorites — click to remove'
                             : 'Save to Favorites'
                         }
-                        className={`absolute top-3 right-3 z-10 w-9 h-9 rounded-full flex items-center justify-center transition-all cursor-pointer border-[1.5px] border-[#7A5C38] ${
+                        className={`absolute top-3 right-3 z-10 w-9 h-9 rounded-full flex items-center justify-center transition-all cursor-pointer border-[1.5px] border-[#5A4E38] ${
                           isFavorite(rel.id)
-                            ? 'bg-[#E9F399] text-[#9B6A73] scale-105'
-                            : 'bg-[#F9F5E9]/95 hover:bg-[#E9F399] text-[#40563D]'
+                            ? 'bg-[#E9F390] text-[#9B6A73] scale-105'
+                            : 'bg-[#F2EBD0]/95 hover:bg-[#E9F390] text-[#40563D]'
                         }`}
                       >
                         <Heart
@@ -2862,14 +2505,20 @@ export const ProductDetailPage: React.FC = () => {
                     </div>
 
                     <div className="flex items-center justify-between gap-2 text-xs mb-2">
-                      <div className="flex items-center gap-0.5 text-[#C98A6A]">
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-[#DCE7C9] text-[#40563D] font-dm text-[10px] font-bold tracking-[0.04em]">
+                        {rel.id === 'panjeeri'
+                          ? 'Tasty, Crunchy, Nut-Rich'
+                          : rel.id === 'spicemix'
+                          ? "Pakistan's 1st All-in-One Cooking Paste"
+                          : rel.id === 'toothpowder'
+                          ? 'Natural, Chemical-Free, Non-Abrasive'
+                          : rel.category}
+                      </span>
+                      <div className="flex items-center gap-0.5 text-[#C98A6A] shrink-0">
                         {Array.from({ length: 5 }).map((_, sIdx) => (
                           <Star key={sIdx} className="w-3.5 h-3.5 fill-current" />
                         ))}
                       </div>
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-[#40563D]">
-                        {rel.category}
-                      </span>
                     </div>
 
                     <h3
@@ -2879,16 +2528,16 @@ export const ProductDetailPage: React.FC = () => {
                       {rel.name}
                     </h3>
 
-                    <p className="text-xs sm:text-sm mt-2 line-clamp-2 leading-relaxed text-[#2C221E]">
+                    <p className="text-xs sm:text-sm mt-2 line-clamp-2 leading-relaxed text-[#40563D]">
                       {rel.description}
                     </p>
                   </div>
 
-                  <div className="pt-5 mt-5 border-t border-[#7A5C38]/25 flex items-center justify-between gap-2">
+                  <div className="pt-5 mt-5 border-t border-[#5A4E38]/25 flex items-center justify-between gap-2">
                     <button
                       type="button"
                       onClick={() => handleQuickAddRelated(rel, rel.id)}
-                      className="flex-1 py-3 px-4 rounded-full bg-[#E9F399] hover:bg-[#dfeb82] text-[#40563D] border-[1.5px] border-[#7A5C38] font-serif text-sm sm:text-base font-extrabold tracking-tight transition-colors cursor-pointer"
+                      className="flex-1 py-3 px-4 rounded-full bg-[#E9F390] hover:bg-[#DCE7C9] text-[#40563D] border-[1.5px] border-[#5A4E38] font-serif text-sm sm:text-base font-extrabold tracking-tight transition-colors cursor-pointer"
                     >
                       {isRelAdded ? 'Added to Cart!' : 'Add to Cart'}
                     </button>
@@ -2897,7 +2546,7 @@ export const ProductDetailPage: React.FC = () => {
                       type="button"
                       onClick={() => setActiveProductId(rel.id)}
                       aria-label={`View ${rel.name}`}
-                      className="w-11 h-11 rounded-full bg-[#E9F399] hover:bg-[#dfeb82] text-[#40563D] border-[1.5px] border-[#7A5C38] flex items-center justify-center shrink-0 transition-all cursor-pointer hover:translate-x-0.5 hover:-translate-y-0.5"
+                      className="w-11 h-11 rounded-full bg-[#E9F390] hover:bg-[#DCE7C9] text-[#40563D] border-[1.5px] border-[#5A4E38] flex items-center justify-center shrink-0 transition-all cursor-pointer hover:translate-x-0.5 hover:-translate-y-0.5"
                     >
                       <ArrowUpRight className="w-5 h-5 stroke-[2.25]" />
                     </button>
@@ -2915,7 +2564,7 @@ export const ProductDetailPage: React.FC = () => {
                   setActiveProductId(null);
                   setActivePageSlug('shop');
                 }}
-                className="px-8 py-3.5 sm:py-4 rounded-full bg-[#E9F399] hover:bg-[#dfeb82] text-[#40563D] border-[1.5px] border-[#7A5C38] font-serif text-lg sm:text-xl font-extrabold tracking-tight transition-colors cursor-pointer"
+                className="px-8 py-3.5 sm:py-4 rounded-full bg-[#E9F390] hover:bg-[#DCE7C9] text-[#40563D] border-[1.5px] border-[#5A4E38] font-serif text-lg sm:text-xl font-extrabold tracking-tight transition-colors cursor-pointer"
               >
                 Shop All Products
               </button>
@@ -2926,7 +2575,7 @@ export const ProductDetailPage: React.FC = () => {
                   setActivePageSlug('shop');
                 }}
                 aria-label="Shop All Products"
-                className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#E9F399] hover:bg-[#dfeb82] text-[#40563D] border-[1.5px] border-[#7A5C38] flex items-center justify-center transition-all cursor-pointer hover:translate-x-0.5 hover:-translate-y-0.5"
+                className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#E9F390] hover:bg-[#DCE7C9] text-[#40563D] border-[1.5px] border-[#5A4E38] flex items-center justify-center transition-all cursor-pointer hover:translate-x-0.5 hover:-translate-y-0.5"
               >
                 <ArrowUpRight className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.25]" />
               </button>
@@ -2935,32 +2584,32 @@ export const ProductDetailPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Seamless Wave Transition into Pre-Footer Important Notice Section (#F5EBC8) */}
-      <WaveDivider fromColor="#FFFDF9" toColor="#F5EBC8" flip />
+      {/* Seamless Wave Transition into Pre-Footer Important Notice Section (#F2EBD0) */}
+      <WaveDivider fromColor="#FAF9F4" toColor="#F2EBD0" flip />
 
       {/* Customer Voice Note / Story Modal */}
       {activeReel && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#5A4E38]/60 backdrop-blur-2xs">
-          <div className="relative w-full max-w-md bg-[#F9F5E9] rounded-[1.75rem] p-6 sm:p-8 border-[1.5px] border-[#7A5C38] shadow-2xl space-y-5">
-            <div className="flex items-center justify-between border-b border-[#7A5C38]/25 pb-3">
+          <div className="relative w-full max-w-md bg-[#F2EBD0] rounded-[1.75rem] p-6 sm:p-8 border-[1.5px] border-[#5A4E38] shadow-2xl space-y-5">
+            <div className="flex items-center justify-between border-b border-[#5A4E38]/25 pb-3">
               <div>
                 <span className="font-mono text-xs font-bold text-[#40563D] block">
                   {activeReel.handle}
                 </span>
-                <span className="text-xs text-[#786C57]">
+                <span className="text-xs text-[#5A4E38]">
                   {activeReel.customerName} · {activeReel.city}
                 </span>
               </div>
               <button
                 type="button"
                 onClick={() => setActiveReel(null)}
-                className="p-1.5 text-[#786C57] hover:text-[#5A4E38] rounded-full cursor-pointer"
+                className="p-1.5 text-[#5A4E38] hover:text-[#5A4E38] rounded-full cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="bg-[#B4CBA2] rounded-[1.5rem] aspect-square p-6 flex items-center justify-center border-[1.5px] border-[#7A5C38]">
+            <div className="bg-[#B4CBA2] rounded-[1.5rem] aspect-square p-6 flex items-center justify-center border-[1.5px] border-[#5A4E38]">
               <ProductImage
                 type={product.imageType}
                 productId={product.id}
@@ -2979,7 +2628,7 @@ export const ProductDetailPage: React.FC = () => {
               <h4 className="font-serif text-xl font-semibold text-[#5A4E38]">
                 {activeReel.title}
               </h4>
-              <p className="text-xs sm:text-sm text-[#786C57] leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#5A4E38] leading-relaxed">
                 {activeReel.transcript}
               </p>
             </div>
@@ -2991,14 +2640,14 @@ export const ProductDetailPage: React.FC = () => {
                   setActiveReel(null);
                   scrollToTopBuyBox();
                 }}
-                className="flex-1 py-3 bg-[#E9F399] hover:bg-[#dfeb82] text-[#40563D] border-[1.5px] border-[#7A5C38] text-xs font-bold uppercase tracking-wider rounded-full cursor-pointer"
+                className="flex-1 py-3 bg-[#E9F390] hover:bg-[#DCE7C9] text-[#40563D] border-[1.5px] border-[#5A4E38] text-xs font-bold uppercase tracking-wider rounded-full cursor-pointer"
               >
                 Order {product.name}
               </button>
               <button
                 type="button"
                 onClick={() => setActiveReel(null)}
-                className="px-5 py-3 bg-[#FFFDF9] hover:bg-[#F1EBD9] text-[#5A4E38] border-[1.5px] border-[#7A5C38] text-xs font-semibold uppercase tracking-wider rounded-full cursor-pointer"
+                className="px-5 py-3 bg-[#FAF9F4] hover:bg-[#F2EBD0] text-[#5A4E38] border-[1.5px] border-[#5A4E38] text-xs font-semibold uppercase tracking-wider rounded-full cursor-pointer"
               >
                 Close
               </button>

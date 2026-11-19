@@ -61,10 +61,10 @@ export const IngredientSpotDoodle: React.FC<IngredientSpotDoodleProps> = ({
       aria-hidden="true"
     >
       {/* Organic Ink-and-Wash Backdrop Halo */}
-      <circle cx="44" cy="44" r="39" fill="#FAF9F7" />
+      <circle cx="44" cy="44" r="39" fill="#F2EBD0" />
       <path
         d="M45 8C65 8 80 22 80 43C80 64 65 79 43 80C21 81 8 65 8 44C8 23 25 8 45 8Z"
-        fill="#E1E9D7"
+        fill="#DCE7C9"
         fillOpacity="0.6"
       />
       <circle
@@ -100,7 +100,7 @@ export const IngredientSpotDoodle: React.FC<IngredientSpotDoodleProps> = ({
             width="36"
             height="42"
             rx="7"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             fillOpacity="0.5"
             stroke="#5A4E38"
             strokeWidth="1.35"
@@ -112,7 +112,7 @@ export const IngredientSpotDoodle: React.FC<IngredientSpotDoodleProps> = ({
             width="28"
             height="22"
             rx="3"
-            fill="#F9F5E9"
+            fill="#F2EBD0"
             stroke="#5A4E38"
             strokeWidth="1.1"
           />
@@ -132,7 +132,7 @@ export const IngredientSpotDoodle: React.FC<IngredientSpotDoodleProps> = ({
           {/* Whole Red Onion Bulb */}
           <path
             d="M28 50C28 38 37 33 41 25C45 33 54 38 54 50C54 59 48 64 41 64C34 64 28 59 28 50Z"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             stroke="#5A4E38"
             strokeWidth="1.35"
           />
@@ -144,7 +144,7 @@ export const IngredientSpotDoodle: React.FC<IngredientSpotDoodleProps> = ({
             cy="56"
             rx="13"
             ry="7.5"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             stroke="#9B6A73"
             strokeWidth="1.35"
           />
@@ -177,7 +177,7 @@ export const IngredientSpotDoodle: React.FC<IngredientSpotDoodleProps> = ({
           {/* Halved Juicy Tomato Slice */}
           <path
             d="M44 54C44 45 52 43 60 46C65 48.5 64 58 56 61C49 63.5 44 59 44 54Z"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             stroke="#5A4E38"
             strokeWidth="1.3"
           />
@@ -197,7 +197,7 @@ export const IngredientSpotDoodle: React.FC<IngredientSpotDoodleProps> = ({
           <ellipse cx="45" cy="54" rx="23" ry="12" fill="#C7B39A" fillOpacity="0.38" />
           <path
             d="M21 45H67C65 60 56 66 44 66C32 66 23 60 21 45Z"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             stroke="#5A4E38"
             strokeWidth="1.35"
             strokeLinejoin="round"
@@ -205,14 +205,14 @@ export const IngredientSpotDoodle: React.FC<IngredientSpotDoodleProps> = ({
           {/* Creamy Whipped Yogurt Peaks */}
           <path
             d="M22 45C27 38 35 42 41 37C46 33 52 39 58 37C63 36 65 41 66 45H22Z"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             stroke="#5A4E38"
             strokeWidth="1.25"
             strokeLinejoin="round"
           />
           <path
             d="M32 42C37 39 44 43 52 40"
-            stroke="#E1E9D7"
+            stroke="#DCE7C9"
             strokeWidth="1.8"
             strokeLinecap="round"
           />
@@ -230,7 +230,7 @@ export const IngredientSpotDoodle: React.FC<IngredientSpotDoodleProps> = ({
             cy="53"
             rx="26"
             ry="13"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             stroke="#5A4E38"
             strokeWidth="1.3"
           />
@@ -244,12 +244,12 @@ export const IngredientSpotDoodle: React.FC<IngredientSpotDoodleProps> = ({
           />
           <path
             d="M32 47L24 43C22 42 21 45 23 47L31 50"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             stroke="#5A4E38"
             strokeWidth="1.25"
           />
           {/* Marbling lines */}
-          <path d="M39 46C43 45 47 47 49 50" stroke="#FAF9F7" strokeWidth="1.2" strokeLinecap="round" />
+          <path d="M39 46C43 45 47 47 49 50" stroke="#F2EBD0" strokeWidth="1.2" strokeLinecap="round" />
           <circle cx="57" cy="49" r="4.5" fill="#C7B39A" stroke="#5A4E38" strokeWidth="1.2" />
         </g>
       )}
@@ -260,7 +260,7 @@ export const IngredientSpotDoodle: React.FC<IngredientSpotDoodleProps> = ({
           <ellipse cx="45" cy="50" rx="25" ry="14" fill="#E9F390" fillOpacity="0.45" />
           <path
             d="M22 50C26 39 44 37 62 43C68 45 70 50 65 55C58 61 38 61 25 55C21 53.5 21 51.5 22 50Z"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             stroke="#5A4E38"
             strokeWidth="1.35"
           />
@@ -281,7 +281,7 @@ export const IngredientSpotDoodle: React.FC<IngredientSpotDoodleProps> = ({
           <ellipse cx="44" cy="52" rx="23" ry="13" fill="#E9F390" fillOpacity="0.55" />
           <path
             d="M21 46H67C65 60 56 66 44 66C32 66 23 60 21 46Z"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             stroke="#5A4E38"
             strokeWidth="1.35"
           />
@@ -297,7 +297,7 @@ export const IngredientSpotDoodle: React.FC<IngredientSpotDoodleProps> = ({
           <circle cx="42" cy="41" r="1.5" fill="#9B6A73" />
           <circle cx="49" cy="43" r="1.5" fill="#5A4E38" />
           <circle cx="55" cy="44" r="1.4" fill="#9B6A73" />
-          <circle cx="39" cy="44.5" r="1.3" fill="#FAF9F7" />
+          <circle cx="39" cy="44.5" r="1.3" fill="#F2EBD0" />
         </g>
       )}
 
@@ -307,13 +307,13 @@ export const IngredientSpotDoodle: React.FC<IngredientSpotDoodleProps> = ({
           <ellipse cx="44" cy="53" rx="23" ry="12" fill="#DCE7C9" fillOpacity="0.65" />
           <path
             d="M21 46H67C65 60 56 66 44 66C32 66 23 60 21 46Z"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             stroke="#5A4E38"
             strokeWidth="1.35"
           />
           <path
             d="M23 46C28 33 60 33 65 46H23Z"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             stroke="#5A4E38"
             strokeWidth="1.3"
           />
@@ -332,7 +332,7 @@ export const IngredientSpotDoodle: React.FC<IngredientSpotDoodleProps> = ({
           {/* Glass Oil Cruet Bottle */}
           <path
             d="M39 24H49V32L57 44C60 49 58 64 44 64C30 64 28 49 31 44L39 32V24Z"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             fillOpacity="0.8"
             stroke="#5A4E38"
             strokeWidth="1.35"
@@ -353,10 +353,10 @@ export const IngredientSpotDoodle: React.FC<IngredientSpotDoodleProps> = ({
       {/* 10. MEASURED WATER GLASSES */}
       {type === 'water-glasses' && (
         <g>
-          <circle cx="44" cy="46" r="18" fill="#E1E9D7" fillOpacity="0.85" />
+          <circle cx="44" cy="46" r="18" fill="#DCE7C9" fillOpacity="0.85" />
           <path
             d="M29 26H59L55 62C54.5 65 51 67 44 67C37 67 33.5 65 33 62L29 26Z"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             fillOpacity="0.85"
             stroke="#5A4E38"
             strokeWidth="1.35"
@@ -364,7 +364,7 @@ export const IngredientSpotDoodle: React.FC<IngredientSpotDoodleProps> = ({
           />
           <path
             d="M31 40C37 38 43 42 49 40C52 39 55 40 57 40L54.5 61C54 63.5 50.5 65 44 65C37.5 65 34 63.5 33.5 61L31 40Z"
-            fill="#E1E9D7"
+            fill="#DCE7C9"
             fillOpacity="0.8"
           />
           <path
@@ -408,7 +408,7 @@ export const IngredientSpotDoodle: React.FC<IngredientSpotDoodleProps> = ({
           <ellipse cx="44" cy="53" rx="22" ry="12" fill="#C7B39A" fillOpacity="0.4" />
           <path
             d="M22 46H66C64 60 55 66 44 66C33 66 24 60 22 46Z"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             stroke="#5A4E38"
             strokeWidth="1.35"
           />
@@ -417,7 +417,7 @@ export const IngredientSpotDoodle: React.FC<IngredientSpotDoodleProps> = ({
             cy="46"
             rx="22"
             ry="5"
-            fill="#F9F5E9"
+            fill="#F2EBD0"
             stroke="#5A4E38"
             strokeWidth="1.25"
           />
@@ -450,13 +450,13 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
     >
       {/* =====================================================================
           AIRY EDITORIAL MEDALLION BACKDROP
-          Soft Sage Mist (#E1E9D7) organic wash + Pure White Cream (#FAF9F7) halo
+          Soft Sage Mist (#DCE7C9) organic wash + Pure White Cream (#F2EBD0) halo
           + fine double-hairline architectural ring & botanical star accents
           ===================================================================== */}
-      <circle cx="60" cy="60" r="54" fill="#FAF9F7" />
+      <circle cx="60" cy="60" r="54" fill="#F2EBD0" />
       <path
         d="M62 10C88 10 109 29 109 57C109 85 89 108 60 109C31 110 11 88 11 59C11 30 36 10 62 10Z"
-        fill="#E1E9D7"
+        fill="#DCE7C9"
         fillOpacity="0.65"
       />
       <circle
@@ -521,7 +521,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
             cy="60"
             rx="29"
             ry="6.5"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             fillOpacity="0.45"
             stroke="#5A4E38"
             strokeWidth="1.35"
@@ -562,7 +562,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
             cy="59.5"
             rx="6.5"
             ry="2.8"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             stroke="#9B6A73"
             strokeWidth="1.15"
           />
@@ -578,7 +578,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
           <path d="M84 21L59 34" stroke="#5A4E38" strokeWidth="1.5" strokeLinecap="round" />
           <path
             d="M44 37C43 33.5 49 30.5 55.5 32C60 33 60.5 36.8 56.5 39C51.5 41.2 44.8 40 44 37Z"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             stroke="#5A4E38"
             strokeWidth="1.35"
           />
@@ -607,11 +607,11 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
             fill="#C7B39A"
             fillOpacity="0.35"
           />
-          <circle cx="77" cy="31" r="13" fill="#E1E9D7" fillOpacity="0.85" />
+          <circle cx="77" cy="31" r="13" fill="#DCE7C9" fillOpacity="0.85" />
 
           <path
             d="M30 61H84L81 88C80 93 75 96 69 96H45C39 96 34 93 33 88L30 61Z"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             fillOpacity="0.55"
             stroke="#5A4E38"
             strokeWidth="1.4"
@@ -625,7 +625,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
             cy="61"
             rx="27"
             ry="5.8"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             stroke="#5A4E38"
             strokeWidth="1.35"
           />
@@ -656,7 +656,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
           <g transform="rotate(-30 79 30)">
             <path
               d="M68 19H88L85.5 42C85 44.5 82.5 46 78 46C73.5 46 71 44.5 70.5 42L68 19Z"
-              fill="#FAF9F7"
+              fill="#F2EBD0"
               fillOpacity="0.9"
               stroke="#5A4E38"
               strokeWidth="1.3"
@@ -667,7 +667,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
               cy="19"
               rx="10"
               ry="2.6"
-              fill="#E1E9D7"
+              fill="#DCE7C9"
               stroke="#5A4E38"
               strokeWidth="1.2"
             />
@@ -676,14 +676,14 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
 
           <path
             d="M66 36C61.5 42 60 50 61.5 59.5C63.5 59.5 66 59.5 67 58C66 49 67.5 42 70.5 37Z"
-            fill="#E1E9D7"
+            fill="#DCE7C9"
             fillOpacity="0.85"
             stroke="#5A4E38"
             strokeWidth="1.15"
             strokeLinejoin="round"
           />
-          <circle cx="58" cy="52" r="1.2" fill="#FAF9F7" stroke="#5A4E38" strokeWidth="0.9" />
-          <circle cx="71" cy="51" r="1" fill="#FAF9F7" stroke="#5A4E38" strokeWidth="0.9" />
+          <circle cx="58" cy="52" r="1.2" fill="#F2EBD0" stroke="#5A4E38" strokeWidth="0.9" />
+          <circle cx="71" cy="51" r="1" fill="#F2EBD0" stroke="#5A4E38" strokeWidth="0.9" />
         </g>
       )}
 
@@ -701,7 +701,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
 
           <path
             d="M33 57H87C93 67 92 83 80 92C73 96.5 67 98 60 98C53 98 47 96.5 40 92C28 83 27 67 33 57Z"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             fillOpacity="0.6"
             stroke="#5A4E38"
             strokeWidth="1.4"
@@ -726,7 +726,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
           <g transform="rotate(-9 57 44)">
             <path
               d="M32 48C38 38.5 49 35 60 35C71 35 82 38.5 88 48H32Z"
-              fill="#FAF9F7"
+              fill="#F2EBD0"
               stroke="#5A4E38"
               strokeWidth="1.35"
               strokeLinejoin="round"
@@ -785,7 +785,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
 
           <path
             d="M29 57H91L87 89C86 94 81 97 74 97H46C39 97 34 94 33 89L29 57Z"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             fillOpacity="0.65"
             stroke="#5A4E38"
             strokeWidth="1.4"
@@ -797,7 +797,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
             width="68"
             height="4.8"
             rx="2.4"
-            fill="#F9F5E9"
+            fill="#F2EBD0"
             stroke="#5A4E38"
             strokeWidth="1.35"
           />
@@ -822,7 +822,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
             { cx: 58, cy: 88.5, fill: '#C98A6A' },
             { cx: 65, cy: 91, fill: '#C7B39A' },
             { cx: 72, cy: 89, fill: '#C98A6A' },
-            { cx: 48, cy: 85, fill: '#FAF9F7' },
+            { cx: 48, cy: 85, fill: '#F2EBD0' },
             { cx: 61, cy: 85, fill: '#E9F390' },
             { cx: 68, cy: 85.5, fill: '#9B6A73' },
           ].map((grain, i) => (
@@ -841,7 +841,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
           <path d="M84 20L60 33" stroke="#5A4E38" strokeWidth="1.5" strokeLinecap="round" />
           <path
             d="M44 36C43 32.5 49 29.5 55.5 31C60 32 60.5 35.8 56.5 38C51.5 40.2 44.8 39 44 36Z"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             stroke="#5A4E38"
             strokeWidth="1.35"
           />
@@ -871,7 +871,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
 
           <path
             d="M29 58H91L86 88C85 93 80 96 73 96H47C40 96 35 93 34 88L29 58Z"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             fillOpacity="0.65"
             stroke="#5A4E38"
             strokeWidth="1.4"
@@ -890,14 +890,14 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
             stroke="#5A4E38"
             strokeWidth="1.35"
           />
-          <circle cx="48" cy="57" r="2.3" fill="#FAF9F7" stroke="#5A4E38" strokeWidth="1" />
-          <circle cx="56" cy="58.5" r="1.7" fill="#FAF9F7" stroke="#5A4E38" strokeWidth="0.9" />
-          <circle cx="67" cy="57" r="2.1" fill="#FAF9F7" stroke="#5A4E38" strokeWidth="1" />
+          <circle cx="48" cy="57" r="2.3" fill="#F2EBD0" stroke="#5A4E38" strokeWidth="1" />
+          <circle cx="56" cy="58.5" r="1.7" fill="#F2EBD0" stroke="#5A4E38" strokeWidth="0.9" />
+          <circle cx="67" cy="57" r="2.1" fill="#F2EBD0" stroke="#5A4E38" strokeWidth="1" />
 
           <g transform="translate(0, -5) rotate(-4 60 46)">
             <path
               d="M30 49C36 40.5 48 38 60 38C72 38 84 40.5 90 49H30Z"
-              fill="#FAF9F7"
+              fill="#F2EBD0"
               stroke="#5A4E38"
               strokeWidth="1.35"
               strokeLinejoin="round"
@@ -948,7 +948,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
 
           <path
             d="M27 77H81C79 91 70 98 54 98C38 98 29 91 27 77Z"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             stroke="#5A4E38"
             strokeWidth="1.4"
             strokeLinejoin="round"
@@ -968,7 +968,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
             <path d="M73 36L103 23" stroke="#5A4E38" strokeWidth="2.4" strokeLinecap="round" />
             <path
               d="M35 37H75C73 49 65 54 55 54C45 54 37 49 35 37Z"
-              fill="#FAF9F7"
+              fill="#F2EBD0"
               stroke="#5A4E38"
               strokeWidth="1.4"
             />
@@ -1015,7 +1015,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
 
           <path
             d="M32 56H88L93 68C94 80 83 90 60 90C37 90 26 80 27 68L32 56Z"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             fillOpacity="0.65"
             stroke="#5A4E38"
             strokeWidth="1.4"
@@ -1045,7 +1045,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
             width="6.8"
             height="5.5"
             rx="1.6"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             stroke="#5A4E38"
             strokeWidth="1.15"
           />
@@ -1053,7 +1053,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
           <path d="M83 20L60 33" stroke="#5A4E38" strokeWidth="1.5" strokeLinecap="round" />
           <path
             d="M44 36C43 32.5 49 29.5 55.5 31C60 32 60.5 35.8 56.5 38C51.5 40.2 44.8 39 44 36Z"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             stroke="#5A4E38"
             strokeWidth="1.35"
           />
@@ -1076,14 +1076,14 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
         <g>
           <path
             d="M31 65H91L87 91C86 95 81 98 73 98H49C41 98 36 95 35 91L31 65Z"
-            fill="#E1E9D7"
+            fill="#DCE7C9"
             fillOpacity="0.7"
           />
           <circle cx="46" cy="28" r="14" fill="#E9F390" fillOpacity="0.5" />
 
           <path
             d="M29 64H91L87 90C86 94 81 97 73 97H47C39 97 34 94 33 90L29 64Z"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             fillOpacity="0.65"
             stroke="#5A4E38"
             strokeWidth="1.4"
@@ -1094,7 +1094,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
             cy="64"
             rx="31"
             ry="5.8"
-            fill="#E1E9D7"
+            fill="#DCE7C9"
             stroke="#5A4E38"
             strokeWidth="1.35"
           />
@@ -1102,7 +1102,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
           <g transform="rotate(26 45 28)">
             <path
               d="M27 20H63C61 32 54 38 45 38C36 38 29 32 27 20Z"
-              fill="#FAF9F7"
+              fill="#F2EBD0"
               stroke="#5A4E38"
               strokeWidth="1.35"
               strokeLinejoin="round"
@@ -1110,7 +1110,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
             <path d="M29 25H61" stroke="#40563D" strokeWidth="1" strokeDasharray="2.5 2" />
             <path
               d="M29 20C34 13 56 13 61 20H29Z"
-              fill="#FAF9F7"
+              fill="#F2EBD0"
               stroke="#5A4E38"
               strokeWidth="1.25"
             />
@@ -1134,7 +1134,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
               height="5.5"
               rx="1"
               transform={`rotate(${g.rot} ${g.x} ${g.y})`}
-              fill="#FAF9F7"
+              fill="#F2EBD0"
               stroke="#5A4E38"
               strokeWidth="0.95"
             />
@@ -1156,7 +1156,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
 
           <path
             d="M30 57H90L94 70C95 82 83 91 60 91C37 91 25 82 26 70L30 57Z"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             fillOpacity="0.65"
             stroke="#5A4E38"
             strokeWidth="1.4"
@@ -1164,7 +1164,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
           />
           <path
             d="M27 54C27 50.5 38 49 60 49C82 49 93 50.5 93 54C93 57.5 83 58.5 60 58.5C37 58.5 27 57.5 27 54Z"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             stroke="#5A4E38"
             strokeWidth="1.35"
           />
@@ -1179,7 +1179,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
             stroke="#5A4E38"
             strokeWidth="1.35"
           />
-          <circle cx="60" cy="34.5" r="2.8" fill="#FAF9F7" stroke="#5A4E38" strokeWidth="1.25" />
+          <circle cx="60" cy="34.5" r="2.8" fill="#F2EBD0" stroke="#5A4E38" strokeWidth="1.25" />
 
           <path
             d="M44 31C41.5 25.5 46 21 43.5 15"
@@ -1230,7 +1230,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
           ===================================================================== */}
       {variant === 'fry-roast-step-1' && (
         <g>
-          <ellipse cx="61" cy="72" rx="38" ry="19" fill="#E1E9D7" fillOpacity="0.7" />
+          <ellipse cx="61" cy="72" rx="38" ry="19" fill="#DCE7C9" fillOpacity="0.7" />
           <circle cx="46" cy="28" r="12" fill="#E9F390" fillOpacity="0.65" />
 
           <ellipse
@@ -1238,7 +1238,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
             cy="71"
             rx="39"
             ry="19"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             stroke="#5A4E38"
             strokeWidth="1.4"
           />
@@ -1279,7 +1279,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
 
           <path
             d="M48 39C48 39 45.5 43.2 45.5 45C45.5 46.5 46.6 47.5 48 47.5C49.4 47.5 50.5 46.5 50.5 45C50.5 43.2 48 39 48 39Z"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             stroke="#5A4E38"
             strokeWidth="1.15"
           />
@@ -1299,14 +1299,14 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
 
           <path
             d="M84 63L106 53C108 52 109.5 54.5 107 56L85 67.5"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             stroke="#5A4E38"
             strokeWidth="1.35"
             strokeLinecap="round"
           />
           <path
             d="M22 61H88L83 79C81 83.5 75 85.5 55 85.5C35 85.5 29 83.5 27 79L22 61Z"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             fillOpacity="0.7"
             stroke="#5A4E38"
             strokeWidth="1.4"
@@ -1317,7 +1317,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
             cy="61"
             rx="33"
             ry="7.5"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             stroke="#5A4E38"
             strokeWidth="1.35"
           />
@@ -1372,7 +1372,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
             cy="69"
             rx="42"
             ry="22"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             stroke="#5A4E38"
             strokeWidth="1.4"
           />
@@ -1401,7 +1401,7 @@ export const RecipeStepDoodle: React.FC<RecipeStepDoodleProps> = ({
             cx="81"
             cy="56"
             r="8.8"
-            fill="#FAF9F7"
+            fill="#F2EBD0"
             stroke="#5A4E38"
             strokeWidth="1.3"
           />

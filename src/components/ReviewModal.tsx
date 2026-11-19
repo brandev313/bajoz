@@ -11,7 +11,7 @@ export const ReviewModal: React.FC = () => {
   const { isReviewModalOpen, setIsReviewModalOpen, addCustomerReview } = useShop();
   const [customerName, setCustomerName] = useState('');
   const [city, setCity] = useState('');
-  const [productTag, setProductTag] = useState('Ghar Ki Panjeeri');
+  const [productTag, setProductTag] = useState('HomeMade Panjeeri');
   const [rating, setRating] = useState(5);
   const [title, setTitle] = useState('');
   const [comment, setComment] = useState('');
@@ -43,12 +43,12 @@ export const ReviewModal: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#5A4E38]/55 backdrop-blur-2xs">
-      <div className="relative w-full max-w-lg bg-[#F9F5E9] rounded-3xl shadow-2xl p-6 sm:p-8 border border-[#E6DDC8]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#40563D]/60 backdrop-blur-2xs">
+      <div className="relative w-full max-w-lg bg-[#F2EBD0] rounded-3xl shadow-2xl p-6 sm:p-8 border-2 border-[#5A4E38]">
         <button
           type="button"
           onClick={() => setIsReviewModalOpen(false)}
-          className="absolute top-5 right-5 p-1.5 text-[#786C57] hover:text-[#5A4E38] hover:bg-[#F1EBD9] rounded-full cursor-pointer transition-colors"
+          className="absolute top-5 right-5 p-1.5 text-[#5A4E38] hover:text-[#40563D] hover:bg-[#F2EBD0] rounded-full cursor-pointer transition-colors"
         >
           <X className="w-5 h-5" />
         </button>
@@ -56,46 +56,46 @@ export const ReviewModal: React.FC = () => {
         {submitted ? (
           <div className="text-center py-8 space-y-2">
             <CheckCircle2 className="w-10 h-10 text-[#40563D] mx-auto" />
-            <h3 className="font-serif text-2xl font-semibold text-[#5A4E38]">
+            <h3 className="font-serif text-2xl font-semibold text-[#40563D]">
               Thank you for sharing your review
             </h3>
-            <p className="text-xs text-[#786C57]">
+            <p className="text-xs text-[#5A4E38]">
               Your feedback has been added to our verified household wall.
             </p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <h3 className="font-serif text-2xl font-semibold text-[#5A4E38]">
+              <h3 className="font-serif text-2xl font-semibold text-[#40563D]">
                 Share your BAJOZ experience
               </h3>
-              <p className="text-xs text-[#786C57]">
+              <p className="text-xs text-[#5A4E38]">
                 Help other Pakistani households discover clean, homemade nourishment.
               </p>
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-[#786C57] mb-1">
+              <label className="block text-xs font-medium text-[#5A4E38] mb-1">
                 Product Ordered
               </label>
               <select
                 value={productTag}
                 onChange={(e) => setProductTag(e.target.value)}
-                className="w-full px-3.5 py-2.5 bg-[#F5EBC8] border border-[#E6DDC8] rounded-xl text-xs text-[#5A4E38]"
+                className="w-full px-3.5 py-2.5 bg-[#F2EBD0] border border-[#40563D]/40 rounded-xl text-xs text-[#40563D]"
               >
-                <option value="Ghar Ki Panjeeri">Ghar Ki Panjeeri (500g)</option>
-                <option value="BAJOZ SpiceMix">BAJOZ SpiceMix (350g)</option>
+                <option value="HomeMade Panjeeri">HomeMade Panjeeri</option>
+                <option value="BAJOZ SpiceMix">BAJOZ SpiceMix</option>
                 <option value="Natural Tooth Powder">
-                  Natural Homemade Tooth Powder (120g)
+                  BAJOZ Tooth Guardian Powder
                 </option>
               </select>
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-[#786C57] mb-1">
+              <label className="block text-xs font-medium text-[#5A4E38] mb-1">
                 Rating
               </label>
-              <div className="flex items-center gap-1 text-[#C98A6A]">
+              <div className="flex items-center gap-1 text-[#40563D]">
                 {[1, 2, 3, 4, 5].map((star) => (
                   <button
                     key={star}
@@ -120,14 +120,14 @@ export const ReviewModal: React.FC = () => {
                 placeholder="Your Name *"
                 value={customerName}
                 onChange={(e) => setCustomerName(e.target.value)}
-                className="w-full px-3.5 py-2.5 bg-[#F5EBC8] border border-[#E6DDC8] rounded-xl text-xs text-[#5A4E38]"
+                className="w-full px-3.5 py-2.5 bg-[#F2EBD0] border border-[#40563D]/40 rounded-xl text-xs text-[#40563D]"
               />
               <input
                 type="text"
                 placeholder="City / Area (e.g. DHA, Lahore)"
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
-                className="w-full px-3.5 py-2.5 bg-[#F5EBC8] border border-[#E6DDC8] rounded-xl text-xs text-[#5A4E38]"
+                className="w-full px-3.5 py-2.5 bg-[#F2EBD0] border border-[#40563D]/40 rounded-xl text-xs text-[#40563D]"
               />
             </div>
 
@@ -137,7 +137,7 @@ export const ReviewModal: React.FC = () => {
               placeholder="Review Headline *"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-3.5 py-2.5 bg-[#F5EBC8] border border-[#E6DDC8] rounded-xl text-xs text-[#5A4E38]"
+              className="w-full px-3.5 py-2.5 bg-[#F2EBD0] border border-[#40563D]/40 rounded-xl text-xs text-[#40563D]"
             />
 
             <textarea
@@ -146,20 +146,20 @@ export const ReviewModal: React.FC = () => {
               placeholder="Tell us about the aroma, taste, and packaging..."
               value={comment}
               onChange={(e) => setComment(e.target.value)}
-              className="w-full px-3.5 py-2.5 bg-[#F5EBC8] border border-[#E6DDC8] rounded-xl text-xs text-[#5A4E38] resize-none"
+              className="w-full px-3.5 py-2.5 bg-[#F2EBD0] border border-[#40563D]/40 rounded-xl text-xs text-[#40563D] resize-none"
             />
 
             <div className="flex justify-end gap-2 pt-2">
               <button
                 type="button"
                 onClick={() => setIsReviewModalOpen(false)}
-                className="px-4 py-2 text-xs font-semibold text-[#786C57] hover:text-[#5A4E38] cursor-pointer"
+                className="px-4 py-2 text-xs font-semibold text-[#5A4E38] hover:text-[#40563D] cursor-pointer"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="px-6 py-2.5 bg-[#40563D] hover:bg-[#334530] text-[#F9F5E9] text-xs font-bold uppercase tracking-wider rounded-full cursor-pointer transition-colors"
+                className="px-6 py-2.5 bg-[#40563D] hover:bg-[#E9F390] text-[#F2EBD0] hover:text-[#40563D] text-xs font-bold uppercase tracking-wider rounded-full cursor-pointer transition-colors"
               >
                 Publish Review
               </button>

@@ -4,6 +4,7 @@
  */
 
 import React from 'react';
+import { Check } from 'lucide-react';
 import { useShop } from '../context/ShopContext';
 
 export const BrandStory: React.FC = () => {
@@ -12,20 +13,20 @@ export const BrandStory: React.FC = () => {
   return (
     <section
       id="craftsmanship"
-      className="py-14 lg:py-20 bg-gradient-to-b from-white via-white to-[#F5EFDC] scroll-mt-16 transition-colors duration-300"
+      className="py-14 lg:py-20 bg-gradient-to-b from-white via-white to-[#F2EBD0] scroll-mt-16 transition-colors duration-300"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-5 flex flex-col items-center justify-center">
-            <div className="w-full max-w-[340px] bg-[#DCE6C8] border border-[#4A5D23]/15 rounded-3xl p-8 flex flex-col items-center">
+            <div className="w-full max-w-[340px] bg-[#DCE7C9] border-[1.5px] border-[#5A4E38] rounded-3xl p-8 flex flex-col items-center">
               <svg
                 viewBox="0 0 280 260"
                 className="w-full h-auto"
                 fill="none"
-                aria-label="Artisanal small-batch roasting illustration"
+                aria-label="Traditional homemade roasting illustration"
               >
                 <g
-                  stroke="#4A5D23"
+                  stroke="#40563D"
                   strokeWidth="2.4"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -48,7 +49,7 @@ export const BrandStory: React.FC = () => {
                       cx={cx}
                       cy="240"
                       r="3.2"
-                      stroke={i % 2 === 0 ? '#4A5D23' : '#C86D3B'}
+                      stroke={i % 2 === 0 ? '#40563D' : '#C86D3B'}
                     />
                   ))}
                 </g>
@@ -57,15 +58,15 @@ export const BrandStory: React.FC = () => {
           </div>
 
           <div className="lg:col-span-7 space-y-6">
-            <div className="text-xs font-semibold uppercase tracking-widest text-[#4A5D23]">
+            <div className="text-xs font-semibold uppercase tracking-widest text-[#40563D]">
               {siteCopy.craftKicker}
             </div>
 
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#2C221E] leading-[1.12]">
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#40563D] leading-[1.12]">
               {siteCopy.craftHeading}
             </h2>
 
-            <div className="space-y-4 text-sm sm:text-base text-[#655549] leading-relaxed max-w-2xl">
+            <div className="space-y-4 text-sm sm:text-base text-[#5A4E38] leading-relaxed max-w-2xl">
               {(siteCopy.craftParagraphs || []).map((para, idx) => (
                 <p key={idx}>{para}</p>
               ))}
@@ -76,12 +77,15 @@ export const BrandStory: React.FC = () => {
                 {siteCopy.craftPillars.map((pillar) => (
                   <div
                     key={pillar.id}
-                    className="bg-[#DCE6C8] border border-[#4A5D23]/15 rounded-2xl p-4"
+                    className="bg-[#DCE7C9] border-[1.5px] border-[#5A4E38] rounded-2xl p-4"
                   >
-                    <h3 className="font-serif text-lg font-semibold text-[#2C221E]">
-                      {pillar.title}
+                    <h3 className="font-serif text-lg font-semibold text-[#40563D] flex items-start gap-2">
+                      <span className="w-4 h-4 rounded-full bg-[#FAF9F4] text-[#40563D] flex items-center justify-center shrink-0 mt-1">
+                        <Check className="w-2.5 h-2.5 stroke-[2.75]" />
+                      </span>
+                      <span>{pillar.title.replace(/^\d+\.\s*/, '')}</span>
                     </h3>
-                    <p className="text-xs text-[#2C221E]/80 mt-1 leading-relaxed">
+                    <p className="text-xs text-[#40563D]/80 mt-1 leading-relaxed pl-6">
                       {pillar.description}
                     </p>
                   </div>

@@ -211,6 +211,19 @@ export interface WebsiteCopyConfig {
   whyChooseKicker?: string;
   whyChooseHeading?: string;
   whyChooseDescription?: string;
+  benefitsKicker?: string;
+  benefitsHeading?: string;
+  benefitsDescription?: string;
+  benefit1Title?: string;
+  benefit1Desc?: string;
+  benefit2Title?: string;
+  benefit2Desc?: string;
+  benefit3Title?: string;
+  benefit3Desc?: string;
+  aboutKicker?: string;
+  aboutHeading?: string;
+  aboutParagraph1?: string;
+  aboutParagraph2?: string;
   storiesKicker?: string;
   storiesHeading?: string;
   storiesDescription?: string;
@@ -257,6 +270,68 @@ export interface WebsiteCopyConfig {
   voiceKnowledgeBase?: string;
 }
 
+export interface RecipeVideoOptimizationSettings {
+  autoOptimizeOnUpload: boolean;
+  maxResolution: '720p' | '480p';
+  crfQuality: number; // 23 = crisp, 26 = balanced fast-web, 28 = ultra-compact
+  fastStartStreaming: boolean;
+  autoGeneratePoster: boolean;
+  lazyLoadOnStorefront: boolean;
+}
+
+export interface QuickRecipeVideoChapter {
+  timeSec: number;
+  timeLabel: string;
+  title: string;
+  caption: string;
+}
+
+export interface QuickRecipeVideoConfig {
+  enabled: boolean;
+  kicker: string;
+  title: string;
+  subtitle: string;
+  durationLabel: string;
+  videoUrl: string;
+  posterUrl: string;
+  optimized?: boolean;
+  originalBytes?: number;
+  optimizedBytes?: number;
+  savingsPercent?: number;
+  chapters: QuickRecipeVideoChapter[];
+}
+
+export interface ManagedRecipe {
+  id: string;
+  title: string;
+  titleUr?: string;
+  category:
+    | 'chicken'
+    | 'mutton'
+    | 'beef'
+    | 'lentils'
+    | 'vegetables'
+    | 'rice'
+    | 'fish-roast';
+  cookTime: string;
+  servings: string;
+  baseWeight: string;
+  spiceMixAmount: string;
+  summary: string;
+  ingredients: string[];
+  steps: string[];
+  posterUrl?: string;
+  videoUrl?: string;
+  videoDuration?: string;
+  videoOptimized?: boolean;
+  videoOriginalBytes?: number;
+  videoOptimizedBytes?: number;
+  videoSavingsPercent?: number;
+  isPublished: boolean;
+  featured?: boolean;
+  updatedAt: string;
+}
+
 export interface StoreSettings {
   businessName: string;
   websiteUrl?: string;
@@ -279,6 +354,9 @@ export interface StoreSettings {
   };
   siteCopy?: WebsiteCopyConfig;
   customPages?: CustomPage[];
+  managedRecipes?: ManagedRecipe[];
+  quickRecipeVideo?: QuickRecipeVideoConfig;
+  videoOptimization?: RecipeVideoOptimizationSettings;
 }
 
 export interface CustomerUser {

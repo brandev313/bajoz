@@ -89,22 +89,22 @@ export const FavoritesDrawer: React.FC = () => {
     >
       <div
         onClick={() => setIsFavoritesOpen(false)}
-        className="absolute inset-0 bg-[#5A4E38]/45 backdrop-blur-2xs transition-opacity"
+        className="absolute inset-0 bg-[#40563D]/60 backdrop-blur-2xs transition-opacity"
       />
 
       <div className="fixed inset-y-0 right-0 max-w-full flex pl-0 sm:pl-10">
-        <div className="w-screen max-w-md bg-[#F5EBC8] border-l border-[#E6DDC8] shadow-2xl flex flex-col justify-between">
+        <div className="w-screen max-w-md bg-[#F2EBD0] border-l border-[#40563D] shadow-2xl flex flex-col justify-between">
           {/* Drawer Header */}
-          <div className="px-4 py-4 sm:px-6 sm:py-5 border-b border-[#E6DDC8] bg-[#F9F5E9] flex items-center justify-between">
+          <div className="px-4 py-4 sm:px-6 sm:py-5 border-b border-[#40563D]/25 bg-[#F2EBD0] flex items-center justify-between">
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-full bg-[#E9F399] border border-[#E6DDC8] flex items-center justify-center text-[#5A4E38] shrink-0">
-                <Heart className="w-4 h-4 fill-[#9B6A73] text-[#9B6A73]" />
+              <div className="w-9 h-9 rounded-full bg-[#E9F390] border border-[#5A4E38]/40 flex items-center justify-center text-[#40563D] shrink-0">
+                <Heart className="w-4 h-4 fill-[#40563D] text-[#40563D]" />
               </div>
               <div>
-                <h2 className="font-serif text-2xl font-semibold text-[#5A4E38]">
+                <h2 className="font-serif text-2xl font-semibold text-[#40563D]">
                   Your Favorites
                 </h2>
-                <p className="text-xs text-[#786C57]">
+                <p className="text-xs text-[#5A4E38]">
                   {favoriteProducts.length}{' '}
                   {favoriteProducts.length === 1
                     ? 'saved product'
@@ -117,14 +117,14 @@ export const FavoritesDrawer: React.FC = () => {
               type="button"
               onClick={() => setIsFavoritesOpen(false)}
               aria-label="Close favorites drawer"
-              className="p-2 text-[#786C57] hover:text-[#5A4E38] rounded-full transition-colors cursor-pointer"
+              className="p-2 text-[#5A4E38] hover:text-[#40563D] rounded-full transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
 
           {/* Info Strip */}
-          <div className="px-4 py-3 sm:px-6 bg-[#DCE7C9] border-b border-[#E6DDC8] text-xs flex items-center justify-between gap-2 text-[#5A4E38]">
+          <div className="px-4 py-3 sm:px-6 bg-[#E9F390]/65 border-b border-[#40563D]/25 text-xs flex items-center justify-between gap-2 text-[#40563D]">
             <span className="flex items-center gap-1.5 font-medium">
               <Sparkles className="w-3.5 h-3.5 text-[#40563D] shrink-0" />
               <span>Saved automatically on this device for your next visit</span>
@@ -133,7 +133,7 @@ export const FavoritesDrawer: React.FC = () => {
               <button
                 type="button"
                 onClick={clearFavorites}
-                className="text-[11px] font-semibold text-[#786C57] hover:text-[#9B6A73] underline underline-offset-2 shrink-0 cursor-pointer"
+                className="text-[11px] font-semibold text-[#5A4E38] hover:underline underline-offset-2 shrink-0 cursor-pointer"
               >
                 Clear All
               </button>
@@ -141,17 +141,17 @@ export const FavoritesDrawer: React.FC = () => {
           </div>
 
           {/* Favorites List */}
-          <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 bg-[#F5EBC8]">
+          <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 bg-[#F2EBD0]">
             {favoriteProducts.length === 0 ? (
               <div className="text-center py-16 space-y-3">
-                <div className="w-14 h-14 rounded-full bg-[#F9F5E9] border border-[#E6DDC8] flex items-center justify-center mx-auto text-[#786C57]">
+                <div className="w-14 h-14 rounded-full bg-[#F2EBD0] border border-[#40563D]/35 flex items-center justify-center mx-auto text-[#40563D]">
                   <Heart className="w-6 h-6" />
                 </div>
-                <p className="font-serif text-2xl text-[#5A4E38]">
+                <p className="font-serif text-2xl text-[#40563D]">
                   No favorites saved yet.
                 </p>
-                <p className="text-xs text-[#786C57] max-w-xs mx-auto leading-relaxed">
-                  Tap the heart icon on any BAJOZ product card — like our Homemade
+                <p className="text-xs text-[#5A4E38] max-w-xs mx-auto leading-relaxed">
+                  Tap the heart icon on any BAJOZ product card — like our HomeMade
                   Panjeeri, SpiceMix, or Tooth Guardian — to save it here for quick
                   access.
                 </p>
@@ -163,7 +163,7 @@ export const FavoritesDrawer: React.FC = () => {
                       .getElementById('collection')
                       ?.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  className="mt-4 px-6 py-2.5 bg-[#40563D] hover:bg-[#344731] text-[#F9F5E9] text-xs font-bold uppercase tracking-wider rounded-full cursor-pointer transition-colors"
+                  className="mt-4 px-6 py-2.5 bg-[#40563D] hover:bg-[#E9F390] text-[#F2EBD0] hover:text-[#40563D] text-xs font-bold uppercase tracking-wider rounded-full cursor-pointer transition-colors"
                 >
                   Explore Our Products
                 </button>
@@ -173,17 +173,18 @@ export const FavoritesDrawer: React.FC = () => {
                 const defaultPack =
                   product.packSizes?.[0]?.unitWeight || 'Standard Jar';
                 const isJustAdded = addedFeedback[product.id];
+                const identityColorClass = 'text-[#5A4E38]';
 
                 return (
                   <div
                     key={product.id}
-                    className="p-4 rounded-2xl bg-[#F9F5E9] hover:bg-[#F1EBD9] border border-[#E6DDC8] shadow-2xs flex flex-col gap-3.5 transition-all"
+                    className="p-4 rounded-2xl bg-[#F2EBD0] border-[1.5px] border-[#5A4E38] shadow-2xs flex flex-col gap-3.5 transition-all"
                   >
                     <div className="flex gap-4">
                       <button
                         type="button"
                         onClick={() => handleOpenProduct(product.id)}
-                        className="w-20 h-20 rounded-xl bg-[#F5EBC8] p-2 shrink-0 flex items-center justify-center border border-[#E6DDC8] cursor-pointer group"
+                        className="w-20 h-20 rounded-xl bg-[#FAF9F4] p-2 shrink-0 flex items-center justify-center border border-[#5A4E38] cursor-pointer group"
                       >
                         <ProductImage
                           type={product.imageType}
@@ -201,11 +202,15 @@ export const FavoritesDrawer: React.FC = () => {
                             onClick={() => handleOpenProduct(product.id)}
                             className="text-left cursor-pointer group"
                           >
-                            <span className="text-[10px] font-bold uppercase tracking-wider text-[#40563D] block">
+                            <span
+                              className={`text-[10px] font-bold uppercase tracking-wider block ${identityColorClass}`}
+                            >
                               {product.category}
                             </span>
-                            <h3 className="font-serif text-lg font-semibold text-[#5A4E38] group-hover:text-[#40563D] transition-colors leading-snug">
-                              {product.name}
+                            <h3 className="font-serif text-lg font-semibold text-[#40563D] group-hover:underline transition-colors leading-snug">
+                              {product.id === 'panjeeri'
+                                ? 'HomeMade Panjeeri'
+                                : product.name}
                             </h3>
                           </button>
 
@@ -214,13 +219,13 @@ export const FavoritesDrawer: React.FC = () => {
                             onClick={() => toggleFavorite(product.id)}
                             aria-label={`Remove ${product.name} from favorites`}
                             title="Remove from Favorites"
-                            className="p-1.5 rounded-full text-[#9B6A73] hover:bg-[#F5EBC8] transition-colors cursor-pointer shrink-0"
+                            className="p-1.5 rounded-full text-[#5A4E38] hover:bg-[#F2EBD0] transition-colors cursor-pointer shrink-0"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
                         </div>
 
-                        <p className="text-xs text-[#786C57] mt-0.5">
+                        <p className="text-xs text-[#5A4E38] mt-0.5">
                           Sizes:{' '}
                           {product.packSizes?.map((pk) => pk.unitWeight).join(', ') ||
                             defaultPack}
@@ -231,14 +236,14 @@ export const FavoritesDrawer: React.FC = () => {
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-1 xs:grid-cols-2 gap-2 pt-2 border-t border-[#E6DDC8]">
+                    <div className="grid grid-cols-1 xs:grid-cols-2 gap-2 pt-2 border-t border-[#40563D]/20">
                       <button
                         type="button"
                         onClick={() => handleQuickAdd(product)}
                         className={`inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-full text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer ${
                           isJustAdded
-                            ? 'bg-[#5A4E38] text-[#F9F5E9]'
-                            : 'bg-[#40563D] hover:bg-[#344731] text-[#F9F5E9]'
+                            ? 'bg-[#5A4E38] text-[#F2EBD0]'
+                            : 'bg-[#40563D] hover:bg-[#E9F390] text-[#F2EBD0] hover:text-[#40563D]'
                         }`}
                       >
                         {isJustAdded ? (
@@ -248,7 +253,7 @@ export const FavoritesDrawer: React.FC = () => {
                           </>
                         ) : (
                           <>
-                            <ShoppingBag className="w-3.5 h-3.5 text-[#F9F5E9]" />
+                            <ShoppingBag className="w-3.5 h-3.5" />
                             <span>Add to Cart</span>
                           </>
                         )}
@@ -257,7 +262,7 @@ export const FavoritesDrawer: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => handleOpenProduct(product.id)}
-                        className="inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-full bg-[#F9F5E9] hover:bg-[#E9F399] text-[#5A4E38] border border-[#E6DDC8] text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer"
+                        className="inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-full bg-[#F2EBD0] hover:bg-[#E9F390] text-[#40563D] border border-[#40563D]/35 text-xs font-semibold uppercase tracking-wider transition-colors cursor-pointer"
                       >
                         <span>View Details</span>
                         <ArrowUpRight className="w-3.5 h-3.5 text-[#40563D]" />
@@ -271,20 +276,20 @@ export const FavoritesDrawer: React.FC = () => {
 
           {/* Drawer Footer */}
           {favoriteProducts.length > 0 && (
-            <div className="p-4 sm:p-6 border-t border-[#E6DDC8] bg-[#F9F5E9] space-y-3">
+            <div className="p-4 sm:p-6 border-t border-[#40563D]/25 bg-[#F2EBD0] space-y-3">
               <button
                 type="button"
                 onClick={handleAddAllToCart}
-                className="w-full py-3.5 bg-[#40563D] hover:bg-[#344731] text-[#F9F5E9] rounded-full text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors cursor-pointer"
+                className="w-full py-3.5 bg-[#40563D] hover:bg-[#E9F390] text-[#F2EBD0] hover:text-[#40563D] rounded-full text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors cursor-pointer"
               >
                 {addedAllFeedback ? (
                   <>
-                    <Check className="w-4 h-4 text-[#F9F5E9]" />
+                    <Check className="w-4 h-4" />
                     <span>All Favorites Added to Bag</span>
                   </>
                 ) : (
                   <>
-                    <ShoppingBag className="w-4 h-4 text-[#F9F5E9]" />
+                    <ShoppingBag className="w-4 h-4" />
                     <span>
                       Add All ({favoriteProducts.length}) to Shopping Bag
                     </span>

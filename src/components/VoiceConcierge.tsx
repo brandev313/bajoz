@@ -838,28 +838,28 @@ export const VoiceConcierge: React.FC = () => {
         onClick={() => setIsVoiceConciergeOpen(false)}
       />
 
-      <div className="relative w-full max-w-lg bg-[#F9F5E9] rounded-3xl shadow-2xl border-[1.5px] border-[#7A5C38] overflow-hidden z-10 flex flex-col max-h-[92vh] sm:max-h-[88vh]">
+      <div className="relative w-full max-w-lg bg-[#F2EBD0] rounded-3xl shadow-2xl border-[1.5px] border-[#5A4E38] overflow-hidden z-10 flex flex-col max-h-[92vh] sm:max-h-[88vh]">
         {/* Header */}
-        <div className="px-4 sm:px-6 py-3.5 sm:py-4 bg-[#40563D] text-[#F9F5E9] flex items-center justify-between">
+        <div className="px-4 sm:px-6 py-3.5 sm:py-4 bg-[#40563D] text-[#F2EBD0] flex items-center justify-between">
           <div className="flex items-center gap-2.5 min-w-0">
             <img
               src={BAJOZ_MASTER_VECTORS.masterSvg}
               alt="BAJOZ Emblem"
               referrerPolicy="no-referrer"
-              className="w-9 h-9 rounded-xl border border-[#F9F5E9]/30 object-contain shrink-0 select-none"
+              className="w-9 h-9 rounded-xl border border-[#F2EBD0]/30 object-contain shrink-0 select-none"
             />
             <div className="min-w-0">
               <div className="flex items-center gap-2">
-                <h2 className="font-serif text-base sm:text-lg font-bold leading-tight text-[#F9F5E9] truncate">
+                <h2 className="font-serif text-base sm:text-lg font-bold leading-tight text-[#F2EBD0] truncate">
                   {agentName}
                 </h2>
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#F9F5E9]/15 text-[#E9F399] text-[10px] font-bold uppercase tracking-wider shrink-0">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#E9F399] animate-pulse" />
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#F2EBD0]/15 text-[#E9F390] text-[10px] font-bold uppercase tracking-wider shrink-0">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#E9F390] animate-pulse" />
                   Live Context
                 </span>
               </div>
-              <p className="text-[11px] text-[#F9F5E9]/85 flex items-center gap-1.5 truncate">
-                <Radio className="w-3 h-3 text-[#E9F399] shrink-0" />
+              <p className="text-[11px] text-[#F2EBD0]/85 flex items-center gap-1.5 truncate">
+                <Radio className="w-3 h-3 text-[#E9F390] shrink-0" />
                 <span className="truncate">{agentSubtitle}</span>
               </p>
             </div>
@@ -876,7 +876,7 @@ export const VoiceConcierge: React.FC = () => {
                 }
               }}
               aria-label={isMutedSpokenReply ? 'Unmute voice output' : 'Mute voice output'}
-              className="p-2 text-[#F9F5E9]/80 hover:text-[#E9F399] rounded-full cursor-pointer transition-colors"
+              className="p-2 text-[#F2EBD0]/80 hover:text-[#E9F390] rounded-full cursor-pointer transition-colors"
               title={isMutedSpokenReply ? 'Unmute spoken responses' : 'Mute spoken responses'}
             >
               {isMutedSpokenReply ? (
@@ -889,7 +889,7 @@ export const VoiceConcierge: React.FC = () => {
               type="button"
               onClick={() => setIsVoiceConciergeOpen(false)}
               aria-label="Close Live Voice Guide"
-              className="p-2 text-[#F9F5E9]/80 hover:text-[#F9F5E9] rounded-full cursor-pointer transition-colors"
+              className="p-2 text-[#F2EBD0]/80 hover:text-[#F2EBD0] rounded-full cursor-pointer transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -897,7 +897,7 @@ export const VoiceConcierge: React.FC = () => {
         </div>
 
         {/* Context-Aware Active Selection Bar */}
-        <div className="px-4 py-2.5 bg-[#E9F399] border-b border-[#7A5C38]/30 flex flex-wrap items-center justify-between gap-2 text-xs text-[#40563D]">
+        <div className="px-4 py-2.5 bg-[#E9F390] border-b border-[#5A4E38]/30 flex flex-wrap items-center justify-between gap-2 text-xs text-[#40563D]">
           {activeSelectionContext && activeProduct ? (
             <>
               <div className="font-semibold truncate">
@@ -921,7 +921,7 @@ export const VoiceConcierge: React.FC = () => {
                   setAddedFromVoice(true);
                   setTimeout(() => setAddedFromVoice(false), 1800);
                 }}
-                className="px-3 py-1 rounded-full bg-[#40563D] text-[#F9F5E9] font-bold text-[11px] cursor-pointer shrink-0"
+                className="px-3 py-1 rounded-full bg-[#40563D] text-[#F2EBD0] font-bold text-[11px] cursor-pointer shrink-0"
               >
                 {addedFromVoice ? 'Added to Bag!' : '+ Add Selection to Bag'}
               </button>
@@ -937,7 +937,7 @@ export const VoiceConcierge: React.FC = () => {
                     onClick={() => {
                       setActiveProductId(p.id);
                     }}
-                    className="px-2.5 py-0.5 rounded-full bg-[#F9F5E9] hover:bg-white text-[#40563D] border border-[#7A5C38] text-[10px] font-bold cursor-pointer"
+                    className="px-2.5 py-0.5 rounded-full bg-[#F2EBD0] hover:bg-white text-[#40563D] border border-[#5A4E38] text-[10px] font-bold cursor-pointer"
                   >
                     {p.id === 'panjeeri'
                       ? 'Panjeeri'
@@ -952,7 +952,7 @@ export const VoiceConcierge: React.FC = () => {
         </div>
 
         {/* Interactive Voice Stage */}
-        <div className="p-4 sm:p-5 flex flex-col items-center text-center border-b border-[#E6DDC8] bg-[#F5EBC8]">
+        <div className="p-4 sm:p-5 flex flex-col items-center text-center border-b border-[#E9F390] bg-[#F2EBD0]">
           <button
             type="button"
             onClick={() => (isActive ? stopSession() : void startSession())}
@@ -960,10 +960,10 @@ export const VoiceConcierge: React.FC = () => {
             aria-label={isActive ? 'Stop live voice call' : 'Start live voice call'}
             className={`w-18 h-18 sm:w-20 sm:h-20 rounded-full flex items-center justify-center transition-all shadow-lg cursor-pointer ${
               status === 'speaking'
-                ? 'bg-[#E9F399] text-[#5A4E38] scale-105 ring-8 ring-[#E9F399]/40'
+                ? 'bg-[#E9F390] text-[#5A4E38] scale-105 ring-8 ring-[#E9F390]/40'
                 : status === 'listening'
-                ? 'bg-[#40563D] text-[#F9F5E9] ring-8 ring-[#40563D]/20 animate-pulse'
-                : 'bg-[#40563D] hover:bg-[#334530] text-[#F9F5E9] border-2 border-[#E6DDC8]'
+                ? 'bg-[#40563D] text-[#F2EBD0] ring-8 ring-[#40563D]/20 animate-pulse'
+                : 'bg-[#40563D] hover:bg-[#334530] text-[#F2EBD0] border-2 border-[#E9F390]'
             }`}
           >
             {status === 'speaking' ? (
@@ -971,7 +971,7 @@ export const VoiceConcierge: React.FC = () => {
             ) : isActive ? (
               <MicOff className="w-7 h-7" />
             ) : (
-              <Mic className="w-7 h-7 text-[#F9F5E9]" />
+              <Mic className="w-7 h-7 text-[#F2EBD0]" />
             )}
           </button>
 
@@ -992,7 +992,7 @@ export const VoiceConcierge: React.FC = () => {
                 key={q}
                 type="button"
                 onClick={() => void askConciergeQuestion(q)}
-                className="px-3 py-1 rounded-full bg-[#F9F5E9] hover:bg-[#E9F399] text-[#40563D] border border-[#7A5C38] text-[11px] font-semibold transition-colors cursor-pointer"
+                className="px-3 py-1 rounded-full bg-[#F2EBD0] hover:bg-[#E9F390] text-[#40563D] border border-[#5A4E38] text-[11px] font-semibold transition-colors cursor-pointer"
               >
                 {q}
               </button>
@@ -1001,14 +1001,14 @@ export const VoiceConcierge: React.FC = () => {
         </div>
 
         {/* Conversation Transcripts */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-3 bg-[#F5EBC8]/60 min-h-[140px]">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-3 bg-[#F2EBD0]/60 min-h-[140px]">
           {transcripts.map((t) => (
             <div
               key={t.id}
               className={`p-3.5 rounded-2xl text-xs leading-relaxed whitespace-pre-line ${
                 t.role === 'assistant'
-                  ? 'bg-[#F9F5E9] text-[#5A4E38] border border-[#7A5C38]/40'
-                  : 'bg-[#40563D] text-[#F9F5E9] ml-8'
+                  ? 'bg-[#F2EBD0] text-[#5A4E38] border border-[#5A4E38]/40'
+                  : 'bg-[#40563D] text-[#F2EBD0] ml-8'
               }`}
             >
               <span className="block text-[10px] uppercase tracking-wider opacity-70 mb-1 font-semibold">
@@ -1023,7 +1023,7 @@ export const VoiceConcierge: React.FC = () => {
         {/* 24/7 Interactive Question Input */}
         <form
           onSubmit={handleTextSubmit}
-          className="px-4 py-2.5 bg-[#F9F5E9] border-t border-[#E6DDC8] flex items-center gap-2"
+          className="px-4 py-2.5 bg-[#F2EBD0] border-t border-[#E9F390] flex items-center gap-2"
         >
           <input
             type="text"
@@ -1034,27 +1034,27 @@ export const VoiceConcierge: React.FC = () => {
                 ? `Ask a question about ${activeSelectionContext.productName}...`
                 : 'Type your question in English or Urdu...'
             }
-            className="flex-1 bg-[#F5EBC8] border border-[#7A5C38]/40 rounded-full px-3.5 py-2 text-xs text-[#5A4E38] placeholder:text-[#786C57]/75 focus:outline-none focus:border-[#40563D]"
+            className="flex-1 bg-[#F2EBD0] border border-[#5A4E38]/40 rounded-full px-3.5 py-2 text-xs text-[#5A4E38] placeholder:text-[#5A4E38]/75 focus:outline-none focus:border-[#40563D]"
           />
           <button
             type="submit"
             disabled={!textInput.trim() || isSendingText}
             aria-label="Send question to Live Voice Guide"
-            className="px-3.5 py-2 rounded-full bg-[#40563D] hover:bg-[#334530] disabled:opacity-50 text-[#F9F5E9] text-xs font-bold inline-flex items-center gap-1 cursor-pointer transition-colors"
+            className="px-3.5 py-2 rounded-full bg-[#40563D] hover:bg-[#334530] disabled:opacity-50 text-[#F2EBD0] text-xs font-bold inline-flex items-center gap-1 cursor-pointer transition-colors"
           >
-            <Send className="w-3.5 h-3.5 text-[#F9F5E9]" />
+            <Send className="w-3.5 h-3.5 text-[#F2EBD0]" />
             <span>Ask</span>
           </button>
         </form>
 
         {/* Footer Controls */}
-        <div className="px-4 sm:px-6 py-3 bg-[#F9F5E9] border-t border-[#E6DDC8] flex flex-wrap items-center justify-between gap-2 text-xs">
+        <div className="px-4 sm:px-6 py-3 bg-[#F2EBD0] border-t border-[#E9F390] flex flex-wrap items-center justify-between gap-2 text-xs">
           <div className="flex items-center gap-2">
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#DCE7C9] hover:bg-[#E1E9D7] text-[#5A4E38] border border-[#7A5C38]/40 font-semibold text-[11px] transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#DCE7C9] hover:bg-[#DCE7C9] text-[#5A4E38] border border-[#5A4E38]/40 font-semibold text-[11px] transition-colors"
             >
               <MessageCircle className="w-3.5 h-3.5 text-[#40563D]" />
               <span>WhatsApp 24/7</span>
@@ -1065,7 +1065,7 @@ export const VoiceConcierge: React.FC = () => {
                 setIsVoiceConciergeOpen(false);
                 setIsTrackingOpen(true);
               }}
-              className="px-3 py-1.5 rounded-full bg-[#F5EBC8] hover:bg-[#E9F399] text-[#40563D] border border-[#7A5C38]/40 font-semibold text-[11px] cursor-pointer transition-colors"
+              className="px-3 py-1.5 rounded-full bg-[#F2EBD0] hover:bg-[#E9F390] text-[#40563D] border border-[#5A4E38]/40 font-semibold text-[11px] cursor-pointer transition-colors"
             >
               Track Order
             </button>
@@ -1076,7 +1076,7 @@ export const VoiceConcierge: React.FC = () => {
               <button
                 type="button"
                 onClick={stopSession}
-                className="px-4 py-2 bg-[#9B6A73] text-[#F9F5E9] font-semibold rounded-full cursor-pointer text-xs"
+                className="px-4 py-2 bg-[#9B6A73] text-[#F2EBD0] font-semibold rounded-full cursor-pointer text-xs"
               >
                 End Voice Call
               </button>
@@ -1084,7 +1084,7 @@ export const VoiceConcierge: React.FC = () => {
               <button
                 type="button"
                 onClick={() => void startSession()}
-                className="px-4 py-2 bg-[#40563D] hover:bg-[#334530] text-[#F9F5E9] font-bold rounded-full cursor-pointer text-xs transition-colors"
+                className="px-4 py-2 bg-[#40563D] hover:bg-[#334530] text-[#F2EBD0] font-bold rounded-full cursor-pointer text-xs transition-colors"
               >
                 Start Voice Call
               </button>

@@ -55,13 +55,13 @@ export const ProductDetailModal: React.FC = () => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-[#5A4E38]/55 backdrop-blur-2xs">
-      <div className="relative w-full max-w-4xl bg-[#F9F5E9] rounded-3xl shadow-2xl overflow-hidden max-h-[92dvh] flex flex-col border border-[#E6DDC8]">
+      <div className="relative w-full max-w-4xl bg-[#F2EBD0] rounded-3xl shadow-2xl overflow-hidden max-h-[92dvh] flex flex-col border-2 border-[#5A4E38]">
         {/* Top Header */}
-        <div className="px-4 sm:px-6 py-3.5 sm:py-4 bg-[#F9F5E9] border-b border-[#E6DDC8] flex items-center justify-between gap-2">
+        <div className="px-4 sm:px-6 py-3.5 sm:py-4 bg-[#F2EBD0] border-b border-[#5A4E38]/30 flex items-center justify-between gap-2">
           <div className="text-xs text-[#40563D] font-semibold truncate">
             <span>{activeProductModal.category}</span>
             <span> · </span>
-            <span className="font-mono text-[#786C57]">
+            <span className="font-mono text-[#5A4E38]">
               SKU:{' '}
               {variant?.sku ||
                 (activeProductModal.id === 'spicemix' ? 'BZ-SPX-STD' : 'BAJOZ-01')}
@@ -70,18 +70,18 @@ export const ProductDetailModal: React.FC = () => {
           <button
             type="button"
             onClick={() => setActiveProductModal(null)}
-            className="p-1.5 text-[#786C57] hover:text-[#5A4E38] hover:bg-[#F1EBD9] rounded-full cursor-pointer transition-colors shrink-0"
+            className="p-1.5 text-[#5A4E38] hover:text-[#5A4E38] hover:bg-[#F2EBD0] rounded-full cursor-pointer transition-colors shrink-0"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Scrollable Content */}
-        <div className="overflow-y-auto p-4 xs:p-6 sm:p-8 space-y-6 sm:space-y-8 bg-[#F9F5E9]">
+        <div className="overflow-y-auto p-4 xs:p-6 sm:p-8 space-y-6 sm:space-y-8 bg-[#F2EBD0]">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 items-start">
-            {/* Left Studio Image Stage */}
+            {/* Left Studio Image Stage — Pure White Cream (#FAF9F4) Background */}
             <div className="md:col-span-5 space-y-3">
-              <div className="relative bg-[#F5EBC8] border border-[#E6DDC8] rounded-2xl p-5 sm:p-6 aspect-square flex items-center justify-center">
+              <div className="relative bg-[#FAF9F4] border-[1.5px] border-[#5A4E38] rounded-2xl p-5 sm:p-6 aspect-square flex items-center justify-center">
                 <button
                   type="button"
                   onClick={() => toggleFavorite(activeProductModal.id)}
@@ -98,8 +98,8 @@ export const ProductDetailModal: React.FC = () => {
                   }
                   className={`absolute top-3.5 right-3.5 z-10 w-9 h-9 rounded-full flex items-center justify-center transition-all cursor-pointer border shadow-xs ${
                     isFavorite(activeProductModal.id)
-                      ? 'bg-[#E9F399] border-[#40563D]/30 text-[#9B6A73]'
-                      : 'bg-[#F9F5E9] hover:bg-[#F1EBD9] border-[#E6DDC8] text-[#786C57] hover:text-[#5A4E38]'
+                      ? 'bg-[#E9F390] border-[#40563D]/30 text-[#9B6A73]'
+                      : 'bg-[#FAF9F4] hover:bg-[#F2EBD0] border-[#E9F390] text-[#5A4E38] hover:text-[#5A4E38]'
                   }`}
                 >
                   <Heart
@@ -118,7 +118,7 @@ export const ProductDetailModal: React.FC = () => {
                   alt={activeProductModal.name}
                 />
               </div>
-              <p className="text-xs text-[#786C57] text-center">
+              <p className="text-xs text-[#5A4E38] text-center">
                 {pack?.label || 'Standard Jar'} · Airtight fresh-sealed jar
               </p>
             </div>
@@ -129,19 +129,19 @@ export const ProductDetailModal: React.FC = () => {
                 <h2 className="font-serif text-2xl xs:text-3xl sm:text-4xl font-semibold text-[#5A4E38]">
                   {activeProductModal.name}
                 </h2>
-                <p className="text-xs uppercase tracking-wider text-[#786C57] mt-1">
+                <p className="text-xs uppercase tracking-wider text-[#5A4E38] mt-1">
                   {hasMultipleVariants && variant
                     ? `${variant.name} · ${pack?.label || ''}`
                     : `${pack?.label || activeProductModal.subtitle}`}
                 </p>
-                <p className="text-sm text-[#786C57] mt-3 leading-relaxed">
+                <p className="text-sm text-[#5A4E38] mt-3 leading-relaxed">
                   {variant?.description || activeProductModal.description}
                 </p>
               </div>
 
               {hasMultipleVariants && (
                 <div>
-                  <label className="block text-xs font-semibold text-[#5A4E38] mb-2">
+                  <label className="bajoz-flavour block text-xs text-[#5A4E38] mb-2">
                     Flavour:
                   </label>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -150,10 +150,10 @@ export const ProductDetailModal: React.FC = () => {
                         key={v.id}
                         type="button"
                         onClick={() => setSelectedVariantId(v.id)}
-                        className={`p-2.5 rounded-xl text-xs font-semibold transition-all text-left cursor-pointer border ${
+                        className={`bajoz-flavour bajoz-variant p-2.5 rounded-xl text-xs transition-all text-left cursor-pointer border ${
                           v.id === variant?.id
-                            ? 'bg-[#40563D] text-[#F9F5E9] border-[#40563D]'
-                            : 'bg-[#F9F5E9] text-[#5A4E38] border-[#E6DDC8] hover:bg-[#F1EBD9]'
+                            ? 'bg-[#40563D] text-[#F2EBD0] border-[#40563D]'
+                            : 'bg-[#F2EBD0] text-[#5A4E38] border-[#E9F390] hover:bg-[#F2EBD0]'
                         }`}
                       >
                         <span className="block truncate">{v.name}</span>
@@ -165,7 +165,7 @@ export const ProductDetailModal: React.FC = () => {
 
               {activeProductModal.packSizes.length > 0 && (
                 <div>
-                  <label className="block text-xs font-semibold text-[#5A4E38] mb-2">
+                  <label className="bajoz-size block text-xs text-[#5A4E38] mb-2">
                     Jar Size:
                   </label>
                   <div className="grid grid-cols-1 xs:grid-cols-2 gap-2">
@@ -175,14 +175,14 @@ export const ProductDetailModal: React.FC = () => {
                           key={p.id}
                           type="button"
                           onClick={() => setSelectedPackId(p.id)}
-                          className={`py-2.5 px-3 rounded-xl text-xs font-semibold transition-all cursor-pointer border flex items-center justify-between gap-2 ${
+                          className={`bajoz-size py-2.5 px-3 rounded-xl text-xs transition-all cursor-pointer border flex items-center justify-between gap-2 ${
                             p.id === pack.id
-                              ? 'bg-[#40563D] text-[#F9F5E9] border-[#40563D]'
-                              : 'bg-[#F9F5E9] text-[#5A4E38] border-[#E6DDC8] hover:bg-[#F1EBD9]'
+                              ? 'bg-[#40563D] text-[#F2EBD0] border-[#40563D]'
+                              : 'bg-[#F2EBD0] text-[#5A4E38] border-[#E9F390] hover:bg-[#F2EBD0]'
                           }`}
                         >
-                          <span>{p.label}</span>
-                          <span className="font-mono font-bold">
+                          <span className="bajoz-size">{p.label}</span>
+                          <span className="bajoz-price">
                             Price: N/A
                           </span>
                         </button>
@@ -193,18 +193,18 @@ export const ProductDetailModal: React.FC = () => {
               )}
 
               {/* Price & Buy Bar */}
-              <div className="pt-4 border-t border-[#E6DDC8] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="pt-4 border-t border-[#E9F390] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                  <span className="block text-[10px] uppercase tracking-wider text-[#786C57]">
+                  <span className="bajoz-price block text-[10px] uppercase tracking-wider text-[#5A4E38]">
                     Total Price
                   </span>
-                  <span className="font-serif text-3xl font-bold text-[#40563D] tabular-nums">
+                  <span className="bajoz-price text-3xl text-[#40563D] tabular-nums">
                     N/A
                   </span>
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <div className="inline-flex items-center bg-[#F5EBC8] border border-[#E6DDC8] rounded-full px-1">
+                  <div className="inline-flex items-center bg-[#F2EBD0] border border-[#5A4E38] rounded-full px-1">
                     <button
                       type="button"
                       disabled={quantity <= 1}
@@ -238,7 +238,7 @@ export const ProductDetailModal: React.FC = () => {
                       );
                       setActiveProductModal(null);
                     }}
-                    className="flex-1 sm:flex-initial px-6 py-3 rounded-full bg-[#40563D] hover:bg-[#334530] text-[#F9F5E9] border border-[#40563D] text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer whitespace-nowrap shrink-0"
+                    className="flex-1 sm:flex-initial px-6 py-3 rounded-full bg-[#E9F390] hover:bg-[#5A4E38] text-[#5A4E38] hover:text-[#F2EBD0] border border-[#5A4E38] shadow-[2px_2px_0px_#5A4E38] hover:shadow-none font-serif text-sm sm:text-base font-extrabold tracking-tight transition-all cursor-pointer whitespace-nowrap shrink-0"
                   >
                     {isOutOfStock ? 'Sold Out' : 'Add to Bag'}
                   </button>
@@ -248,8 +248,8 @@ export const ProductDetailModal: React.FC = () => {
           </div>
 
           {/* Lower Specification Tabs */}
-          <div className="pt-6 border-t border-[#E6DDC8]">
-            <div className="flex gap-6 border-b border-[#E6DDC8] text-xs font-semibold text-[#786C57] overflow-x-auto">
+          <div className="pt-6 border-t border-[#5A4E38]/30">
+            <div className="flex gap-6 border-b border-[#5A4E38]/30 text-xs font-semibold text-[#5A4E38] overflow-x-auto">
               {[
                 { id: 'story', label: 'Craft & Story' },
                 {
@@ -274,7 +274,7 @@ export const ProductDetailModal: React.FC = () => {
               ))}
             </div>
 
-            <div className="pt-5 text-sm text-[#786C57] leading-relaxed">
+            <div className="pt-5 text-sm text-[#5A4E38] leading-relaxed">
               {activeTab === 'story' && <p>{activeProductModal.story}</p>}
 
               {activeTab === 'ingredients' && (
@@ -282,9 +282,11 @@ export const ProductDetailModal: React.FC = () => {
                   {activeProductModal.ingredients.map((ing, i) => (
                     <div
                       key={i}
-                      className="flex items-center gap-2.5 bg-[#F5EBC8] hover:bg-[#F1EBD9] p-3 rounded-xl border border-[#E6DDC8] text-xs text-[#5A4E38] transition-colors"
+                      className="flex items-center gap-2.5 bg-[#F2EBD0] hover:bg-[#F2EBD0] p-3 rounded-xl border border-[#5A4E38] text-xs text-[#5A4E38] transition-colors"
                     >
-                      <Check className="w-3.5 h-3.5 text-[#40563D] shrink-0" />
+                      <span className="w-4 h-4 rounded-full bg-[#DCE7C9] text-[#40563D] flex items-center justify-center shrink-0">
+                        <Check className="w-2.5 h-2.5 stroke-[2.75]" />
+                      </span>
                       <span>{ing}</span>
                     </div>
                   ))}
@@ -292,19 +294,19 @@ export const ProductDetailModal: React.FC = () => {
               )}
 
               {activeTab === 'usage' && (
-                <div className="space-y-2.5">
+                <ul className="space-y-2.5">
                   {activeProductModal.usageInstructions.map((step, i) => (
-                    <div
+                    <li
                       key={i}
-                      className="flex items-start gap-3 bg-[#F5EBC8] hover:bg-[#F1EBD9] p-3.5 rounded-xl border border-[#E6DDC8] text-xs text-[#5A4E38] transition-colors"
+                      className="flex items-start gap-2.5 bg-[#F2EBD0] hover:bg-[#F2EBD0] p-3.5 rounded-xl border border-[#5A4E38] text-xs text-[#5A4E38] transition-colors"
                     >
-                      <span className="font-mono font-bold text-[#40563D]">
-                        0{i + 1}.
+                      <span className="w-4 h-4 rounded-full bg-[#DCE7C9] text-[#40563D] flex items-center justify-center shrink-0 mt-0.5">
+                        <Check className="w-2.5 h-2.5 stroke-[2.75]" />
                       </span>
                       <span>{step}</span>
-                    </div>
+                    </li>
                   ))}
-                </div>
+                </ul>
               )}
 
               {activeTab === 'faqs' && (
@@ -312,12 +314,12 @@ export const ProductDetailModal: React.FC = () => {
                   {activeProductModal.faqs.map((f, i) => (
                     <div
                       key={i}
-                      className="bg-[#F5EBC8] hover:bg-[#F1EBD9] p-4 rounded-xl border border-[#E6DDC8] space-y-1 transition-colors"
+                      className="bg-[#F2EBD0] hover:bg-[#F2EBD0] p-4 rounded-xl border border-[#5A4E38] space-y-1 transition-colors"
                     >
                       <h4 className="font-serif text-lg font-semibold text-[#5A4E38]">
                         {f.question}
                       </h4>
-                      <p className="text-xs text-[#786C57]">{f.answer}</p>
+                      <p className="text-xs text-[#5A4E38]">{f.answer}</p>
                     </div>
                   ))}
                 </div>

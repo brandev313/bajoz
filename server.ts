@@ -11,8 +11,12 @@ import express from 'express';
 import http from 'http';
 import fs from 'fs';
 import path from 'path';
+import { execFile } from 'child_process';
+import { promisify } from 'util';
 import dotenv from 'dotenv';
 import { createServer as createViteServer } from 'vite';
+
+const execFileAsync = promisify(execFile);
 import { WebSocketServer, WebSocket } from 'ws';
 import { GoogleGenAI, Modality } from '@google/genai';
 import {
@@ -157,8 +161,8 @@ function sanitizeUserForClient(profile: any) {
 
 async function startServer() {
   const app = express();
-  app.use(express.json({ limit: '25mb' }));
-  app.use(express.urlencoded({ extended: true, limit: '25mb' }));
+  app.use(express.json({ limit: '120mb' }));
+  app.use(express.urlencoded({ extended: true, limit: '120mb' }));
 
   // Serve uploaded files from /public/uploads
   const uploadsDir = path.resolve(process.cwd(), 'public/uploads');
@@ -361,6 +365,295 @@ ${urls
   app.delete('/api/storage/files/:id', (req, res) => {
     const deleted = deleteUploadedFileFromDisk(storeState, req.params.id);
     return res.json({ ok: deleted });
+  });
+
+  // ==========================================================================
+  // Recipe Video Upload & Automatic Web Optimization Engine (ffmpeg + faststart)
+  // ==========================================================================
+  async function runFfmpegVideoOptimization(
+    inputPath: string,
+    outputMp4Path: string,
+    posterJpgPath: string,
+    opts: {
+      maxResolution?: '720p' | '480p';
+      crfQuality?: number;
+      fastStartStreaming?: boolean;
+      autoGeneratePoster?: boolean;
+    }
+  ): Promise<{
+    optimized: boolean;
+    originalBytes: number;
+    optimizedBytes: number;
+    savingsPercent: number;
+    posterGenerated: boolean;
+  }> {
+    const originalBytes = fs.existsSync(inputPath) ? fs.statSync(inputPath).size : 0;
+    const maxWidth = opts.maxResolution === '480p' ? 854 : 1280;
+    const crf = Math.min(32, Math.max(20, Number(opts.crfQuality) || 26));
+    const useFastStart = opts.fastStartStreaming !== false;
+
+    const ffmpegArgs = [
+      '-y',
+      '-i',
+      inputPath,
+      '-vf',
+      `scale='min(${maxWidth},iw)':-2,fps=30`,
+      '-c:v',
+      'libx264',
+      '-preset',
+      'fast',
+      '-crf',
+      String(crf),
+      '-pix_fmt',
+      'yuv420p',
+      '-c:a',
+      'aac',
+      '-b:a',
+      '96k',
+      '-ac',
+      '2',
+    ];
+    if (useFastStart) {
+      ffmpegArgs.push('-movflags', '+faststart');
+    }
+    ffmpegArgs.push(outputMp4Path);
+
+    await execFileAsync('ffmpeg', ffmpegArgs, { timeout: 120000 });
+
+    let posterGenerated = false;
+    if (opts.autoGeneratePoster !== false) {
+      try {
+        await execFileAsync(
+          'ffmpeg',
+          [
+            '-y',
+            '-ss',
+            '00:00:01',
+            '-i',
+            outputMp4Path,
+            '-vframes',
+            '1',
+            '-vf',
+            `scale='min(${maxWidth},iw)':-2`,
+            '-q:v',
+            '4',
+            posterJpgPath,
+          ],
+          { timeout: 30000 }
+        );
+        posterGenerated = fs.existsSync(posterJpgPath);
+      } catch {
+        // Fallback to first frame if video is shorter than 1 second
+        try {
+          await execFileAsync(
+            'ffmpeg',
+            ['-y', '-i', outputMp4Path, '-vframes', '1', '-q:v', '4', posterJpgPath],
+            { timeout: 30000 }
+          );
+          posterGenerated = fs.existsSync(posterJpgPath);
+        } catch {
+          posterGenerated = false;
+        }
+      }
+    }
+
+    const optimizedBytes = fs.existsSync(outputMp4Path)
+      ? fs.statSync(outputMp4Path).size
+      : originalBytes;
+    const savingsPercent =
+      originalBytes > 0
+        ? Math.max(0, Math.round(((originalBytes - optimizedBytes) / originalBytes) * 100))
+        : 0;
+
+    return {
+      optimized: true,
+      originalBytes,
+      optimizedBytes,
+      savingsPercent,
+      posterGenerated,
+    };
+  }
+
+  app.post('/api/storage/upload-video', async (req, res) => {
+    try {
+      const {
+        dataUrl,
+        filename,
+        autoOptimize = true,
+        maxResolution = '720p',
+        crfQuality = 26,
+        fastStartStreaming = true,
+        autoGeneratePoster = true,
+      } = req.body || {};
+
+      if (!dataUrl || typeof dataUrl !== 'string') {
+        return res
+          .status(400)
+          .json({ ok: false, message: 'Missing video dataUrl payload.' });
+      }
+
+      const match = dataUrl.match(/^data:video\/([a-zA-Z0-9.+-]+);base64,(.+)$/);
+      if (!match) {
+        return res
+          .status(400)
+          .json({ ok: false, message: 'Unsupported video format. Please upload MP4, MOV, or WebM.' });
+      }
+
+      const rawExt = match[1].includes('webm')
+        ? 'webm'
+        : match[1].includes('quicktime')
+        ? 'mov'
+        : 'mp4';
+      const buffer = Buffer.from(match[2], 'base64');
+      const videosDir = path.resolve(process.cwd(), 'public/uploads/videos');
+      fs.mkdirSync(videosDir, { recursive: true });
+
+      const slugBase = String(filename || 'recipe-video')
+        .replace(/\.[^/.]+$/, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9-_]+/g, '-')
+        .slice(0, 48);
+      const stamp = `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+      const rawFileName = `${slugBase || 'recipe'}-${stamp}-raw.${rawExt}`;
+      const rawFilePath = path.join(videosDir, rawFileName);
+      fs.writeFileSync(rawFilePath, buffer);
+
+      const originalBytes = buffer.length;
+
+      if (!autoOptimize) {
+        return res.json({
+          ok: true,
+          url: `/uploads/videos/${rawFileName}`,
+          posterUrl: undefined,
+          optimized: false,
+          originalBytes,
+          optimizedBytes: originalBytes,
+          savingsPercent: 0,
+        });
+      }
+
+      const optFileName = `${slugBase || 'recipe'}-${stamp}-opt.mp4`;
+      const posterFileName = `${slugBase || 'recipe'}-${stamp}-poster.jpg`;
+      const optFilePath = path.join(videosDir, optFileName);
+      const posterFilePath = path.join(videosDir, posterFileName);
+
+      try {
+        const stats = await runFfmpegVideoOptimization(
+          rawFilePath,
+          optFilePath,
+          posterFilePath,
+          {
+            maxResolution: maxResolution === '480p' ? '480p' : '720p',
+            crfQuality: Number(crfQuality) || 26,
+            fastStartStreaming: fastStartStreaming !== false,
+            autoGeneratePoster: autoGeneratePoster !== false,
+          }
+        );
+
+        // Remove unoptimized raw file once web-optimized MP4 is ready
+        try {
+          fs.unlinkSync(rawFilePath);
+        } catch {
+          // ignore cleanup failure
+        }
+
+        return res.json({
+          ok: true,
+          url: `/uploads/videos/${optFileName}`,
+          posterUrl: stats.posterGenerated
+            ? `/uploads/videos/${posterFileName}`
+            : undefined,
+          optimized: true,
+          originalBytes: stats.originalBytes,
+          optimizedBytes: stats.optimizedBytes,
+          savingsPercent: stats.savingsPercent,
+        });
+      } catch (ffErr) {
+        console.error('Auto video optimization fallback:', ffErr);
+        return res.json({
+          ok: true,
+          url: `/uploads/videos/${rawFileName}`,
+          posterUrl: undefined,
+          optimized: false,
+          originalBytes,
+          optimizedBytes: originalBytes,
+          savingsPercent: 0,
+          note: 'Saved original video (ffmpeg unavailable or unsupported codec).',
+        });
+      }
+    } catch (err) {
+      console.error('Video upload error:', err);
+      return res
+        .status(500)
+        .json({ ok: false, message: 'Failed to process recipe video upload.' });
+    }
+  });
+
+  app.post('/api/storage/optimize-existing-video', async (req, res) => {
+    try {
+      const {
+        videoUrl,
+        maxResolution = '720p',
+        crfQuality = 26,
+        fastStartStreaming = true,
+        autoGeneratePoster = true,
+      } = req.body || {};
+
+      const cleanUrl = String(videoUrl || '').split('?')[0].trim();
+      if (!cleanUrl.startsWith('/assets/') && !cleanUrl.startsWith('/uploads/')) {
+        return res.status(400).json({
+          ok: false,
+          message: 'Only local storefront/uploaded videos can be server-optimized.',
+        });
+      }
+
+      const publicRoot = path.resolve(process.cwd(), 'public');
+      const resolvedInput = path.resolve(publicRoot, cleanUrl.replace(/^\/+/, ''));
+      if (!resolvedInput.startsWith(publicRoot) || !fs.existsSync(resolvedInput)) {
+        return res.status(404).json({
+          ok: false,
+          message: 'Source video file not found on server.',
+        });
+      }
+
+      const videosDir = path.resolve(process.cwd(), 'public/uploads/videos');
+      fs.mkdirSync(videosDir, { recursive: true });
+      const baseName = path.basename(resolvedInput, path.extname(resolvedInput));
+      const stamp = Date.now().toString(36);
+      const optFileName = `${baseName}-opt-${stamp}.mp4`;
+      const posterFileName = `${baseName}-poster-${stamp}.jpg`;
+      const optFilePath = path.join(videosDir, optFileName);
+      const posterFilePath = path.join(videosDir, posterFileName);
+
+      const stats = await runFfmpegVideoOptimization(
+        resolvedInput,
+        optFilePath,
+        posterFilePath,
+        {
+          maxResolution: maxResolution === '480p' ? '480p' : '720p',
+          crfQuality: Number(crfQuality) || 26,
+          fastStartStreaming: fastStartStreaming !== false,
+          autoGeneratePoster: autoGeneratePoster !== false,
+        }
+      );
+
+      return res.json({
+        ok: true,
+        url: `/uploads/videos/${optFileName}`,
+        posterUrl: stats.posterGenerated
+          ? `/uploads/videos/${posterFileName}`
+          : undefined,
+        optimized: true,
+        originalBytes: stats.originalBytes,
+        optimizedBytes: stats.optimizedBytes,
+        savingsPercent: stats.savingsPercent,
+      });
+    } catch (err) {
+      console.error('Optimize existing video error:', err);
+      return res
+        .status(500)
+        .json({ ok: false, message: 'Video optimization failed.' });
+    }
   });
 
   // ==========================================================================

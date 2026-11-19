@@ -237,7 +237,7 @@ export function normalizeCatalogProduct(p: Product): Product {
         : isMoong
         ? 'Daal Moong'
         : sanitizeBrand(v.name),
-      badge: v.badge ? sanitizeBrand(v.badge) : defaultMatch?.badge || 'Small-Batch',
+      badge: v.badge ? sanitizeBrand(v.badge) : defaultMatch?.badge || 'Homemade',
       sku: isSunji
         ? 'BJ-PAN-SUJ'
         : String(v.sku || defaultMatch?.sku || 'BJ-SKU').replace(/^DT-/, 'BJ-'),

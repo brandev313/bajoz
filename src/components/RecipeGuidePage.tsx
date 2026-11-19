@@ -6,7 +6,7 @@
  * Interactive SpiceMix Kitchen Recipe & Dosage Guide
  *
  * Designed to match the exact visual language, spacing, typography, color palette,
- * flat 1.5px #7A5C38 borders, WaveDivider transitions, and signature pill + circular
+ * flat 1.5px #5A4E38 borders, WaveDivider transitions, and signature pill + circular
  * arrow CTAs of the BAJOZ homepage.
  */
 
@@ -18,6 +18,9 @@ import {
   Sun,
   RotateCcw,
   ArrowUpRight,
+  Film,
+  Clock,
+  Users,
 } from 'lucide-react';
 import {
   RecipeStepDoodle,
@@ -1722,7 +1725,11 @@ export const RecipeGuidePage: React.FC = () => {
     setActivePageSlug,
     setActiveProductId,
     setIsCheckoutOpen,
+    managedRecipes,
+    videoOptimization,
   } = useShop();
+
+  const publishedManagedRecipes = (managedRecipes || []).filter((r) => r.isPublished);
 
   const activeSpice =
     SPICE_LEVELS.find((s) => s.id === selectedSpiceId) || SPICE_LEVELS[1];
@@ -1830,16 +1837,40 @@ export const RecipeGuidePage: React.FC = () => {
   return (
     <div
       dir={isUr ? 'rtl' : 'ltr'}
-      className="min-h-screen w-full bg-[#F5EBC8] text-[#2C221E] font-sans selection:bg-[#E9F399] selection:text-[#4A2E1B] overflow-x-hidden"
+      className="min-h-screen w-full bg-[#F2EBD0] text-[#40563D] font-sans selection:bg-[#E9F390] selection:text-[#40563D] overflow-x-hidden"
     >
       {/* ===================================================================
-          1. HERO & SPICE LEVEL DOSAGE SECTION (#F5EBC8 Heritage Cream — Matches Homepage Hero)
+          1. HERO & SPICE LEVEL DOSAGE SECTION (#F2EBD0 Heritage Cream — 20% Co-Primary Hero Banner)
          =================================================================== */}
-      <section className="relative pt-6 pb-10 sm:pt-8 sm:pb-14 lg:pb-16 bg-[#F5EBC8]">
+      <section className="relative pt-12 pb-10 sm:pt-14 sm:pb-14 lg:pt-16 lg:pb-16 bg-[#FAF9F4] bajoz-seamless-section">
         <div className="w-full max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-16 xl:px-24 space-y-6 sm:space-y-8">
-          {/* Top Utility Bar: Eyebrow Pill + Language Switch + Keep Screen On */}
+          {/* Top Breadcrumb Bar */}
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="inline-flex items-center px-5 py-2 rounded-full bg-[#E9F399] border-[1.5px] border-[#7A5C38] text-xs sm:text-sm font-extrabold text-[#40563D] tracking-tight">
+            <nav
+              aria-label="Breadcrumb"
+              className="flex flex-wrap items-center gap-2.5 font-dm text-sm sm:text-[15px] font-medium text-[#5A4E38]"
+            >
+              <button
+                type="button"
+                onClick={() => {
+                  setActivePageSlug(null);
+                  setActiveProductId(null);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="hover:bg-[#5A4E38] hover:text-[#F2EBD0] cursor-pointer font-semibold"
+              >
+                {isUr ? 'ہوم' : 'Home'}
+              </button>
+              <span className="text-[#5A4E38]/60">/</span>
+              <span className="text-[#40563D] font-bold">
+                {isUr ? 'ریسیپی گائیڈ' : 'Recipe Guide'}
+              </span>
+            </nav>
+          </div>
+
+          {/* Top Utility Bar: Micro Pill (#DCE7C9 5%) + Language Switch + Keep Screen On */}
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="inline-flex items-center px-5 py-2 rounded-full bg-[#DCE7C9] border border-[#5A4E38]/35 text-xs sm:text-sm font-extrabold text-[#40563D] tracking-tight">
               {isUr
                 ? 'باجوز اسپائس مکس — جار کیو آر کچن گائیڈ'
                 : "Pakistan's 1st All-in-One Cooking Paste · Jar QR Guide"}
@@ -1847,7 +1878,7 @@ export const RecipeGuidePage: React.FC = () => {
 
             <div className="flex items-center gap-2">
               <div
-                className="inline-flex items-center bg-[#F9F5E9] border-[1.5px] border-[#7A5C38] rounded-full p-0.5"
+                className="inline-flex items-center bg-[#F2EBD0] border border-[#5A4E38]/40 rounded-full p-0.5"
                 role="group"
                 aria-label="Language switch"
               >
@@ -1856,8 +1887,8 @@ export const RecipeGuidePage: React.FC = () => {
                   onClick={() => setLang('en')}
                   className={`px-3.5 py-1 rounded-full text-xs sm:text-sm font-serif font-bold transition-colors cursor-pointer whitespace-nowrap ${
                     lang === 'en'
-                      ? 'bg-[#40563D] text-[#F9F5E9]'
-                      : 'text-[#4A2E1B] hover:bg-[#E9F399]'
+                      ? 'bg-[#40563D] text-[#F2EBD0]'
+                      : 'text-[#40563D] hover:bg-[#E9F390]'
                   }`}
                 >
                   EN
@@ -1867,8 +1898,8 @@ export const RecipeGuidePage: React.FC = () => {
                   onClick={() => setLang('ur')}
                   className={`px-3.5 py-1 rounded-full text-xs sm:text-sm font-serif font-bold transition-colors cursor-pointer whitespace-nowrap ${
                     lang === 'ur'
-                      ? 'bg-[#40563D] text-[#F9F5E9]'
-                      : 'text-[#4A2E1B] hover:bg-[#E9F399]'
+                      ? 'bg-[#40563D] text-[#F2EBD0]'
+                      : 'text-[#40563D] hover:bg-[#E9F390]'
                   }`}
                 >
                   اردو
@@ -1879,10 +1910,10 @@ export const RecipeGuidePage: React.FC = () => {
                 type="button"
                 onClick={toggleKitchenWakeLock}
                 aria-pressed={wakeLockActive}
-                className={`px-4 py-2 rounded-full text-xs sm:text-sm font-serif font-bold border-[1.5px] border-[#7A5C38] transition-colors flex items-center gap-1.5 cursor-pointer whitespace-nowrap ${
+                className={`px-4 py-2 rounded-full text-xs sm:text-sm font-serif font-bold border border-[#5A4E38]/40 transition-colors flex items-center gap-1.5 cursor-pointer whitespace-nowrap ${
                   wakeLockActive
-                    ? 'bg-[#E9F399] text-[#40563D]'
-                    : 'bg-[#F9F5E9] text-[#2C221E] hover:bg-[#E9F399]'
+                    ? 'bg-[#E9F390] text-[#40563D]'
+                    : 'bg-[#F2EBD0] text-[#40563D] hover:bg-[#E9F390]'
                 }`}
               >
                 <Sun className="w-4 h-4 text-[#40563D] shrink-0" />
@@ -1901,7 +1932,7 @@ export const RecipeGuidePage: React.FC = () => {
                 type="button"
                 onClick={handleShareGuide}
                 aria-label="Share recipe"
-                className="px-4 py-2 rounded-full text-xs sm:text-sm font-serif font-bold bg-[#F9F5E9] hover:bg-[#E9F399] text-[#2C221E] border-[1.5px] border-[#7A5C38] transition-colors flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
+                className="px-4 py-2 rounded-full text-xs sm:text-sm font-serif font-bold bg-[#F2EBD0] hover:bg-[#E9F390] text-[#40563D] border border-[#5A4E38]/40 transition-colors flex items-center gap-1.5 cursor-pointer whitespace-nowrap"
               >
                 <Share2 className="w-4 h-4 text-[#40563D] shrink-0" />
                 <span className="hidden md:inline">
@@ -1911,24 +1942,24 @@ export const RecipeGuidePage: React.FC = () => {
             </div>
           </div>
 
-          {/* Centered Kicker, Display Heading & Formula Subheading — Matches FeaturedProducts.tsx */}
+          {/* Centered Kicker, Display Heading & Formula Subheading */}
           <div className="text-center max-w-5xl mx-auto space-y-2.5 sm:space-y-3">
-            <p className="bajoz-script-kicker text-xl sm:text-2xl lg:text-3xl text-[#40563D]">
+            <p className="font-editorial italic text-xl sm:text-2xl lg:text-3xl text-[#5A4E38]">
               {isUr
                 ? 'باجوز — دی ہاؤس آف نیچرلز'
                 : 'One SpiceMix Jar Makes All Pakistani Dishes'}
             </p>
-            <h1 className="bajoz-poster-display text-3xl sm:text-5xl lg:text-6xl text-[#4A2E1B]">
+            <h1 className="bajoz-poster-display text-3xl sm:text-5xl lg:text-6xl text-[#40563D]">
               {isUr ? 'اسپائس مکس کچن ریسیپی گائیڈ' : 'SPICEMIX RECIPE GUIDE'}
             </h1>
-            <p className="font-serif italic text-base sm:text-xl lg:text-2xl font-semibold text-[#40563D]">
+            <p className="font-editorial italic text-base sm:text-xl lg:text-2xl font-medium text-[#5A4E38]">
               {isUr
                 ? 'تمام بنیادی مصالحے + گرم مصالحہ + تازہ ادرک + لہسن = باجوز اسپائس مکس'
                 : 'All Basic Spices + Garam Masala + Ginger + Garlic = SPICEMIX'}
             </p>
           </div>
 
-          {/* SPICE LEVEL SELECTOR + CLEAN FLAT BAJOZ SPICEMIX QUANTITY CARD (NO RETRO OFFSET BORDERS) */}
+          {/* SPICE LEVEL SELECTOR + CLEAN FLAT BAJOZ SPICEMIX QUANTITY CARD */}
           <div className="max-w-5xl mx-auto space-y-4">
             {/* 3 Spice Level Cards */}
             <div
@@ -1953,10 +1984,10 @@ export const RecipeGuidePage: React.FC = () => {
                     role="radio"
                     aria-checked={isSelected}
                     onClick={() => setSelectedSpiceId(level.id)}
-                    className={`rounded-[1.5rem] p-4 sm:p-5 text-left transition-colors border-[1.5px] border-[#7A5C38] cursor-pointer flex flex-col justify-between ${
+                    className={`rounded-[1.5rem] p-4 sm:p-5 text-left transition-colors border-[1.5px] border-[#5A4E38] cursor-pointer flex flex-col justify-between ${
                       isSelected
-                        ? 'bg-[#40563D] text-[#F9F5E9]'
-                        : 'bg-[#F9F5E9] text-[#2C221E] hover:bg-[#E9F399]'
+                        ? 'bg-[#40563D] text-[#F2EBD0]'
+                        : 'bg-[#F2EBD0] text-[#40563D] hover:bg-[#E9F390]'
                     }`}
                   >
                     <div className="flex items-center justify-between gap-2">
@@ -1969,8 +2000,8 @@ export const RecipeGuidePage: React.FC = () => {
                             key={idx}
                             className={`w-4 h-4 ${
                               isSelected
-                                ? 'text-[#E9F399] fill-[#E9F399]'
-                                : 'text-[#C98A6A] fill-[#C98A6A]'
+                                ? 'text-[#E9F390] fill-[#E9F390]'
+                                : 'text-[#5A4E38] fill-[#5A4E38]'
                             }`}
                           />
                         ))}
@@ -1979,7 +2010,7 @@ export const RecipeGuidePage: React.FC = () => {
 
                     <div
                       className={`mt-2 font-serif font-extrabold text-base sm:text-lg tabular-nums ${
-                        isSelected ? 'text-[#E9F399]' : 'text-[#40563D]'
+                        isSelected ? 'text-[#E9F390]' : 'text-[#40563D]'
                       }`}
                     >
                       {displayTbsp}
@@ -1989,13 +2020,13 @@ export const RecipeGuidePage: React.FC = () => {
               })}
             </div>
 
-            {/* Clean Flat BAJOZ SpiceMix Required Quantity Card (Zero Retro Offset Borders) */}
+            {/* Clean Flat BAJOZ SpiceMix Required Quantity Card */}
             <div
               aria-live="polite"
-              className="rounded-[1.5rem] border-[1.5px] border-[#7A5C38] bg-[#F9F5E9] p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+              className="rounded-[1.5rem] border-[1.5px] border-[#5A4E38] border-t-4 border-t-[#5A4E38] bg-[#F2EBD0] p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
             >
               <div className="flex items-center gap-3.5 min-w-0">
-                <div className="w-14 h-14 rounded-2xl bg-[#FFFDF9] border border-[#7A5C38]/40 flex items-center justify-center shrink-0">
+                <div className="w-14 h-14 rounded-2xl bg-[#F2EBD0] border-[1.5px] border-[#5A4E38] flex items-center justify-center shrink-0">
                   <IngredientSpotDoodle type="spicemix-jar" className="w-11 h-11" />
                 </div>
                 <div className="min-w-0">
@@ -2013,7 +2044,7 @@ export const RecipeGuidePage: React.FC = () => {
                 </div>
               </div>
 
-              <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#E9F399] border-[1.5px] border-[#7A5C38] text-xs sm:text-sm font-extrabold text-[#40563D] shrink-0">
+              <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#E9F390] border border-[#40563D] text-xs sm:text-sm font-extrabold text-[#40563D] shrink-0">
                 {isUr ? 'پانی کا تناسب: ' : 'Water Ratio: '}
                 <span className="ml-1">
                   {isUr ? activeCategory.waterRuleUr : activeCategory.waterRuleEn}
@@ -2024,13 +2055,12 @@ export const RecipeGuidePage: React.FC = () => {
         </div>
       </section>
 
-      {/* Seamless Wave Transition from #F5EBC8 into #F9F5E9 Recipe Section */}
-      <WaveDivider fromColor="#F5EBC8" toColor="#F9F5E9" compact />
+      <WaveDivider fromColor="#FAF9F4" toColor="#F2EBD0" strokeColor="#5A4E38" />
 
       {/* ===================================================================
-          2. INTERACTIVE RECIPE GUIDE SECTION (#F9F5E9 Soft Ivory — Matches SpiceMix Showcase)
+          2. INTERACTIVE RECIPE GUIDE SECTION (#F2EBD0 Warm Alabaster — 35% Primary Canvas)
          =================================================================== */}
-      <section className="py-8 sm:py-14 lg:py-18 bg-[#F9F5E9]">
+      <section className="py-10 sm:py-16 lg:py-20 bg-[#F2EBD0] bajoz-seamless-section">
         <div className="w-full max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-16 xl:px-24 space-y-6 sm:space-y-8">
           {/* Category & Dish Selector Bar */}
           <div className="max-w-5xl mx-auto space-y-3">
@@ -2049,10 +2079,10 @@ export const RecipeGuidePage: React.FC = () => {
                     role="tab"
                     aria-selected={isActive}
                     onClick={() => handleCategoryChange(cat.id)}
-                    className={`px-5 py-2.5 rounded-full font-serif font-bold text-sm sm:text-base transition-colors border-[1.5px] border-[#7A5C38] cursor-pointer whitespace-nowrap shrink-0 ${
+                    className={`px-5 py-2.5 rounded-full font-serif font-bold text-sm sm:text-base transition-colors border cursor-pointer whitespace-nowrap shrink-0 ${
                       isActive
-                        ? 'bg-[#40563D] text-[#F9F5E9]'
-                        : 'bg-[#FFFDF9] text-[#2C221E] hover:bg-[#E9F399]'
+                        ? 'bg-[#40563D] text-[#F2EBD0] border-[#40563D]'
+                        : 'bg-[#F2EBD0] text-[#40563D] border-[#5A4E38]/35 hover:bg-[#E9F390]'
                     }`}
                   >
                     {isUr ? cat.labelUr : cat.labelEn}
@@ -2076,10 +2106,10 @@ export const RecipeGuidePage: React.FC = () => {
                     role="tab"
                     aria-selected={isDishActive}
                     onClick={() => setSelectedDishId(dish.id)}
-                    className={`px-4 py-2 rounded-full font-serif font-bold text-xs sm:text-sm transition-colors border-[1.5px] border-[#7A5C38] cursor-pointer whitespace-nowrap shrink-0 ${
+                    className={`px-4 py-2 rounded-full font-serif font-bold text-xs sm:text-sm transition-colors border cursor-pointer whitespace-nowrap shrink-0 ${
                       isDishActive
-                        ? 'bg-[#E9F399] text-[#40563D] font-extrabold'
-                        : 'bg-[#F5EBC8]/70 text-[#2C221E] hover:bg-[#E9F399]'
+                        ? 'bg-[#E9F390] text-[#40563D] border-[#40563D] font-extrabold'
+                        : 'bg-[#F2EBD0] text-[#40563D] border-[#5A4E38]/35 hover:bg-[#E9F390]'
                     }`}
                   >
                     {isUr ? dish.nameUr : dish.nameEn}
@@ -2089,15 +2119,15 @@ export const RecipeGuidePage: React.FC = () => {
             </div>
           </div>
 
-          {/* ACTIVE RECIPE CARD (Clean Flat 1.5px #7A5C38 Border — Matches Homepage Feature Boxes) */}
-          <article className="max-w-5xl mx-auto rounded-[2rem] border-[1.5px] border-[#7A5C38] bg-[#FFFDF9] overflow-hidden">
+          {/* ACTIVE RECIPE CARD (Heritage Cream #F2EBD0 Co-Primary Block — 20%) */}
+          <article className="max-w-5xl mx-auto rounded-[2rem] border-[1.5px] border-[#5A4E38] bg-[#F2EBD0] shadow-[0_16px_38px_-14px_rgba(64,86,61,0.12)] overflow-hidden">
             {/* Dish Title & Metadata Header */}
-            <div className="px-5 py-5 sm:px-8 sm:py-6 bg-[#F5EBC8]/55 border-b-[1.5px] border-[#7A5C38]/35 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div className="px-5 py-5 sm:px-8 sm:py-6 bg-[#F2EBD0] border-b border-[#5A4E38]/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
-                <h2 className="bajoz-poster-display text-2xl sm:text-4xl text-[#4A2E1B]">
+                <h2 className="bajoz-poster-display text-2xl sm:text-4xl text-[#40563D]">
                   {isUr ? activeDish.nameUr : activeDish.nameEn}
                 </h2>
-                <p className="mt-1 text-sm sm:text-base text-[#2C221E] font-medium">
+                <p className="mt-1 text-sm sm:text-base text-[#5A4E38] font-medium">
                   {isUr ? activeDish.oneLineSummaryUr : activeDish.oneLineSummaryEn}
                 </p>
               </div>
@@ -2112,7 +2142,7 @@ export const RecipeGuidePage: React.FC = () => {
             </div>
 
             {/* Symmetrical Ingredient Visual Grid */}
-            <div className="p-5 sm:p-8 border-b-[1.5px] border-[#7A5C38]/25">
+            <div className="p-5 sm:p-8 border-b border-[#5A4E38]/25 bg-[#F2EBD0]">
               <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
                 <h3 className="font-serif font-extrabold text-base sm:text-lg text-[#40563D]">
                   {isUr ? 'مطلوبہ اجزاء (Ingredients):' : 'Ingredients You Need:'}
@@ -2133,8 +2163,8 @@ export const RecipeGuidePage: React.FC = () => {
                   return (
                     <div
                       key={ing.id}
-                      className={`rounded-[1.25rem] p-3 sm:p-4 flex flex-col items-center text-center justify-between border-[1.5px] border-[#7A5C38] ${
-                        ing.isSpiceMix ? 'bg-[#E9F399]/55' : 'bg-[#F9F5E9]'
+                      className={`rounded-[1.25rem] p-3 sm:p-4 flex flex-col items-center text-center justify-between border-[1.5px] border-[#5A4E38] ${
+                        ing.isSpiceMix ? 'bg-[#E9F390]' : 'bg-[#FAF9F4]'
                       }`}
                     >
                       <IngredientSpotDoodle
@@ -2142,7 +2172,7 @@ export const RecipeGuidePage: React.FC = () => {
                         className="w-12 h-12 sm:w-14 sm:h-14"
                       />
                       <div className="mt-2 w-full">
-                        <div className="font-serif font-bold text-xs sm:text-sm text-[#4A2E1B] leading-tight line-clamp-1">
+                        <div className="font-serif font-bold text-xs sm:text-sm text-[#40563D] leading-tight line-clamp-1">
                           {isUr ? ing.nameUr : ing.nameEn}
                         </div>
                         <div
@@ -2160,7 +2190,7 @@ export const RecipeGuidePage: React.FC = () => {
             </div>
 
             {/* 3-Step One-Glance Kitchen Workflow */}
-            <div className="p-5 sm:p-8 space-y-4">
+            <div className="p-5 sm:p-8 space-y-4 bg-[#F2EBD0]">
               <div className="flex items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
                   <h3 className="font-serif font-extrabold text-base sm:text-lg text-[#40563D]">
@@ -2168,7 +2198,7 @@ export const RecipeGuidePage: React.FC = () => {
                       ? 'پکانے کے 3 آسان مراحل (مکمل ہونے پر ٹیپ کریں):'
                       : '3 Easy Cooking Steps (Tap Any Step to Mark Done):'}
                   </h3>
-                  <span className="text-xs sm:text-sm font-serif font-bold text-[#4A2E1B] tabular-nums">
+                  <span className="text-xs sm:text-sm font-serif font-bold text-[#5A4E38] tabular-nums">
                     ({completedCount}/3)
                   </span>
                 </div>
@@ -2207,36 +2237,36 @@ export const RecipeGuidePage: React.FC = () => {
                           toggleStepComplete(step.stepNumber);
                         }
                       }}
-                      className={`rounded-[1.5rem] p-5 border-[1.5px] border-[#7A5C38] transition-colors cursor-pointer flex flex-col justify-between ${
-                        isDone ? 'bg-[#DCE7C9]/65' : 'bg-[#F9F5E9] hover:bg-[#F5EBC8]/60'
+                      className={`rounded-[1.5rem] p-5 border-[1.5px] border-[#5A4E38] transition-colors cursor-pointer flex flex-col justify-between ${
+                        isDone ? 'bg-[#DCE7C9]/60' : 'bg-[#F2EBD0] hover:bg-[#E9F390]/35'
                       }`}
                     >
                       <div className="space-y-3.5">
                         {/* Step Header */}
                         <div className="flex items-center justify-between gap-2">
                           <div className="flex items-center gap-2.5 min-w-0">
-                            <span className="w-7 h-7 rounded-full bg-[#40563D] text-[#F9F5E9] font-serif font-bold text-xs flex items-center justify-center shrink-0">
-                              {step.stepNumber}
+                            <span className="w-6 h-6 rounded-full bg-[#DCE7C9] text-[#40563D] flex items-center justify-center shrink-0">
+                              <Check className="w-3.5 h-3.5 stroke-[2.75]" />
                             </span>
                             <div className="min-w-0">
                               <h4
-                                className={`font-serif font-extrabold text-base sm:text-lg text-[#4A2E1B] leading-tight truncate ${
+                                className={`font-serif font-extrabold text-base sm:text-lg text-[#40563D] leading-tight truncate ${
                                   isDone ? 'line-through opacity-75' : ''
                                 }`}
                               >
                                 {isUr ? step.titleUr : step.titleEn}
                               </h4>
-                              <span className="text-xs font-serif font-semibold text-[#40563D] tabular-nums">
+                              <span className="text-xs font-serif font-semibold text-[#5A4E38] tabular-nums">
                                 {isUr ? step.timeUr : step.timeEn}
                               </span>
                             </div>
                           </div>
 
                           <span
-                            className={`w-6 h-6 rounded-full flex items-center justify-center border border-[#7A5C38] transition-colors shrink-0 ${
+                            className={`w-6 h-6 rounded-full flex items-center justify-center border border-[#40563D] transition-colors shrink-0 ${
                               isDone
-                                ? 'bg-[#E9F399] text-[#40563D]'
-                                : 'bg-[#FFFDF9] text-transparent'
+                                ? 'bg-[#E9F390] text-[#40563D]'
+                                : 'bg-[#F2EBD0] text-transparent'
                             }`}
                           >
                             <Check className="w-3.5 h-3.5 stroke-[2.5]" />
@@ -2244,7 +2274,7 @@ export const RecipeGuidePage: React.FC = () => {
                         </div>
 
                         {/* Step Illustration */}
-                        <div className="w-full h-28 rounded-2xl bg-[#FFFDF9] border border-[#7A5C38]/35 flex items-center justify-center">
+                        <div className="w-full h-28 rounded-2xl bg-[#FAF9F4] border-[1.5px] border-[#5A4E38] flex items-center justify-center">
                           <RecipeStepDoodle
                             variant={step.doodleVariant}
                             className="w-24 h-24"
@@ -2256,12 +2286,12 @@ export const RecipeGuidePage: React.FC = () => {
                           {bullets.map((b, idx) => (
                             <li
                               key={idx}
-                              className={`flex items-start gap-2.5 text-sm sm:text-base font-medium leading-relaxed text-[#2C221E] ${
+                              className={`flex items-start gap-2 text-sm sm:text-base font-medium leading-relaxed text-[#40563D] ${
                                 isDone ? 'opacity-70' : ''
                               }`}
                             >
-                              <span className="w-5 h-5 rounded-full bg-[#E9F399] text-[#40563D] border border-[#7A5C38] flex items-center justify-center shrink-0 mt-0.5 text-[11px] font-serif font-extrabold">
-                                {idx + 1}
+                              <span className="w-4 h-4 rounded-full bg-[#DCE7C9] text-[#40563D] flex items-center justify-center shrink-0 mt-1">
+                                <Check className="w-2.5 h-2.5 stroke-[2.75]" />
                               </span>
                               <span>{isUr ? b.ur : b.en}</span>
                             </li>
@@ -2277,27 +2307,26 @@ export const RecipeGuidePage: React.FC = () => {
         </div>
       </section>
 
-      {/* Seamless Wave Transition from #F9F5E9 into #FFFDF9 Section */}
-      <WaveDivider fromColor="#F9F5E9" toColor="#FFFDF9" flip compact />
+      <WaveDivider fromColor="#F2EBD0" toColor="#FAF9F4" flip strokeColor="#5A4E38" />
 
       {/* ===================================================================
-          3. HOUSEHOLD WATER FORMULA & HOMEPAGE-STYLE CTA SECTION (#FFFDF9 Pure White Cream)
+          3. HOUSEHOLD WATER FORMULA & HOMEPAGE-STYLE CTA SECTION (#FAF9F4 Pure White Cream)
          =================================================================== */}
-      <section className="py-10 sm:py-16 bg-[#FFFDF9]">
+      <section className="py-14 sm:py-20 bg-[#FAF9F4] text-[#40563D] bajoz-seamless-section">
         <div className="w-full max-w-[1680px] mx-auto px-6 sm:px-10 lg:px-16 xl:px-24">
-          <div className="max-w-5xl mx-auto rounded-[1.5rem] border-[1.5px] border-[#7A5C38] bg-[#F9F5E9] p-6 sm:p-8 space-y-6">
+          <div className="max-w-5xl mx-auto bajoz-stamp-card bg-[#F2EBD0] text-[#40563D] p-7 sm:p-9 space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div>
-                <p className="bajoz-script-kicker text-xl sm:text-2xl text-[#40563D]">
+                <p className="font-serif italic text-xl sm:text-2xl text-[#5A4E38]">
                   {isUr ? 'باجوز کچن فارمولا' : 'Quick Kitchen Reference'}
                 </p>
-                <h2 className="bajoz-poster-display text-2xl sm:text-3xl text-[#4A2E1B]">
+                <h2 className="font-serif text-2xl sm:text-3xl font-bold text-[#40563D]">
                   {isUr
                     ? 'پانی اور باجوز اسپائس مکس کا گھریلو تناسب'
                     : 'Standard Household Water & SpiceMix Ratio'}
                 </h2>
               </div>
-              <span className="text-xs sm:text-sm font-serif italic font-semibold text-[#40563D]">
+              <span className="text-xs sm:text-sm font-serif italic font-semibold text-[#5A4E38]">
                 {isUr
                   ? 'ہمیشہ صاف اور خشک چمچ استعمال کریں'
                   : 'Always scoop with a clean, dry spoon'}
@@ -2305,57 +2334,57 @@ export const RecipeGuidePage: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <div className="rounded-2xl border-[1.5px] border-[#7A5C38] bg-[#FFFDF9] p-3.5 sm:p-4">
-                <div className="font-serif font-bold text-xs sm:text-sm text-[#40563D]">
+              <div className="rounded-2xl border-[1.5px] border-[#5A4E38] bg-[#FAF9F4] p-3.5 sm:p-4">
+                <div className="font-serif font-bold text-xs sm:text-sm text-[#5A4E38]">
                   {isUr ? 'چکن (1 کلو)' : 'Chicken (1 kg)'}
                 </div>
-                <div className="font-serif font-extrabold text-sm sm:text-base text-[#4A2E1B] mt-1 tabular-nums">
+                <div className="font-serif font-extrabold text-sm sm:text-base text-[#40563D] mt-1 tabular-nums">
                   {isUr ? '1 سے 1.5 گلاس پانی' : '1–1.5 Glasses Water'}
                 </div>
               </div>
 
-              <div className="rounded-2xl border-[1.5px] border-[#7A5C38] bg-[#FFFDF9] p-3.5 sm:p-4">
-                <div className="font-serif font-bold text-xs sm:text-sm text-[#40563D]">
+              <div className="rounded-2xl border-[1.5px] border-[#5A4E38] bg-[#FAF9F4] p-3.5 sm:p-4">
+                <div className="font-serif font-bold text-xs sm:text-sm text-[#5A4E38]">
                   {isUr ? 'مٹن / بیف (1 کلو)' : 'Mutton / Beef (1 kg)'}
                 </div>
-                <div className="font-serif font-extrabold text-sm sm:text-base text-[#4A2E1B] mt-1 tabular-nums">
+                <div className="font-serif font-extrabold text-sm sm:text-base text-[#40563D] mt-1 tabular-nums">
                   {isUr ? '2 سے 2.5 گلاس پانی' : '2–2.5 Glasses Water'}
                 </div>
               </div>
 
-              <div className="rounded-2xl border-[1.5px] border-[#7A5C38] bg-[#FFFDF9] p-3.5 sm:p-4">
-                <div className="font-serif font-bold text-xs sm:text-sm text-[#40563D]">
+              <div className="rounded-2xl border-[1.5px] border-[#5A4E38] bg-[#FAF9F4] p-3.5 sm:p-4">
+                <div className="font-serif font-bold text-xs sm:text-sm text-[#5A4E38]">
                   {isUr ? 'سبزیاں (Sabzi)' : 'Vegetables (Sabzi)'}
                 </div>
-                <div className="font-serif font-extrabold text-sm sm:text-base text-[#4A2E1B] mt-1 tabular-nums">
+                <div className="font-serif font-extrabold text-sm sm:text-base text-[#40563D] mt-1 tabular-nums">
                   {isUr ? '1 سے 1.5 گلاس پانی' : '1–1.5 Glasses Water'}
                 </div>
               </div>
 
-              <div className="rounded-2xl border-[1.5px] border-[#7A5C38] bg-[#FFFDF9] p-3.5 sm:p-4">
-                <div className="font-serif font-bold text-xs sm:text-sm text-[#40563D]">
+              <div className="rounded-2xl border-[1.5px] border-[#5A4E38] bg-[#FAF9F4] p-3.5 sm:p-4">
+                <div className="font-serif font-bold text-xs sm:text-sm text-[#5A4E38]">
                   {isUr ? 'دالیں (250 گرام)' : 'Daal (250g)'}
                 </div>
-                <div className="font-serif font-extrabold text-sm sm:text-base text-[#4A2E1B] mt-1 tabular-nums">
+                <div className="font-serif font-extrabold text-sm sm:text-base text-[#40563D] mt-1 tabular-nums">
                   {isUr ? '2 سے 4 گلاس پانی' : '2–4 Glasses Water'}
                 </div>
               </div>
             </div>
 
-            {/* Homepage Signature CTA Buttons: Order Now Pill + Circular Arrow | View All Products */}
-            <div className="pt-2 flex flex-wrap items-center justify-between gap-4 border-t border-[#7A5C38]/25">
-              <p className="text-sm sm:text-base font-semibold text-[#2C221E]">
+            {/* PDP 'Buy Now' Style CTA Buttons */}
+            <div className="pt-2 flex flex-wrap items-center justify-between gap-4 border-t border-[#5A4E38]/25">
+              <p className="text-sm sm:text-base font-semibold text-[#40563D]">
                 {isUr
                   ? 'کیا آپ کا باجوز اسپائس مکس جار ختم ہونے والا ہے؟ تازہ جار ابھی آرڈر کریں۔'
                   : 'Running low on your BAJOZ SpiceMix jar? Order a fresh homemade jar now.'}
               </p>
 
-              <div className="flex flex-wrap items-center gap-3.5">
+              <div className="flex flex-wrap items-center gap-4">
                 <div className="inline-flex items-center gap-1.5">
                   <button
                     type="button"
                     onClick={handleOrderSpiceMixNow}
-                    className="px-7 sm:px-9 py-3.5 rounded-full bg-[#E9F399] hover:bg-[#dfeb82] text-[#40563D] border-[1.5px] border-[#7A5C38] font-serif text-base sm:text-lg font-extrabold tracking-tight transition-colors duration-150 cursor-pointer whitespace-nowrap"
+                    className="px-7 sm:px-9 py-3.5 rounded-full bg-[#E9F390] hover:bg-[#5A4E38] text-[#5A4E38] hover:text-[#F2EBD0] border border-[#5A4E38] shadow-[2px_2px_0px_#5A4E38] hover:shadow-none font-serif text-base sm:text-lg font-extrabold tracking-tight transition-all duration-150 cursor-pointer whitespace-nowrap"
                   >
                     {isUr ? 'نیا جار آرڈر کریں' : 'Order SpiceMix Now'}
                   </button>
@@ -2363,26 +2392,171 @@ export const RecipeGuidePage: React.FC = () => {
                     type="button"
                     onClick={handleOrderSpiceMixNow}
                     aria-label="Order SpiceMix Now"
-                    className="w-12 h-12 rounded-full bg-[#E9F399] hover:bg-[#dfeb82] text-[#40563D] border-[1.5px] border-[#7A5C38] flex items-center justify-center transition-transform duration-150 cursor-pointer hover:translate-x-0.5 hover:-translate-y-0.5"
+                    className="w-12 h-12 rounded-full bg-[#40563D] hover:bg-[#E9F390] text-[#F2EBD0] hover:text-[#40563D] border border-[#40563D] flex items-center justify-center transition-all duration-150 cursor-pointer hover:translate-x-0.5 hover:-translate-y-0.5"
                   >
                     <ArrowUpRight className="w-5 h-5 stroke-[2.25]" />
                   </button>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={handleViewAllProducts}
-                  className="inline-flex items-center justify-center gap-2 py-3.5 px-7 rounded-full bg-[#FFFDF9] hover:bg-[#E9F399]/60 text-[#2C221E] border-[1.5px] border-[#7A5C38] font-serif text-base sm:text-lg font-bold tracking-tight transition-colors duration-150 cursor-pointer whitespace-nowrap"
-                >
-                  <span>{isUr ? 'تمام مصنوعات دیکھیں' : 'View All Products'}</span>
-                </button>
+                <div className="inline-flex items-center gap-1.5">
+                  <button
+                    type="button"
+                    onClick={handleViewAllProducts}
+                    className="px-7 py-3.5 rounded-full bg-[#E9F390] hover:bg-[#5A4E38] text-[#5A4E38] hover:text-[#F2EBD0] border border-[#5A4E38] shadow-[2px_2px_0px_#5A4E38] hover:shadow-none font-serif text-base sm:text-lg font-extrabold tracking-tight transition-all duration-150 cursor-pointer whitespace-nowrap"
+                  >
+                    {isUr ? 'تمام مصنوعات دیکھیں' : 'View All Products'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleViewAllProducts}
+                    aria-label="View All Products"
+                    className="w-12 h-12 rounded-full bg-[#40563D] hover:bg-[#E9F390] text-[#F2EBD0] hover:text-[#40563D] border border-[#40563D] flex items-center justify-center transition-all duration-150 cursor-pointer hover:translate-x-0.5 hover:-translate-y-0.5"
+                  >
+                    <ArrowUpRight className="w-5 h-5 stroke-[2.25]" />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <WaveDivider fromColor="#FFFDF9" toColor="#F5EBC8" compact />
+      {publishedManagedRecipes.length > 0 && (
+        <>
+          <WaveDivider fromColor="#FAF9F4" toColor="#F2EBD0" strokeColor="#5A4E38" />
+          <section
+            aria-label="Chef & Kitchen Recipe Collection"
+            className="py-20 sm:py-28 lg:py-32 bg-[#F2EBD0] text-[#40563D] bajoz-seamless-section"
+          >
+            <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-10 lg:px-14 xl:px-16 space-y-12 sm:space-y-16">
+              <div className="text-center max-w-3xl mx-auto space-y-3">
+                <p className="bajoz-subheadline text-xs sm:text-sm uppercase tracking-[0.14em] text-[#5A4E38]">
+                  {isUr ? 'باجوز کچن ریسیپی ویڈیوز اور تراکیب' : 'BAJOZ Kitchen Videos & Curated Recipes'}
+                </p>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#40563D]">
+                  {isUr ? 'آسان گھریلو پکوان اور ویڈیو گائیڈ' : 'Watch & Cook Everyday Family Favourites'}
+                </h2>
+                <p className="text-sm sm:text-base text-[#5A4E38] leading-relaxed">
+                  {isUr
+                    ? 'باجوز اسپائس مکس کے ساتھ تیار کی گئی تازہ ریسیپیز اور تیز ویڈیو ڈیمو دیکھیں۔'
+                    : 'Fresh kitchen recipes and fast-loading cooking videos managed directly from the BAJOZ kitchen.'}
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 sm:gap-9">
+                {publishedManagedRecipes.map((rec) => (
+                  <article
+                    key={rec.id}
+                    className="rounded-[1.75rem] bg-[#FAF9F4] border-2 border-[#5A4E38] overflow-hidden flex flex-col justify-between shadow-[0_14px_34px_-22px_rgba(64,86,61,0.22)] transition-transform duration-300 hover:-translate-y-1"
+                  >
+                    <div>
+                      {/* Media Area: Optimized Video Player or Custom Poster Image */}
+                      <div className="relative aspect-video bg-[#243122] border-b border-[#5A4E38] overflow-hidden">
+                        {rec.videoUrl ? (
+                          <video
+                            src={rec.videoUrl}
+                            poster={rec.posterUrl || '/assets/spicemix-recipe-poster.jpg'}
+                            controls
+                            playsInline
+                            preload={videoOptimization.lazyLoadOnStorefront ? 'metadata' : 'auto'}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : rec.posterUrl ? (
+                          <img
+                            src={rec.posterUrl}
+                            alt={rec.title}
+                            loading="lazy"
+                            className="w-full h-full object-cover"
+                          />
+                        ) : null}
+
+                        <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 pointer-events-none">
+                          <span className="px-2.5 py-1 rounded-full bg-[#DCE7C9] text-[#40563D] border border-[#5A4E38]/30 font-dm text-[10px] font-bold uppercase tracking-wider">
+                            {rec.category}
+                          </span>
+                          {rec.videoUrl && (
+                            <span className="px-2.5 py-1 rounded-full bg-[#DCE7C9] text-[#40563D] border border-[#5A4E38]/30 font-dm text-[10px] font-bold uppercase tracking-wider inline-flex items-center gap-1">
+                              <Film className="w-3 h-3" />
+                              <span>{rec.videoDuration || 'Video'}</span>
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Recipe Content */}
+                      <div className="p-6 sm:p-7 space-y-4">
+                        <div className="space-y-1.5">
+                          <h3 className="text-xl sm:text-2xl text-[#40563D] leading-snug">
+                            {isUr && rec.titleUr ? rec.titleUr : rec.title}
+                          </h3>
+                          <p className="text-xs sm:text-sm text-[#5A4E38] leading-relaxed">
+                            {rec.summary}
+                          </p>
+                        </div>
+
+                        <div className="flex flex-wrap gap-2 text-[11px] font-dm font-bold text-[#40563D]">
+                          <span className="px-3 py-1 rounded-full bg-[#E9F390] border border-[#5A4E38]/40 text-[#5A4E38]">
+                            {rec.spiceMixAmount}
+                          </span>
+                          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#DCE7C9] text-[#40563D]">
+                            <Clock className="w-3 h-3" />
+                            {rec.cookTime}
+                          </span>
+                          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#F2EBD0] text-[#40563D]">
+                            <Users className="w-3 h-3" />
+                            {rec.servings}
+                          </span>
+                        </div>
+
+                        {rec.ingredients.length > 0 && (
+                          <div className="pt-2 border-t border-[#5A4E38]/15 space-y-1.5">
+                            <p className="font-dm text-[11px] font-bold uppercase tracking-wider text-[#5A4E38]">
+                              Key Ingredients
+                            </p>
+                            <ul className="space-y-1 text-xs text-[#40563D]">
+                              {rec.ingredients.slice(0, 5).map((ing, i) => (
+                                <li key={i} className="flex items-start gap-2">
+                                  <span className="w-4 h-4 rounded-full bg-[#DCE7C9] text-[#40563D] flex items-center justify-center shrink-0 mt-0.5">
+                                    <Check className="w-2.5 h-2.5 stroke-[2.75]" />
+                                  </span>
+                                  <span>{ing}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+
+                        {rec.steps.length > 0 && (
+                          <div className="pt-2 border-t border-[#5A4E38]/15 space-y-1.5">
+                            <p className="font-dm text-[11px] font-bold uppercase tracking-wider text-[#5A4E38]">
+                              Quick Steps
+                            </p>
+                            <ul className="space-y-1.5 text-xs text-[#40563D]">
+                              {rec.steps.map((step, i) => (
+                                <li key={i} className="flex items-start gap-2">
+                                  <span className="w-4 h-4 rounded-full bg-[#DCE7C9] text-[#40563D] flex items-center justify-center shrink-0 mt-0.5">
+                                    <Check className="w-2.5 h-2.5 stroke-[2.75]" />
+                                  </span>
+                                  <span className="leading-relaxed">{step}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+          <WaveDivider fromColor="#F2EBD0" toColor="#F2EBD0" strokeColor="#5A4E38" />
+        </>
+      )}
+
+      {publishedManagedRecipes.length === 0 && (
+        <WaveDivider fromColor="#FAF9F4" toColor="#F2EBD0" strokeColor="#5A4E38" />
+      )}
     </div>
   );
 };

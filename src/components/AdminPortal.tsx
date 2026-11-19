@@ -6,6 +6,7 @@
 import React, { useState, useEffect } from 'react';
 import { useShop, calculateVariantPrice, DEFAULT_SITE_COPY } from '../context/ShopContext';
 import { ProductImage, OFFICIAL_PRODUCT_IMAGES } from './ProductImage';
+import { AdminRecipesTab } from './AdminRecipesTab';
 import {
   FulfillmentStatus,
   PaymentStatus,
@@ -190,6 +191,7 @@ export const AdminPortal: React.FC = () => {
     updateOrderShipping,
     scheduleOrder,
     updateOrderDetails,
+    cancelOrder,
     deleteOrder,
     addCustomerReview,
     updateReview,
@@ -199,6 +201,7 @@ export const AdminPortal: React.FC = () => {
     updateSiteCopy,
     upsertCustomPage,
     deleteCustomPage,
+    managedRecipes,
     registeredUsers,
     adminCreateUser,
     adminUpdateUser,
@@ -221,7 +224,15 @@ export const AdminPortal: React.FC = () => {
 
   // Main Console Tabs
   const [activeTab, setActiveTab] = useState<
-    'orders' | 'products' | 'pages' | 'cms' | 'users' | 'reviews' | 'settings' | 'security'
+    | 'orders'
+    | 'products'
+    | 'recipes'
+    | 'pages'
+    | 'cms'
+    | 'users'
+    | 'reviews'
+    | 'settings'
+    | 'security'
   >('orders');
 
   // ============================================================================
@@ -714,12 +725,12 @@ export const AdminPortal: React.FC = () => {
 
   if (isVerifyingSession) {
     return (
-      <div className="min-h-screen bg-[#F6EBC8] text-[#2C221E] flex items-center justify-center p-6">
+      <div className="min-h-screen bg-[#F6EBC8] text-[#40563D] flex items-center justify-center p-6">
         <div className="text-center space-y-2">
-          <p className="font-serif text-2xl tracking-wider uppercase text-[#4A5D23] font-bold">
+          <p className="font-serif text-2xl tracking-wider uppercase text-[#40563D] font-bold">
             BAJOZ — The House of Naturals · Authorized Portal
           </p>
-          <p className="text-xs text-[#655549] font-mono">
+          <p className="text-xs text-[#5A4E38] font-mono">
             Verifying security credentials...
           </p>
         </div>
@@ -732,21 +743,21 @@ export const AdminPortal: React.FC = () => {
   // ============================================================================
   if (!adminStaff) {
     return (
-      <div className="min-h-screen bg-[#F6EBC8] text-[#2C221E] flex flex-col justify-between">
-        <header className="w-full bg-[#F6EBC8] border-b border-[#2C221E]/8 py-4 px-4 sm:px-8">
+      <div className="min-h-screen bg-[#F6EBC8] text-[#40563D] flex flex-col justify-between">
+        <header className="w-full bg-[#F6EBC8] border-b border-[#40563D]/8 py-4 px-4 sm:px-8">
           <div className="max-w-5xl w-full mx-auto flex flex-wrap items-center justify-between gap-3">
             <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-              <span className="font-serif text-lg sm:text-2xl font-bold tracking-[0.14em] text-[#4A5D23]">
+              <span className="font-serif text-lg sm:text-2xl font-bold tracking-[0.14em] text-[#40563D]">
                 {settings.businessName || 'BAJOZ- The House of Naturals'}
               </span>
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono uppercase tracking-wider bg-[#DCE6C8] text-[#4A5D23] border border-[#4A5D23]/25">
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono uppercase tracking-wider bg-[#DCE7C9] text-[#40563D] border border-[#40563D]/25">
                 Restricted Admin URL · /admin
               </span>
             </div>
             <button
               type="button"
               onClick={() => setCurrentView('store')}
-              className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#4A5D23] hover:bg-[#3B4B1B] text-[#F5EFDC] text-xs font-semibold rounded-full transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#40563D] hover:bg-[#40563D] text-[#F2EBD0] text-xs font-semibold rounded-full transition-colors cursor-pointer"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Public Storefront</span>
@@ -754,21 +765,21 @@ export const AdminPortal: React.FC = () => {
           </div>
         </header>
 
-        <main className="max-w-md w-[calc(100%-2rem)] sm:w-full mx-auto my-6 sm:my-8 bg-[#F6EBC8] text-[#2C221E] rounded-3xl p-5 sm:p-8 shadow-xl border border-[#4A5D23]/20 space-y-6">
+        <main className="max-w-md w-[calc(100%-2rem)] sm:w-full mx-auto my-6 sm:my-8 bg-[#F6EBC8] text-[#40563D] rounded-3xl p-5 sm:p-8 shadow-xl border border-[#40563D]/20 space-y-6">
           <div className="space-y-2 text-center">
-            <div className="w-12 h-12 rounded-2xl bg-[#4A5D23] text-[#F5EFDC] flex items-center justify-center mx-auto shadow-md">
+            <div className="w-12 h-12 rounded-2xl bg-[#40563D] text-[#F2EBD0] flex items-center justify-center mx-auto shadow-md">
               <Lock className="w-5 h-5" />
             </div>
-            <p className="text-[11px] font-mono uppercase tracking-widest text-[#4A5D23] font-semibold">
+            <p className="text-[11px] font-mono uppercase tracking-widest text-[#40563D] font-semibold">
               Authorized Personnel Only
             </p>
-            <h1 className="font-serif text-3xl font-bold text-[#2C221E]">
+            <h1 className="font-serif text-3xl font-bold text-[#40563D]">
               BAJOZ Management Portal
             </h1>
-            <p className="text-xs text-[#655549] leading-relaxed">
+            <p className="text-xs text-[#5A4E38] leading-relaxed">
               This portal is unlinked from the public BAJOZ storefront and accessible
               only via its dedicated URL (
-              <span className="font-mono text-[#2C221E]">/admin</span>). Sign in with
+              <span className="font-mono text-[#40563D]">/admin</span>). Sign in with
               your Director or Manager credentials to manage products, orders, pages,
               and site-wide copy.
             </p>
@@ -782,7 +793,7 @@ export const AdminPortal: React.FC = () => {
 
           <form onSubmit={handleAdminLogin} className="space-y-4">
             <div>
-              <label className="block text-xs font-semibold text-[#2C221E] mb-1">
+              <label className="block text-xs font-semibold text-[#40563D] mb-1">
                 Authorized Staff Email
               </label>
               <input
@@ -791,12 +802,12 @@ export const AdminPortal: React.FC = () => {
                 value={loginEmail}
                 onChange={(e) => setLoginEmail(e.target.value)}
                 placeholder="admin@dtcss.pk"
-                className="w-full px-3.5 py-2.5 bg-white border border-[#2C221E]/20 rounded-xl text-xs focus:outline-none focus:border-[#4A5D23]"
+                className="w-full px-3.5 py-2.5 bg-white border border-[#40563D]/20 rounded-xl text-xs focus:outline-none focus:border-[#40563D]"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-[#2C221E] mb-1">
+              <label className="block text-xs font-semibold text-[#40563D] mb-1">
                 Security Key / Password
               </label>
               <input
@@ -805,14 +816,14 @@ export const AdminPortal: React.FC = () => {
                 value={loginPassword}
                 onChange={(e) => setLoginPassword(e.target.value)}
                 placeholder="••••••••••••••••"
-                className="w-full px-3.5 py-2.5 bg-white border border-[#2C221E]/20 rounded-xl text-xs font-mono focus:outline-none focus:border-[#4A5D23]"
+                className="w-full px-3.5 py-2.5 bg-white border border-[#40563D]/20 rounded-xl text-xs font-mono focus:outline-none focus:border-[#40563D]"
               />
             </div>
 
             <button
               type="submit"
               disabled={isLoggingIn}
-              className="w-full py-3 bg-[#4A5D23] hover:bg-[#3B4B1B] text-[#F5EFDC] text-xs font-semibold uppercase tracking-wider rounded-full transition-colors cursor-pointer disabled:opacity-60"
+              className="w-full py-3 bg-[#40563D] hover:bg-[#40563D] text-[#F2EBD0] text-xs font-semibold uppercase tracking-wider rounded-full transition-colors cursor-pointer disabled:opacity-60"
             >
               {isLoggingIn
                 ? 'Verifying Authorization...'
@@ -821,10 +832,10 @@ export const AdminPortal: React.FC = () => {
           </form>
 
           {/* Store Owner Quick-Fill Helper for Authorised Credentials */}
-          <div className="pt-4 border-t border-[#2C221E]/10 space-y-2.5 text-xs">
+          <div className="pt-4 border-t border-[#40563D]/10 space-y-2.5 text-xs">
             <div className="flex items-center justify-between">
-              <span className="font-semibold text-[#2C221E] flex items-center gap-1.5">
-                <KeyRound className="w-3.5 h-3.5 text-[#4A5D23]" />
+              <span className="font-semibold text-[#40563D] flex items-center gap-1.5">
+                <KeyRound className="w-3.5 h-3.5 text-[#40563D]" />
                 <span>Authorized Personnel Credentials</span>
               </span>
               <div className="flex items-center gap-2">
@@ -835,7 +846,7 @@ export const AdminPortal: React.FC = () => {
                     setLoginPassword('DTCSS-Admin-2026');
                     setLoginError(null);
                   }}
-                  className="text-[11px] font-semibold text-[#4A5D23] hover:underline cursor-pointer"
+                  className="text-[11px] font-semibold text-[#40563D] hover:underline cursor-pointer"
                 >
                   Fill Director
                 </button>
@@ -847,26 +858,26 @@ export const AdminPortal: React.FC = () => {
                     setLoginPassword('DTCSS-Ops-2026');
                     setLoginError(null);
                   }}
-                  className="text-[11px] font-semibold text-[#4A5D23] hover:underline cursor-pointer"
+                  className="text-[11px] font-semibold text-[#40563D] hover:underline cursor-pointer"
                 >
                   Fill Manager
                 </button>
               </div>
             </div>
-            <div className="p-3 bg-[#DCE6C8]/65 rounded-xl font-mono text-[11px] text-[#655549] space-y-1">
+            <div className="p-3 bg-[#DCE7C9]/65 rounded-xl font-mono text-[11px] text-[#5A4E38] space-y-1">
               <div>
-                <span className="text-[#2C221E] font-semibold">Director:</span>{' '}
+                <span className="text-[#40563D] font-semibold">Director:</span>{' '}
                 admin@dtcss.pk / DTCSS-Admin-2026
               </div>
               <div>
-                <span className="text-[#2C221E] font-semibold">Manager:</span>{' '}
+                <span className="text-[#40563D] font-semibold">Manager:</span>{' '}
                 ops@dtcss.pk / DTCSS-Ops-2026
               </div>
             </div>
           </div>
         </main>
 
-        <footer className="w-full bg-[#F6EBC8] border-t border-[#2C221E]/8 py-5 px-4 text-center text-[11px] text-[#655549] font-mono">
+        <footer className="w-full bg-[#F6EBC8] border-t border-[#40563D]/8 py-5 px-4 text-center text-[11px] text-[#5A4E38] font-mono">
           BAJOZ — The House of Naturals · Internal Management Endpoint (/admin)
         </footer>
       </div>
@@ -877,24 +888,24 @@ export const AdminPortal: React.FC = () => {
   // AUTHENTICATED CONSOLE: Directors & Managers Full Control
   // ============================================================================
   return (
-    <div className="min-h-screen bg-[#F6EBC8] text-[#2C221E] flex flex-col">
-      {/* Admin Top Bar matching #F5EFDC Nav Bar */}
-      <header className="bg-[#F6EBC8] text-[#2C221E] border-b border-[#2C221E]/8 sticky top-0 z-30">
+    <div className="min-h-screen bg-[#F6EBC8] text-[#40563D] flex flex-col">
+      {/* Admin Top Bar matching #F2EBD0 Nav Bar */}
+      <header className="bg-[#F6EBC8] text-[#40563D] border-b border-[#40563D]/8 sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-4">
           <div className="flex flex-wrap items-center gap-3">
             <button
               type="button"
               onClick={() => setCurrentView('store')}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#4A5D23] hover:bg-[#3B4B1B] text-[#F5EFDC] text-xs font-semibold rounded-full cursor-pointer transition-colors"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#40563D] hover:bg-[#40563D] text-[#F2EBD0] text-xs font-semibold rounded-full cursor-pointer transition-colors"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Public Storefront</span>
             </button>
-            <span className="font-serif text-xl sm:text-2xl font-bold tracking-wider text-[#4A5D23]">
+            <span className="font-serif text-xl sm:text-2xl font-bold tracking-wider text-[#40563D]">
               BAJOZ — Executive Admin
             </span>
-            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono bg-[#DCE6C8] text-[#2C221E] border border-[#4A5D23]/20">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#4A5D23]" />
+            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono bg-[#DCE7C9] text-[#40563D] border border-[#40563D]/20">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#40563D]" />
               <span>
                 {adminStaff.name} ({adminStaff.role})
               </span>
@@ -905,16 +916,16 @@ export const AdminPortal: React.FC = () => {
             <button
               type="button"
               onClick={handleCopyAdminUrl}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#DCE6C8] hover:bg-[#E9F490] text-[#2C221E] rounded-lg font-mono text-[11px] cursor-pointer transition-colors border border-[#4A5D23]/15"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#DCE7C9] hover:bg-[#E9F490] text-[#40563D] rounded-lg font-mono text-[11px] cursor-pointer transition-colors border border-[#40563D]/15"
               title="Copy dedicated Admin Portal URL"
             >
-              <Copy className="w-3.5 h-3.5 text-[#4A5D23]" />
+              <Copy className="w-3.5 h-3.5 text-[#40563D]" />
               <span>
                 {copiedUrlBanner ? 'Copied /admin!' : 'URL: /admin'}
               </span>
             </button>
 
-            <span className="hidden md:inline text-[#655549] font-mono font-semibold">
+            <span className="hidden md:inline text-[#5A4E38] font-mono font-semibold">
               PKR {totalRevenue.toLocaleString()} · {orders.length} Orders ·{' '}
               {products.length} Products
             </span>
@@ -933,21 +944,22 @@ export const AdminPortal: React.FC = () => {
 
       {/* Toast Feedback Banner */}
       {toastMessage && (
-        <div className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-5 z-50 bg-[#2C221E] text-[#F5EFDC] border border-[#D99B26] px-4 sm:px-5 py-3 rounded-2xl shadow-xl flex items-center gap-2.5 text-xs font-semibold">
+        <div className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-5 z-50 bg-[#40563D] text-[#F2EBD0] border border-[#D99B26] px-4 sm:px-5 py-3 rounded-2xl shadow-xl flex items-center gap-2.5 text-xs font-semibold">
           <Check className="w-4 h-4 text-[#D99B26] shrink-0" />
           <span>{toastMessage}</span>
         </div>
       )}
 
       {/* Navigation Tabs */}
-      <div className="bg-[#DCE6C8]/75 border-b border-[#4A5D23]/15">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex gap-5 text-xs font-semibold text-[#655549] overflow-x-auto">
+      <div className="bg-[#DCE7C9]/75 border-b border-[#40563D]/15">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex gap-5 text-xs font-semibold text-[#5A4E38] overflow-x-auto">
           {[
             { id: 'orders', label: `Orders, Schedule & Dispatch (${orders.length})` },
-            { id: 'products', label: `Products Catalog (${products.length})` },
+            { id: 'products', label: `Products & Inventory (${products.length})` },
+            { id: 'recipes', label: `Recipes & Videos (${managedRecipes.length})` },
             { id: 'pages', label: `Website Pages (${customPages.length})` },
             { id: 'cms', label: 'Website Copy & Content CMS' },
-            { id: 'users', label: `User Accounts (${registeredUsers.length})` },
+            { id: 'users', label: `Customers & Users (${registeredUsers.length})` },
             { id: 'reviews', label: `Reviews (${reviews.length})` },
             { id: 'settings', label: 'Store & Bank Settings' },
             {
@@ -961,8 +973,8 @@ export const AdminPortal: React.FC = () => {
               onClick={() => setActiveTab(t.id as typeof activeTab)}
               className={`py-4 border-b-2 transition-colors whitespace-nowrap cursor-pointer ${
                 activeTab === t.id
-                  ? 'border-[#4A5D23] text-[#2C221E]'
-                  : 'border-transparent hover:text-[#2C221E]'
+                  ? 'border-[#40563D] text-[#40563D]'
+                  : 'border-transparent hover:text-[#40563D]'
               }`}
             >
               {t.label}
@@ -978,7 +990,7 @@ export const AdminPortal: React.FC = () => {
         {activeTab === 'orders' && (
           <div className="space-y-6">
             {/* Top Action Bar */}
-            <div className="bg-white p-5 rounded-2xl border border-[#2C221E]/8 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+            <div className="bg-white p-5 rounded-2xl border border-[#40563D]/8 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
               <div className="flex flex-wrap items-center gap-3 flex-1">
                 <div className="relative flex-1 min-w-[220px] max-w-md">
                   <input
@@ -986,15 +998,15 @@ export const AdminPortal: React.FC = () => {
                     value={orderSearch}
                     onChange={(e) => setOrderSearch(e.target.value)}
                     placeholder="Search Order ID, customer, phone, city, tracking..."
-                    className="w-full pl-9 pr-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl text-xs"
+                    className="w-full pl-9 pr-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl text-xs"
                   />
-                  <Search className="w-3.5 h-3.5 text-[#655549] absolute left-3 top-2.5" />
+                  <Search className="w-3.5 h-3.5 text-[#5A4E38] absolute left-3 top-2.5" />
                 </div>
 
                 <select
                   value={orderStatusFilter}
                   onChange={(e) => setOrderStatusFilter(e.target.value)}
-                  className="px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl text-xs font-semibold"
+                  className="px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl text-xs font-semibold"
                 >
                   <option value="All">All Statuses ({orders.length})</option>
                   <option value="Order Placed">Order Placed</option>
@@ -1016,7 +1028,7 @@ export const AdminPortal: React.FC = () => {
                     setPickerPackId(products[0]?.packSizes[0]?.id || '');
                     setIsBookingModalOpen(true);
                   }}
-                  className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-[#4A5D23] hover:bg-[#3B4B1B] text-[#F5EFDC] rounded-xl text-xs font-semibold cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-[#40563D] hover:bg-[#40563D] text-[#F2EBD0] rounded-xl text-xs font-semibold cursor-pointer"
                 >
                   <Plus className="w-4 h-4" />
                   <span>Book Manual Order</span>
@@ -1025,28 +1037,28 @@ export const AdminPortal: React.FC = () => {
             </div>
 
             {/* Orders Table & Mobile Cards */}
-            <div className="bg-white rounded-2xl border border-[#2C221E]/8 overflow-hidden">
+            <div className="bg-white rounded-2xl border border-[#40563D]/8 overflow-hidden">
               {/* Mobile Order Cards (< md) */}
-              <div className="md:hidden divide-y divide-[#2C221E]/10">
+              <div className="md:hidden divide-y divide-[#40563D]/10">
                 {filteredOrders.map((o) => (
                   <div key={o.orderNumber} className="p-4 space-y-3 text-xs">
                     <div className="flex items-start justify-between gap-2">
                       <div>
-                        <span className="font-mono font-bold text-sm text-[#2C221E] block">
+                        <span className="font-mono font-bold text-sm text-[#40563D] block">
                           #{o.orderNumber}
                         </span>
-                        <span className="text-[11px] text-[#655549]">
+                        <span className="text-[11px] text-[#5A4E38]">
                           {new Date(o.date).toLocaleDateString()} · {o.customer.name} ({o.customer.city})
                         </span>
-                        <span className="text-[11px] text-[#655549] block font-mono">
+                        <span className="text-[11px] text-[#5A4E38] block font-mono">
                           {o.customer.phone}
                         </span>
                       </div>
                       <div className="text-right">
-                        <span className="font-mono font-bold text-[#2C221E] block tabular-nums">
+                        <span className="font-mono font-bold text-[#40563D] block tabular-nums">
                           PKR {o.total.toLocaleString()}
                         </span>
-                        <span className="text-[10px] font-mono uppercase text-[#4A5D23]">
+                        <span className="text-[10px] font-mono uppercase text-[#40563D]">
                           {o.paymentMethod}
                         </span>
                       </div>
@@ -1054,7 +1066,7 @@ export const AdminPortal: React.FC = () => {
 
                     <div className="p-2.5 rounded-xl bg-[#F6EBC8]/70 space-y-1">
                       {o.items.map((i) => (
-                        <div key={i.id} className="text-[11px] text-[#2C221E]">
+                        <div key={i.id} className="text-[11px] text-[#40563D]">
                           • {i.productName} ({i.variantName}) ×{i.quantity}
                         </div>
                       ))}
@@ -1062,7 +1074,7 @@ export const AdminPortal: React.FC = () => {
 
                     <div className="grid grid-cols-2 gap-2">
                       <div>
-                        <label className="block text-[10px] font-mono uppercase text-[#655549] mb-1">
+                        <label className="block text-[10px] font-mono uppercase text-[#5A4E38] mb-1">
                           Payment
                         </label>
                         <select
@@ -1078,7 +1090,7 @@ export const AdminPortal: React.FC = () => {
                               `Order #${o.orderNumber} payment marked ${e.target.value}.`
                             );
                           }}
-                          className="w-full px-2.5 py-1.5 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-lg text-xs"
+                          className="w-full px-2.5 py-1.5 bg-[#F6EBC8] border border-[#40563D]/15 rounded-lg text-xs"
                         >
                           <option value="Pending">Pending</option>
                           <option value="Awaiting Verification">Awaiting Proof</option>
@@ -1089,7 +1101,7 @@ export const AdminPortal: React.FC = () => {
                       </div>
 
                       <div>
-                        <label className="block text-[10px] font-mono uppercase text-[#655549] mb-1">
+                        <label className="block text-[10px] font-mono uppercase text-[#5A4E38] mb-1">
                           Fulfillment
                         </label>
                         <select
@@ -1105,7 +1117,7 @@ export const AdminPortal: React.FC = () => {
                               `Order #${o.orderNumber} status updated to ${e.target.value}.`
                             );
                           }}
-                          className="w-full px-2.5 py-1.5 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-lg text-xs font-semibold"
+                          className="w-full px-2.5 py-1.5 bg-[#F6EBC8] border border-[#40563D]/15 rounded-lg text-xs font-semibold"
                         >
                           <option value="Order Placed">Order Placed</option>
                           <option value="Scheduled">Scheduled</option>
@@ -1119,14 +1131,14 @@ export const AdminPortal: React.FC = () => {
                     </div>
 
                     <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
-                      <div className="text-[11px] text-[#655549]">
+                      <div className="text-[11px] text-[#5A4E38]">
                         {o.trackingNumber ? (
                           <span>
-                            Courier: <strong className="text-[#2C221E]">{o.courierName}</strong> ({o.trackingNumber})
+                            Courier: <strong className="text-[#40563D]">{o.courierName}</strong> ({o.trackingNumber})
                           </span>
                         ) : o.scheduledDate ? (
                           <span>
-                            Scheduled: <strong className="text-[#4A5D23]">{o.scheduledDate}</strong>
+                            Scheduled: <strong className="text-[#40563D]">{o.scheduledDate}</strong>
                           </span>
                         ) : (
                           <span>No courier assigned yet</span>
@@ -1136,7 +1148,7 @@ export const AdminPortal: React.FC = () => {
                         <button
                           type="button"
                           onClick={() => setSelectedOrderForDetail(o)}
-                          className="px-3 py-1.5 bg-[#F2ECE1] hover:bg-[#E6ECD8] text-[#2C221E] rounded-lg text-[11px] font-semibold cursor-pointer"
+                          className="px-3 py-1.5 bg-[#F2ECE1] hover:bg-[#E6ECD8] text-[#40563D] rounded-lg text-[11px] font-semibold cursor-pointer"
                         >
                           Manage / Track
                         </button>
@@ -1159,7 +1171,7 @@ export const AdminPortal: React.FC = () => {
 
               <div className="hidden md:block overflow-x-auto">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-[#F2ECE1] text-[#655549] uppercase text-[10px] tracking-wider">
+                  <thead className="bg-[#F2ECE1] text-[#5A4E38] uppercase text-[10px] tracking-wider">
                     <tr>
                       <th className="py-3.5 px-4">Order ID</th>
                       <th className="py-3.5 px-4">Customer & Address</th>
@@ -1171,26 +1183,26 @@ export const AdminPortal: React.FC = () => {
                       <th className="py-3.5 px-4 text-right">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-[#2C221E]/8">
+                  <tbody className="divide-y divide-[#40563D]/8">
                     {filteredOrders.map((o) => (
                       <tr key={o.orderNumber} className="hover:bg-[#F6EBC8]/60 align-top">
                         <td className="py-4 px-4 font-mono">
-                          <span className="font-bold text-sm text-[#2C221E] block">
+                          <span className="font-bold text-sm text-[#40563D] block">
                             #{o.orderNumber}
                           </span>
-                          <span className="text-[10px] text-[#655549]">
+                          <span className="text-[10px] text-[#5A4E38]">
                             {new Date(o.date).toLocaleDateString()}
                           </span>
                         </td>
 
                         <td className="py-4 px-4 max-w-[200px]">
-                          <span className="font-semibold block text-[#2C221E]">
+                          <span className="font-semibold block text-[#40563D]">
                             {o.customer.name}
                           </span>
-                          <span className="text-[#655549] block">
+                          <span className="text-[#5A4E38] block">
                             {o.customer.city} · {o.customer.phone}
                           </span>
-                          <span className="text-[11px] text-[#655549] line-clamp-1">
+                          <span className="text-[11px] text-[#5A4E38] line-clamp-1">
                             {o.customer.address}
                           </span>
                         </td>
@@ -1203,7 +1215,7 @@ export const AdminPortal: React.FC = () => {
                               </div>
                             ))}
                           </div>
-                          <div className="font-mono font-bold text-[#2C221E] mt-1 tabular-nums">
+                          <div className="font-mono font-bold text-[#40563D] mt-1 tabular-nums">
                             PKR {o.total.toLocaleString()} ({o.paymentMethod.toUpperCase()})
                           </div>
                         </td>
@@ -1222,7 +1234,7 @@ export const AdminPortal: React.FC = () => {
                                 `Order #${o.orderNumber} payment marked ${e.target.value}.`
                               );
                             }}
-                            className="px-2.5 py-1.5 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-lg text-xs"
+                            className="px-2.5 py-1.5 bg-[#F6EBC8] border border-[#40563D]/15 rounded-lg text-xs"
                           >
                             <option value="Pending">Pending</option>
                             <option value="Awaiting Verification">Awaiting Proof</option>
@@ -1246,7 +1258,7 @@ export const AdminPortal: React.FC = () => {
                                 `Order #${o.orderNumber} status updated to ${e.target.value}.`
                               );
                             }}
-                            className="px-2.5 py-1.5 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-lg text-xs font-semibold"
+                            className="px-2.5 py-1.5 bg-[#F6EBC8] border border-[#40563D]/15 rounded-lg text-xs font-semibold"
                           >
                             <option value="Order Placed">Order Placed</option>
                             <option value="Scheduled">Scheduled</option>
@@ -1266,12 +1278,12 @@ export const AdminPortal: React.FC = () => {
                                 type="date"
                                 value={scheduleDateDraft}
                                 onChange={(e) => setScheduleDateDraft(e.target.value)}
-                                className="w-full px-2 py-1 bg-white border border-[#2C221E]/20 rounded text-[11px] font-mono"
+                                className="w-full px-2 py-1 bg-white border border-[#40563D]/20 rounded text-[11px] font-mono"
                               />
                               <select
                                 value={scheduleSlotDraft}
                                 onChange={(e) => setScheduleSlotDraft(e.target.value)}
-                                className="w-full px-2 py-1 bg-white border border-[#2C221E]/20 rounded text-[11px]"
+                                className="w-full px-2 py-1 bg-white border border-[#40563D]/20 rounded text-[11px]"
                               >
                                 {DELIVERY_SLOTS.map((sl) => (
                                   <option key={sl} value={sl}>
@@ -1297,14 +1309,14 @@ export const AdminPortal: React.FC = () => {
                                     }
                                     setSchedulingOrderNum(null);
                                   }}
-                                  className="px-2 py-1 bg-[#4A5D23] text-white rounded text-[10px] font-semibold cursor-pointer"
+                                  className="px-2 py-1 bg-[#40563D] text-white rounded text-[10px] font-semibold cursor-pointer"
                                 >
                                   Save
                                 </button>
                                 <button
                                   type="button"
                                   onClick={() => setSchedulingOrderNum(null)}
-                                  className="px-2 py-1 bg-[#F2ECE1] text-[#2C221E] rounded text-[10px] cursor-pointer"
+                                  className="px-2 py-1 bg-[#F2ECE1] text-[#40563D] rounded text-[10px] cursor-pointer"
                                 >
                                   Cancel
                                 </button>
@@ -1312,10 +1324,10 @@ export const AdminPortal: React.FC = () => {
                             </div>
                           ) : o.scheduledDate ? (
                             <div className="space-y-0.5">
-                              <span className="font-mono font-semibold text-[#4A5D23] block text-[11px]">
+                              <span className="font-mono font-semibold text-[#40563D] block text-[11px]">
                                 {o.scheduledDate}
                               </span>
-                              <span className="text-[10px] text-[#655549] block">
+                              <span className="text-[10px] text-[#5A4E38] block">
                                 {o.scheduledSlot}
                               </span>
                               <button
@@ -1327,7 +1339,7 @@ export const AdminPortal: React.FC = () => {
                                     o.scheduledSlot || DELIVERY_SLOTS[0]
                                   );
                                 }}
-                                className="text-[10px] text-[#4A5D23] underline cursor-pointer"
+                                className="text-[10px] text-[#40563D] underline cursor-pointer"
                               >
                                 Reschedule
                               </button>
@@ -1344,7 +1356,7 @@ export const AdminPortal: React.FC = () => {
                                 );
                                 setScheduleSlotDraft(DELIVERY_SLOTS[0]);
                               }}
-                              className="inline-flex items-center gap-1 text-[#4A5D23] font-semibold hover:underline cursor-pointer text-[11px]"
+                              className="inline-flex items-center gap-1 text-[#40563D] font-semibold hover:underline cursor-pointer text-[11px]"
                             >
                               <Calendar className="w-3 h-3" />
                               <span>+ Schedule</span>
@@ -1361,14 +1373,14 @@ export const AdminPortal: React.FC = () => {
                                 value={courierName}
                                 onChange={(e) => setCourierName(e.target.value)}
                                 placeholder="Courier Name"
-                                className="w-full px-2 py-1 bg-white border border-[#2C221E]/20 rounded text-[11px]"
+                                className="w-full px-2 py-1 bg-white border border-[#40563D]/20 rounded text-[11px]"
                               />
                               <input
                                 type="text"
                                 value={trackingNo}
                                 onChange={(e) => setTrackingNo(e.target.value)}
                                 placeholder="Tracking #"
-                                className="w-full px-2 py-1 bg-white border border-[#2C221E]/20 rounded text-[11px] font-mono"
+                                className="w-full px-2 py-1 bg-white border border-[#40563D]/20 rounded text-[11px] font-mono"
                               />
                               <div className="flex gap-1">
                                 <button
@@ -1388,14 +1400,14 @@ export const AdminPortal: React.FC = () => {
                                     setCourierDraftOrder(null);
                                     setTrackingNo('');
                                   }}
-                                  className="px-2 py-1 bg-[#4A5D23] text-white rounded text-[10px] font-semibold cursor-pointer"
+                                  className="px-2 py-1 bg-[#40563D] text-white rounded text-[10px] font-semibold cursor-pointer"
                                 >
                                   Save
                                 </button>
                                 <button
                                   type="button"
                                   onClick={() => setCourierDraftOrder(null)}
-                                  className="px-2 py-1 bg-[#F2ECE1] text-[#2C221E] rounded text-[10px] cursor-pointer"
+                                  className="px-2 py-1 bg-[#F2ECE1] text-[#40563D] rounded text-[10px] cursor-pointer"
                                 >
                                   Cancel
                                 </button>
@@ -1404,7 +1416,7 @@ export const AdminPortal: React.FC = () => {
                           ) : o.trackingNumber ? (
                             <div>
                               <span className="font-semibold block">{o.courierName}</span>
-                              <span className="font-mono text-[#655549] block text-[11px]">
+                              <span className="font-mono text-[#5A4E38] block text-[11px]">
                                 {o.trackingNumber}
                               </span>
                               <button
@@ -1414,7 +1426,7 @@ export const AdminPortal: React.FC = () => {
                                   setCourierName(o.courierName || 'Trax Logistics');
                                   setTrackingNo(o.trackingNumber || '');
                                 }}
-                                className="text-[10px] text-[#4A5D23] underline cursor-pointer"
+                                className="text-[10px] text-[#40563D] underline cursor-pointer"
                               >
                                 Edit Tracking
                               </button>
@@ -1427,7 +1439,7 @@ export const AdminPortal: React.FC = () => {
                                 setCourierName('Trax Logistics');
                                 setTrackingNo('');
                               }}
-                              className="inline-flex items-center gap-1 text-[#4A5D23] font-semibold hover:underline cursor-pointer text-[11px]"
+                              className="inline-flex items-center gap-1 text-[#40563D] font-semibold hover:underline cursor-pointer text-[11px]"
                             >
                               <Truck className="w-3 h-3" />
                               <span>+ Assign Courier</span>
@@ -1435,17 +1447,37 @@ export const AdminPortal: React.FC = () => {
                           )}
                         </td>
 
-                        {/* Actions Column: Track/Inspect + Delete */}
+                        {/* Actions Column: Track/Inspect + Cancel + Delete */}
                         <td className="py-4 px-4 text-right">
                           <div className="inline-flex items-center gap-1.5">
                             <button
                               type="button"
                               onClick={() => setSelectedOrderForDetail(o)}
-                              className="px-2.5 py-1.5 bg-[#F2ECE1] hover:bg-[#E6ECD8] text-[#2C221E] rounded-lg text-[11px] font-semibold cursor-pointer"
+                              className="px-2.5 py-1.5 bg-[#F2ECE1] hover:bg-[#E6ECD8] text-[#40563D] rounded-lg text-[11px] font-semibold cursor-pointer"
                               title="Inspect, Track & Edit Order Details"
                             >
                               Manage / Track
                             </button>
+                            {o.fulfillmentStatus !== 'Cancelled' && (
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  cancelOrder(
+                                    o.orderNumber,
+                                    `Cancelled by ${adminStaff.name} · inventory restocked`,
+                                    adminStaff.name,
+                                    true
+                                  );
+                                  showToast(
+                                    `Cancelled Order #${o.orderNumber} and restored stock.`
+                                  );
+                                }}
+                                className="px-2.5 py-1.5 bg-[#FEF2F2] hover:bg-[#FEE2E2] text-[#991B1B] rounded-lg text-[11px] font-semibold cursor-pointer"
+                                title="Cancel Order & Restock Inventory"
+                              >
+                                Cancel
+                              </button>
+                            )}
                             <button
                               type="button"
                               onClick={() => {
@@ -1473,12 +1505,12 @@ export const AdminPortal: React.FC = () => {
             =================================================================== */}
         {activeTab === 'products' && (
           <div className="space-y-6">
-            <div className="bg-white p-5 rounded-2xl border border-[#2C221E]/8 flex flex-wrap items-center justify-between gap-4">
+            <div className="bg-white p-5 rounded-2xl border border-[#40563D]/8 flex flex-wrap items-center justify-between gap-4">
               <div>
-                <h2 className="font-serif text-2xl font-bold text-[#2C221E]">
+                <h2 className="font-serif text-2xl font-bold text-[#40563D]">
                   DTCSS Product Catalog ({products.length} Products)
                 </h2>
-                <p className="text-xs text-[#655549]">
+                <p className="text-xs text-[#5A4E38]">
                   Add new products, edit every detail (variants, pack sizes, ingredients,
                   ritual steps, FAQs, photos, story), or remove any product.
                 </p>
@@ -1489,7 +1521,7 @@ export const AdminPortal: React.FC = () => {
                   setIsNewProductMode(true);
                   setProductEditorDraft(createBlankProduct());
                 }}
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#4A5D23] hover:bg-[#3B4B1B] text-[#F5EFDC] rounded-full text-xs font-semibold uppercase tracking-wider cursor-pointer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#40563D] hover:bg-[#40563D] text-[#F2EBD0] rounded-full text-xs font-semibold uppercase tracking-wider cursor-pointer"
               >
                 <Plus className="w-4 h-4" />
                 <span>Add New Product</span>
@@ -1505,10 +1537,10 @@ export const AdminPortal: React.FC = () => {
               return (
                 <div
                   key={prod.id}
-                  className="bg-white rounded-2xl p-6 border border-[#2C221E]/8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center"
+                  className="bg-white rounded-2xl p-6 border border-[#40563D]/8 grid grid-cols-1 lg:grid-cols-12 gap-6 items-center"
                 >
                   <div className="lg:col-span-3 flex flex-col items-center gap-3">
-                    <div className="w-40 h-40 bg-[#F6EBC8] rounded-2xl p-3 flex items-center justify-center border border-[#2C221E]/8">
+                    <div className="w-40 h-40 bg-[#F6EBC8] rounded-2xl p-3 flex items-center justify-center border border-[#40563D]/8">
                       <ProductImage
                         type={prod.imageType}
                         productId={prod.id}
@@ -1518,7 +1550,7 @@ export const AdminPortal: React.FC = () => {
                       />
                     </div>
                     <div className="flex items-center gap-2">
-                      <label className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#F2ECE1] hover:bg-[#E6ECD8] text-[#2C221E] rounded-lg text-[11px] font-semibold cursor-pointer">
+                      <label className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#F2ECE1] hover:bg-[#E6ECD8] text-[#40563D] rounded-lg text-[11px] font-semibold cursor-pointer">
                         <Upload className="w-3.5 h-3.5" />
                         <span>Upload Photo</span>
                         <input
@@ -1537,7 +1569,7 @@ export const AdminPortal: React.FC = () => {
                             onClick={() =>
                               updateProductCustomImage(prod.id, defaultOfficialUrl)
                             }
-                            className="p-1.5 text-[#655549] hover:text-[#2C221E] cursor-pointer"
+                            className="p-1.5 text-[#5A4E38] hover:text-[#40563D] cursor-pointer"
                             title="Restore official product photo"
                           >
                             <RotateCcw className="w-3.5 h-3.5" />
@@ -1547,13 +1579,13 @@ export const AdminPortal: React.FC = () => {
                   </div>
 
                   <div className="lg:col-span-9 space-y-4">
-                    <div className="flex flex-wrap items-start justify-between gap-3 border-b border-[#2C221E]/8 pb-3">
+                    <div className="flex flex-wrap items-start justify-between gap-3 border-b border-[#40563D]/8 pb-3">
                       <div>
                         <div className="flex flex-wrap items-center gap-2">
                           <h3 className="font-serif text-2xl font-semibold">
                             {prod.name}
                           </h3>
-                          <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-[#F2ECE1] text-[#655549]">
+                          <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-[#F2ECE1] text-[#5A4E38]">
                             {prod.category}
                           </span>
                           <button
@@ -1571,14 +1603,14 @@ export const AdminPortal: React.FC = () => {
                             }}
                             className={`px-2.5 py-0.5 rounded-full text-[10px] font-semibold cursor-pointer ${
                               prod.isPublished
-                                ? 'bg-[#E6ECD8] text-[#4A5D23]'
+                                ? 'bg-[#E6ECD8] text-[#40563D]'
                                 : 'bg-[#FEE2E2] text-[#991B1B]'
                             }`}
                           >
                             {prod.isPublished ? 'Published (Live)' : 'Hidden Draft'}
                           </button>
                         </div>
-                        <p className="text-xs text-[#655549] mt-0.5">
+                        <p className="text-xs text-[#5A4E38] mt-0.5">
                           {prod.subtitle} · {prod.packagingSpec}
                         </p>
                       </div>
@@ -1594,7 +1626,7 @@ export const AdminPortal: React.FC = () => {
                               onChange={(e) =>
                                 setPriceDraft(parseInt(e.target.value) || 0)
                               }
-                              className="w-24 px-2.5 py-1 bg-[#F6EBC8] border border-[#2C221E]/20 rounded-lg text-xs font-mono"
+                              className="w-24 px-2.5 py-1 bg-[#F6EBC8] border border-[#40563D]/20 rounded-lg text-xs font-mono"
                             />
                             <button
                               type="button"
@@ -1608,7 +1640,7 @@ export const AdminPortal: React.FC = () => {
                                 }
                                 setEditingPriceProductId(null);
                               }}
-                              className="px-2.5 py-1 bg-[#4A5D23] text-white rounded-lg text-xs font-semibold cursor-pointer"
+                              className="px-2.5 py-1 bg-[#40563D] text-white rounded-lg text-xs font-semibold cursor-pointer"
                             >
                               Save
                             </button>
@@ -1620,10 +1652,10 @@ export const AdminPortal: React.FC = () => {
                               setEditingPriceProductId(prod.id);
                               setPriceDraft(prod.basePrice);
                             }}
-                            className="font-serif text-lg font-bold tabular-nums hover:text-[#4A5D23] cursor-pointer mr-2"
+                            className="font-serif text-lg font-bold tabular-nums hover:text-[#40563D] cursor-pointer mr-2"
                           >
                             Base: PKR {prod.basePrice.toLocaleString()}{' '}
-                            <span className="text-xs font-sans font-semibold text-[#4A5D23] underline">
+                            <span className="text-xs font-sans font-semibold text-[#40563D] underline">
                               (Quick Price)
                             </span>
                           </button>
@@ -1635,7 +1667,7 @@ export const AdminPortal: React.FC = () => {
                             setIsNewProductMode(false);
                             setProductEditorDraft(JSON.parse(JSON.stringify(prod)));
                           }}
-                          className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#2C221E] hover:bg-[#3E312B] text-[#F5EFDC] rounded-xl text-xs font-semibold cursor-pointer"
+                          className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#40563D] hover:bg-[#3E312B] text-[#F2EBD0] rounded-xl text-xs font-semibold cursor-pointer"
                         >
                           <Edit3 className="w-3.5 h-3.5 text-[#D99B26]" />
                           <span>Edit Every Detail</span>
@@ -1663,21 +1695,21 @@ export const AdminPortal: React.FC = () => {
                         return (
                           <div
                             key={v.id}
-                            className="p-3.5 bg-[#F6EBC8] rounded-xl border border-[#2C221E]/8 space-y-1.5 text-xs"
+                            className="p-3.5 bg-[#F6EBC8] rounded-xl border border-[#40563D]/8 space-y-1.5 text-xs"
                           >
-                            <div className="font-semibold text-[#2C221E] flex justify-between">
+                            <div className="font-semibold text-[#40563D] flex justify-between">
                               <span>{v.name}</span>
                               {v.priceAdjustment > 0 && (
-                                <span className="font-mono text-[10px] text-[#4A5D23]">
+                                <span className="font-mono text-[10px] text-[#40563D]">
                                   +PKR {v.priceAdjustment}
                                 </span>
                               )}
                             </div>
-                            <div className="font-mono text-[11px] text-[#655549]">
+                            <div className="font-mono text-[11px] text-[#5A4E38]">
                               SKU: {v.sku}
                             </div>
                             <div className="pt-1 flex items-center justify-between">
-                              <span className="text-[#655549]">Stock:</span>
+                              <span className="text-[#5A4E38]">Stock:</span>
                               {isEditing ? (
                                 <div className="flex items-center gap-1">
                                   <input
@@ -1687,7 +1719,7 @@ export const AdminPortal: React.FC = () => {
                                     onChange={(e) =>
                                       setStockDraft(parseInt(e.target.value) || 0)
                                     }
-                                    className="w-16 px-2 py-1 bg-white border border-[#2C221E]/20 rounded text-xs font-mono"
+                                    className="w-16 px-2 py-1 bg-white border border-[#40563D]/20 rounded text-xs font-mono"
                                   />
                                   <button
                                     type="button"
@@ -1700,7 +1732,7 @@ export const AdminPortal: React.FC = () => {
                                       setEditingStockKey(null);
                                       showToast(`Stock updated for ${v.name}.`);
                                     }}
-                                    className="p-1 bg-[#4A5D23] text-white rounded cursor-pointer"
+                                    className="p-1 bg-[#40563D] text-white rounded cursor-pointer"
                                   >
                                     <Check className="w-3.5 h-3.5" />
                                   </button>
@@ -1712,7 +1744,7 @@ export const AdminPortal: React.FC = () => {
                                     setEditingStockKey(key);
                                     setStockDraft(v.stock);
                                   }}
-                                  className="font-mono font-bold text-[#4A5D23] hover:underline cursor-pointer"
+                                  className="font-mono font-bold text-[#40563D] hover:underline cursor-pointer"
                                 >
                                   {v.stock} jars (Edit)
                                 </button>
@@ -1730,16 +1762,21 @@ export const AdminPortal: React.FC = () => {
         )}
 
         {/* ===================================================================
+            TAB: RECIPE GUIDE & VIDEO OPTIMIZATION MANAGER
+            =================================================================== */}
+        {activeTab === 'recipes' && <AdminRecipesTab showToast={showToast} />}
+
+        {/* ===================================================================
             TAB 3: WEBSITE PAGES — CREATE, UPDATE & DELETE CUSTOM PAGES
             =================================================================== */}
         {activeTab === 'pages' && (
           <div className="space-y-6">
-            <div className="bg-white p-5 rounded-2xl border border-[#2C221E]/8 flex flex-wrap items-center justify-between gap-4">
+            <div className="bg-white p-5 rounded-2xl border border-[#40563D]/8 flex flex-wrap items-center justify-between gap-4">
               <div>
-                <h2 className="font-serif text-2xl font-bold text-[#2C221E]">
+                <h2 className="font-serif text-2xl font-bold text-[#40563D]">
                   Website Pages Manager ({customPages.length} Pages)
                 </h2>
-                <p className="text-xs text-[#655549]">
+                <p className="text-xs text-[#5A4E38]">
                   Create new standalone pages for DTCSS (e.g., Corporate Gifting, Wholesale,
                   Lab Purity, Winter Campaigns), link them in the Header or Footer, and
                   customize their content sections.
@@ -1748,7 +1785,7 @@ export const AdminPortal: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setEditingPageDraft(createBlankPage())}
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#4A5D23] hover:bg-[#3B4B1B] text-[#F5EFDC] rounded-full text-xs font-semibold uppercase tracking-wider cursor-pointer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#40563D] hover:bg-[#40563D] text-[#F2EBD0] rounded-full text-xs font-semibold uppercase tracking-wider cursor-pointer"
               >
                 <Plus className="w-4 h-4" />
                 <span>Create New Page</span>
@@ -1759,53 +1796,53 @@ export const AdminPortal: React.FC = () => {
               {customPages.map((pg) => (
                 <div
                   key={pg.id}
-                  className="bg-white rounded-2xl p-6 border border-[#2C221E]/8 flex flex-col justify-between space-y-4"
+                  className="bg-white rounded-2xl p-6 border border-[#40563D]/8 flex flex-col justify-between space-y-4"
                 >
                   <div className="space-y-2">
                     <div className="flex flex-wrap items-center justify-between gap-2">
-                      <span className="font-mono text-[11px] text-[#4A5D23] bg-[#E6ECD8] px-2.5 py-0.5 rounded-full">
+                      <span className="font-mono text-[11px] text-[#40563D] bg-[#E6ECD8] px-2.5 py-0.5 rounded-full">
                         /page/{pg.slug}
                       </span>
                       <div className="flex items-center gap-1.5 text-[10px] font-semibold">
                         <span
                           className={`px-2 py-0.5 rounded ${
                             pg.isPublished
-                              ? 'bg-[#E6ECD8] text-[#4A5D23]'
+                              ? 'bg-[#E6ECD8] text-[#40563D]'
                               : 'bg-[#FEE2E2] text-[#991B1B]'
                           }`}
                         >
                           {pg.isPublished ? 'Published' : 'Draft'}
                         </span>
                         {pg.showInHeader && (
-                          <span className="px-2 py-0.5 rounded bg-[#F2ECE1] text-[#2C221E]">
+                          <span className="px-2 py-0.5 rounded bg-[#F2ECE1] text-[#40563D]">
                             In Header
                           </span>
                         )}
                         {pg.showInFooter && (
-                          <span className="px-2 py-0.5 rounded bg-[#F2ECE1] text-[#2C221E]">
+                          <span className="px-2 py-0.5 rounded bg-[#F2ECE1] text-[#40563D]">
                             In Footer
                           </span>
                         )}
                       </div>
                     </div>
 
-                    <h3 className="font-serif text-2xl font-bold text-[#2C221E]">
+                    <h3 className="font-serif text-2xl font-bold text-[#40563D]">
                       {pg.title}
                     </h3>
-                    <p className="text-xs text-[#655549] line-clamp-2">{pg.subtitle}</p>
-                    <p className="text-[11px] font-mono text-[#655549]">
+                    <p className="text-xs text-[#5A4E38] line-clamp-2">{pg.subtitle}</p>
+                    <p className="text-[11px] font-mono text-[#5A4E38]">
                       {pg.sections.length} content section(s) · Updated {pg.updatedAt}
                     </p>
                   </div>
 
-                  <div className="pt-4 border-t border-[#2C221E]/8 flex flex-wrap items-center justify-between gap-2">
+                  <div className="pt-4 border-t border-[#40563D]/8 flex flex-wrap items-center justify-between gap-2">
                     <button
                       type="button"
                       onClick={() => {
                         setCurrentView('store');
                         setActivePageSlug(pg.slug);
                       }}
-                      className="inline-flex items-center gap-1 text-xs font-semibold text-[#4A5D23] hover:underline cursor-pointer"
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-[#40563D] hover:underline cursor-pointer"
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
                       <span>View Live Page</span>
@@ -1817,7 +1854,7 @@ export const AdminPortal: React.FC = () => {
                         onClick={() =>
                           setEditingPageDraft(JSON.parse(JSON.stringify(pg)))
                         }
-                        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#2C221E] text-[#F5EFDC] rounded-xl text-xs font-semibold cursor-pointer"
+                        className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-[#40563D] text-[#F2EBD0] rounded-xl text-xs font-semibold cursor-pointer"
                       >
                         <Edit3 className="w-3.5 h-3.5 text-[#D99B26]" />
                         <span>Edit Page & Copy</span>
@@ -1846,12 +1883,12 @@ export const AdminPortal: React.FC = () => {
             =================================================================== */}
         {activeTab === 'cms' && (
           <div className="space-y-6">
-            <div className="bg-white p-5 rounded-2xl border border-[#2C221E]/8 flex flex-wrap items-center justify-between gap-4">
+            <div className="bg-white p-5 rounded-2xl border border-[#40563D]/8 flex flex-wrap items-center justify-between gap-4">
               <div>
-                <h2 className="font-serif text-2xl font-bold text-[#2C221E]">
+                <h2 className="font-serif text-2xl font-bold text-[#40563D]">
                   Site-Wide Content & Copy CMS
                 </h2>
-                <p className="text-xs text-[#655549]">
+                <p className="text-xs text-[#5A4E38]">
                   Create, update, or delete headlines, paragraphs, purity pillars,
                   culinary recipes, custom homepage banners, FAQs, and footer copy across
                   the entire website.
@@ -1865,7 +1902,7 @@ export const AdminPortal: React.FC = () => {
                     updateSiteCopy(DEFAULT_SITE_COPY);
                     showToast('Restored default DTCSS website copy.');
                   }}
-                  className="px-4 py-2 bg-[#F2ECE1] hover:bg-[#E6ECD8] text-[#2C221E] rounded-full text-xs font-semibold cursor-pointer"
+                  className="px-4 py-2 bg-[#F2ECE1] hover:bg-[#E6ECD8] text-[#40563D] rounded-full text-xs font-semibold cursor-pointer"
                 >
                   Reset to Default Copy
                 </button>
@@ -1875,7 +1912,7 @@ export const AdminPortal: React.FC = () => {
                     updateSiteCopy(copyDraft);
                     showToast('Published all website copy changes live!');
                   }}
-                  className="inline-flex items-center gap-1.5 px-6 py-2.5 bg-[#4A5D23] hover:bg-[#3B4B1B] text-[#F5EFDC] rounded-full text-xs font-semibold uppercase tracking-wider cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-6 py-2.5 bg-[#40563D] hover:bg-[#40563D] text-[#F2EBD0] rounded-full text-xs font-semibold uppercase tracking-wider cursor-pointer"
                 >
                   <Check className="w-4 h-4" />
                   <span>Save & Publish All Copy</span>
@@ -1907,8 +1944,8 @@ export const AdminPortal: React.FC = () => {
                   onClick={() => setCmsSubTab(st.id as typeof cmsSubTab)}
                   className={`px-4 py-2 rounded-xl text-xs font-semibold cursor-pointer transition-colors ${
                     cmsSubTab === st.id
-                      ? 'bg-[#2C221E] text-[#F5EFDC]'
-                      : 'bg-white text-[#655549] hover:text-[#2C221E]'
+                      ? 'bg-[#40563D] text-[#F2EBD0]'
+                      : 'bg-white text-[#5A4E38] hover:text-[#40563D]'
                   }`}
                 >
                   {st.label}
@@ -1919,8 +1956,8 @@ export const AdminPortal: React.FC = () => {
             {/* SUB-TAB 1: HEADER & HERO */}
             {cmsSubTab === 'hero' && (
               <div className="space-y-6">
-                <div className="bg-white p-6 rounded-2xl border border-[#2C221E]/8 space-y-4 text-xs">
-                  <h3 className="font-serif text-xl font-bold text-[#2C221E]">
+                <div className="bg-white p-6 rounded-2xl border border-[#40563D]/8 space-y-4 text-xs">
+                  <h3 className="font-serif text-xl font-bold text-[#40563D]">
                     Header Navigation Link Labels
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-5 gap-3">
@@ -1935,7 +1972,7 @@ export const AdminPortal: React.FC = () => {
                             navCollectionLabel: e.target.value,
                           })
                         }
-                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                       />
                     </div>
                     <div>
@@ -1949,7 +1986,7 @@ export const AdminPortal: React.FC = () => {
                             navSpiceMixLabel: e.target.value,
                           })
                         }
-                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                       />
                     </div>
                     <div>
@@ -1960,7 +1997,7 @@ export const AdminPortal: React.FC = () => {
                         onChange={(e) =>
                           setCopyDraft({ ...copyDraft, navCraftLabel: e.target.value })
                         }
-                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                       />
                     </div>
                     <div>
@@ -1974,7 +2011,7 @@ export const AdminPortal: React.FC = () => {
                             navReviewsLabel: e.target.value,
                           })
                         }
-                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                       />
                     </div>
                     <div>
@@ -1988,14 +2025,14 @@ export const AdminPortal: React.FC = () => {
                             navTrackOrderLabel: e.target.value,
                           })
                         }
-                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                       />
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-white p-6 rounded-2xl border border-[#2C221E]/8 space-y-4 text-xs">
-                  <h3 className="font-serif text-xl font-bold text-[#2C221E]">
+                <div className="bg-white p-6 rounded-2xl border border-[#40563D]/8 space-y-4 text-xs">
+                  <h3 className="font-serif text-xl font-bold text-[#40563D]">
                     Hero Section — Pre-Header, Headline, Subheadline, Description, 5 Benefit Bullets & CTAs
                   </h3>
 
@@ -2007,7 +2044,7 @@ export const AdminPortal: React.FC = () => {
                       onChange={(e) =>
                         setCopyDraft({ ...copyDraft, heroHeadline: e.target.value })
                       }
-                      className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl font-serif text-base"
+                      className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl font-serif text-base"
                     />
                   </div>
 
@@ -2019,7 +2056,7 @@ export const AdminPortal: React.FC = () => {
                       onChange={(e) =>
                         setCopyDraft({ ...copyDraft, heroSubheadline: e.target.value })
                       }
-                      className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl font-serif text-sm"
+                      className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl font-serif text-sm"
                     />
                   </div>
 
@@ -2033,12 +2070,12 @@ export const AdminPortal: React.FC = () => {
                       onChange={(e) =>
                         setCopyDraft({ ...copyDraft, heroDescription: e.target.value })
                       }
-                      className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                      className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                     />
                   </div>
 
                   {/* 5 Benefit-Oriented Bullet Points */}
-                  <div className="pt-2 border-t border-[#2C221E]/10 space-y-2">
+                  <div className="pt-2 border-t border-[#40563D]/10 space-y-2">
                     <div className="flex items-center justify-between">
                       <label className="font-semibold">
                         5 Benefit-Oriented Bullet Points of Our Products
@@ -2058,7 +2095,7 @@ export const AdminPortal: React.FC = () => {
                             ],
                           });
                         }}
-                        className="text-[#4A5D23] font-semibold hover:underline cursor-pointer"
+                        className="text-[#40563D] font-semibold hover:underline cursor-pointer"
                       >
                         + Add Benefit Bullet
                       </button>
@@ -2070,7 +2107,7 @@ export const AdminPortal: React.FC = () => {
                         []
                       ).map((benefit, idx) => (
                         <div key={idx} className="flex items-center gap-2">
-                          <span className="font-mono text-[11px] text-[#4A5D23] w-5 shrink-0">
+                          <span className="font-mono text-[11px] text-[#40563D] w-5 shrink-0">
                             0{idx + 1}.
                           </span>
                           <input
@@ -2085,7 +2122,7 @@ export const AdminPortal: React.FC = () => {
                               next[idx] = e.target.value;
                               setCopyDraft({ ...copyDraft, heroBenefits: next });
                             }}
-                            className="flex-1 px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl text-xs"
+                            className="flex-1 px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl text-xs"
                           />
                           <button
                             type="button"
@@ -2108,7 +2145,7 @@ export const AdminPortal: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-[#2C221E]/10">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-[#40563D]/10">
                     <div>
                       <label className="block font-semibold mb-1">
                         Primary CTA Button Label ("View Products")
@@ -2126,7 +2163,7 @@ export const AdminPortal: React.FC = () => {
                             heroViewProductsCta: e.target.value,
                           })
                         }
-                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                       />
                     </div>
                     <div>
@@ -2146,13 +2183,13 @@ export const AdminPortal: React.FC = () => {
                             heroWhatsappCta: e.target.value,
                           })
                         }
-                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                       />
                     </div>
                   </div>
 
                   {/* Hero Kickers CRUD */}
-                  <div className="pt-2 border-t border-[#2C221E]/10 space-y-2">
+                  <div className="pt-2 border-t border-[#40563D]/10 space-y-2">
                     <div className="flex items-center justify-between">
                       <label className="font-semibold">
                         Hero Pre-Header Kicker Tags (Create, Update, Delete)
@@ -2165,7 +2202,7 @@ export const AdminPortal: React.FC = () => {
                             heroKickers: [...copyDraft.heroKickers, 'New Tag'],
                           })
                         }
-                        className="text-[#4A5D23] font-semibold hover:underline cursor-pointer"
+                        className="text-[#40563D] font-semibold hover:underline cursor-pointer"
                       >
                         + Add Kicker Tag
                       </button>
@@ -2174,7 +2211,7 @@ export const AdminPortal: React.FC = () => {
                       {copyDraft.heroKickers.map((k, idx) => (
                         <div
                           key={idx}
-                          className="flex items-center gap-1 bg-[#F6EBC8] px-2.5 py-1 rounded-lg border border-[#2C221E]/15"
+                          className="flex items-center gap-1 bg-[#F6EBC8] px-2.5 py-1 rounded-lg border border-[#40563D]/15"
                         >
                           <input
                             type="text"
@@ -2207,9 +2244,9 @@ export const AdminPortal: React.FC = () => {
                 </div>
 
                 {/* Hero Purity Strip Pillars CRUD */}
-                <div className="bg-white p-6 rounded-2xl border border-[#2C221E]/8 space-y-4 text-xs">
+                <div className="bg-white p-6 rounded-2xl border border-[#40563D]/8 space-y-4 text-xs">
                   <div className="flex items-center justify-between">
-                    <h3 className="font-serif text-xl font-bold text-[#2C221E]">
+                    <h3 className="font-serif text-xl font-bold text-[#40563D]">
                       Hero Purity & Proof Pillars ({copyDraft.heroPillars.length})
                     </h3>
                     <button
@@ -2227,7 +2264,7 @@ export const AdminPortal: React.FC = () => {
                           ],
                         })
                       }
-                      className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#4A5D23] text-[#F5EFDC] rounded-lg font-semibold cursor-pointer"
+                      className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#40563D] text-[#F2EBD0] rounded-lg font-semibold cursor-pointer"
                     >
                       <Plus className="w-3.5 h-3.5" />
                       <span>Add Pillar</span>
@@ -2238,7 +2275,7 @@ export const AdminPortal: React.FC = () => {
                     {copyDraft.heroPillars.map((pillar, idx) => (
                       <div
                         key={pillar.id}
-                        className="p-4 bg-[#F6EBC8] rounded-xl border border-[#2C221E]/10 space-y-2"
+                        className="p-4 bg-[#F6EBC8] rounded-xl border border-[#40563D]/10 space-y-2"
                       >
                         <div className="flex items-center justify-between gap-2">
                           <input
@@ -2249,7 +2286,7 @@ export const AdminPortal: React.FC = () => {
                               next[idx] = { ...pillar, title: e.target.value };
                               setCopyDraft({ ...copyDraft, heroPillars: next });
                             }}
-                            className="w-full px-2.5 py-1.5 bg-white border border-[#2C221E]/15 rounded-lg font-serif text-sm font-semibold"
+                            className="w-full px-2.5 py-1.5 bg-white border border-[#40563D]/15 rounded-lg font-serif text-sm font-semibold"
                           />
                           <button
                             type="button"
@@ -2274,7 +2311,7 @@ export const AdminPortal: React.FC = () => {
                             next[idx] = { ...pillar, description: e.target.value };
                             setCopyDraft({ ...copyDraft, heroPillars: next });
                           }}
-                          className="w-full px-2.5 py-1.5 bg-white border border-[#2C221E]/15 rounded-lg text-xs"
+                          className="w-full px-2.5 py-1.5 bg-white border border-[#40563D]/15 rounded-lg text-xs"
                         />
                       </div>
                     ))}
@@ -2286,8 +2323,8 @@ export const AdminPortal: React.FC = () => {
             {/* SUB-TAB 2: COLLECTION & SPICEMIX SPOTLIGHT */}
             {cmsSubTab === 'collection_spicemix' && (
               <div className="space-y-6">
-                <div className="bg-white p-6 rounded-2xl border border-[#2C221E]/8 space-y-4 text-xs">
-                  <h3 className="font-serif text-xl font-bold text-[#2C221E]">
+                <div className="bg-white p-6 rounded-2xl border border-[#40563D]/8 space-y-4 text-xs">
+                  <h3 className="font-serif text-xl font-bold text-[#40563D]">
                     Product Collection Section Copy
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -2302,7 +2339,7 @@ export const AdminPortal: React.FC = () => {
                             collectionKicker: e.target.value,
                           })
                         }
-                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                       />
                     </div>
                     <div>
@@ -2316,7 +2353,7 @@ export const AdminPortal: React.FC = () => {
                             collectionHeading: e.target.value,
                           })
                         }
-                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                       />
                     </div>
                   </div>
@@ -2333,14 +2370,14 @@ export const AdminPortal: React.FC = () => {
                           collectionDescription: e.target.value,
                         })
                       }
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                     />
                   </div>
                 </div>
 
-                <div className="bg-white p-6 rounded-2xl border border-[#2C221E]/8 space-y-4 text-xs">
+                <div className="bg-white p-6 rounded-2xl border border-[#40563D]/8 space-y-4 text-xs">
                   <div className="flex flex-wrap items-center justify-between gap-2">
-                    <h3 className="font-serif text-xl font-bold text-[#2C221E]">
+                    <h3 className="font-serif text-xl font-bold text-[#40563D]">
                       SpiceMix Culinary Spotlight Section & Dishes
                     </h3>
                     <label className="inline-flex items-center gap-2 font-semibold cursor-pointer">
@@ -2370,7 +2407,7 @@ export const AdminPortal: React.FC = () => {
                             spotlightLeftKicker: e.target.value,
                           })
                         }
-                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                       />
                     </div>
                     <div>
@@ -2384,7 +2421,7 @@ export const AdminPortal: React.FC = () => {
                             spotlightLeftHeading: e.target.value,
                           })
                         }
-                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                       />
                     </div>
                     <div>
@@ -2400,7 +2437,7 @@ export const AdminPortal: React.FC = () => {
                             spotlightRightKicker: e.target.value,
                           })
                         }
-                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                       />
                     </div>
                     <div>
@@ -2416,7 +2453,7 @@ export const AdminPortal: React.FC = () => {
                             spotlightRightHeading: e.target.value,
                           })
                         }
-                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                       />
                     </div>
                   </div>
@@ -2434,12 +2471,12 @@ export const AdminPortal: React.FC = () => {
                           spotlightRightDescription: e.target.value,
                         })
                       }
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                     />
                   </div>
 
                   {/* Culinary Dishes CRUD */}
-                  <div className="pt-3 border-t border-[#2C221E]/10 space-y-3">
+                  <div className="pt-3 border-t border-[#40563D]/10 space-y-3">
                     <div className="flex items-center justify-between">
                       <span className="font-semibold">
                         Culinary Dishes ({copyDraft.spotlightDishes.length})
@@ -2461,7 +2498,7 @@ export const AdminPortal: React.FC = () => {
                             ],
                           })
                         }
-                        className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#4A5D23] text-[#F5EFDC] rounded-lg font-semibold cursor-pointer"
+                        className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#40563D] text-[#F2EBD0] rounded-lg font-semibold cursor-pointer"
                       >
                         <Plus className="w-3.5 h-3.5" />
                         <span>Add Dish</span>
@@ -2472,7 +2509,7 @@ export const AdminPortal: React.FC = () => {
                       {copyDraft.spotlightDishes.map((dish, idx) => (
                         <div
                           key={dish.id}
-                          className="p-3.5 bg-[#F6EBC8] rounded-xl border border-[#2C221E]/10 space-y-2"
+                          className="p-3.5 bg-[#F6EBC8] rounded-xl border border-[#40563D]/10 space-y-2"
                         >
                           <div className="flex items-center gap-2">
                             <input
@@ -2483,7 +2520,7 @@ export const AdminPortal: React.FC = () => {
                                 next[idx] = { ...dish, index: e.target.value };
                                 setCopyDraft({ ...copyDraft, spotlightDishes: next });
                               }}
-                              className="w-12 px-2 py-1 bg-white border border-[#2C221E]/15 rounded font-mono"
+                              className="w-12 px-2 py-1 bg-white border border-[#40563D]/15 rounded font-mono"
                             />
                             <input
                               type="text"
@@ -2493,7 +2530,7 @@ export const AdminPortal: React.FC = () => {
                                 next[idx] = { ...dish, name: e.target.value };
                                 setCopyDraft({ ...copyDraft, spotlightDishes: next });
                               }}
-                              className="flex-1 px-2.5 py-1 bg-white border border-[#2C221E]/15 rounded font-semibold"
+                              className="flex-1 px-2.5 py-1 bg-white border border-[#40563D]/15 rounded font-semibold"
                             />
                             <input
                               type="text"
@@ -2503,7 +2540,7 @@ export const AdminPortal: React.FC = () => {
                                 next[idx] = { ...dish, prepTime: e.target.value };
                                 setCopyDraft({ ...copyDraft, spotlightDishes: next });
                               }}
-                              className="w-20 px-2 py-1 bg-white border border-[#2C221E]/15 rounded font-mono"
+                              className="w-20 px-2 py-1 bg-white border border-[#40563D]/15 rounded font-mono"
                             />
                             <button
                               type="button"
@@ -2528,7 +2565,7 @@ export const AdminPortal: React.FC = () => {
                               next[idx] = { ...dish, method: e.target.value };
                               setCopyDraft({ ...copyDraft, spotlightDishes: next });
                             }}
-                            className="w-full px-2.5 py-1 bg-white border border-[#2C221E]/15 rounded"
+                            className="w-full px-2.5 py-1 bg-white border border-[#40563D]/15 rounded"
                           />
                         </div>
                       ))}
@@ -2541,8 +2578,8 @@ export const AdminPortal: React.FC = () => {
             {/* SUB-TAB 3: OUR CRAFT STORY & CUSTOM HOMEPAGE SECTIONS */}
             {cmsSubTab === 'craft_home' && (
               <div className="space-y-6">
-                <div className="bg-white p-6 rounded-2xl border border-[#2C221E]/8 space-y-4 text-xs">
-                  <h3 className="font-serif text-xl font-bold text-[#2C221E]">
+                <div className="bg-white p-6 rounded-2xl border border-[#40563D]/8 space-y-4 text-xs">
+                  <h3 className="font-serif text-xl font-bold text-[#40563D]">
                     Our Craft / Brand Story Section Copy
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -2554,7 +2591,7 @@ export const AdminPortal: React.FC = () => {
                         onChange={(e) =>
                           setCopyDraft({ ...copyDraft, craftKicker: e.target.value })
                         }
-                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                       />
                     </div>
                     <div>
@@ -2565,7 +2602,7 @@ export const AdminPortal: React.FC = () => {
                         onChange={(e) =>
                           setCopyDraft({ ...copyDraft, craftHeading: e.target.value })
                         }
-                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                       />
                     </div>
                   </div>
@@ -2587,7 +2624,7 @@ export const AdminPortal: React.FC = () => {
                             ],
                           })
                         }
-                        className="text-[#4A5D23] font-semibold hover:underline cursor-pointer"
+                        className="text-[#40563D] font-semibold hover:underline cursor-pointer"
                       >
                         + Add Paragraph
                       </button>
@@ -2602,7 +2639,7 @@ export const AdminPortal: React.FC = () => {
                             next[idx] = e.target.value;
                             setCopyDraft({ ...copyDraft, craftParagraphs: next });
                           }}
-                          className="flex-1 px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                          className="flex-1 px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                         />
                         <button
                           type="button"
@@ -2623,7 +2660,7 @@ export const AdminPortal: React.FC = () => {
                   </div>
 
                   {/* Craft Pillars CRUD */}
-                  <div className="pt-3 border-t border-[#2C221E]/10 space-y-3">
+                  <div className="pt-3 border-t border-[#40563D]/10 space-y-3">
                     <div className="flex items-center justify-between">
                       <span className="font-semibold">
                         Craftsmanship Pillars ({copyDraft.craftPillars.length})
@@ -2643,7 +2680,7 @@ export const AdminPortal: React.FC = () => {
                             ],
                           })
                         }
-                        className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#4A5D23] text-[#F5EFDC] rounded-lg font-semibold cursor-pointer"
+                        className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#40563D] text-[#F2EBD0] rounded-lg font-semibold cursor-pointer"
                       >
                         <Plus className="w-3.5 h-3.5" />
                         <span>Add Craft Pillar</span>
@@ -2653,7 +2690,7 @@ export const AdminPortal: React.FC = () => {
                       {copyDraft.craftPillars.map((cp, idx) => (
                         <div
                           key={cp.id}
-                          className="p-3.5 bg-[#F6EBC8] rounded-xl border border-[#2C221E]/10 space-y-2"
+                          className="p-3.5 bg-[#F6EBC8] rounded-xl border border-[#40563D]/10 space-y-2"
                         >
                           <div className="flex items-center justify-between gap-2">
                             <input
@@ -2664,7 +2701,7 @@ export const AdminPortal: React.FC = () => {
                                 next[idx] = { ...cp, title: e.target.value };
                                 setCopyDraft({ ...copyDraft, craftPillars: next });
                               }}
-                              className="w-full px-2 py-1 bg-white border border-[#2C221E]/15 rounded font-semibold"
+                              className="w-full px-2 py-1 bg-white border border-[#40563D]/15 rounded font-semibold"
                             />
                             <button
                               type="button"
@@ -2689,7 +2726,7 @@ export const AdminPortal: React.FC = () => {
                               next[idx] = { ...cp, description: e.target.value };
                               setCopyDraft({ ...copyDraft, craftPillars: next });
                             }}
-                            className="w-full px-2 py-1 bg-white border border-[#2C221E]/15 rounded"
+                            className="w-full px-2 py-1 bg-white border border-[#40563D]/15 rounded"
                           />
                         </div>
                       ))}
@@ -2698,14 +2735,14 @@ export const AdminPortal: React.FC = () => {
                 </div>
 
                 {/* Custom Homepage Sections Builder */}
-                <div className="bg-white p-6 rounded-2xl border border-[#2C221E]/8 space-y-4 text-xs">
+                <div className="bg-white p-6 rounded-2xl border border-[#40563D]/8 space-y-4 text-xs">
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <div>
-                      <h3 className="font-serif text-xl font-bold text-[#2C221E]">
+                      <h3 className="font-serif text-xl font-bold text-[#40563D]">
                         Custom Homepage Content Blocks (
                         {(copyDraft.customHomeSections || []).length})
                       </h3>
-                      <p className="text-[#655549]">
+                      <p className="text-[#5A4E38]">
                         Add custom promotional or editorial sections directly onto the main
                         DTCSS homepage.
                       </p>
@@ -2733,7 +2770,7 @@ export const AdminPortal: React.FC = () => {
                           ],
                         })
                       }
-                      className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#4A5D23] text-[#F5EFDC] rounded-xl font-semibold cursor-pointer"
+                      className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#40563D] text-[#F2EBD0] rounded-xl font-semibold cursor-pointer"
                     >
                       <Plus className="w-3.5 h-3.5" />
                       <span>Add Homepage Section</span>
@@ -2743,10 +2780,10 @@ export const AdminPortal: React.FC = () => {
                   {(copyDraft.customHomeSections || []).map((sec, sIdx) => (
                     <div
                       key={sec.id}
-                      className="p-4 bg-[#F6EBC8] rounded-2xl border border-[#2C221E]/12 space-y-3"
+                      className="p-4 bg-[#F6EBC8] rounded-2xl border border-[#40563D]/12 space-y-3"
                     >
                       <div className="flex items-center justify-between">
-                        <span className="font-mono font-bold text-[#4A5D23]">
+                        <span className="font-mono font-bold text-[#40563D]">
                           Homepage Block #{sIdx + 1}
                         </span>
                         <button
@@ -2777,7 +2814,7 @@ export const AdminPortal: React.FC = () => {
                               next[sIdx] = { ...sec, kicker: e.target.value };
                               setCopyDraft({ ...copyDraft, customHomeSections: next });
                             }}
-                            className="w-full px-2.5 py-1.5 bg-white border border-[#2C221E]/15 rounded-lg"
+                            className="w-full px-2.5 py-1.5 bg-white border border-[#40563D]/15 rounded-lg"
                           />
                         </div>
                         <div>
@@ -2790,7 +2827,7 @@ export const AdminPortal: React.FC = () => {
                               next[sIdx] = { ...sec, heading: e.target.value };
                               setCopyDraft({ ...copyDraft, customHomeSections: next });
                             }}
-                            className="w-full px-2.5 py-1.5 bg-white border border-[#2C221E]/15 rounded-lg font-semibold"
+                            className="w-full px-2.5 py-1.5 bg-white border border-[#40563D]/15 rounded-lg font-semibold"
                           />
                         </div>
                         <div>
@@ -2805,9 +2842,9 @@ export const AdminPortal: React.FC = () => {
                               };
                               setCopyDraft({ ...copyDraft, customHomeSections: next });
                             }}
-                            className="w-full px-2.5 py-1.5 bg-white border border-[#2C221E]/15 rounded-lg"
+                            className="w-full px-2.5 py-1.5 bg-white border border-[#40563D]/15 rounded-lg"
                           >
-                            <option value="cream">Desi Ghee Cream (#F5EFDC)</option>
+                            <option value="cream">Desi Ghee Cream (#F2EBD0)</option>
                             <option value="white">Crisp Studio White</option>
                             <option value="sand">Warm Sand (#F2ECE1)</option>
                             <option value="espresso">Roasted Espresso Dark</option>
@@ -2825,7 +2862,7 @@ export const AdminPortal: React.FC = () => {
                             next[sIdx] = { ...sec, body: e.target.value };
                             setCopyDraft({ ...copyDraft, customHomeSections: next });
                           }}
-                          className="w-full px-2.5 py-1.5 bg-white border border-[#2C221E]/15 rounded-lg"
+                          className="w-full px-2.5 py-1.5 bg-white border border-[#40563D]/15 rounded-lg"
                         />
                       </div>
                     </div>
@@ -2837,13 +2874,13 @@ export const AdminPortal: React.FC = () => {
             {/* SUB-TAB 4: REVIEWS HEADINGS, GLOBAL FAQS & FOOTER COPY */}
             {cmsSubTab === 'faqs_footer' && (
               <div className="space-y-6">
-                <div className="bg-white p-6 rounded-2xl border border-[#2C221E]/8 space-y-4 text-xs">
+                <div className="bg-white p-6 rounded-2xl border border-[#40563D]/8 space-y-4 text-xs">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="font-serif text-xl font-bold text-[#2C221E]">
+                      <h3 className="font-serif text-xl font-bold text-[#40563D]">
                         Storefront Frequently Asked Questions ({copyDraft.faqs.length})
                       </h3>
-                      <p className="text-[#655549]">
+                      <p className="text-[#5A4E38]">
                         Create new FAQs, update answers, or delete outdated questions.
                       </p>
                     </div>
@@ -2862,7 +2899,7 @@ export const AdminPortal: React.FC = () => {
                           ],
                         })
                       }
-                      className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#4A5D23] text-[#F5EFDC] rounded-xl font-semibold cursor-pointer"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#40563D] text-[#F2EBD0] rounded-xl font-semibold cursor-pointer"
                     >
                       <Plus className="w-3.5 h-3.5" />
                       <span>Add FAQ</span>
@@ -2878,7 +2915,7 @@ export const AdminPortal: React.FC = () => {
                         onChange={(e) =>
                           setCopyDraft({ ...copyDraft, faqKicker: e.target.value })
                         }
-                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                       />
                     </div>
                     <div>
@@ -2889,7 +2926,7 @@ export const AdminPortal: React.FC = () => {
                         onChange={(e) =>
                           setCopyDraft({ ...copyDraft, faqHeading: e.target.value })
                         }
-                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                       />
                     </div>
                   </div>
@@ -2898,7 +2935,7 @@ export const AdminPortal: React.FC = () => {
                     {copyDraft.faqs.map((faq, idx) => (
                       <div
                         key={faq.id}
-                        className="p-4 bg-[#F6EBC8] rounded-xl border border-[#2C221E]/10 space-y-2"
+                        className="p-4 bg-[#F6EBC8] rounded-xl border border-[#40563D]/10 space-y-2"
                       >
                         <div className="flex items-center justify-between gap-2">
                           <input
@@ -2909,7 +2946,7 @@ export const AdminPortal: React.FC = () => {
                               next[idx] = { ...faq, q: e.target.value };
                               setCopyDraft({ ...copyDraft, faqs: next });
                             }}
-                            className="w-full px-3 py-1.5 bg-white border border-[#2C221E]/15 rounded-lg font-semibold"
+                            className="w-full px-3 py-1.5 bg-white border border-[#40563D]/15 rounded-lg font-semibold"
                           />
                           <button
                             type="button"
@@ -2932,7 +2969,7 @@ export const AdminPortal: React.FC = () => {
                             next[idx] = { ...faq, a: e.target.value };
                             setCopyDraft({ ...copyDraft, faqs: next });
                           }}
-                          className="w-full px-3 py-1.5 bg-white border border-[#2C221E]/15 rounded-lg"
+                          className="w-full px-3 py-1.5 bg-white border border-[#40563D]/15 rounded-lg"
                         />
                       </div>
                     ))}
@@ -2940,8 +2977,8 @@ export const AdminPortal: React.FC = () => {
                 </div>
 
                 {/* Footer & Reviews Copy */}
-                <div className="bg-white p-6 rounded-2xl border border-[#2C221E]/8 space-y-4 text-xs">
-                  <h3 className="font-serif text-xl font-bold text-[#2C221E]">
+                <div className="bg-white p-6 rounded-2xl border border-[#40563D]/8 space-y-4 text-xs">
+                  <h3 className="font-serif text-xl font-bold text-[#40563D]">
                     Reviews Header & Footer Copy
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -2958,7 +2995,7 @@ export const AdminPortal: React.FC = () => {
                             reviewsKickerPrefix: e.target.value,
                           })
                         }
-                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                       />
                     </div>
                     <div>
@@ -2974,7 +3011,7 @@ export const AdminPortal: React.FC = () => {
                             reviewsHeading: e.target.value,
                           })
                         }
-                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                       />
                     </div>
                     <div>
@@ -2990,7 +3027,7 @@ export const AdminPortal: React.FC = () => {
                             footerCollectionHeading: e.target.value,
                           })
                         }
-                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                       />
                     </div>
                     <div>
@@ -3006,7 +3043,7 @@ export const AdminPortal: React.FC = () => {
                             footerDispatchHeading: e.target.value,
                           })
                         }
-                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                       />
                     </div>
                   </div>
@@ -3021,7 +3058,7 @@ export const AdminPortal: React.FC = () => {
                       onChange={(e) =>
                         setCopyDraft({ ...copyDraft, footerTagline: e.target.value })
                       }
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                     />
                   </div>
 
@@ -3038,7 +3075,7 @@ export const AdminPortal: React.FC = () => {
                           footerBottomRightText: e.target.value,
                         })
                       }
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                     />
                   </div>
                 </div>
@@ -3049,8 +3086,8 @@ export const AdminPortal: React.FC = () => {
             {cmsSubTab === 'policies_voice' && (
               <div className="space-y-6">
                 {/* Pre-Footer Disclaimer & Section Headings */}
-                <div className="bg-white p-6 rounded-2xl border border-[#2C221E]/8 space-y-4 text-xs">
-                  <h3 className="font-serif text-xl font-bold text-[#2C221E]">
+                <div className="bg-white p-6 rounded-2xl border border-[#40563D]/8 space-y-4 text-xs">
+                  <h3 className="font-serif text-xl font-bold text-[#40563D]">
                     Pre-Footer Natural Remedies Disclaimer & Homepage Section Headings
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -3067,7 +3104,7 @@ export const AdminPortal: React.FC = () => {
                             disclaimerBadge: e.target.value,
                           })
                         }
-                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                       />
                     </div>
                     <div>
@@ -3086,7 +3123,7 @@ export const AdminPortal: React.FC = () => {
                             needsSectionKicker: e.target.value,
                           })
                         }
-                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                       />
                     </div>
                     <div>
@@ -3105,7 +3142,7 @@ export const AdminPortal: React.FC = () => {
                             needsSectionHeading: e.target.value,
                           })
                         }
-                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                       />
                     </div>
                   </div>
@@ -3123,14 +3160,14 @@ export const AdminPortal: React.FC = () => {
                           disclaimerText: e.target.value,
                         })
                       }
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                     />
                   </div>
                 </div>
 
                 {/* Store Policies & Shipping Info */}
-                <div className="bg-white p-6 rounded-2xl border border-[#2C221E]/8 space-y-4 text-xs">
-                  <h3 className="font-serif text-xl font-bold text-[#2C221E]">
+                <div className="bg-white p-6 rounded-2xl border border-[#40563D]/8 space-y-4 text-xs">
+                  <h3 className="font-serif text-xl font-bold text-[#40563D]">
                     Shipping Information, No Returns/Refunds Policy & Store Terms
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -3147,7 +3184,7 @@ export const AdminPortal: React.FC = () => {
                             shippingPolicyText: e.target.value,
                           })
                         }
-                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                       />
                     </div>
                     <div>
@@ -3163,7 +3200,7 @@ export const AdminPortal: React.FC = () => {
                             returnsPolicyText: e.target.value,
                           })
                         }
-                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                       />
                     </div>
                     <div>
@@ -3177,7 +3214,7 @@ export const AdminPortal: React.FC = () => {
                             privacyPolicyText: e.target.value,
                           })
                         }
-                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                       />
                     </div>
                     <div>
@@ -3193,19 +3230,19 @@ export const AdminPortal: React.FC = () => {
                             termsConditionsText: e.target.value,
                           })
                         }
-                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                       />
                     </div>
                   </div>
                 </div>
 
                 {/* Live Voice Guide Instructions & Knowledge Base */}
-                <div className="bg-white p-6 rounded-2xl border border-[#2C221E]/8 space-y-4 text-xs">
+                <div className="bg-white p-6 rounded-2xl border border-[#40563D]/8 space-y-4 text-xs">
                   <div>
-                    <h3 className="font-serif text-xl font-bold text-[#2C221E]">
+                    <h3 className="font-serif text-xl font-bold text-[#40563D]">
                       Live Voice Guide — Instructions & Knowledge Base
                     </h3>
-                    <p className="text-[#655549] mt-0.5">
+                    <p className="text-[#5A4E38] mt-0.5">
                       Customize the real-time voice guide agent name, opening greeting,
                       system instructions, and product/policy knowledge base. Changes take
                       effect immediately on new voice calls.
@@ -3226,7 +3263,7 @@ export const AdminPortal: React.FC = () => {
                             voiceAgentName: e.target.value,
                           })
                         }
-                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                       />
                     </div>
                     <div>
@@ -3242,7 +3279,7 @@ export const AdminPortal: React.FC = () => {
                             voiceWelcomeMessage: e.target.value,
                           })
                         }
-                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                        className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                       />
                     </div>
                   </div>
@@ -3260,7 +3297,7 @@ export const AdminPortal: React.FC = () => {
                           voiceSystemInstruction: e.target.value,
                         })
                       }
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl font-mono text-[11px]"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl font-mono text-[11px]"
                     />
                   </div>
 
@@ -3277,7 +3314,7 @@ export const AdminPortal: React.FC = () => {
                           voiceKnowledgeBase: e.target.value,
                         })
                       }
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl font-mono text-[11px]"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl font-mono text-[11px]"
                     />
                   </div>
                 </div>
@@ -3291,12 +3328,12 @@ export const AdminPortal: React.FC = () => {
             =================================================================== */}
         {activeTab === 'reviews' && (
           <div className="space-y-6">
-            <div className="bg-white p-5 rounded-2xl border border-[#2C221E]/8 flex flex-wrap items-center justify-between gap-4">
+            <div className="bg-white p-5 rounded-2xl border border-[#40563D]/8 flex flex-wrap items-center justify-between gap-4">
               <div>
-                <h2 className="font-serif text-2xl font-bold text-[#2C221E]">
+                <h2 className="font-serif text-2xl font-bold text-[#40563D]">
                   Customer Reviews & Testimonials ({reviews.length})
                 </h2>
-                <p className="text-xs text-[#655549]">
+                <p className="text-xs text-[#5A4E38]">
                   Add verified household reviews, edit existing testimonials, toggle
                   visibility, or delete reviews.
                 </p>
@@ -3304,7 +3341,7 @@ export const AdminPortal: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setIsAddingReview(!isAddingReview)}
-                className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-[#4A5D23] text-[#F5EFDC] rounded-full text-xs font-semibold cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-4 py-2.5 bg-[#40563D] text-[#F2EBD0] rounded-full text-xs font-semibold cursor-pointer"
               >
                 <Plus className="w-4 h-4" />
                 <span>Add New Testimonial</span>
@@ -3331,7 +3368,7 @@ export const AdminPortal: React.FC = () => {
                   setIsAddingReview(false);
                   showToast('Added new verified customer review.');
                 }}
-                className="bg-white p-6 rounded-2xl border border-[#4A5D23]/30 space-y-4 text-xs"
+                className="bg-white p-6 rounded-2xl border border-[#40563D]/30 space-y-4 text-xs"
               >
                 <h3 className="font-serif text-xl font-bold">
                   Create Verified Customer Review
@@ -3343,19 +3380,19 @@ export const AdminPortal: React.FC = () => {
                     placeholder="Customer Name"
                     value={newRevName}
                     onChange={(e) => setNewRevName(e.target.value)}
-                    className="px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                    className="px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                   />
                   <input
                     type="text"
                     placeholder="City (e.g. DHA Lahore)"
                     value={newRevCity}
                     onChange={(e) => setNewRevCity(e.target.value)}
-                    className="px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                    className="px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                   />
                   <select
                     value={newRevProductTag}
                     onChange={(e) => setNewRevProductTag(e.target.value)}
-                    className="px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                    className="px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                   >
                     {products.map((p) => (
                       <option key={p.id} value={p.name}>
@@ -3366,7 +3403,7 @@ export const AdminPortal: React.FC = () => {
                   <select
                     value={newRevRating}
                     onChange={(e) => setNewRevRating(Number(e.target.value))}
-                    className="px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                    className="px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                   >
                     <option value={5}>5 Stars</option>
                     <option value={4}>4 Stars</option>
@@ -3379,7 +3416,7 @@ export const AdminPortal: React.FC = () => {
                   placeholder="Review Headline"
                   value={newRevTitle}
                   onChange={(e) => setNewRevTitle(e.target.value)}
-                  className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                  className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                 />
                 <textarea
                   rows={2}
@@ -3387,19 +3424,19 @@ export const AdminPortal: React.FC = () => {
                   placeholder="Full customer review comment..."
                   value={newRevComment}
                   onChange={(e) => setNewRevComment(e.target.value)}
-                  className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                  className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                 />
                 <div className="flex gap-2">
                   <button
                     type="submit"
-                    className="px-5 py-2 bg-[#4A5D23] text-[#F5EFDC] rounded-full font-semibold cursor-pointer"
+                    className="px-5 py-2 bg-[#40563D] text-[#F2EBD0] rounded-full font-semibold cursor-pointer"
                   >
                     Publish Review
                   </button>
                   <button
                     type="button"
                     onClick={() => setIsAddingReview(false)}
-                    className="px-4 py-2 bg-[#F2ECE1] text-[#2C221E] rounded-full cursor-pointer"
+                    className="px-4 py-2 bg-[#F2ECE1] text-[#40563D] rounded-full cursor-pointer"
                   >
                     Cancel
                   </button>
@@ -3414,7 +3451,7 @@ export const AdminPortal: React.FC = () => {
                   return (
                     <div
                       key={r.id}
-                      className="bg-white p-5 rounded-2xl border border-[#4A5D23] space-y-3 text-xs"
+                      className="bg-white p-5 rounded-2xl border border-[#40563D] space-y-3 text-xs"
                     >
                       <div className="grid grid-cols-2 gap-2">
                         <input
@@ -3477,7 +3514,7 @@ export const AdminPortal: React.FC = () => {
                             setEditingReviewDraft(null);
                             showToast('Review updated.');
                           }}
-                          className="px-3.5 py-1.5 bg-[#4A5D23] text-white rounded-lg font-semibold cursor-pointer"
+                          className="px-3.5 py-1.5 bg-[#40563D] text-white rounded-lg font-semibold cursor-pointer"
                         >
                           Save Review
                         </button>
@@ -3489,15 +3526,15 @@ export const AdminPortal: React.FC = () => {
                 return (
                   <div
                     key={r.id}
-                    className="bg-white p-5 rounded-2xl border border-[#2C221E]/8 space-y-2 text-xs flex flex-col justify-between"
+                    className="bg-white p-5 rounded-2xl border border-[#40563D]/8 space-y-2 text-xs flex flex-col justify-between"
                   >
                     <div className="space-y-2">
                       <div className="flex justify-between items-start gap-2">
                         <div>
-                          <span className="font-semibold text-[#2C221E]">
+                          <span className="font-semibold text-[#40563D]">
                             {r.customerName} ({r.city})
                           </span>
-                          <span className="block text-[11px] text-[#655549]">
+                          <span className="block text-[11px] text-[#5A4E38]">
                             {r.productTag} · {r.rating}★ · {r.date}
                           </span>
                         </div>
@@ -3507,7 +3544,7 @@ export const AdminPortal: React.FC = () => {
                             onClick={() => approveReview(r.id)}
                             className={`px-2 py-0.5 rounded text-[10px] font-semibold cursor-pointer ${
                               r.isApproved
-                                ? 'bg-[#E6ECD8] text-[#4A5D23]'
+                                ? 'bg-[#E6ECD8] text-[#40563D]'
                                 : 'bg-[#FEE2E2] text-[#991B1B]'
                             }`}
                           >
@@ -3516,7 +3553,7 @@ export const AdminPortal: React.FC = () => {
                           <button
                             type="button"
                             onClick={() => setEditingReviewDraft(r)}
-                            className="text-[#4A5D23] font-semibold hover:underline cursor-pointer"
+                            className="text-[#40563D] font-semibold hover:underline cursor-pointer"
                           >
                             Edit
                           </button>
@@ -3533,7 +3570,7 @@ export const AdminPortal: React.FC = () => {
                         </div>
                       </div>
                       <p className="font-serif text-base font-semibold">“{r.title}”</p>
-                      <p className="text-[#655549]">{r.comment}</p>
+                      <p className="text-[#5A4E38]">{r.comment}</p>
                     </div>
                   </div>
                 );
@@ -3552,9 +3589,9 @@ export const AdminPortal: React.FC = () => {
               updateStoreSettings(settingsDraft);
               showToast('Store, contact, delivery, and bank settings saved.');
             }}
-            className="bg-white p-6 rounded-2xl border border-[#2C221E]/8 max-w-4xl space-y-6 text-xs"
+            className="bg-white p-6 rounded-2xl border border-[#40563D]/8 max-w-4xl space-y-6 text-xs"
           >
-            <h2 className="font-serif text-2xl font-bold text-[#2C221E]">
+            <h2 className="font-serif text-2xl font-bold text-[#40563D]">
               Global Store, Contact & Bank Transfer Settings
             </h2>
 
@@ -3570,7 +3607,7 @@ export const AdminPortal: React.FC = () => {
                       businessName: e.target.value,
                     })
                   }
-                  className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                  className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                 />
               </div>
               <div>
@@ -3584,7 +3621,7 @@ export const AdminPortal: React.FC = () => {
                       websiteUrl: e.target.value,
                     })
                   }
-                  className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl font-mono"
+                  className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl font-mono"
                 />
               </div>
               <div>
@@ -3598,7 +3635,7 @@ export const AdminPortal: React.FC = () => {
                       officialPhone: e.target.value,
                     })
                   }
-                  className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl font-mono"
+                  className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl font-mono"
                 />
               </div>
               <div>
@@ -3614,7 +3651,7 @@ export const AdminPortal: React.FC = () => {
                       whatsappNumber: e.target.value,
                     })
                   }
-                  className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl font-mono"
+                  className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl font-mono"
                 />
               </div>
               <div>
@@ -3630,7 +3667,7 @@ export const AdminPortal: React.FC = () => {
                       freeDeliveryThreshold: parseInt(e.target.value) || 0,
                     })
                   }
-                  className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl font-mono"
+                  className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl font-mono"
                 />
               </div>
               <div>
@@ -3646,7 +3683,7 @@ export const AdminPortal: React.FC = () => {
                       standardDeliveryFee: parseInt(e.target.value) || 0,
                     })
                   }
-                  className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl font-mono"
+                  className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl font-mono"
                 />
               </div>
             </div>
@@ -3664,7 +3701,7 @@ export const AdminPortal: React.FC = () => {
                     announcementText: e.target.value,
                   })
                 }
-                className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
               />
             </div>
 
@@ -3680,7 +3717,7 @@ export const AdminPortal: React.FC = () => {
                       officeAddress: e.target.value,
                     })
                   }
-                  className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                  className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                 />
               </div>
               <div>
@@ -3694,7 +3731,7 @@ export const AdminPortal: React.FC = () => {
                       instagramUrl: e.target.value,
                     })
                   }
-                  className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                  className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                 />
               </div>
               <div>
@@ -3708,13 +3745,13 @@ export const AdminPortal: React.FC = () => {
                       facebookUrl: e.target.value,
                     })
                   }
-                  className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                  className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                 />
               </div>
             </div>
 
-            <div className="pt-4 border-t border-[#2C221E]/10 space-y-3">
-              <h3 className="font-serif text-lg font-bold text-[#2C221E]">
+            <div className="pt-4 border-t border-[#40563D]/10 space-y-3">
+              <h3 className="font-serif text-lg font-bold text-[#40563D]">
                 Direct Bank Transfer Details (Checkout Display)
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -3732,7 +3769,7 @@ export const AdminPortal: React.FC = () => {
                         },
                       })
                     }
-                    className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                    className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                   />
                 </div>
                 <div>
@@ -3749,7 +3786,7 @@ export const AdminPortal: React.FC = () => {
                         },
                       })
                     }
-                    className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl font-mono"
+                    className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl font-mono"
                   />
                 </div>
                 <div>
@@ -3766,7 +3803,7 @@ export const AdminPortal: React.FC = () => {
                         },
                       })
                     }
-                    className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl font-mono"
+                    className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl font-mono"
                   />
                 </div>
                 <div>
@@ -3783,7 +3820,7 @@ export const AdminPortal: React.FC = () => {
                         },
                       })
                     }
-                    className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl font-mono"
+                    className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl font-mono"
                   />
                 </div>
               </div>
@@ -3803,32 +3840,32 @@ export const AdminPortal: React.FC = () => {
                       },
                     })
                   }
-                  className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                  className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                 />
               </div>
             </div>
 
             <button
               type="submit"
-              className="px-6 py-2.5 bg-[#E9F490] hover:bg-[#dfec78] text-[#2C221E] border border-[#4A5D23]/25 font-bold uppercase tracking-wider rounded-full cursor-pointer"
+              className="px-6 py-2.5 bg-[#E9F490] hover:bg-[#dfec78] text-[#40563D] border border-[#40563D]/25 font-bold uppercase tracking-wider rounded-full cursor-pointer"
             >
               Save Store & Bank Settings
             </button>
 
             {/* Custom Self-Hosted Database Backup & Restore (Namecheap Hosting Ready) */}
-            <div className="pt-6 border-t border-[#2C221E]/10 space-y-3">
+            <div className="pt-6 border-t border-[#40563D]/10 space-y-3">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div>
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-[#4A5D23] font-bold block">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-[#40563D] font-bold block">
                     Self-Hosted Custom Database Engine · Zero External Cloud Dependencies
                   </span>
-                  <h3 className="font-serif text-lg font-bold text-[#2C221E]">
+                  <h3 className="font-serif text-lg font-bold text-[#40563D]">
                     Namecheap Hosting Database Backup & Restore (.json)
                   </h3>
-                  <p className="text-xs text-[#655549]">
+                  <p className="text-xs text-[#5A4E38]">
                     All products, orders, customer accounts, reviews, policies, and voice
                     guide settings are stored directly on your hosting server in{' '}
-                    <code className="font-mono text-[#2C221E]">.dtcss-store-db.json</code>.
+                    <code className="font-mono text-[#40563D]">.dtcss-store-db.json</code>.
                     Download a snapshot or restore from a backup file anytime.
                   </p>
                 </div>
@@ -3837,14 +3874,14 @@ export const AdminPortal: React.FC = () => {
                   <a
                     href="/api/admin/db-backup"
                     download={`bajoz-database-backup-${new Date().toISOString().slice(0, 10)}.json`}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#4A5D23] hover:bg-[#3A4A1B] text-[#F5EFDC] rounded-full text-xs font-semibold cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#40563D] hover:bg-[#3A4A1B] text-[#F2EBD0] rounded-full text-xs font-semibold cursor-pointer"
                   >
                     <FileText className="w-3.5 h-3.5" />
                     <span>Download Full DB Backup</span>
                   </a>
 
-                  <label className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#DCE6C8] hover:bg-[#E9F490] text-[#2C221E] border border-[#4A5D23]/20 rounded-full text-xs font-semibold cursor-pointer">
-                    <Upload className="w-3.5 h-3.5 text-[#4A5D23]" />
+                  <label className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#DCE7C9] hover:bg-[#E9F490] text-[#40563D] border border-[#40563D]/20 rounded-full text-xs font-semibold cursor-pointer">
+                    <Upload className="w-3.5 h-3.5 text-[#40563D]" />
                     <span>Restore DB From Backup</span>
                     <input
                       type="file"
@@ -3887,39 +3924,39 @@ export const AdminPortal: React.FC = () => {
         {activeTab === 'security' && (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             <div className="lg:col-span-7 space-y-6">
-              <div className="bg-white p-6 rounded-2xl border border-[#2C221E]/8 space-y-4">
+              <div className="bg-white p-6 rounded-2xl border border-[#40563D]/8 space-y-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <span className="text-[11px] font-mono uppercase tracking-wider text-[#4A5D23] font-semibold">
+                    <span className="text-[11px] font-mono uppercase tracking-wider text-[#40563D] font-semibold">
                       Unlisted Admin Endpoint
                     </span>
-                    <h3 className="font-serif text-2xl font-bold text-[#2C221E]">
+                    <h3 className="font-serif text-2xl font-bold text-[#40563D]">
                       Dedicated Admin Portal URLs
                     </h3>
                   </div>
                   <button
                     type="button"
                     onClick={handleCopyAdminUrl}
-                    className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#4A5D23] text-[#F5EFDC] rounded-xl text-xs font-semibold cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#40563D] text-[#F2EBD0] rounded-xl text-xs font-semibold cursor-pointer"
                   >
                     <Copy className="w-3.5 h-3.5" />
                     <span>{copiedUrlBanner ? 'Copied!' : 'Copy Portal Link'}</span>
                   </button>
                 </div>
-                <p className="text-xs text-[#655549] leading-relaxed">
+                <p className="text-xs text-[#5A4E38] leading-relaxed">
                   All Admin buttons are hidden from the public DTCSS storefront.
                   Directors and Managers can access this console directly by visiting:
                 </p>
-                <div className="p-3.5 bg-[#F6EBC8] rounded-xl border border-[#2C221E]/10 font-mono text-xs space-y-1.5">
+                <div className="p-3.5 bg-[#F6EBC8] rounded-xl border border-[#40563D]/10 font-mono text-xs space-y-1.5">
                   <div>
-                    <span className="text-[#655549]">Primary URL: </span>
-                    <span className="font-bold text-[#2C221E]">
+                    <span className="text-[#5A4E38]">Primary URL: </span>
+                    <span className="font-bold text-[#40563D]">
                       {dedicatedAdminUrl}
                     </span>
                   </div>
                   <div>
-                    <span className="text-[#655549]">Legacy Alias: </span>
-                    <span className="font-bold text-[#2C221E]">
+                    <span className="text-[#5A4E38]">Legacy Alias: </span>
+                    <span className="font-bold text-[#40563D]">
                       {typeof window !== 'undefined'
                         ? `${window.location.origin}/dtcss/admin`
                         : 'https://bajoz.pk/dtcss/admin'}
@@ -3928,26 +3965,26 @@ export const AdminPortal: React.FC = () => {
                 </div>
               </div>
 
-              <div className="bg-white p-6 rounded-2xl border border-[#2C221E]/8 space-y-4">
-                <h3 className="font-serif text-2xl font-bold text-[#2C221E]">
+              <div className="bg-white p-6 rounded-2xl border border-[#40563D]/8 space-y-4">
+                <h3 className="font-serif text-2xl font-bold text-[#40563D]">
                   Authorized DTCSS Personnel ({personnelList.length})
                 </h3>
                 {securityFeedback && (
-                  <div className="p-3 bg-[#E6ECD8] text-[#2C221E] rounded-xl text-xs font-semibold">
+                  <div className="p-3 bg-[#E6ECD8] text-[#40563D] rounded-xl text-xs font-semibold">
                     {securityFeedback}
                   </div>
                 )}
-                <div className="divide-y divide-[#2C221E]/8">
+                <div className="divide-y divide-[#40563D]/8">
                   {personnelList.map((staff) => (
                     <div
                       key={staff.email}
                       className="py-3.5 flex items-center justify-between gap-4 text-xs"
                     >
                       <div>
-                        <span className="font-semibold text-[#2C221E] block">
+                        <span className="font-semibold text-[#40563D] block">
                           {staff.name}
                         </span>
-                        <span className="font-mono text-[#655549]">{staff.email}</span>
+                        <span className="font-mono text-[#5A4E38]">{staff.email}</span>
                       </div>
                       <div className="flex items-center gap-3">
                         <span className="px-2.5 py-1 bg-[#F6EBC8] rounded-full font-mono text-[11px]">
@@ -3973,11 +4010,11 @@ export const AdminPortal: React.FC = () => {
             <div className="lg:col-span-5">
               <form
                 onSubmit={handleAddOrUpdatePersonnel}
-                className="bg-white p-6 rounded-2xl border border-[#2C221E]/8 space-y-4 text-xs"
+                className="bg-white p-6 rounded-2xl border border-[#40563D]/8 space-y-4 text-xs"
               >
                 <div className="flex items-center gap-2">
-                  <UserPlus className="w-4 h-4 text-[#4A5D23]" />
-                  <h3 className="font-serif text-2xl font-bold text-[#2C221E]">
+                  <UserPlus className="w-4 h-4 text-[#40563D]" />
+                  <h3 className="font-serif text-2xl font-bold text-[#40563D]">
                     Authorize Staff or Update Key
                   </h3>
                 </div>
@@ -3989,7 +4026,7 @@ export const AdminPortal: React.FC = () => {
                     value={newStaffEmail}
                     onChange={(e) => setNewStaffEmail(e.target.value)}
                     placeholder="manager@dtcss.pk"
-                    className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                    className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                   />
                 </div>
                 <div>
@@ -4000,7 +4037,7 @@ export const AdminPortal: React.FC = () => {
                     value={newStaffName}
                     onChange={(e) => setNewStaffName(e.target.value)}
                     placeholder="e.g. Usman Tariq"
-                    className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                    className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                   />
                 </div>
                 <div>
@@ -4012,7 +4049,7 @@ export const AdminPortal: React.FC = () => {
                         e.target.value as AuthorizedStaffProfile['role']
                       )
                     }
-                    className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                    className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                   >
                     <option value="Store Director">Store Director</option>
                     <option value="Operations Manager">Operations Manager</option>
@@ -4031,12 +4068,12 @@ export const AdminPortal: React.FC = () => {
                     value={newStaffPassword}
                     onChange={(e) => setNewStaffPassword(e.target.value)}
                     placeholder="Set secret access key"
-                    className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl font-mono"
+                    className="w-full px-3.5 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl font-mono"
                   />
                 </div>
                 <button
                   type="submit"
-                  className="w-full py-2.5 bg-[#4A5D23] hover:bg-[#3B4B1B] text-[#F5EFDC] font-semibold uppercase tracking-wider rounded-full cursor-pointer"
+                  className="w-full py-2.5 bg-[#40563D] hover:bg-[#40563D] text-[#F2EBD0] font-semibold uppercase tracking-wider rounded-full cursor-pointer"
                 >
                   Save Staff Authorization
                 </button>
@@ -4050,12 +4087,12 @@ export const AdminPortal: React.FC = () => {
             =================================================================== */}
         {activeTab === 'users' && (
           <div className="space-y-6">
-            <div className="bg-white p-5 rounded-2xl border border-[#2C221E]/8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="bg-white p-5 rounded-2xl border border-[#40563D]/8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
-                <h2 className="font-serif text-2xl font-bold text-[#2C221E]">
+                <h2 className="font-serif text-2xl font-bold text-[#40563D]">
                   Customer Account Management ({registeredUsers.length})
                 </h2>
-                <p className="text-xs text-[#655549] mt-0.5">
+                <p className="text-xs text-[#5A4E38] mt-0.5">
                   Create, search, update, or remove customer accounts, saved delivery addresses, and account credentials.
                 </p>
               </div>
@@ -4066,9 +4103,9 @@ export const AdminPortal: React.FC = () => {
                     value={userSearch}
                     onChange={(e) => setUserSearch(e.target.value)}
                     placeholder="Search name, email, phone, city..."
-                    className="w-full pl-9 pr-4 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-full text-xs text-[#2C221E] focus:outline-none focus:border-[#4A5D23]"
+                    className="w-full pl-9 pr-4 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-full text-xs text-[#40563D] focus:outline-none focus:border-[#40563D]"
                   />
-                  <Search className="w-4 h-4 text-[#655549] absolute left-3 top-1/2 -translate-y-1/2" />
+                  <Search className="w-4 h-4 text-[#5A4E38] absolute left-3 top-1/2 -translate-y-1/2" />
                 </div>
                 <button
                   type="button"
@@ -4087,7 +4124,7 @@ export const AdminPortal: React.FC = () => {
                       passwordHash: '',
                     });
                   }}
-                  className="px-4 py-2.5 bg-[#4A5D23] hover:bg-[#3B4B1B] text-[#F5EFDC] rounded-full text-xs font-semibold flex items-center gap-1.5 cursor-pointer"
+                  className="px-4 py-2.5 bg-[#40563D] hover:bg-[#40563D] text-[#F2EBD0] rounded-full text-xs font-semibold flex items-center gap-1.5 cursor-pointer"
                 >
                   <Plus className="w-4 h-4" /> + Create Customer Account
                 </button>
@@ -4118,56 +4155,56 @@ export const AdminPortal: React.FC = () => {
                   return (
                     <div
                       key={cust.id}
-                      className="bg-white p-5 rounded-2xl border border-[#2C221E]/10 flex flex-col justify-between gap-4 shadow-2xs"
+                      className="bg-white p-5 rounded-2xl border border-[#40563D]/10 flex flex-col justify-between gap-4 shadow-2xs"
                     >
                       <div className="space-y-3">
                         <div className="flex items-start justify-between gap-2">
                           <div>
-                            <span className="font-mono text-[10px] uppercase tracking-wider text-[#4A5D23] font-bold">
+                            <span className="font-mono text-[10px] uppercase tracking-wider text-[#40563D] font-bold">
                               {cust.provider === 'google' ? 'Google Auth' : 'Email Account'} · ID #{cust.id.slice(-6)}
                             </span>
-                            <h3 className="font-serif text-lg font-bold text-[#2C221E]">
+                            <h3 className="font-serif text-lg font-bold text-[#40563D]">
                               {cust.name || 'Unnamed Customer'}
                             </h3>
-                            <p className="text-xs text-[#655549] font-mono break-all">
+                            <p className="text-xs text-[#5A4E38] font-mono break-all">
                               {cust.email}
                             </p>
                           </div>
-                          <span className="px-2.5 py-1 rounded-full bg-[#F6EBC8] text-[#2C221E] font-mono text-[11px] font-bold shrink-0">
+                          <span className="px-2.5 py-1 rounded-full bg-[#F6EBC8] text-[#40563D] font-mono text-[11px] font-bold shrink-0">
                             {custOrders.length} {custOrders.length === 1 ? 'Order' : 'Orders'}
                           </span>
                         </div>
 
                         <div className="grid grid-cols-2 gap-2 p-3 rounded-xl bg-[#F6EBC8]/60 text-xs">
                           <div>
-                            <span className="text-[10px] uppercase tracking-wider text-[#655549] block">
+                            <span className="text-[10px] uppercase tracking-wider text-[#5A4E38] block">
                               Phone
                             </span>
-                            <span className="font-mono font-semibold text-[#2C221E]">
+                            <span className="font-mono font-semibold text-[#40563D]">
                               {cust.phone || 'Not set'}
                             </span>
                           </div>
                           <div>
-                            <span className="text-[10px] uppercase tracking-wider text-[#655549] block">
+                            <span className="text-[10px] uppercase tracking-wider text-[#5A4E38] block">
                               City
                             </span>
-                            <span className="font-semibold text-[#2C221E]">
+                            <span className="font-semibold text-[#40563D]">
                               {cust.city || 'Not set'}
                             </span>
                           </div>
                           <div>
-                            <span className="text-[10px] uppercase tracking-wider text-[#655549] block">
+                            <span className="text-[10px] uppercase tracking-wider text-[#5A4E38] block">
                               Lifetime Spend
                             </span>
-                            <span className="font-mono font-bold text-[#4A5D23]">
+                            <span className="font-mono font-bold text-[#40563D]">
                               PKR {totalSpent.toLocaleString()}
                             </span>
                           </div>
                           <div>
-                            <span className="text-[10px] uppercase tracking-wider text-[#655549] block">
+                            <span className="text-[10px] uppercase tracking-wider text-[#5A4E38] block">
                               Joined
                             </span>
-                            <span className="font-mono text-[11px] text-[#2C221E]">
+                            <span className="font-mono text-[11px] text-[#40563D]">
                               {new Date(cust.createdAt).toLocaleDateString()}
                             </span>
                           </div>
@@ -4175,17 +4212,17 @@ export const AdminPortal: React.FC = () => {
 
                         {cust.savedAddresses && cust.savedAddresses.length > 0 && (
                           <div className="text-xs">
-                            <span className="text-[10px] uppercase tracking-wider text-[#655549] font-semibold block mb-1">
+                            <span className="text-[10px] uppercase tracking-wider text-[#5A4E38] font-semibold block mb-1">
                               Saved Delivery Addresses ({cust.savedAddresses.length})
                             </span>
-                            <p className="text-[#2C221E] bg-[#F6EBC8]/40 px-2.5 py-1.5 rounded-lg line-clamp-2">
+                            <p className="text-[#40563D] bg-[#F6EBC8]/40 px-2.5 py-1.5 rounded-lg line-clamp-2">
                               {cust.savedAddresses[0]}
                             </p>
                           </div>
                         )}
                       </div>
 
-                      <div className="flex items-center justify-between gap-2 pt-3 border-t border-[#2C221E]/8">
+                      <div className="flex items-center justify-between gap-2 pt-3 border-t border-[#40563D]/8">
                         <button
                           type="button"
                           onClick={() => {
@@ -4193,7 +4230,7 @@ export const AdminPortal: React.FC = () => {
                             setNewCustomerAddressDraft('');
                             setEditingCustomer({ ...cust });
                           }}
-                          className="flex-1 py-2 px-3 bg-[#F6EBC8] hover:bg-[#DCE6C8] text-[#2C221E] rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 cursor-pointer transition-colors"
+                          className="flex-1 py-2 px-3 bg-[#F6EBC8] hover:bg-[#DCE7C9] text-[#40563D] rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 cursor-pointer transition-colors"
                         >
                           <Edit3 className="w-3.5 h-3.5" /> Edit Account
                         </button>
@@ -4207,7 +4244,7 @@ export const AdminPortal: React.FC = () => {
                             setManualCustAddress(cust.savedAddresses?.[0] || '');
                             setIsBookingModalOpen(true);
                           }}
-                          className="py-2 px-3 bg-[#4A5D23]/12 hover:bg-[#4A5D23] hover:text-white text-[#4A5D23] rounded-xl text-xs font-semibold cursor-pointer transition-colors"
+                          className="py-2 px-3 bg-[#40563D]/12 hover:bg-[#40563D] hover:text-white text-[#40563D] rounded-xl text-xs font-semibold cursor-pointer transition-colors"
                           title="Book Order for Customer"
                         >
                           + Book Order
@@ -4236,21 +4273,21 @@ export const AdminPortal: React.FC = () => {
           MODAL 1: MANUAL ORDER BOOKING MODAL
           ===================================================================== */}
       {isBookingModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-[#2C221E]/65 backdrop-blur-2xs">
-          <div className="bg-[#F6EBC8] text-[#2C221E] w-full max-w-3xl rounded-3xl shadow-2xl border border-[#2C221E]/15 max-h-[92vh] flex flex-col overflow-hidden">
-            <div className="px-4 sm:px-6 py-4 bg-white border-b border-[#2C221E]/10 flex items-center justify-between gap-2">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-[#40563D]/65 backdrop-blur-2xs">
+          <div className="bg-[#F6EBC8] text-[#40563D] w-full max-w-3xl rounded-3xl shadow-2xl border border-[#40563D]/15 max-h-[92vh] flex flex-col overflow-hidden">
+            <div className="px-4 sm:px-6 py-4 bg-white border-b border-[#40563D]/10 flex items-center justify-between gap-2">
               <div>
                 <h2 className="font-serif text-xl sm:text-2xl font-bold">
                   Book Manual Order (Phone / WhatsApp / Walk-In)
                 </h2>
-                <p className="text-xs text-[#655549]">
+                <p className="text-xs text-[#5A4E38]">
                   Logged by {adminStaff.name} ({adminStaff.role})
                 </p>
               </div>
               <button
                 type="button"
                 onClick={() => setIsBookingModalOpen(false)}
-                className="p-1.5 text-[#655549] hover:text-[#2C221E] rounded-full cursor-pointer"
+                className="p-1.5 text-[#5A4E38] hover:text-[#40563D] rounded-full cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -4261,7 +4298,7 @@ export const AdminPortal: React.FC = () => {
               className="overflow-y-auto p-4 sm:p-6 space-y-6 text-xs"
             >
               {/* Customer Details */}
-              <div className="bg-white p-4 rounded-2xl border border-[#2C221E]/8 space-y-3">
+              <div className="bg-white p-4 rounded-2xl border border-[#40563D]/8 space-y-3">
                 <h3 className="font-serif text-lg font-bold">1. Customer & Delivery</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <div>
@@ -4272,7 +4309,7 @@ export const AdminPortal: React.FC = () => {
                       value={manualCustName}
                       onChange={(e) => setManualCustName(e.target.value)}
                       placeholder="e.g. Mrs. Kamran"
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                     />
                   </div>
                   <div>
@@ -4283,7 +4320,7 @@ export const AdminPortal: React.FC = () => {
                       value={manualCustPhone}
                       onChange={(e) => setManualCustPhone(e.target.value)}
                       placeholder="0300-1234567"
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl font-mono"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl font-mono"
                     />
                   </div>
                   <div>
@@ -4294,7 +4331,7 @@ export const AdminPortal: React.FC = () => {
                       value={manualCustCity}
                       onChange={(e) => setManualCustCity(e.target.value)}
                       placeholder="Lahore"
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                     />
                   </div>
                 </div>
@@ -4307,7 +4344,7 @@ export const AdminPortal: React.FC = () => {
                       value={manualCustAddress}
                       onChange={(e) => setManualCustAddress(e.target.value)}
                       placeholder="House #, Street, Sector, Area"
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                     />
                   </div>
                   <div>
@@ -4319,14 +4356,14 @@ export const AdminPortal: React.FC = () => {
                       value={manualCustEmail}
                       onChange={(e) => setManualCustEmail(e.target.value)}
                       placeholder="customer@email.com"
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                     />
                   </div>
                 </div>
               </div>
 
               {/* Line Items Builder */}
-              <div className="bg-white p-4 rounded-2xl border border-[#2C221E]/8 space-y-3">
+              <div className="bg-white p-4 rounded-2xl border border-[#40563D]/8 space-y-3">
                 <h3 className="font-serif text-lg font-bold">2. Select Products & Jars</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-12 gap-2 items-end">
                   <div className="sm:col-span-4">
@@ -4341,7 +4378,7 @@ export const AdminPortal: React.FC = () => {
                           setPickerPackId(nextProd.packSizes[0]?.id || '');
                         }
                       }}
-                      className="w-full px-2.5 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                      className="w-full px-2.5 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                     >
                       {products.map((p) => (
                         <option key={p.id} value={p.id}>
@@ -4355,7 +4392,7 @@ export const AdminPortal: React.FC = () => {
                     <select
                       value={pickerVariantId}
                       onChange={(e) => setPickerVariantId(e.target.value)}
-                      className="w-full px-2.5 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                      className="w-full px-2.5 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                     >
                       {(
                         products.find((p) => p.id === pickerProductId)?.variants || []
@@ -4371,7 +4408,7 @@ export const AdminPortal: React.FC = () => {
                     <select
                       value={pickerPackId}
                       onChange={(e) => setPickerPackId(e.target.value)}
-                      className="w-full px-2.5 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                      className="w-full px-2.5 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                     >
                       {(
                         products.find((p) => p.id === pickerProductId)?.packSizes || []
@@ -4388,12 +4425,12 @@ export const AdminPortal: React.FC = () => {
                       min="1"
                       value={pickerQty}
                       onChange={(e) => setPickerQty(parseInt(e.target.value) || 1)}
-                      className="w-14 px-2 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl text-center font-mono"
+                      className="w-14 px-2 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl text-center font-mono"
                     />
                     <button
                       type="button"
                       onClick={handleAddLineItemToManualOrder}
-                      className="flex-1 py-2 bg-[#4A5D23] text-white rounded-xl font-semibold cursor-pointer"
+                      className="flex-1 py-2 bg-[#40563D] text-white rounded-xl font-semibold cursor-pointer"
                     >
                       + Add
                     </button>
@@ -4401,7 +4438,7 @@ export const AdminPortal: React.FC = () => {
                 </div>
 
                 {manualItems.length > 0 ? (
-                  <div className="divide-y divide-[#2C221E]/8 pt-2">
+                  <div className="divide-y divide-[#40563D]/8 pt-2">
                     {manualItems.map((item) => (
                       <div
                         key={item.id}
@@ -4439,7 +4476,7 @@ export const AdminPortal: React.FC = () => {
               </div>
 
               {/* Scheduling, Payment & Courier */}
-              <div className="bg-white p-4 rounded-2xl border border-[#2C221E]/8 space-y-3">
+              <div className="bg-white p-4 rounded-2xl border border-[#40563D]/8 space-y-3">
                 <h3 className="font-serif text-lg font-bold">
                   3. Schedule, Payment & Courier Assignment
                 </h3>
@@ -4453,7 +4490,7 @@ export const AdminPortal: React.FC = () => {
                           e.target.value as 'cod' | 'bank_transfer'
                         )
                       }
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                     >
                       <option value="cod">Cash on Delivery (COD)</option>
                       <option value="bank_transfer">Meezan Bank Transfer</option>
@@ -4466,7 +4503,7 @@ export const AdminPortal: React.FC = () => {
                       onChange={(e) =>
                         setManualPaymentStatus(e.target.value as PaymentStatus)
                       }
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                     >
                       <option value="Pending">Pending</option>
                       <option value="Paid">Paid</option>
@@ -4482,7 +4519,7 @@ export const AdminPortal: React.FC = () => {
                       onChange={(e) =>
                         setManualFulfillmentStatus(e.target.value as FulfillmentStatus)
                       }
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                     >
                       <option value="Confirmed">Confirmed</option>
                       <option value="Scheduled">Scheduled</option>
@@ -4502,7 +4539,7 @@ export const AdminPortal: React.FC = () => {
                       type="date"
                       value={manualScheduledDate}
                       onChange={(e) => setManualScheduledDate(e.target.value)}
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl font-mono"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl font-mono"
                     />
                   </div>
                   <div>
@@ -4510,7 +4547,7 @@ export const AdminPortal: React.FC = () => {
                     <select
                       value={manualScheduledSlot}
                       onChange={(e) => setManualScheduledSlot(e.target.value)}
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                     >
                       {DELIVERY_SLOTS.map((sl) => (
                         <option key={sl} value={sl}>
@@ -4528,7 +4565,7 @@ export const AdminPortal: React.FC = () => {
                       value={manualCourier}
                       onChange={(e) => setManualCourier(e.target.value)}
                       placeholder="Trax / TCS"
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                     />
                   </div>
                   <div>
@@ -4540,7 +4577,7 @@ export const AdminPortal: React.FC = () => {
                       value={manualTracking}
                       onChange={(e) => setManualTracking(e.target.value)}
                       placeholder="TRX-..."
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl font-mono"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl font-mono"
                     />
                   </div>
                 </div>
@@ -4555,7 +4592,7 @@ export const AdminPortal: React.FC = () => {
                       value={manualNotes}
                       onChange={(e) => setManualNotes(e.target.value)}
                       placeholder="Special instructions..."
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                     />
                   </div>
                   <div>
@@ -4567,7 +4604,7 @@ export const AdminPortal: React.FC = () => {
                       value={manualGiftMsg}
                       onChange={(e) => setManualGiftMsg(e.target.value)}
                       placeholder="Handwritten gift message..."
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                     />
                   </div>
                 </div>
@@ -4577,14 +4614,14 @@ export const AdminPortal: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setIsBookingModalOpen(false)}
-                  className="px-5 py-2.5 bg-white text-[#2C221E] rounded-full font-semibold cursor-pointer"
+                  className="px-5 py-2.5 bg-white text-[#40563D] rounded-full font-semibold cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={manualItems.length === 0}
-                  className="px-6 py-2.5 bg-[#4A5D23] hover:bg-[#3B4B1B] text-[#F5EFDC] rounded-full font-semibold uppercase tracking-wider cursor-pointer disabled:opacity-50"
+                  className="px-6 py-2.5 bg-[#40563D] hover:bg-[#40563D] text-[#F2EBD0] rounded-full font-semibold uppercase tracking-wider cursor-pointer disabled:opacity-50"
                 >
                   Confirm & Book Order
                 </button>
@@ -4598,18 +4635,41 @@ export const AdminPortal: React.FC = () => {
           MODAL 2: ORDER DETAIL, TIMELINE TRACKER & CUSTOMER EDITOR
           ===================================================================== */}
       {selectedOrderForDetail && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-[#2C221E]/65 backdrop-blur-2xs">
-          <div className="bg-[#F6EBC8] text-[#2C221E] w-full max-w-2xl rounded-3xl shadow-2xl border border-[#2C221E]/15 max-h-[90vh] flex flex-col overflow-hidden">
-            <div className="px-4 sm:px-6 py-4 bg-white border-b border-[#2C221E]/10 flex flex-wrap items-center justify-between gap-2">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-[#40563D]/65 backdrop-blur-2xs">
+          <div className="bg-[#F6EBC8] text-[#40563D] w-full max-w-2xl rounded-3xl shadow-2xl border border-[#40563D]/15 max-h-[90vh] flex flex-col overflow-hidden">
+            <div className="px-4 sm:px-6 py-4 bg-white border-b border-[#40563D]/10 flex flex-wrap items-center justify-between gap-2">
               <div>
-                <span className="font-mono text-xs text-[#4A5D23] font-bold">
+                <span className="font-mono text-xs text-[#40563D] font-bold">
                   ORDER #{selectedOrderForDetail.orderNumber}
                 </span>
                 <h2 className="font-serif text-xl sm:text-2xl font-bold">
                   Manage, Edit & Track Parcel
                 </h2>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
+                {selectedOrderForDetail.fulfillmentStatus !== 'Cancelled' && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      cancelOrder(
+                        selectedOrderForDetail.orderNumber,
+                        `Cancelled by ${adminStaff.name} · inventory restocked`,
+                        adminStaff.name,
+                        true
+                      );
+                      setSelectedOrderForDetail({
+                        ...selectedOrderForDetail,
+                        fulfillmentStatus: 'Cancelled',
+                      });
+                      showToast(
+                        `Order #${selectedOrderForDetail.orderNumber} cancelled & inventory restocked.`
+                      );
+                    }}
+                    className="px-3 py-1.5 bg-[#FEF2F2] hover:bg-[#FEE2E2] text-[#991B1B] border border-[#991B1B]/20 rounded-xl text-xs font-semibold cursor-pointer"
+                  >
+                    Cancel Order & Restock
+                  </button>
+                )}
                 <button
                   type="button"
                   onClick={() => {
@@ -4619,14 +4679,14 @@ export const AdminPortal: React.FC = () => {
                     setTrackingOrderQuery(code);
                     setIsTrackingOpen(true);
                   }}
-                  className="px-3 py-1.5 bg-[#F2ECE1] hover:bg-[#E6ECD8] text-[#2C221E] rounded-xl text-xs font-semibold cursor-pointer"
+                  className="px-3 py-1.5 bg-[#F2ECE1] hover:bg-[#E6ECD8] text-[#40563D] rounded-xl text-xs font-semibold cursor-pointer"
                 >
                   Customer Tracker View
                 </button>
                 <button
                   type="button"
                   onClick={() => setSelectedOrderForDetail(null)}
-                  className="p-1.5 text-[#655549] hover:text-[#2C221E] rounded-full cursor-pointer"
+                  className="p-1.5 text-[#5A4E38] hover:text-[#40563D] rounded-full cursor-pointer"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -4635,7 +4695,7 @@ export const AdminPortal: React.FC = () => {
 
             <div className="overflow-y-auto p-4 sm:p-6 space-y-5 text-xs">
               {/* Editable Customer & Address Info */}
-              <div className="bg-white p-4 rounded-2xl border border-[#2C221E]/8 space-y-3">
+              <div className="bg-white p-4 rounded-2xl border border-[#40563D]/8 space-y-3">
                 <h3 className="font-serif text-lg font-bold">
                   Customer & Shipping Details
                 </h3>
@@ -4696,7 +4756,7 @@ export const AdminPortal: React.FC = () => {
               </div>
 
               {/* Editable Courier & Live Order Tracking Details */}
-              <div className="bg-white p-4 rounded-2xl border border-[#2C221E]/8 space-y-3">
+              <div className="bg-white p-4 rounded-2xl border border-[#40563D]/8 space-y-3">
                 <div className="flex items-center justify-between gap-2">
                   <h3 className="font-serif text-lg font-bold">
                     Courier & Live Tracking Assignment
@@ -4725,7 +4785,7 @@ export const AdminPortal: React.FC = () => {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   <div>
-                    <label className="block text-[10px] uppercase tracking-wider text-[#655549] font-semibold mb-1">
+                    <label className="block text-[10px] uppercase tracking-wider text-[#5A4E38] font-semibold mb-1">
                       Courier Partner (TCS / Leopards / Rider)
                     </label>
                     <input
@@ -4741,7 +4801,7 @@ export const AdminPortal: React.FC = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-[10px] uppercase tracking-wider text-[#655549] font-semibold mb-1">
+                    <label className="block text-[10px] uppercase tracking-wider text-[#5A4E38] font-semibold mb-1">
                       Tracking Number / Consignment ID
                     </label>
                     <input
@@ -4760,26 +4820,26 @@ export const AdminPortal: React.FC = () => {
               </div>
 
               {/* Editable Order Items & Quantities */}
-              <div className="bg-white p-4 rounded-2xl border border-[#2C221E]/8 space-y-3">
+              <div className="bg-white p-4 rounded-2xl border border-[#40563D]/8 space-y-3">
                 <div className="flex items-center justify-between">
                   <h3 className="font-serif text-lg font-bold">
                     Booked Line Items ({selectedOrderForDetail.items.length})
                   </h3>
-                  <span className="font-mono font-bold text-[#4A5D23]">
+                  <span className="font-mono font-bold text-[#40563D]">
                     Total: PKR {selectedOrderForDetail.total.toLocaleString()}
                   </span>
                 </div>
-                <div className="divide-y divide-[#2C221E]/8">
+                <div className="divide-y divide-[#40563D]/8">
                   {selectedOrderForDetail.items.map((item, idx) => (
                     <div
                       key={item.id || idx}
                       className="py-2 flex flex-wrap items-center justify-between gap-2"
                     >
                       <div>
-                        <span className="font-semibold text-[#2C221E]">
+                        <span className="font-semibold text-[#40563D]">
                           {item.productName}
                         </span>{' '}
-                        · <span className="text-[#655549]">{item.variantName}</span> (
+                        · <span className="text-[#5A4E38]">{item.variantName}</span> (
                         {item.packSizeLabel})
                       </div>
                       <div className="flex items-center gap-2">
@@ -4847,7 +4907,7 @@ export const AdminPortal: React.FC = () => {
               </div>
 
               {/* Add, Edit & Delete Live Tracking Milestones */}
-              <div className="bg-white p-4 rounded-2xl border border-[#2C221E]/8 space-y-3">
+              <div className="bg-white p-4 rounded-2xl border border-[#40563D]/8 space-y-3">
                 <h3 className="font-serif text-lg font-bold">
                   Dispatch Timeline & Milestones (
                   {selectedOrderForDetail.statusHistory.length})
@@ -4858,7 +4918,7 @@ export const AdminPortal: React.FC = () => {
                     value={newMilestoneNote}
                     onChange={(e) => setNewMilestoneNote(e.target.value)}
                     placeholder="Add custom tracking note (e.g. Handed to Lahore rider)..."
-                    className="flex-1 px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                    className="flex-1 px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                   />
                   <button
                     type="button"
@@ -4873,7 +4933,7 @@ export const AdminPortal: React.FC = () => {
                       setNewMilestoneNote('');
                       showToast('Added tracking milestone to order history.');
                     }}
-                    className="px-4 py-2 bg-[#4A5D23] text-white rounded-xl font-semibold cursor-pointer"
+                    className="px-4 py-2 bg-[#40563D] text-white rounded-xl font-semibold cursor-pointer"
                   >
                     + Log Event
                   </button>
@@ -4886,10 +4946,10 @@ export const AdminPortal: React.FC = () => {
                       className="p-3 bg-[#F6EBC8] rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-2"
                     >
                       <div className="flex-1 space-y-1">
-                        <span className="font-semibold text-[#2C221E] block">
+                        <span className="font-semibold text-[#40563D] block">
                           {h.status}{' '}
                           {h.actor && (
-                            <span className="font-mono text-[10px] text-[#4A5D23]">
+                            <span className="font-mono text-[10px] text-[#40563D]">
                               by {h.actor}
                             </span>
                           )}
@@ -4906,11 +4966,11 @@ export const AdminPortal: React.FC = () => {
                               statusHistory: updatedHistory,
                             });
                           }}
-                          className="w-full px-2.5 py-1 bg-white/80 border border-[#2C221E]/10 rounded-lg text-[#2C221E] text-xs"
+                          className="w-full px-2.5 py-1 bg-white/80 border border-[#40563D]/10 rounded-lg text-[#40563D] text-xs"
                         />
                       </div>
                       <div className="flex items-center gap-2 shrink-0">
-                        <span className="font-mono text-[10px] text-[#655549]">
+                        <span className="font-mono text-[10px] text-[#5A4E38]">
                           {new Date(h.timestamp).toLocaleString()}
                         </span>
                         {selectedOrderForDetail.statusHistory.length > 1 && (
@@ -4946,11 +5006,11 @@ export const AdminPortal: React.FC = () => {
           MODAL: CREATE / EDIT CUSTOMER USER ACCOUNT (FULL CRUD)
           ===================================================================== */}
       {editingCustomer && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-[#2C221E]/65 backdrop-blur-2xs">
-          <div className="bg-[#F6EBC8] text-[#2C221E] w-full max-w-xl rounded-3xl shadow-2xl border border-[#2C221E]/15 max-h-[90vh] flex flex-col overflow-hidden">
-            <div className="px-4 sm:px-6 py-4 bg-white border-b border-[#2C221E]/10 flex items-center justify-between gap-2">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-[#40563D]/65 backdrop-blur-2xs">
+          <div className="bg-[#F6EBC8] text-[#40563D] w-full max-w-xl rounded-3xl shadow-2xl border border-[#40563D]/15 max-h-[90vh] flex flex-col overflow-hidden">
+            <div className="px-4 sm:px-6 py-4 bg-white border-b border-[#40563D]/10 flex items-center justify-between gap-2">
               <div>
-                <span className="font-mono text-[11px] uppercase tracking-wider text-[#4A5D23] font-bold">
+                <span className="font-mono text-[11px] uppercase tracking-wider text-[#40563D] font-bold">
                   {isNewCustomerMode
                     ? 'New Customer Profile'
                     : `Editing Account ID #${editingCustomer.id.slice(-6)}`}
@@ -4964,7 +5024,7 @@ export const AdminPortal: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setEditingCustomer(null)}
-                className="p-1.5 text-[#655549] hover:text-[#2C221E] rounded-full cursor-pointer"
+                className="p-1.5 text-[#5A4E38] hover:text-[#40563D] rounded-full cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -5002,7 +5062,7 @@ export const AdminPortal: React.FC = () => {
               }}
               className="overflow-y-auto p-4 sm:p-6 space-y-4 text-xs"
             >
-              <div className="bg-white p-4 rounded-2xl border border-[#2C221E]/8 space-y-3">
+              <div className="bg-white p-4 rounded-2xl border border-[#40563D]/8 space-y-3">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <label className="block font-semibold mb-1">Full Name *</label>
@@ -5014,7 +5074,7 @@ export const AdminPortal: React.FC = () => {
                         setEditingCustomer({ ...editingCustomer, name: e.target.value })
                       }
                       placeholder="e.g. Ayesha Tariq"
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                     />
                   </div>
                   <div>
@@ -5027,7 +5087,7 @@ export const AdminPortal: React.FC = () => {
                         setEditingCustomer({ ...editingCustomer, email: e.target.value })
                       }
                       placeholder="customer@example.com"
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl font-mono"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl font-mono"
                     />
                   </div>
                   <div>
@@ -5040,7 +5100,7 @@ export const AdminPortal: React.FC = () => {
                         setEditingCustomer({ ...editingCustomer, phone: e.target.value })
                       }
                       placeholder="0300-1234567"
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl font-mono"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl font-mono"
                     />
                   </div>
                   <div>
@@ -5053,7 +5113,7 @@ export const AdminPortal: React.FC = () => {
                         setEditingCustomer({ ...editingCustomer, city: e.target.value })
                       }
                       placeholder="Lahore"
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                     />
                   </div>
                   <div>
@@ -5066,7 +5126,7 @@ export const AdminPortal: React.FC = () => {
                           provider: e.target.value as 'email' | 'google',
                         })
                       }
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                     >
                       <option value="email">Email & Password</option>
                       <option value="google">Google Workspace / OAuth</option>
@@ -5088,14 +5148,14 @@ export const AdminPortal: React.FC = () => {
                       placeholder={
                         isNewCustomerMode ? 'Default: bajoz123' : 'Leave blank to keep'
                       }
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl font-mono"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl font-mono"
                     />
                   </div>
                 </div>
               </div>
 
               {/* Saved Addresses CRUD */}
-              <div className="bg-white p-4 rounded-2xl border border-[#2C221E]/8 space-y-3">
+              <div className="bg-white p-4 rounded-2xl border border-[#40563D]/8 space-y-3">
                 <h3 className="font-serif text-base font-bold">
                   Saved Delivery Addresses ({editingCustomer.savedAddresses.length})
                 </h3>
@@ -5105,7 +5165,7 @@ export const AdminPortal: React.FC = () => {
                     value={newCustomerAddressDraft}
                     onChange={(e) => setNewCustomerAddressDraft(e.target.value)}
                     placeholder="Add delivery address (House #, Street, Area)..."
-                    className="flex-1 px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                    className="flex-1 px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                   />
                   <button
                     type="button"
@@ -5120,7 +5180,7 @@ export const AdminPortal: React.FC = () => {
                       });
                       setNewCustomerAddressDraft('');
                     }}
-                    className="px-4 py-2 bg-[#4A5D23] text-white rounded-xl font-semibold cursor-pointer"
+                    className="px-4 py-2 bg-[#40563D] text-white rounded-xl font-semibold cursor-pointer"
                   >
                     + Add
                   </button>
@@ -5145,7 +5205,7 @@ export const AdminPortal: React.FC = () => {
                               savedAddresses: updated,
                             });
                           }}
-                          className="flex-1 bg-transparent text-[#2C221E] focus:outline-none"
+                          className="flex-1 bg-transparent text-[#40563D] focus:outline-none"
                         />
                         <button
                           type="button"
@@ -5171,13 +5231,13 @@ export const AdminPortal: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setEditingCustomer(null)}
-                  className="px-4 py-2.5 rounded-full bg-white border border-[#2C221E]/15 font-semibold cursor-pointer"
+                  className="px-4 py-2.5 rounded-full bg-white border border-[#40563D]/15 font-semibold cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-6 py-2.5 rounded-full bg-[#4A5D23] hover:bg-[#3B4B1B] text-[#F5EFDC] font-semibold cursor-pointer"
+                  className="px-6 py-2.5 rounded-full bg-[#40563D] hover:bg-[#40563D] text-[#F2EBD0] font-semibold cursor-pointer"
                 >
                   {isNewCustomerMode ? 'Create Customer Account' : 'Save Account Changes'}
                 </button>
@@ -5191,11 +5251,11 @@ export const AdminPortal: React.FC = () => {
           MODAL 3: FULL PRODUCT EDITOR (EDIT EVERY DETAIL OR CREATE NEW PRODUCT)
           ===================================================================== */}
       {productEditorDraft && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-[#2C221E]/70 backdrop-blur-2xs">
-          <div className="bg-[#F6EBC8] text-[#2C221E] w-full max-w-5xl rounded-3xl shadow-2xl border border-[#2C221E]/15 max-h-[94vh] flex flex-col overflow-hidden">
-            <div className="px-4 sm:px-6 py-4 bg-white border-b border-[#2C221E]/10 flex items-center justify-between gap-2">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-[#40563D]/70 backdrop-blur-2xs">
+          <div className="bg-[#F6EBC8] text-[#40563D] w-full max-w-5xl rounded-3xl shadow-2xl border border-[#40563D]/15 max-h-[94vh] flex flex-col overflow-hidden">
+            <div className="px-4 sm:px-6 py-4 bg-white border-b border-[#40563D]/10 flex items-center justify-between gap-2">
               <div>
-                <span className="text-[11px] font-mono uppercase tracking-wider text-[#4A5D23] font-semibold">
+                <span className="text-[11px] font-mono uppercase tracking-wider text-[#40563D] font-semibold">
                   {isNewProductMode
                     ? 'Creating New Product'
                     : `Editing Product ID: ${productEditorDraft.id}`}
@@ -5207,7 +5267,7 @@ export const AdminPortal: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setProductEditorDraft(null)}
-                className="p-1.5 text-[#655549] hover:text-[#2C221E] rounded-full cursor-pointer"
+                className="p-1.5 text-[#5A4E38] hover:text-[#40563D] rounded-full cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -5228,7 +5288,7 @@ export const AdminPortal: React.FC = () => {
               className="overflow-y-auto p-6 space-y-6 text-xs"
             >
               {/* 1. Core Identity, Pricing & Photo */}
-              <div className="bg-white p-5 rounded-2xl border border-[#2C221E]/8 space-y-4">
+              <div className="bg-white p-5 rounded-2xl border border-[#40563D]/8 space-y-4">
                 <h3 className="font-serif text-xl font-bold">
                   1. Core Product Identity, Pricing & Photograph
                 </h3>
@@ -5245,7 +5305,7 @@ export const AdminPortal: React.FC = () => {
                           name: e.target.value,
                         })
                       }
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl font-semibold"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl font-semibold"
                     />
                   </div>
                   <div>
@@ -5261,7 +5321,7 @@ export const AdminPortal: React.FC = () => {
                         })
                       }
                       placeholder="Panjeeri / Cooking Paste / Oral Care"
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                     />
                   </div>
                   <div>
@@ -5279,7 +5339,7 @@ export const AdminPortal: React.FC = () => {
                           basePrice: parseInt(e.target.value) || 0,
                         })
                       }
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl font-mono font-bold"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl font-mono font-bold"
                     />
                   </div>
                   <div className="flex items-center gap-4 pt-5">
@@ -5324,7 +5384,7 @@ export const AdminPortal: React.FC = () => {
                           subtitle: e.target.value,
                         })
                       }
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                     />
                   </div>
                   <div>
@@ -5340,7 +5400,7 @@ export const AdminPortal: React.FC = () => {
                           packagingSpec: e.target.value,
                         })
                       }
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                     />
                   </div>
                 </div>
@@ -5356,7 +5416,7 @@ export const AdminPortal: React.FC = () => {
                         tagline: e.target.value,
                       })
                     }
-                    className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                    className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                   />
                 </div>
 
@@ -5374,7 +5434,7 @@ export const AdminPortal: React.FC = () => {
                           description: e.target.value,
                         })
                       }
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                     />
                   </div>
                   <div>
@@ -5390,7 +5450,7 @@ export const AdminPortal: React.FC = () => {
                           story: e.target.value,
                         })
                       }
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                     />
                   </div>
                 </div>
@@ -5410,11 +5470,11 @@ export const AdminPortal: React.FC = () => {
                         })
                       }
                       placeholder="/assets/... or https://..."
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl font-mono"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl font-mono"
                     />
                   </div>
                   <div className="sm:col-span-4 pt-4">
-                    <label className="inline-flex items-center gap-2 px-4 py-2 bg-[#F2ECE1] hover:bg-[#E6ECD8] text-[#2C221E] rounded-xl font-semibold cursor-pointer">
+                    <label className="inline-flex items-center gap-2 px-4 py-2 bg-[#F2ECE1] hover:bg-[#E6ECD8] text-[#40563D] rounded-xl font-semibold cursor-pointer">
                       <Upload className="w-4 h-4" />
                       <span>Upload Image From Device</span>
                       <input
@@ -5431,7 +5491,7 @@ export const AdminPortal: React.FC = () => {
               </div>
 
               {/* 2. Variants Manager (Create, Update, Delete Variants) */}
-              <div className="bg-white p-5 rounded-2xl border border-[#2C221E]/8 space-y-4">
+              <div className="bg-white p-5 rounded-2xl border border-[#40563D]/8 space-y-4">
                 <div className="flex items-center justify-between">
                   <h3 className="font-serif text-xl font-bold">
                     2. Recipe Variants, SKUs & Stock ({productEditorDraft.variants.length})
@@ -5457,7 +5517,7 @@ export const AdminPortal: React.FC = () => {
                         ],
                       })
                     }
-                    className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#4A5D23] text-white rounded-lg font-semibold cursor-pointer"
+                    className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#40563D] text-white rounded-lg font-semibold cursor-pointer"
                   >
                     <Plus className="w-3.5 h-3.5" />
                     <span>Add Variant</span>
@@ -5468,7 +5528,7 @@ export const AdminPortal: React.FC = () => {
                   {productEditorDraft.variants.map((v, vIdx) => (
                     <div
                       key={v.id}
-                      className="p-4 bg-[#F6EBC8] rounded-xl border border-[#2C221E]/10 space-y-3"
+                      className="p-4 bg-[#F6EBC8] rounded-xl border border-[#40563D]/10 space-y-3"
                     >
                       <div className="grid grid-cols-1 sm:grid-cols-5 gap-2.5">
                         <div>
@@ -5607,7 +5667,7 @@ export const AdminPortal: React.FC = () => {
               </div>
 
               {/* 3. Pack Sizes Manager */}
-              <div className="bg-white p-5 rounded-2xl border border-[#2C221E]/8 space-y-4">
+              <div className="bg-white p-5 rounded-2xl border border-[#40563D]/8 space-y-4">
                 <div className="flex items-center justify-between">
                   <h3 className="font-serif text-xl font-bold">
                     3. Jar / Pack Sizes ({productEditorDraft.packSizes.length})
@@ -5629,7 +5689,7 @@ export const AdminPortal: React.FC = () => {
                         ],
                       })
                     }
-                    className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#4A5D23] text-white rounded-lg font-semibold cursor-pointer"
+                    className="inline-flex items-center gap-1 px-3 py-1.5 bg-[#40563D] text-white rounded-lg font-semibold cursor-pointer"
                   >
                     <Plus className="w-3.5 h-3.5" />
                     <span>Add Jar Size</span>
@@ -5640,7 +5700,7 @@ export const AdminPortal: React.FC = () => {
                   {productEditorDraft.packSizes.map((pk, pIdx) => (
                     <div
                       key={pk.id}
-                      className="p-3.5 bg-[#F6EBC8] rounded-xl border border-[#2C221E]/10 grid grid-cols-1 sm:grid-cols-12 gap-2 items-center"
+                      className="p-3.5 bg-[#F6EBC8] rounded-xl border border-[#40563D]/10 grid grid-cols-1 sm:grid-cols-12 gap-2 items-center"
                     >
                       <input
                         type="text"
@@ -5711,7 +5771,7 @@ export const AdminPortal: React.FC = () => {
 
               {/* 4. Ingredients & Usage Instructions */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-white p-5 rounded-2xl border border-[#2C221E]/8 space-y-3">
+                <div className="bg-white p-5 rounded-2xl border border-[#40563D]/8 space-y-3">
                   <div className="flex items-center justify-between">
                     <h3 className="font-serif text-lg font-bold">
                       4. Ingredients ({productEditorDraft.ingredients.length})
@@ -5727,7 +5787,7 @@ export const AdminPortal: React.FC = () => {
                           ],
                         })
                       }
-                      className="text-[#4A5D23] font-semibold hover:underline cursor-pointer"
+                      className="text-[#40563D] font-semibold hover:underline cursor-pointer"
                     >
                       + Add Ingredient
                     </button>
@@ -5767,7 +5827,7 @@ export const AdminPortal: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="bg-white p-5 rounded-2xl border border-[#2C221E]/8 space-y-3">
+                <div className="bg-white p-5 rounded-2xl border border-[#40563D]/8 space-y-3">
                   <div className="flex items-center justify-between">
                     <h3 className="font-serif text-lg font-bold">
                       5. Daily Ritual / Usage Steps (
@@ -5784,7 +5844,7 @@ export const AdminPortal: React.FC = () => {
                           ],
                         })
                       }
-                      className="text-[#4A5D23] font-semibold hover:underline cursor-pointer"
+                      className="text-[#40563D] font-semibold hover:underline cursor-pointer"
                     >
                       + Add Step
                     </button>
@@ -5827,7 +5887,7 @@ export const AdminPortal: React.FC = () => {
               </div>
 
               {/* 6. Product FAQs */}
-              <div className="bg-white p-5 rounded-2xl border border-[#2C221E]/8 space-y-3">
+              <div className="bg-white p-5 rounded-2xl border border-[#40563D]/8 space-y-3">
                 <div className="flex items-center justify-between">
                   <h3 className="font-serif text-lg font-bold">
                     6. Product-Specific FAQs ({productEditorDraft.faqs.length})
@@ -5846,7 +5906,7 @@ export const AdminPortal: React.FC = () => {
                         ],
                       })
                     }
-                    className="text-[#4A5D23] font-semibold hover:underline cursor-pointer"
+                    className="text-[#40563D] font-semibold hover:underline cursor-pointer"
                   >
                     + Add Product FAQ
                   </button>
@@ -5908,13 +5968,13 @@ export const AdminPortal: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setProductEditorDraft(null)}
-                  className="px-5 py-2.5 bg-white text-[#2C221E] rounded-full font-semibold cursor-pointer"
+                  className="px-5 py-2.5 bg-white text-[#40563D] rounded-full font-semibold cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-7 py-2.5 bg-[#4A5D23] hover:bg-[#3B4B1B] text-[#F5EFDC] rounded-full font-semibold uppercase tracking-wider cursor-pointer"
+                  className="px-7 py-2.5 bg-[#40563D] hover:bg-[#40563D] text-[#F2EBD0] rounded-full font-semibold uppercase tracking-wider cursor-pointer"
                 >
                   {isNewProductMode
                     ? 'Create & Publish Product'
@@ -5930,11 +5990,11 @@ export const AdminPortal: React.FC = () => {
           MODAL 4: WEBSITE PAGE & SECTIONS EDITOR MODAL
           ===================================================================== */}
       {editingPageDraft && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-[#2C221E]/70 backdrop-blur-2xs">
-          <div className="bg-[#F6EBC8] text-[#2C221E] w-full max-w-4xl rounded-3xl shadow-2xl border border-[#2C221E]/15 max-h-[92vh] flex flex-col overflow-hidden">
-            <div className="px-4 sm:px-6 py-4 bg-white border-b border-[#2C221E]/10 flex items-center justify-between gap-2">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-[#40563D]/70 backdrop-blur-2xs">
+          <div className="bg-[#F6EBC8] text-[#40563D] w-full max-w-4xl rounded-3xl shadow-2xl border border-[#40563D]/15 max-h-[92vh] flex flex-col overflow-hidden">
+            <div className="px-4 sm:px-6 py-4 bg-white border-b border-[#40563D]/10 flex items-center justify-between gap-2">
               <div>
-                <span className="text-[11px] font-mono uppercase tracking-wider text-[#4A5D23] font-semibold">
+                <span className="text-[11px] font-mono uppercase tracking-wider text-[#40563D] font-semibold">
                   Website Page Builder · /page/{editingPageDraft.slug}
                 </span>
                 <h2 className="font-serif text-xl sm:text-2xl font-bold">
@@ -5944,7 +6004,7 @@ export const AdminPortal: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setEditingPageDraft(null)}
-                className="p-1.5 text-[#655549] hover:text-[#2C221E] rounded-full cursor-pointer"
+                className="p-1.5 text-[#5A4E38] hover:text-[#40563D] rounded-full cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -5968,7 +6028,7 @@ export const AdminPortal: React.FC = () => {
               }}
               className="overflow-y-auto p-4 sm:p-6 space-y-6 text-xs"
             >
-              <div className="bg-white p-5 rounded-2xl border border-[#2C221E]/8 space-y-4">
+              <div className="bg-white p-5 rounded-2xl border border-[#40563D]/8 space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <div>
                     <label className="block font-semibold mb-1">Page Title *</label>
@@ -5982,7 +6042,7 @@ export const AdminPortal: React.FC = () => {
                           title: e.target.value,
                         })
                       }
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl font-semibold"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl font-semibold"
                     />
                   </div>
                   <div>
@@ -5999,7 +6059,7 @@ export const AdminPortal: React.FC = () => {
                           slug: e.target.value,
                         })
                       }
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl font-mono"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl font-mono"
                     />
                   </div>
                   <div>
@@ -6013,7 +6073,7 @@ export const AdminPortal: React.FC = () => {
                           kicker: e.target.value,
                         })
                       }
-                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                      className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                     />
                   </div>
                 </div>
@@ -6031,7 +6091,7 @@ export const AdminPortal: React.FC = () => {
                         subtitle: e.target.value,
                       })
                     }
-                    className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#2C221E]/15 rounded-xl"
+                    className="w-full px-3 py-2 bg-[#F6EBC8] border border-[#40563D]/15 rounded-xl"
                   />
                 </div>
 
@@ -6079,7 +6139,7 @@ export const AdminPortal: React.FC = () => {
               </div>
 
               {/* Page Sections Builder */}
-              <div className="bg-white p-5 rounded-2xl border border-[#2C221E]/8 space-y-4">
+              <div className="bg-white p-5 rounded-2xl border border-[#40563D]/8 space-y-4">
                 <div className="flex items-center justify-between">
                   <h3 className="font-serif text-xl font-bold">
                     Page Content Sections ({editingPageDraft.sections.length})
@@ -6104,7 +6164,7 @@ export const AdminPortal: React.FC = () => {
                         ],
                       })
                     }
-                    className="inline-flex items-center gap-1 px-3.5 py-1.5 bg-[#4A5D23] text-white rounded-xl font-semibold cursor-pointer"
+                    className="inline-flex items-center gap-1 px-3.5 py-1.5 bg-[#40563D] text-white rounded-xl font-semibold cursor-pointer"
                   >
                     <Plus className="w-3.5 h-3.5" />
                     <span>Add Content Section</span>
@@ -6114,10 +6174,10 @@ export const AdminPortal: React.FC = () => {
                 {editingPageDraft.sections.map((sec, sIdx) => (
                   <div
                     key={sec.id}
-                    className="p-4 bg-[#F6EBC8] rounded-2xl border border-[#2C221E]/12 space-y-3"
+                    className="p-4 bg-[#F6EBC8] rounded-2xl border border-[#40563D]/12 space-y-3"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-mono font-bold text-[#4A5D23]">
+                      <span className="font-mono font-bold text-[#40563D]">
                         Section #{sIdx + 1}
                       </span>
                       {editingPageDraft.sections.length > 1 && (
@@ -6223,7 +6283,7 @@ export const AdminPortal: React.FC = () => {
                               sections: next,
                             });
                           }}
-                          className="text-[#4A5D23] font-semibold hover:underline cursor-pointer"
+                          className="text-[#40563D] font-semibold hover:underline cursor-pointer"
                         >
                           + Add Bullet
                         </button>
@@ -6273,13 +6333,13 @@ export const AdminPortal: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setEditingPageDraft(null)}
-                  className="px-5 py-2.5 bg-white text-[#2C221E] rounded-full font-semibold cursor-pointer"
+                  className="px-5 py-2.5 bg-white text-[#40563D] rounded-full font-semibold cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-7 py-2.5 bg-[#4A5D23] hover:bg-[#3B4B1B] text-[#F5EFDC] rounded-full font-semibold uppercase tracking-wider cursor-pointer"
+                  className="px-7 py-2.5 bg-[#40563D] hover:bg-[#40563D] text-[#F2EBD0] rounded-full font-semibold uppercase tracking-wider cursor-pointer"
                 >
                   Save & Publish Page
                 </button>
@@ -6289,10 +6349,10 @@ export const AdminPortal: React.FC = () => {
         </div>
       )}
 
-      {/* Admin Portal Footer matching #F5EFDC Nav Bar */}
-      <footer className="bg-[#F6EBC8] border-t border-[#2C221E]/8 py-6 px-4 sm:px-6 lg:px-8 text-xs text-[#655549]">
+      {/* Admin Portal Footer matching #F2EBD0 Nav Bar */}
+      <footer className="bg-[#F6EBC8] border-t border-[#40563D]/8 py-6 px-4 sm:px-6 lg:px-8 text-xs text-[#5A4E38]">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-          <span className="font-serif text-base font-bold text-[#4A5D23]">
+          <span className="font-serif text-base font-bold text-[#40563D]">
             BAJOZ — The House of Naturals · Executive Admin Console
           </span>
           <span>
